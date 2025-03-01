@@ -195,3 +195,45 @@
     }
   }
   
+  .card-actions {
+    z-index: 1;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.card-actions button {
+    padding: 5px;
+    margin: 0 2px;
+    transition: all 0.3s ease;
+}
+    .card-actions button.text-danger {
+    color: #dc3545 !important;
+}
+
+.card-actions button.text-primary {
+    color: #0d6efd !important;
+}
+
+.card-actions button.text-white {
+    color: #ffffff !important;
+}
+
+.card-actions button:hover {
+    opacity: 0.8;
+    transform: scale(1.1);
+}
+.share-options {
+    /* background: white; */
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.share-options button {
+    width: 100%;
+    margin: 5px 0;
+    padding: 8px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}

@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import "../../styles/AllCat.css";
 
 const Breakfast = () => {
+  const navigate = useNavigate();
   const [setSelectedRecipe] = useState(null);
 
   const breakfastRecipes = [
@@ -12,6 +14,62 @@ const Breakfast = () => {
     { id: 23, title: "Idli", image: "../idli.jpg", rating: 4.6 },
     {id: 24,title: "Besan Chilla",image: "../besan_chilla.jpg",rating: 4.4},
   ];
+
+  const handleFavorite = (recipeId) => {
+    const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes') || '[]');
+    const recipeToAdd = breakfastRecipes.find(r => r.id === recipeId);
+    
+    if (!favoriteRecipes.some(r => r.id === recipeId)) {
+        favoriteRecipes.push(recipeToAdd);
+    } else {
+        const index = favoriteRecipes.findIndex(r => r.id === recipeId);
+        favoriteRecipes.splice(index, 1);
+    }
+    
+    localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteRecipes));
+  };
+
+  const handleSave = (recipeId) => {
+    const savedRecipes = JSON.parse(localStorage.getItem('savedRecipes') || '[]');
+    const recipeToAdd = breakfastRecipes.find(r => r.id === recipeId);
+    
+    if (!savedRecipes.some(r => r.id === recipeId)) {
+        savedRecipes.push(recipeToAdd);
+    } else {
+        const index = savedRecipes.findIndex(r => r.id === recipeId);
+        savedRecipes.splice(index, 1);
+    }
+    
+    localStorage.setItem('savedRecipes', JSON.stringify(savedRecipes));
+  };
+
+  const handleShare = (recipe) => {
+    if (navigator.share) {
+        navigator.share({
+            title: recipe.title,
+            text: `Check out this recipe for ${recipe.title}!`,
+            url: window.location.href
+        });
+    } else {
+        const shareDialog = document.createElement('dialog');
+        shareDialog.innerHTML = `
+            <div class="share-options p-3">
+                <h5>Share Recipe</h5>
+                <button onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=${window.location.href}')">
+                    <i class="fab fa-facebook"></i> Facebook
+                </button>
+                <button onclick="window.open('https://twitter.com/intent/tweet?text=${recipe.title}&url=${window.location.href}')">
+                    <i class="fab fa-twitter"></i> Twitter
+                </button>
+                <button onclick="window.open('https://wa.me/?text=${recipe.title} ${window.location.href}')">
+                    <i class="fab fa-whatsapp"></i> WhatsApp
+                </button>
+            </div>
+        `;
+        document.body.appendChild(shareDialog);
+        shareDialog.showModal();
+    }
+  };
 
   return (
     <div className="breakfast-wrapper">
@@ -71,6 +129,26 @@ const Breakfast = () => {
                 >
                   View Recipe
                 </a>
+              </div>
+              <div className="card-actions position-absolute end-0 m-2">
+                <button 
+                    className={`btn btn-link ${recipe.isFavorite ? 'text-danger' : 'text-white'}`}
+                    onClick={() => handleFavorite(recipe.id)}
+                >
+                    <i className="fas fa-star"></i>
+                </button>
+                <button 
+                    className={`btn btn-link ${recipe.isSaved ? 'text-primary' : 'text-white'}`}
+                    onClick={() => handleSave(recipe.id)}
+                >
+                    <i className="fas fa-bookmark"></i>
+                </button>
+                <button 
+                    className="btn btn-link text-white"
+                    onClick={() => handleShare(recipe)}
+                >
+                    <i className="fas fa-share-alt"></i>
+                </button>
               </div>
             </div>
             <div className="card-content">
