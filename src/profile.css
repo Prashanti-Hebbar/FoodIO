@@ -62,16 +62,29 @@
 .my-recipes-btn:hover {
   background-color: #45a049; */
 /* } */
+  .remove-btn {
+    background-color: #ff9800;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
 
-.recipes-grid {
-  padding: 20px 0;
-}
+  .remove-btn:hover {
+    background-color: #f57c00;
+  }
 
-.recipes-grid h2 {
-  margin-bottom: 20px;
-  color: #333;
-}
+  .recipes-grid {
+    margin-bottom: 40px;
+  }
 
+  .recipes-grid h2 {
+    color: #333;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+  }
 .recipes-container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -150,4 +163,37 @@
   .recipes-container {
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   }
+}
+
+.banner {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+}
+
+.banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.banner-logout-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 500;
+  z-index: 1;
+}
+
+.banner-logout-btn:hover {
+  background-color: #c82333;
+  transform: scale(1.05);
+  transition: all 0.2s ease;
 }

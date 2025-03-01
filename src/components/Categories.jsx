@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../Categories.css';
-import { title } from 'process';
+// import { title } from 'process';
 
 const Categories = () => {
   const categoryGroups = [
@@ -13,13 +13,13 @@ const Categories = () => {
     },
     {
       title: 'Diet',
-      items: ['Low Carb', 'Keto', 'Vegetarian', 'Whole 30', 'Paleo'],
+      items: ['LowCarb', 'Keto', 'Vegetarian', 'Whole30', 'Paleo'],
       icon: '🥗',
       color: '#4ECDC4'
     },
     {
       title: 'Cuisine',
-      items: ['Italian', 'Mexican', 'Thai', 'Chinese', 'Greek'],
+      items: ['Indian', 'Italian', 'Mexican','Japanese'],
       icon: '🌎',
       color: '#45B7D1'
     },
@@ -31,13 +31,13 @@ const Categories = () => {
     },
     {
       title: 'Cooking Method',
-      items: ['InstantPot', 'Air Fryer', 'Slow Cooker', 'Casseroles', 'Sheet Pan', 'Grill'],
+      items: ['InstantPot', 'AirFryer', 'SlowCooker'],
       icon: '👨‍🍳',
       color: '#D4A5A5'
     },
     {
         title: 'Time to prepare or difficulty',
-        items: ['30 minute meals', '10 ingredients or less', 'one pot meals'],
+        items: ['30minutemeals', 'onepotmeals'],
         icon: '⏱️',
         color: '#FF6B6B'
     }

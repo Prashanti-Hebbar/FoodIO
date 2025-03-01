@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../../styles/Drinks.css';
+import '../../styles/AllCat.css';
 
 const Drinks = () => {
     const [setSelectedRecipe] = useState(null);

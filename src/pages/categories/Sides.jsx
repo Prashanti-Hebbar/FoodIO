@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../../styles/Sides.css';
+import '../../styles/AllCat.css';
 
 const Sides = () => {
     const [setSelectedRecipe] = useState(null);

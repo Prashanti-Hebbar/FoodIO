@@ -85,7 +85,7 @@
     font-size: 14px;
   }
   
-  .btn-outline-success {
+  /* .btn-outline-success {
     font-size: 14px;
     border-radius: 20px;
     padding: 8px 15px;
@@ -97,7 +97,7 @@
   .btn-outline-success:hover {
     background-color:#ff9900;
     color: white;
-  }
+  } */
   
   /* Login & Register Buttons */
   .loginlink {
@@ -106,7 +106,7 @@
     font-size: 16px;
     border-radius: 20px;
     padding: 8px 15px;
-    margin-left: 250px;
+    margin-left: 325px;
     transition: 0.3s ease-in-out;
     /* background-color:#ffcc00; */
   }
@@ -169,5 +169,43 @@
       width: 100%;
       margin-bottom: 10px;
     }
+  }
+  
+  .search-results {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    max-height: 300px;
+    overflow-y: auto;
+    z-index: 1000;
+    width: 300px;
+  }
+  
+  .search-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    transition: background-color 0.2s;
+  }
+  
+  .search-item:hover {
+    background-color: #f5f5f5;
+  }
+  
+  .search-result-img {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    margin-right: 10px;
+    border-radius: 4px;
+  }
+  
+  .search-result-title {
+    color: #333;
+    font-size: 14px;
   }
   

@@ -103,9 +103,9 @@ body{
   /* carousel */
   /* General Carousel Styling */
 .carousel {
-  max-width: 90%; /* Set max width */
+  max-width: 95%; /* Set max width */
   margin: 40px auto; /* Center and add space above/below */
-  border-radius: 15px;
+  /* border-radius: 10px; */
   overflow: hidden;
   box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
 }
@@ -195,7 +195,8 @@ body{
 }
 
 /* Featured Recipes Section */
-.container.mt-4 { /* Targets the specific container with the margin-top class */
+.container.mt-4 {
+  max-width: 95%; /* Targets the specific container with the margin-top class */
   padding: 20px; /* Add some padding around the featured recipes */
 }
 
@@ -270,4 +271,34 @@ body{
   .card img {
       height: 200px; /* Adjust image height on smaller screens */
   }
+}
+
+.card-actions {
+  z-index: 1;
+}
+
+.card-actions button {
+  padding: 5px;
+  margin: 0 2px;
+  transition: all 0.3s ease;
+}
+
+.card-actions button:hover {
+  transform: scale(1.1);
+}
+
+.share-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.share-options button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
