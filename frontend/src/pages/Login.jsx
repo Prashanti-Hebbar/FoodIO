@@ -41,7 +41,7 @@ const Login = ({ setIsLoggedIn }) => {
   };
 
   return (
-    <div className="login">
+    <div className="login" style={{marginTop:94}}>
       <h1 id="login-heading">Foodio</h1>
       <img src="/cheftools.jpg" id="hat" alt="chefhat" />
       <form onSubmit={handleSubmit}>
