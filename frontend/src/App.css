@@ -104,7 +104,7 @@ body{
   /* General Carousel Styling */
 .carousel {
   max-width: 95%; /* Set max width */
-  margin: 40px auto; /* Center and add space above/below */
+  margin: 100px auto; /* Center and add space above/below */
   /* border-radius: 10px; */
   overflow: hidden;
   box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);

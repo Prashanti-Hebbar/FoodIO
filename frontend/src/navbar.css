@@ -1,10 +1,14 @@
 /* General Navbar Styling */
 .navbar {
-    position:relative;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
     padding: 12px 20px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     height: 60px;
     z-index: 1050;
+
   }
   
   /* Brand Name */
