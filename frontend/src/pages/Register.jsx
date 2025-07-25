@@ -20,7 +20,7 @@ const Register = ({ setIsLoggedIn }) => {
   };
 
   return (
-    <div className="register">
+    <div className="register" style={{marginTop:94}}>
       <h1 id="register-heading">Foodio</h1>
       <img src="/hat.jpg" id="tools" alt="..." />
       <input type="text" placeholder="Username" onChange={(e) => setUsername(e.target.value)} />
