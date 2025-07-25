@@ -26,6 +26,7 @@ import Indian from "./pages/categories/Indian";
 import Italian from "./pages/categories/Itallian";
 import Japanese from "./pages/categories/Japanese";
 import Mexican from "./pages/categories/Mexican";
+import { SavedRecipesProvider } from "./pages/savedRecipes";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -67,6 +68,7 @@ function App() {
         <Route path="/recipes/italian" element={<Italian />} />
         <Route path="/recipes/japanese" element={<Japanese />} />
         <Route path="/recipes/mexican" element={<Mexican />} />
+        <Route path="/pages/savedRecipes" element={<SavedRecipesProvider/>}/>
       </Routes>
     </Router>
   );
