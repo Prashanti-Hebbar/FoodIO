@@ -302,3 +302,27 @@ body{
   align-items: center;
   gap: 8px;
 }
+.hover-effect_1:hover {
+  color: #056dece8 !important;
+  text-decoration: none !important;
+}
+
+.hover-effect_2:hover {
+  color: #e73174 !important;
+  text-decoration: none !important;
+}
+
+.hover-effect_3:hover {
+  color: #00bbff !important;
+  text-decoration: none !important;
+}
+
+.hover-effect_4:hover {
+  color: #ef1a0b !important;
+  text-decoration: none !important;
+}
+
+.hover-effect:hover {
+  color: #ffcc00 !important;
+  text-decoration: none !important;
+}

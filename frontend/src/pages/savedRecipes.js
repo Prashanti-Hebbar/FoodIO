@@ -3,6 +3,7 @@ import { createContext, useState, useEffect } from "react";
 // Create Context
 export const SavedRecipesContext = createContext();
 
+<<<<<<< HEAD
 export const SavedRecipesProvider = ({ children }) => {
     const [savedRecipes, setSavedRecipes] = useState([]);
 
@@ -19,6 +20,16 @@ export const SavedRecipesProvider = ({ children }) => {
 
     const saveRecipe = (recipe) => {
         setSavedRecipes((prevRecipes) => [...prevRecipes, recipe]);
+=======
+  useEffect(() => {
+    const fetchSavedRecipes = async () => {
+      try {
+        const response = await axios.get(`https://foodio-backend-cgsj.onrender.com/recipes/savedRecipes/${userID}`);
+        setSavedRecipes(response.data.savedRecipes);
+      } catch (err) {
+        console.log(err);
+      }
+>>>>>>> 7ffc97ebed7da6598f67a09bd0fede85a9d30486
     };
 
     const removeRecipe = (recipeId) => {

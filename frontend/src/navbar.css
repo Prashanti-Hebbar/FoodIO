@@ -1,42 +1,84 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Montserrat:wght@700&display=swap');
+
+/* CSS Variables */
+:root {
+    --primary-font: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+    --brand-font: 'Montserrat', sans-serif;
+    --primary-color: #ffcc00;
+    --secondary-color: #ff9900;
+}
+
 /* General Navbar Styling */
 .navbar {
-    position:relative;
+    position: relative;
     padding: 12px 20px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     height: 60px;
     z-index: 1050;
+    font-family: var(--primary-font);
+  }
+
+  .navbar-custom {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 12px 20px;
+    z-index: 1050;
+    height: 60px;
+    background: linear-gradient(
+      135deg,
+      rgba(45, 45, 45, 0.9) 0%,
+      rgba(65, 65, 65, 0.85) 50%,
+      rgba(35, 35, 35, 0.9) 100%
+    );
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 204, 0, 0.15);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2),
+                inset 0 0 30px rgba(255, 204, 0, 0.05);
+    font-family: var(--primary-font);
   }
   
   /* Brand Name */
   .navbar-brand {
-    font-size: 24px;
-    font-weight: bold;
-    color: #ffcc00 !important; /* Yellowish-Gold */
-    letter-spacing: 1px;
-    transition: 0.3s ease-in-out;
+    font-family: var(--brand-font);
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--primary-color) !important;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease-in-out;
+    text-transform: uppercase;
   }
   
   .navbar-brand:hover {
-    color: #ff9900 !important; /* Darker Gold */
+    color: var(--secondary-color) !important;
+    text-shadow: 0 2px 10px rgba(255, 204, 0, 0.3);
   }
   
   /* Navigation Links */
   .navbar-nav .nav-item .nav-link {
-    font-size: 14px;
+    font-family: var(--primary-font);
+    font-size: 15px;
+    font-weight: 500;
     padding: 10px 15px;
     color: white !important;
-    transition: 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    letter-spacing: 0.2px;
   }
   
   .navbar-nav .nav-item .nav-link:hover {
     background-color: rgba(255, 255, 255, 0.2);
     border-radius: 5px;
+    color: var(--primary-color) !important;
   }
   
 /* Dropdown Button */
 .dropdown .btn-secondary {
+    font-family: var(--primary-font);
     font-size: 14px;
-    padding: 20px;
+    padding: 21px;
+    font-weight: 500;
     color: white !important;
     background-color: transparent;
     border: none;
@@ -46,6 +88,7 @@
 /* Hover effect like navbar links */
 .dropdown .btn-secondary:hover {
     background-color: rgba(255, 255, 255, 0.2);
+    color: var(--primary-color) !important;
     border-radius: 5px;
 }
 
@@ -99,61 +142,130 @@
     color: white;
   } */
   
+  /* Auth Buttons Container */
+  .auth-buttons {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-left: auto;
+    padding-right: 20px;
+  }
+
   /* Login & Register Buttons */
-  .loginlink {
-    color: #ffcc00;
+  .loginlink,
+  .reglink {
+    font-family: var(--primary-font);
+    color: var(--primary-color);
     text-decoration: none;
-    font-size: 16px;
-    border-radius: 20px;
-    padding: 8px 15px;
-    margin-left: 325px;
-    transition: 0.3s ease-in-out;
-    /* background-color:#ffcc00; */
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    border-radius: 8px;
+    padding: 8px 16px;
+    height: 38px;
+    transition: all 0.3s ease-in-out;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+  }
+
+  .loginlink {
+    border: 2px solid #ffcc00;
+    background: transparent;
   }
 
   .reglink {
-    color: #ffcc00;
-    text-decoration: none;
-    font-size: 16px;
-    border-radius: 20px;
-    padding: 8px 15px;
-    margin-left: 7px;
-    transition: 0.3s ease-in-out;
-    /* background-color:#ffcc00; */
+    background: #ffcc00;
+    color: #000;
   }
-  
+
+  /* Hover effect */
+  .loginlink:hover {
+    background: rgba(255, 204, 0, 0.1);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 204, 0, 0.2);
+  }
+
+  .reglink:hover {
+    background: #ff9900;
+    color: #000;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 153, 0, 0.3);
+  }
+
+  /* Profile Button */
+  .myprofile {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
   .myprofile i {
-    margin-left: 17px;
     font-size: 1.2rem;
     color: white;
-}
+    padding: 8px;
+    height: 38px;
+    width: 38px;
+    border-radius: 8px;
+    transition: all 0.3s ease-in-out;
+    background: rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
-.myprofile i:hover {
+  .myprofile i:hover {
     color: #ffcc00;
-}
-.myprofile {
-  position: relative;
-}
+    background: rgba(255, 204, 0, 0.1);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 204, 0, 0.2);
+  }
 
-.myprofile i:hover::after {
-  font-family: Arial, Helvetica, sans-serif;
-  font-weight: 110;
-  content: "My Profile";
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: rgba(0, 0, 0, 0.8);
-  color: #ffcc00;
-  padding: 5px 10px;
-  border-radius: 4px;
-  font-size: 12px;
-  white-space: nowrap;
-}
+  .myprofile i:hover::after {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 500;
+    content: "My Profile";
+    position: absolute;
+    top: calc(100% + 5px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.9);
+    color: #ffcc00;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 13px;
+    white-space: nowrap;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(4px);
+  }
   .link-light:hover {
     opacity: 0.8;
   }
-  
+  /* Ai button styling */
+  .ChatButton {
+      font-family: var(--primary-font);
+      text-decoration: none;
+      color: #ffffff;
+      margin-left: 1rem;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+      padding: 10px 15px;
+      border-radius: 8px;
+      transition: all 0.3s ease-in-out;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      white-space: nowrap;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  .ChatButton:hover {
+      background: rgba(255, 204, 0, 0.1);
+      color: var(--primary-color);
+      border-color: var(--primary-color);
+  }
   /* Mobile Responsive */
   @media (max-width: 768px) {
     .navbar-nav {

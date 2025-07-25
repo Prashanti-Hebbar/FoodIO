@@ -39,7 +39,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
 
   return (
     <div>
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+      <nav className="navbar navbar-expand-lg navbar-custom">
         <a className="navbar-brand" href="/Home">FoodIO</a>
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
@@ -65,6 +65,9 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
               <a className="nav-link" href="/About">About</a>
             </li>
           </ul>
+        {/* add chat button */}
+              <a className='ChatButton' href='/ai-chat'>Chat with AI</a>
+
           <form className="form-inline d-flex align-items-center position-relative">
             <input 
               className="form-control mr-sm-2" 
@@ -89,7 +92,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
               </div>
             )}
           </form>
-          <div className="auth-links">
+          <div className="auth-buttons">
             {isLoggedIn ? (
               <button 
                 className="btn btn-danger ms-2" 
@@ -105,6 +108,8 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
             )}
             <a className="myprofile" href="/profile"><i className="fas fa-user"></i></a>
           </div>
+
+          
         </div>
       </nav>
     </div>

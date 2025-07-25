@@ -1,0 +1,62 @@
+.scroll-to-top-container {
+  position: fixed;
+  bottom: 40px;
+  right: 20px;
+  z-index: 50;
+}
+
+.pop-in {
+  animation: popIn 0.3s ease forwards;
+}
+
+.pop-out {
+  animation: popOut 0.3s ease forwards;
+}
+
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes popOut {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+}
+
+.scroll-button {
+  position: relative;
+  width: 45px;
+  height: 45px;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: transform 0.2s ease;
+  background-color: rgb(230, 126, 34);
+  transition: background-color 0.2s;
+}
+
+.scroll-button:hover {
+  background-color: rgb(182, 96, 22);
+}
+
+.arrow-icon {
+  width: 24px;
+  height: 24px;
+  z-index: 2;
+  color: white;
+}

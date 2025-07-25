@@ -17,7 +17,7 @@ const Login = ({ setIsLoggedIn }) => {
     }
 
     try {
-      const response = await axios.post("http://localhost:3001/auth/login", {
+      const response = await axios.post("https://foodio-backend-cgsj.onrender.com/auth/login", {
         username,
         password
       });

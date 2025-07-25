@@ -1,0 +1,126 @@
+/* Full page background */
+.ai-chat-page {
+    min-height: 100vh;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+.download-button {
+    background: #ffffff;
+    color: #ff6b00;
+    border: 2px solid #ff6b00;
+}
+
+.download-button:hover {
+    background: #ff6b00;
+    color: #ffffff;
+}
+.close-button {
+    background: transparent;
+    border: none;
+    color: #ff6b00;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    float: right;
+}
+
+
+/* Semi-transparent overlay to improve readability */
+.ai-chat-overlay {
+    background: rgba(255, 255, 255, 0.88);
+    padding: 2rem;
+    border-radius: 16px;
+    max-width: 600px;
+    width: 100%;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(3px);
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.container {
+    padding: 0;
+    background: none; /* Remove duplicate background */
+    box-shadow: none;
+    border-radius: 0;
+    margin: 0;
+}
+
+.container h2 {
+    text-align: center;
+    color: #ff6b00;
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.4rem;
+    color: #333333;
+    font-weight: 500;
+}
+
+.form-group select,
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 0.6rem;
+    border: 2px solid #eeeeee;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border 0.3s, box-shadow 0.3s;
+}
+
+.form-group select:focus,
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: #ff6b00;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(255, 107, 0, 0.2);
+}
+
+.button {
+    width: 100%;
+    background: #ff6b00;
+    color: #ffffff;
+    padding: 0.7rem;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.3s, transform 0.1s;
+}
+
+.button:hover {
+    background: #e65a00;
+    transform: translateY(-2px);
+}
+
+.button:disabled {
+    background: #cccccc;
+    cursor: not-allowed;
+}
+
+.recipe-card {
+    margin-top: 1.5rem;
+    background: #ffffff;
+    border-left: 6px solid #ff6b00;
+    padding: 1rem;
+    border-radius: 12px;
+    white-space: pre-wrap;
+    color: #333333;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+}
+
+.recipe-card h3 {
+    margin-top: 0;
+    color: #ff6b00;
+    font-size: 1.3rem;
+}

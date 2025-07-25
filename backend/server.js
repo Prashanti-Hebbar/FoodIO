@@ -10,6 +10,9 @@ import cors from 'cors';
 const app = express(); // Create an Express application
 const PORT = 3001;
 
+import dotenv from 'dotenv';
+dotenv.config();
+
 app.use(cors()); // Enable CORS for all routes
 app.use(express.json()); // Middleware to parse JSON data
 // app.use(cors()); // Enable CORS for all routes
