@@ -1,0 +1,123 @@
+.edit-profile-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.edit-profile-modal {
+  background: #fff;
+  border-radius: 6px;
+  width: 380px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.edit-profile-modal h2 {
+  margin: 0 0 1.5rem 0;
+  font-size: 1.25rem;
+  text-align: center;
+  color: #222;
+  font-weight: 600;
+  order: 1;
+}
+
+.edit-profile-modal form {
+  display: flex;
+  flex-direction: column;
+  order: 2;
+  width: 100%;
+}
+
+.form-group label {
+  font-size: 0.9rem;
+  color: #444;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 0.95rem;
+}
+
+.form-group input:focus {
+  border-color: #999;
+  outline: none;
+}
+
+.error-input {
+  border-color: #d00;
+}
+
+.error-message {
+  color: #d00;
+  font-size: 0.8rem;
+}
+
+.button-group {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.button-group button {
+  padding: 0.65rem 1.25rem;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.button-group button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.cancel-button {
+  background: #eee;
+  color: #333;
+}
+
+.cancel-button:hover:not(:disabled) {
+  background: #ddd;
+}
+
+.save-button {
+  background: #e67e22;
+  color: #fff;
+}
+
+.save-button:hover:not(:disabled) {
+  background: #cf6d17;
+}
+
+@media (max-width: 480px) {
+  .edit-profile-modal {
+    width: 90%;
+    padding: 1rem;
+  }
+
+  .button-group {
+    flex-direction: column-reverse;
+    gap: 0.5rem;
+  }
+
+  .button-group button {
+    width: 100%;
+  }
+}

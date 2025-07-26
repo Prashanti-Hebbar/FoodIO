@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import EditProfile from '../components/EditProfile';
 import "../profile.css";
 
 const Profile = () => {
   const navigate = useNavigate();
   const [activeSection, setActiveSection] = useState('myRecipes');
+  const [showEditProfile, setShowEditProfile] = useState(false);
   const [userRecipes, setUserRecipes] = useState([
     { id: 1, title: "Pasta Carbonara", image: "ban.jpg" },
     { id: 2, title: "Chicken Curry", image: "ban.jpg" },
@@ -78,6 +80,12 @@ const Profile = () => {
         <div className="profile-header">
           <img src="ban.jpg" alt="Profile" className="profile-image" />
           <h1 className="username">Prashanti Hebbar</h1>
+          <button 
+            className="edit-profile-btn"
+            onClick={() => setShowEditProfile(true)}
+          >
+            Edit Profile
+          </button>
         </div>
         
         <div className="recipe-buttons">
@@ -105,6 +113,10 @@ const Profile = () => {
         {activeSection === 'favoriteRecipes' && <RecipeGrid title="Favorite Recipes" recipes={favoriteRecipes} />}
         {activeSection === 'savedRecipes' && <RecipeGrid title="Saved Recipes" recipes={savedRecipes} />}
       </div>
+      
+      {showEditProfile && (
+        <EditProfile onClose={() => setShowEditProfile(false)} />
+      )}
     </div>
   );
 };
