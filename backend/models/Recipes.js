@@ -28,8 +28,11 @@ const RecipeSchema = new mongoose.Schema({
   cookTime: {
     type: Number,
     required: true,
+    },
+  userOwner: {
+    type: String,
+    required: true,
   }
-  
 });
 
 export const RecipesModel = mongoose.model("recipes", RecipeSchema);
