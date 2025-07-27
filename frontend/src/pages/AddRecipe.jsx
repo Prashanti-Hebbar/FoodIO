@@ -11,7 +11,7 @@ const AddRecipe = () => {
 
   const [recipe, setRecipe] = useState({
     title: "",
-    imageUrl: "",
+    photo: "",
     description: "",
     ingredients: [],
     instructions: "",
@@ -20,12 +20,19 @@ const AddRecipe = () => {
     userOwner: userID,
   });
 
-  const navigate = useNavigate();
+  const [dragActive, setDragActive] = useState(false);
+  const [uploading, setUploading] = useState(false);
 
+  const navigate = useNavigate();
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setRecipe({ ...recipe, [name]: value });
+    // Map imageUrl input to photo field for backward compatibility
+    if (name === "imageUrl" || name === "photo") {
+      setRecipe({ ...recipe, photo: value });
+    } else {
+      setRecipe({ ...recipe, [name]: value });
+    }
   };
 
   const handleIngredientChange = (event, index) => {
@@ -45,11 +52,60 @@ const AddRecipe = () => {
       await axios.post("https://foodio-backend-cgsj.onrender.com/recipes", recipe, {
         headers: { authorization: cookies.access_token },
       });
-      alert("Recipe saved successfully! 🎉");
+      alert("Recipe saved successfully! 🎉"); // Alert logic for successful save
       navigate('/');
     } catch (error) {
       console.log(error);
     }
+  };
+
+  // Drag and drop handlers
+  const handleDrag = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (e.type === "dragenter" || e.type === "dragover") {
+      setDragActive(true);
+    } else if (e.type === "dragleave") {
+      setDragActive(false);
+    }
+  };
+
+  const handleDrop = async (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setDragActive(false);
+    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+      await handleImageUpload(e.dataTransfer.files[0]);
+    }
+  };
+
+  const handleImageChange = async (e) => {
+    if (e.target.files && e.target.files[0]) {
+      await handleImageUpload(e.target.files[0]);
+    }
+  };
+
+  // Upload image to imgbb (or similar)
+  const handleImageUpload = async (file) => {
+    setUploading(true);
+    const formData = new FormData();
+    formData.append("image", file);
+    try {
+      const apiKey = process.env.REACT_APP_IMGBB_API_KEY;
+      const res = await fetch(`https://api.imgbb.com/1/upload?key=${apiKey}`, {
+        method: "POST",
+        body: formData,
+      });
+      const data = await res.json();
+      if (data.success) {
+        setRecipe((prev) => ({ ...prev, photo: data.data.url }));
+      } else {
+        alert("Image upload failed");
+      }
+    } catch (err) {
+      alert("Image upload error");
+    }
+    setUploading(false);
   };
 
   return (
@@ -71,14 +127,31 @@ const AddRecipe = () => {
           />
 
           <label>Upload Photo:</label>
-          <input 
-            type="text"
-            name="imageUrl" 
-            value={recipe.imageUrl}
-            onChange={handleChange}
-            placeholder="Enter image URL"
-            required 
-          />
+          <div
+            className={`drag-drop-zone${dragActive ? " active" : ""}`}
+            onDragEnter={handleDrag}
+            onDragOver={handleDrag}
+            onDragLeave={handleDrag}
+            onDrop={handleDrop}
+            style={{ border: "2px dashed #aaa", padding: 20, textAlign: "center", marginBottom: 10 }}
+          >
+            <input
+              type="file"
+              accept="image/*"
+              style={{ display: "none" }}
+              id="photo-upload-input"
+              onChange={handleImageChange}
+            />
+            <label htmlFor="photo-upload-input" style={{ cursor: "pointer" }}>
+              {uploading ? "Uploading..." : recipe.photo ? (
+                <img src={recipe.photo} alt="Preview" style={{ maxWidth: 200, maxHeight: 200 }} />
+              ) : (
+                <>
+                  Drag & drop an image here, or <span style={{ color: "#007bff" }}>click to select</span>
+                </>
+              )}
+            </label>
+          </div>
 
           <label>Description:</label>
           <textarea 

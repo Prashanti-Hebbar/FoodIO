@@ -1,15 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { useCookies } from 'react-cookie';
+import { useGetUserID } from '../hooks/useGetUserID';
 import "../profile.css";
 
 const Profile = () => {
   const navigate = useNavigate();
+  const [username, setUsername] = useState("");
   const [activeSection, setActiveSection] = useState('myRecipes');
-  const [userRecipes, setUserRecipes] = useState([
-    { id: 1, title: "Pasta Carbonara", image: "ban.jpg" },
-    { id: 2, title: "Chicken Curry", image: "ban.jpg" },
-    { id: 3, title: "Berry Smoothie", image: "ban.jpg" },
-  ]);
+  const [userRecipes, setUserRecipes] = useState([]);
+  const [cookies] = useCookies(["access_token"]);
+  const userID = useGetUserID();
+
+  useEffect(() => {
+    setUsername(window.localStorage.getItem("username") || "");
+    const fetchUserRecipes = async () => {
+      try {
+        // Fetch all recipes, then filter by userOwner
+        const res = await axios.get("https://foodio-backend-cgsj.onrender.com/recipes", {
+          headers: { authorization: cookies.access_token },
+        });
+        const allRecipes = res.data;
+        const myRecipes = allRecipes.filter(r => r.userOwner === userID);
+        setUserRecipes(myRecipes);
+      } catch (err) {
+        console.error("Failed to fetch user recipes", err);
+      }
+    };
+    fetchUserRecipes();
+  }, [userID, cookies]);
 
   const [favoriteRecipes, setFavoriteRecipes] = useState([
     { id: 4, title: "Pizza Margherita", image: "ban.jpg" },
@@ -24,7 +44,7 @@ const Profile = () => {
   const handleDelete = (recipeId, section) => {
     switch (section) {
       case "My Recipes":
-        setUserRecipes(userRecipes.filter((recipe) => recipe.id !== recipeId));
+  setUserRecipes(userRecipes.filter((recipe) => recipe._id !== recipeId));
         break;
       case "Favorite Recipes":
         setFavoriteRecipes(favoriteRecipes.filter((recipe) => recipe.id !== recipeId));
@@ -45,8 +65,8 @@ const Profile = () => {
     <div className="recipes-grid">
       <div className="recipes-container">
         {recipes.map((recipe) => (
-          <div key={recipe.id} className="recipe-card">
-            <img src={recipe.image} alt={recipe.title} />
+         <div key={recipe._id || recipe.id} className="recipe-card">
+            <img src={recipe.photo || recipe.image} alt={recipe.title} />
             <div className="recipe-info">
               <h3>{recipe.title}</h3>
               <div className="recipe-actions">
@@ -77,7 +97,7 @@ const Profile = () => {
       <div className="profile-content">
         <div className="profile-header">
           <img src="ban.jpg" alt="Profile" className="profile-image" />
-          <h1 className="username">Prashanti Hebbar</h1>
+          <h1 className="username">{username ? username : "User"}</h1>
         </div>
         
         <div className="recipe-buttons">
@@ -101,7 +121,7 @@ const Profile = () => {
           </button>
         </div>
 
-        {activeSection === 'myRecipes' && <RecipeGrid title="My Recipes" recipes={userRecipes} />}
+  {activeSection === 'myRecipes' && <RecipeGrid title="My Recipes" recipes={userRecipes} />}
         {activeSection === 'favoriteRecipes' && <RecipeGrid title="Favorite Recipes" recipes={favoriteRecipes} />}
         {activeSection === 'savedRecipes' && <RecipeGrid title="Saved Recipes" recipes={savedRecipes} />}
       </div>

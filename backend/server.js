@@ -16,7 +16,7 @@ app.use(express.json());
 app.use("/auth", useRouter); 
 app.use("/recipes", recipeRouter); 
 
-mongoose.connect(process.env.MONGO_URI);
+mongoose.connect(process.env.MONGODB_URI);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
