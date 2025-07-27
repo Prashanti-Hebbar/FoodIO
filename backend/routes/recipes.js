@@ -1,5 +1,4 @@
 import express from "express";
-import mongoose from "mongoose";
 import { RecipesModel } from "../models/Recipes.js";
 import { UserModel } from "../models/Users.js";
 import axios from "axios";
@@ -100,5 +99,19 @@ Please provide:
   }
 });
 
+router.delete("/:recipeId", async (req, res) => {
+  try {
+    const { recipeId } = req.params;
+
+    const deletedRecipe = await RecipesModel.findByIdAndDelete(recipeId);
+    if (!deletedRecipe) {
+      return res.status(404).json({ message: "Recipe not found" });
+    }
+
+    res.status(200).json({ message: "Recipe deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ error: "Failed to delete recipe" });
+  }
+});
 
 export { router as recipeRouter };
