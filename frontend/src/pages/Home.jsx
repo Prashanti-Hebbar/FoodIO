@@ -1,10 +1,52 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import "../App.css"
 import "./recipes";
 import { Link } from 'react-router-dom';
 
 
 const Home = () => {
+    const [activeTestimonial, setActiveTestimonial] = useState(2);
+    const MAX_VISIBILITY = 3;
+
+    const testimonials = [
+        {
+            name: "Sarah Johnson",
+            role: "Home Chef",
+            avatar: "../user1.jpg",
+            content: "Foodio has completely transformed my cooking experience! The recipes are easy to follow and the community is so supportive. I've discovered so many amazing dishes!"
+        },
+        {
+            name: "Michael Chen",
+            role: "Professional Chef",
+            avatar: "../user2.jpg",
+            content: "As a professional chef, I love how Foodio allows me to share my creations with food enthusiasts. The platform is intuitive and the feedback from users is invaluable."
+        },
+        {
+            name: "Emily Rodriguez",
+            role: "Food Blogger",
+            avatar: "../user3.jpg",
+            content: "I'm a busy mom and Foodio has been a lifesaver! The quick and easy recipes help me prepare delicious meals for my family without spending hours in the kitchen."
+        },
+        {
+            name: "David Kim",
+            role: "Tech Enthusiast",
+            avatar: "../user4.jpg",
+            content: "The AI recipe suggestions are incredible! It's like having a personal chef who knows exactly what I love to cook. Foodio has revolutionized my meal planning."
+        },
+        {
+            name: "Maria Santos",
+            role: "Cooking Beginner",
+            avatar: "../user5.jpg",
+            content: "Perfect for beginners like me! The step-by-step instructions and video tutorials make cooking feel approachable and fun. I've gained so much confidence!"
+        },
+        {
+            name: "James Wilson",
+            role: "Food Explorer",
+            avatar: "../user6.jpg",
+            content: "Love the diverse recipe collection! From authentic international dishes to modern fusion, Foodio has expanded my culinary horizons tremendously."
+        }
+    ];
+
     const [recipes, setRecipes] = useState({
         topRated: [
             { id: 1, title: 'Delicious Pasta', image: '../pasta.jpg', rating: 4.5 },
@@ -68,7 +110,7 @@ const Home = () => {
                         <div className="card-body">
                             <h5 className="card-title">{recipe.title}</h5>
                             <p className="card-text">Rating: {recipe.rating}</p>
-                            <a href={`/ViewRecipe?id=${recipe.id}`} className="btn btn-primary">View Recipe</a>
+                            <Link to={`/ViewRecipe?id=${recipe.id}`} className="btn btn-primary">View Recipe</Link>
                         </div>
                     </div>
                 </div>
@@ -149,6 +191,8 @@ const Home = () => {
         }, 10);
     }
 };
+
+
     return (
       <div>
         <div id="recipeCarousel" className="carousel slide" data-bs-ride="carousel">
@@ -185,48 +229,62 @@ const Home = () => {
           </button>
         </div>
 
-        <div className="container mt-4">
-                <h2><b>Top Rated Recipes</b></h2>
+        <div className="container mt-4 p-5">
+                <h2 className='mt-5'><b>Top Rated Recipes</b></h2>
                 {renderRecipes('topRated')}
 
-                <h2><b>Trending Recipes</b></h2>
+                <h2 className='mt-5'><b>Trending Recipes</b></h2>
                 {renderRecipes('trending')}
 
-                <h2><b>Newest Recipes</b></h2>
+                <h2 className='mt-5'><b>Newest Recipes</b></h2>
                 {renderRecipes('newest')}
-        </div>
-        <footer className="bg-dark text-light mt-5 py-4">
-    <div className="container">
-        <div className="row">
-            <div className="col-md-4 mb-3">
-                <h5>About Foodio</h5>
-                <p>A collaborative recipe sharing platform designed to make cooking a social experience. Join our community of culinary enthusiasts!</p>
-            </div>
-            <div className="col-md-4 mb-3">
-                <h5>Quick Links</h5>
-                <ul className="list-unstyled">
-                    <li><Link to="/top-rated" className="text-white text-decoration-none hover-effect">Top Rated</Link></li>
-                    <li><Link to="/trending" className="text-light text-decoration-none hover-effect">Trending</Link></li>
-                    <li><Link to="/submit" className="text-light text-decoration-none hover-effect">Submit Recipe</Link></li>
-                    <li><Link to="/community" className="text-light text-decoration-none hover-effect">Community</Link></li>
-                </ul>
-            </div>
-            <div className="col-md-4 mb-3">
-                <h5>Connect With Us</h5>
-                <div className="d-flex gap-3">
-                    <a href="/facebook" className="text-light text-decoration-none hover-effect_1"><i className="bi bi-facebook fs-4"></i></a>
-                    <a href="/instagram" className="text-light text-decoration-none hover-effect_2"><i className="bi bi-instagram fs-4"></i></a>
-                    <a href="/twitter" className="text-light text-decoration-none hover-effect_3"><i className="bi bi-twitter fs-4"></i></a>
-                    <a href="/interest" className="text-light text-decoration-none hover-effect_4"><i className="bi bi-pinterest fs-4"></i></a>
+
+                {/* Testimonials Section */}
+                <div className="testimonials-section">
+                    <h2><b>What Our Users Say</b></h2>
+                    <div className="testimonials-carousel-container">
+                        <div className="testimonials-carousel">
+                            {activeTestimonial > 0 && (
+                                <button className="carousel-nav left" onClick={() => setActiveTestimonial(i => i - 1)}>
+                                    <i className="fas fa-chevron-left"></i>
+                                </button>
+                            )}
+                            {testimonials.map((testimonial, i) => (
+                                <div key={i} className="testimonial-card-container" style={{
+                                    '--active': i === activeTestimonial ? 1 : 0,
+                                    '--offset': (activeTestimonial - i) / 3,
+                                    '--direction': Math.sign(activeTestimonial - i),
+                                    '--abs-offset': Math.abs(activeTestimonial - i) / 3,
+                                    'pointerEvents': activeTestimonial === i ? 'auto' : 'none',
+                                    'opacity': Math.abs(activeTestimonial - i) >= MAX_VISIBILITY ? '0' : '1',
+                                    'display': Math.abs(activeTestimonial - i) > MAX_VISIBILITY ? 'none' : 'block',
+                                }}>
+                                    <div className="testimonial-card">
+                                        <div className="testimonial-rating">
+                                            {[...Array(5)].map((_, starIndex) => (
+                                                <i key={starIndex} className="fas fa-star"></i>
+                                            ))}
+                                        </div>
+                                        <p className="testimonial-text">
+                                            {testimonial.content}
+                                        </p>
+                                        <div className="testimonial-author">
+                                            <img src={testimonial.avatar} alt={testimonial.name} className="testimonial-avatar" />
+                                            <h6>{testimonial.name}</h6>
+                                            <small>{testimonial.role}</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                            {activeTestimonial < testimonials.length - 1 && (
+                                <button className="carousel-nav right" onClick={() => setActiveTestimonial(i => i + 1)}>
+                                    <i className="fas fa-chevron-right"></i>
+                                </button>
+                            )}
+                        </div>
+                    </div>
                 </div>
-            </div>
         </div>
-        <hr className="bg-light" />
-        <div className="text-center">
-            <p className="mb-0">© 2024 Foodio. All rights reserved.</p>
-        </div>
-    </div>
-</footer>
 
       </div>
     );

@@ -116,7 +116,6 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
           <a className="ChatButton" href="/ai-chat" onClick={handleNavLinkClick}>
             Chat with AI
           </a>
-
           <form className="form-inline d-flex align-items-center position-relative">
             <input
               className="form-control mr-sm-2"

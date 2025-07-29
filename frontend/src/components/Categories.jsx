@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../Categories.css';
-// import { title } from 'process';
 
 const Categories = () => {
+  const [isLoading, setIsLoading] = useState(null);
+
   const categoryGroups = [
     {
       title: 'Meal Type',
@@ -19,7 +20,7 @@ const Categories = () => {
     },
     {
       title: 'Cuisine',
-      items: ['Indian', 'Italian', 'Mexican','Japanese'],
+      items: ['Indian', 'Italian', 'Mexican', 'Japanese'],
       icon: '🌎',
       color: '#45B7D1'
     },
@@ -36,43 +37,62 @@ const Categories = () => {
       color: '#D4A5A5'
     },
     {
-        title: 'Time to prepare or difficulty',
-        items: ['30minutemeals', 'onepotmeals'],
-        icon: '⏱️',
-        color: '#FF6B6B'
+      title: 'Time to Prepare or Difficulty',
+      items: ['30 minute meals', 'one pot meals'],
+      icon: '⏱️',
+      color: '#FF6B6B'
     }
   ];
-  
 
   return (
     <div className="categories-wrapper">
       <div className="categories-hero">
-        <h1>Foodio Collections</h1>
-        <p>Explore our handpicked recipe categories</p>
+        <div className="row" style={{ display: "flex", alignItems: "center" }}>
+          <div className="col-8">
+            <h1 style={{ fontSize: "4.5rem", fontWeight: "bold", color: "#fa5a4a" }}>
+              Foodio Collections
+            </h1>
+            <p style={{ fontSize: "1.2rem", color: "#6c7a89" }}>
+              Explore Curated Collections. Experience Endless Flavor!
+            </p>
+          </div>
+          <div className="col-4">
+            <img src="/menu.jpg" alt="menu-img" style={{ height: "200px"}} />
+          </div>
+        </div>
       </div>
-      
+
       <div className="categories-container">
         {categoryGroups.map((group) => (
-          <div 
-            className="category-card" 
+          <div
+            className="category-card"
             key={group.title}
-            style={{'--card-color': group.color}}
+            style={{ '--card-color': group.color }}
           >
             <div className="card-header">
               <span className="card-icon">{group.icon}</span>
               <h2>{group.title}</h2>
             </div>
-            <div className="card-content">
-              {group.items.map((item) => (
-                <Link 
-                  to={`/recipes/${item.toLowerCase()}`} 
-                  className="category-tag"
-                  key={item}
-                >
-                  <span>{item}</span>
-                </Link>
-              ))}
+
+            <div className="wrapper">
+              <div className="collapsible">
+                <input type="checkbox" id={`collapsible-${group.title}`} />
+                <label htmlFor={`collapsible-${group.title}`}>
+                  What's on your mind?
+                </label>
+                <div className="collapsible-text">
+                  {group.items.map((item) => (
+                    <Link
+                      to={`/recipes/${item.toLowerCase()}`}
+                      key={item}
+                    >
+                      <span>{item}</span>
+                    </Link>
+                  ))}
+                </div>
+              </div>
             </div>
+
           </div>
         ))}
       </div>
