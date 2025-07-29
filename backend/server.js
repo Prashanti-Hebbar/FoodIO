@@ -1,3 +1,6 @@
+import dotenv from 'dotenv';
+dotenv.config();
+
 import express from 'express';
 import mongoose from 'mongoose';
 import {useRouter} from './routes/users.js';
@@ -5,10 +8,7 @@ import {recipeRouter} from './routes/recipes.js';
 import cors from 'cors';
 
 const app = express(); 
-const PORT = 3001;
-
-import dotenv from 'dotenv';
-dotenv.config();
+const PORT = process.env.PORT || 3001;
 
 app.use(cors()); 
 app.use(express.json()); 
