@@ -100,5 +100,17 @@ Please provide:
   }
 });
 
+router.post("/:id/favourite", async (req,res)=>{
+  try{
+    const userId = req.user.id;
+    const recipeId = req.params.id;
+    const response = await UserModel.findByIdAndUpdate(userId, {$addToSet: {favourites: recipeId}});
+    console.log("Added to favourites");
+    res.status(200).json(response);
+  } catch(err){
+    console.log(err);
+    res.status(500).json({error: "Failed to add to favourites"});
+  }
+})
 
 export { router as recipeRouter };
