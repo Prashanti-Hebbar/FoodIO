@@ -104,7 +104,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
               </button>
             ) : (
               <>
-                <Link className="loginlink" to="/login">Login </Link>
+                {/* <Link className="loginlink" to="/login">Login </Link> */}
                 <Link className="reglink" to="/register"> Register</Link>
               </>
             )}
