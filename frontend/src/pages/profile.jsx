@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../profile.css";
 
 const Profile = () => {
@@ -47,7 +47,7 @@ const Profile = () => {
     navigate("/");
   };
 
-  const RecipeGrid = ({ title, recipes, setRecipes }) => (
+  const RecipeGrid = ({ title, recipes }) => (
     <div className="recipes-grid">
       <div className="recipes-container">
         {recipes.map((recipe) => (
@@ -58,9 +58,7 @@ const Profile = () => {
               <div className="recipe-actions">
                 {title === "My Recipes" && (
                   <>
-                    <a className="edit-btn" href="/AddRecipe">
-                      Edit
-                    </a>
+                    <Link className="edit-btn" to="/AddRecipe">Edit</Link>
                     <button
                       className="delete-btn"
                       onClick={() => handleDelete(recipe.id, title)}
