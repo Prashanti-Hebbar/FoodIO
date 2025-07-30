@@ -3,33 +3,48 @@ import { createContext, useState, useEffect } from "react";
 // Create Context
 export const SavedRecipesContext = createContext();
 
-<<<<<<< HEAD
 export const SavedRecipesProvider = ({ children }) => {
     const [savedRecipes, setSavedRecipes] = useState([]);
 
-    // Load saved recipes from localStorage on component mount
+    // Load saved recipes on component mount
     useEffect(() => {
-        const storedRecipes = JSON.parse(localStorage.getItem("savedRecipes")) || [];
-        setSavedRecipes(storedRecipes);
+        const fetchSavedRecipes = async () => {
+            const userID = localStorage.getItem("username");
+            if (userID) {
+                try {
+                    // Try to fetch from API if user is logged in
+                    const response = await fetch(`https://foodio-backend-cgsj.onrender.com/recipes/savedRecipes/${userID}`);
+                    if (response.ok) {
+                        const data = await response.json();
+                        setSavedRecipes(data.savedRecipes || []);
+                    } else {
+                        // Fallback to localStorage
+                        const storedRecipes = JSON.parse(localStorage.getItem("savedRecipes")) || [];
+                        setSavedRecipes(storedRecipes);
+                    }
+                } catch (err) {
+                    console.log("API failed, using localStorage:", err);
+                    // Fallback to localStorage
+                    const storedRecipes = JSON.parse(localStorage.getItem("savedRecipes")) || [];
+                    setSavedRecipes(storedRecipes);
+                }
+            } else {
+                // No user logged in, use localStorage
+                const storedRecipes = JSON.parse(localStorage.getItem("savedRecipes")) || [];
+                setSavedRecipes(storedRecipes);
+            }
+        };
+
+        fetchSavedRecipes();
     }, []);
 
-    // Save recipes to localStorage whenever it changes
+    // Save recipes to localStorage whenever it changes (backup)
     useEffect(() => {
         localStorage.setItem("savedRecipes", JSON.stringify(savedRecipes));
     }, [savedRecipes]);
 
     const saveRecipe = (recipe) => {
         setSavedRecipes((prevRecipes) => [...prevRecipes, recipe]);
-=======
-  useEffect(() => {
-    const fetchSavedRecipes = async () => {
-      try {
-        const response = await axios.get(`https://foodio-backend-cgsj.onrender.com/recipes/savedRecipes/${userID}`);
-        setSavedRecipes(response.data.savedRecipes);
-      } catch (err) {
-        console.log(err);
-      }
->>>>>>> 7ffc97ebed7da6598f67a09bd0fede85a9d30486
     };
 
     const removeRecipe = (recipeId) => {
