@@ -1,5 +1,5 @@
 .page-container {
-  min-height: 100vh;
+  min-height: 80vh;
   background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
   padding: 40px 20px;
 }
@@ -31,6 +31,7 @@
 
 .content-container {
   max-width: 800px;
+
   margin: 0 auto;
   background: white;
   padding: 40px;
@@ -133,5 +134,17 @@ h1 {
   
   h1 {
     font-size: 2rem;
+  }
+}
+@media (max-width: 454px) {
+  .back-btn {
+    padding: 4px 8px;
+    margin-right: 6px;
+    font-size: 0.8rem;
+    border-radius: 15px;
+  }
+  
+  h1 {
+    font-size: 1.0rem;
   }
 }
