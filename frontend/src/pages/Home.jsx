@@ -3,7 +3,6 @@ import "../App.css";
 import "./recipes";
 import { Link } from 'react-router-dom';
 
-
 const Home = () => {
   const [recipes, setRecipes] = useState({
     topRated: [
@@ -110,9 +109,7 @@ const Home = () => {
     </div>
   );
 
-  // Add these handler functions
   const handleFavorite = (recipeId) => {
-    // Add to favorites list in user profile
     const updatedRecipes = { ...recipes };
     const recipe = findRecipeById(recipeId, updatedRecipes);
     recipe.isFavorite = !recipe.isFavorite;
@@ -120,14 +117,12 @@ const Home = () => {
   };
 
   const handleSave = (recipeId) => {
-    // Add to saved recipes list in user profile
     const updatedRecipes = { ...recipes };
     const recipe = findRecipeById(recipeId, updatedRecipes);
     recipe.isSaved = !recipe.isSaved;
     setRecipes(updatedRecipes);
   };
 
-<<<<<<< HEAD
   const handleShare = (recipe) => {
     if (navigator.share) {
       navigator.share({
@@ -136,57 +131,55 @@ const Home = () => {
         url: window.location.href,
       });
     } else {
-      // Fallback sharing options
       const shareData = {
         title: recipe.title,
         url: window.location.href,
       };
 
-      // Create share dialog
       const shareDialog = document.createElement("dialog");
-      shareDialog.innerHTML = `
-=======
-    const handleShare = (recipe) => {
-        if (navigator.share) {
-            navigator.share({
-                title: recipe.title,
-                text: `Check out this recipe for ${recipe.title}!`,
-                url: window.location.href
-            });
-        } else {
-            // Fallback sharing options
-            const shareData = {
-                title: recipe.title,
-                url: window.location.href
-            };
-        
-            // Create share dialog
-            const shareDialog = document.createElement('dialog');
-            
-            //fixing the position
-            document.body.style.overflow = 'hidden';
+      document.body.style.overflow = 'hidden';
 
-            shareDialog.innerHTML = `
->>>>>>> 7ffc97ebed7da6598f67a09bd0fede85a9d30486
-                <div class="share-options p-3">
-                    <h5>Share Recipe</h5>
-                    <button onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=${shareData.url}')">
-                        <i class="fab fa-facebook"></i> Facebook
-                    </button>
-                    <button onclick="window.open('https://twitter.com/intent/tweet?text=${shareData.title}&url=${shareData.url}')">
-                        <i class="fab fa-twitter"></i> Twitter
-                    </button>
-                    <button onclick="window.open('https://wa.me/?text=${shareData.title} ${shareData.url}')">
-                        <i class="fab fa-whatsapp"></i> WhatsApp
-                    </button>
-                    <button id="closeDialog">Close</button>
-                </div>
-            `;
-<<<<<<< HEAD
+      shareDialog.innerHTML = `
+        <div class="share-options p-3">
+          <h5>Share Recipe</h5>
+          <button onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=${shareData.url}')">
+            <i class="fab fa-facebook"></i> Facebook
+          </button>
+          <button onclick="window.open('https://twitter.com/intent/tweet?text=${shareData.title}&url=${shareData.url}')">
+            <i class="fab fa-twitter"></i> Twitter
+          </button>
+          <button onclick="window.open('https://wa.me/?text=${shareData.title} ${shareData.url}')">
+            <i class="fab fa-whatsapp"></i> WhatsApp
+          </button>
+          <button id="closeDialog">Close</button>
+        </div>
+      `;
+
+      shareDialog.querySelector('#closeDialog').addEventListener('click', () => {
+        shareDialog.close();
+        document.body.removeChild(shareDialog);
+        document.body.style.overflow = 'auto';
+        document.removeEventListener('click', handleOutsideClick);
+      });
+
       document.body.appendChild(shareDialog);
       shareDialog.showModal();
+      
+      const handleOutsideClick = (e) => {
+        if (!shareDialog.contains(e.target)) {
+          shareDialog.close();
+          document.body.removeChild(shareDialog);
+          document.body.style.overflow = 'auto';
+          document.removeEventListener('click', handleOutsideClick);
+        }           
+      };
+
+      setTimeout(() => {
+        document.addEventListener('click', handleOutsideClick);
+      }, 10);
     }
   };
+
   return (
     <div>
       <div
@@ -205,39 +198,6 @@ const Home = () => {
             <div className="carousel-caption d-none d-md-block">
               <h5>Delicious Dishes</h5>
               <p>Explore a world of culinary delights.</p>
-=======
-            shareDialog.querySelector('#closeDialog').addEventListener('click', () => {
-                shareDialog.close();
-                document.body.removeChild(shareDialog);
-                document.removeEventListener('click', handleOutsideClick);
-            });
-
-            document.body.appendChild(shareDialog);
-            shareDialog.showModal();
-            const handleOutsideClick = (e) => {
-                if (!shareDialog.contains(e.target)) {
-                        shareDialog.close();
-                        document.body.removeChild(shareDialog);
-                        document.removeEventListener('click', handleOutsideClick);
-                    }           
-            };
-
-        setTimeout(() => {
-            document.addEventListener('click', handleOutsideClick);
-        }, 10);
-    }
-};
-    return (
-      <div>
-        <div id="recipeCarousel" className="carousel slide" data-bs-ride="carousel">
-          <div className="carousel-inner">
-            <div className="carousel-item active">
-              <img src="../carousel1.jpg" className="d-block w-100" alt="Recipe 1" style={{objectFit:"cover", height:"550px"}}/>
-              <div className="carousel-caption d-none d-md-block">
-                <h5>Delicious Dishes</h5>
-                <p>Explore a world of culinary delights.</p>
-              </div>
->>>>>>> 7ffc97ebed7da6598f67a09bd0fede85a9d30486
             </div>
           </div>
           <div className="carousel-item">
@@ -256,7 +216,7 @@ const Home = () => {
             <img
               src="../carousel3.jpg"
               className="d-block w-100"
-              alt="Recipe 2"
+              alt="Recipe 3"
               style={{ objectFit: "cover", height: "550px" }}
             />
             <div className="carousel-caption d-none d-md-block">
@@ -307,6 +267,7 @@ const Home = () => {
         </h2>
         {renderRecipes("newest")}
       </div>
+      
       <footer className="bg-dark text-light mt-5 py-4">
         <div className="container">
           <div className="row">
@@ -321,98 +282,47 @@ const Home = () => {
               <h5>Quick Links</h5>
               <ul className="list-unstyled">
                 <li>
-                  <a href="#" className="text-light text-decoration-none">
+                  <Link to="/top-rated" className="text-white text-decoration-none hover-effect">
                     Top Rated
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="#" className="text-light text-decoration-none">
+                  <Link to="/trending" className="text-light text-decoration-none hover-effect">
                     Trending
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="#" className="text-light text-decoration-none">
+                  <Link to="/submit" className="text-light text-decoration-none hover-effect">
                     Submit Recipe
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="#" className="text-light text-decoration-none">
+                  <Link to="/community" className="text-light text-decoration-none hover-effect">
                     Community
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
             <div className="col-md-4 mb-3">
               <h5>Connect With Us</h5>
               <div className="d-flex gap-3">
-                <a href="#" className="text-light">
+                <a href="/facebook" className="text-light text-decoration-none hover-effect_1">
                   <i className="bi bi-facebook fs-4"></i>
                 </a>
-                <a href="#" className="text-light">
+                <a href="/instagram" className="text-light text-decoration-none hover-effect_2">
                   <i className="bi bi-instagram fs-4"></i>
                 </a>
-                <a href="#" className="text-light">
+                <a href="/twitter" className="text-light text-decoration-none hover-effect_3">
                   <i className="bi bi-twitter fs-4"></i>
                 </a>
-                <a href="#" className="text-light">
+                <a href="/interest" className="text-light text-decoration-none hover-effect_4">
                   <i className="bi bi-pinterest fs-4"></i>
                 </a>
               </div>
             </div>
           </div>
-<<<<<<< HEAD
           <hr className="bg-light" />
           <div className="text-center">
-=======
-          <button className="carousel-control-prev" type="button" data-bs-target="#recipeCarousel" data-bs-slide="prev">
-            <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span className="visually-hidden">Previous</span>
-          </button>
-          <button className="carousel-control-next" type="button" data-bs-target="#recipeCarousel" data-bs-slide="next">
-            <span className="carousel-control-next-icon" aria-hidden="true"></span>
-            <span className="visually-hidden">Next</span>
-          </button>
-        </div>
-
-        <div className="container mt-4">
-                <h2><b>Top Rated Recipes</b></h2>
-                {renderRecipes('topRated')}
-
-                <h2><b>Trending Recipes</b></h2>
-                {renderRecipes('trending')}
-
-                <h2><b>Newest Recipes</b></h2>
-                {renderRecipes('newest')}
-        </div>
-        <footer className="bg-dark text-light mt-5 py-4">
-    <div className="container">
-        <div className="row">
-            <div className="col-md-4 mb-3">
-                <h5>About Foodio</h5>
-                <p>A collaborative recipe sharing platform designed to make cooking a social experience. Join our community of culinary enthusiasts!</p>
-            </div>
-            <div className="col-md-4 mb-3">
-                <h5>Quick Links</h5>
-                <ul className="list-unstyled">
-                    <li><Link to="/top-rated" className="text-white text-decoration-none hover-effect">Top Rated</Link></li>
-                    <li><Link to="/trending" className="text-light text-decoration-none hover-effect">Trending</Link></li>
-                    <li><Link to="/submit" className="text-light text-decoration-none hover-effect">Submit Recipe</Link></li>
-                    <li><Link to="/community" className="text-light text-decoration-none hover-effect">Community</Link></li>
-                </ul>
-            </div>
-            <div className="col-md-4 mb-3">
-                <h5>Connect With Us</h5>
-                <div className="d-flex gap-3">
-                    <a href="/facebook" className="text-light text-decoration-none hover-effect_1"><i className="bi bi-facebook fs-4"></i></a>
-                    <a href="/instagram" className="text-light text-decoration-none hover-effect_2"><i className="bi bi-instagram fs-4"></i></a>
-                    <a href="/twitter" className="text-light text-decoration-none hover-effect_3"><i className="bi bi-twitter fs-4"></i></a>
-                    <a href="/interest" className="text-light text-decoration-none hover-effect_4"><i className="bi bi-pinterest fs-4"></i></a>
-                </div>
-            </div>
-        </div>
-        <hr className="bg-light" />
-        <div className="text-center">
->>>>>>> 7ffc97ebed7da6598f67a09bd0fede85a9d30486
             <p className="mb-0">© 2024 Foodio. All rights reserved.</p>
           </div>
         </div>
