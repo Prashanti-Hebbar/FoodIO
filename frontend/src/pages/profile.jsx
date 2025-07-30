@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import EditProfile from '../components/EditProfile';
+import { Link, useNavigate } from 'react-router-dom';
 import "../profile.css";
-import axios from 'axios';
 
-const Profile = ({ setIsLoggedIn }) => {
+const Profile = () => {
   const navigate = useNavigate();
-  //you can make the context of this user to avoid unnecessary useEffect calls
-  const [user,setUser] = useState({});
   const [activeSection, setActiveSection] = useState('myRecipes');
+  const [showEditProfile, setShowEditProfile] = useState(false);
   const [userRecipes, setUserRecipes] = useState([
     { id: 1, title: "Pasta Carbonara", image: "ban.jpg" },
     { id: 2, title: "Chicken Curry", image: "ban.jpg" },
@@ -39,43 +39,6 @@ const Profile = ({ setIsLoggedIn }) => {
         break;
     }
   };
-  //fetching user data
-  useEffect(()=>
-    {
-      const fetchUserInfo = async ()=>
-        {
-          try
-          {
-            //*** Your render url here ***
-            let res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/auth/getProfile`,
-            {
-              withCredentials:true
-            });
-            setUser(res.data);
-          }catch(err)
-          {
-            console.log("there's some issue",err);
-          }
-            
-        }
-        fetchUserInfo();
-
-    },[])
-  const handleLogout = async() => {
-    try
-          {
-            //*** Your render url here ***
-            let res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/auth/logout`,
-            {
-              withCredentials:true
-            });
-            setIsLoggedIn(false);
-          }catch(err)
-          {
-            console.log("there's some issue",err);
-          }
-    navigate('/');
-  };
 
   const RecipeGrid = ({ title, recipes, setRecipes }) => (
     <div className="recipes-grid">
@@ -88,7 +51,7 @@ const Profile = ({ setIsLoggedIn }) => {
               <div className="recipe-actions">
                 {title === "My Recipes" && (
                   <>
-                    <a className="edit-btn" href="/AddRecipe">Edit</a>
+                    <Link className="edit-btn" to="/AddRecipe">Edit</Link>
                     <button className="delete-btn" onClick={() => handleDelete(recipe.id, title)}>Delete</button>
                   </>
                 )}
@@ -107,13 +70,18 @@ const Profile = ({ setIsLoggedIn }) => {
     <div className="profile-page">
       <div className="banner">
         <img src="ban.jpg" alt="Profile Banner" />
-        <button className="banner-logout-btn" onClick={handleLogout}>Logout</button>
       </div>
     
       <div className="profile-content">
         <div className="profile-header">
-          <img src={user.pfp || 'ban.jpg'} alt="Profile" className="profile-image"   referrerPolicy="no-referrer" />
-          <h1 className="username">{user.username || 'Prashanti Hebbar'}</h1>
+          <img src="ban.jpg" alt="Profile" className="profile-image" />
+          <h1 className="username">Prashanti Hebbar</h1>
+          <button 
+            className="edit-profile-btn"
+            onClick={() => setShowEditProfile(true)}
+          >
+            Edit Profile
+          </button>
         </div>
         
         <div className="recipe-buttons">
@@ -141,6 +109,10 @@ const Profile = ({ setIsLoggedIn }) => {
         {activeSection === 'favoriteRecipes' && <RecipeGrid title="Favorite Recipes" recipes={favoriteRecipes} />}
         {activeSection === 'savedRecipes' && <RecipeGrid title="Saved Recipes" recipes={savedRecipes} />}
       </div>
+      
+      {showEditProfile && (
+        <EditProfile onClose={() => setShowEditProfile(false)} />
+      )}
     </div>
   );
 };

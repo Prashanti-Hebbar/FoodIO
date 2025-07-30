@@ -1,102 +1,13 @@
-/* Global styles */
-/* body {
-    font-family: 'Poppins', sans-serif;
-    background: linear-gradient(to bottom right, #ffe8c2, #ffd166);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    margin: 0;
-  } */
-  
+.card:hover{
+  border: 2px solid #e76f51;
+  cursor: pointer;
+  transition: all 0.3s ease-out;
+}
 
-  /* Container */
-  .about-container {
-    /* background: linear-gradient(to bottom right, #ffe8c2, #c49e45); */
-    /* border-bottom: 3px solid #e67e22; */
-    max-width: 100%;
-    height: 650px;
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(10px);
-    border-radius: 20px;
-    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
-    padding: 40px;
-    text-align: center;
-    border: 1px solid rgba(255, 255, 255, 0.4);
-  }
-  
-  /* Heading styles */
-  .about-container h1 {
-    font-size: 36px;
-    font-weight: bold;
-    color: #e76f51;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-  }
-  
-  .about-container h1 span {
-    color: #f4a261;
-  }
-  
-  .about-container h2 {
-    /* justify-content: flex-start; */
-    text-align: left;
-    font-size: 24px;
-    font-weight: 600;
-    color: #d35f36;
-    margin-top: 20px;
-    /* border-bottom: 3px solid #f4a261; */
-    width: fit-content;
-    /* display: inline-flex; */
-    padding-bottom: 5px;
-  }
-  
-  /* Paragraph styles */
-  .about-container p {
-    font-size: 16px;
-    color: #444;
-    line-height: 1.6;
-    margin: 15px 0;
-  }
-  
-  /* List styles */
-  .about-container ul {
-    list-style: none;
-    padding: 0;
-    text-align: center;
-    margin-top: 20px;
-  }
-  
-  .about-container ul li {
-    justify-content:c;
-    display: flex;
-    align-items: center;
-    font-size: 16px;
-    color: #555;
-    margin-bottom: 12px;
-  }
-  
-  .about-container ul li span {
-    font-size: 22px;
-    color: #f4a261;
-    margin-right: 10px;
-  }
-  
-  /* CTA text */
-  .cta-text {
-    font-size: 20px;
-    font-weight: bold;
-    color: #e76f51;
-    margin-top: 20px;
-    animation: pulse 1.5s infinite alternate;
-  }
-  
-  /* Pulse Animation */
-  @keyframes pulse {
-    from {
-      opacity: 1;
-    }
-    to {
-      opacity: 0.7;
-    }
-  }
-  
+.card-body:hover,
+.card-title:hover,
+.card-text:hover {
+  border: none; 
+}
+
+

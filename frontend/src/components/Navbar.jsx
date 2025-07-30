@@ -1,41 +1,20 @@
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import recipes from '../pages/recipes'
 import "../navbar.css"
-import axios from 'axios'
 
 const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
   const [searchTerm, setSearchTerm] = useState('')
   const [searchResults, setSearchResults] = useState([])
   const navigate = useNavigate()
 
-
-  // **** your previous logout***
-  // const handleLogout = () => {
-  //   // Clear all user data
-  //   localStorage.clear();
-  //   setIsLoggedIn(false);
-  //   navigate("/home");
-  // };
-
-    const handleLogout = async() => {
-    console.log(process.env.REACT_APP_BACKEND_URL)
-    try
-          {
-            //*** Your render url here ***
-            let res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/auth/logout`,
-            {
-              withCredentials:true
-            });
-            console.log(res);
-            console.log(res.data);
-            setIsLoggedIn(false);
- 
-          }catch(err)
-          {
-            console.log("there's some issue",err);
-          }
-    navigate('/');
+  const handleLogout = () => {
+    const confirmed = window.confirm("Are you sure you want to logout?");
+    if (confirmed) {
+      localStorage.clear();
+      setIsLoggedIn(false);
+      navigate("/home");
+    }
   };
 
   const handleSearch = (e) => {
@@ -63,7 +42,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-custom">
-        <a className="navbar-brand" href="/Home">FoodIO</a>
+        <Link className="navbar-brand" to="/Home">FoodIO</Link>
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>
@@ -71,7 +50,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav mr-auto">
             <li className="nav-item active">
-              <a className="nav-link" href="/Home">Home</a>
+              <Link className="nav-link" to="/Home">Home</Link>
             </li>
 
             <div className="dropdown">
@@ -79,17 +58,17 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
                 Dashboard
               </button>
               <ul className="dropdown-menu">
-                <li><a className="dropdown-item" href="/Categories">Categories</a></li>
-                <li><a className="dropdown-item" href="/AddRecipe">Add New Recipe</a></li>
+                <li><Link className="dropdown-item" to="/Categories">Categories</Link></li>
+                <li><Link className="dropdown-item" to="/AddRecipe">Add New Recipe</Link></li>
               </ul>
             </div>
 
             <li className="nav-item">
-              <a className="nav-link" href="/About">About</a>
+              <Link className="nav-link" to="/About">About</Link>
             </li>
           </ul>
         {/* add chat button */}
-              <a className='ChatButton' href='/ai-chat'>Chat with AI</a>
+              <Link className='ChatButton' to='/ai-chat'>Chat with AI</Link>
 
           <form className="form-inline d-flex align-items-center position-relative">
             <input 
@@ -125,11 +104,11 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
               </button>
             ) : (
               <>
-                <a className="loginlink" href="/login">Login </a>
-                <a className="reglink" href="/register"> Register</a>
+                {/* <Link className="loginlink" to="/login">Login </Link> */}
+                <Link className="reglink" to="/register"> Register</Link>
               </>
             )}
-            <a className="myprofile" href="/profile"><i className="fas fa-user"></i></a>
+            <Link className="myprofile" to="/profile"><i className="fas fa-user"></i></Link>
           </div>
 
           

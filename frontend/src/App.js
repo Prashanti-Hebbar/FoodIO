@@ -29,6 +29,7 @@ import Mexican from "./pages/categories/Mexican";
 import { SavedRecipesProvider } from "./pages/savedRecipes";
 import AIChatPage from "./pages/AIChatPage";
 import ScrollToTop from "./components/ScrollToTop";
+import Footer from "./components/Footer";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -36,7 +37,6 @@ function App() {
   useEffect(() => {
     const user = localStorage.getItem("username");
     setIsLoggedIn(!!user);
-
   }, []);
   
   return (
@@ -53,7 +53,7 @@ function App() {
         <Route path="/About" element={ <About /> } />
         <Route path="/ViewRecipe" element={<ViewRecipe />}/>
         <Route path="/recipe/:id" element={<ViewRecipe />} />
-        <Route path="/profile" element={<Profile setIsLoggedIn={setIsLoggedIn} />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="/Categories" element={<Categories />} />
         <Route path="/recipes/breakfast" element={<Breakfast />} />
         <Route path="/recipes/Lunch" element={<Lunch />} />
@@ -75,6 +75,7 @@ function App() {
         <Route path="/pages/savedRecipes" element={<SavedRecipesProvider/>}/>
         <Route path="/ai-chat" element={<AIChatPage/>}/>
       </Routes>
+      <Footer />
     </Router>
   );
 }

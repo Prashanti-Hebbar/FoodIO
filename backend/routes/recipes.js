@@ -133,7 +133,7 @@ Please provide:
     const response = await axios.post(
       'https://openrouter.ai/api/v1/chat/completions',
       {
-        model: 'moonshotai/kimi-k2:free', // adjust to your preferred model
+        model: 'moonshotai/kimi-k2:free', 
         messages: [
           { role: 'system', content: 'You are a helpful AI recipe generator.' },
           { role: 'user', content: prompt }

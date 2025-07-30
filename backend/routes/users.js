@@ -2,47 +2,82 @@ import express from "express";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import { UserModel } from "../models/Users.js";
-import {firebaseAuth,Authlogin,Authregister,getProfile,logout} from "../controllers/authController.js";
-import verifyIdToken from "../middleware/verifyJwt.js";
+
 const router = express.Router();
 
-// these funtions are imported from controllers/autController.js (MVC pattern)
-router.post('/firebaseAuth',firebaseAuth);
-router.post('/register',Authregister);
-router.post('/login',Authlogin);
-router.get('/getProfile',verifyIdToken,getProfile);
-router.get('/logout',logout);
+router.post("/register", async (req, res) => {
+  const { username, email, password } = req.body; 
+  const user = await UserModel.findOne({ username }); 
 
-// ### *** Your previous register handler ***
+  if (user) {
+    return res.json({ message: "User already exists" }); 
+  }
 
-// router.post("/register", async (req, res) => {
-//   const { username, email, password } = req.body; // get the data from the request body
-//   const user = await UserModel.findOne({ username }); // check if user already exists
+  const hashedPassword = await bcrypt.hash(password, 10); 
 
-//   if (user) {
-//     return res.json({ message: "User already exists" }); // if user already exists, return an error message
-//   }
+  const newUser = new UserModel({ username, email, password: hashedPassword }); 
+  await newUser.save(); 
 
-//   const hashedPassword = await bcrypt.hash(password, 10); // hash the password
-
-//   const newUser = new UserModel({ username, email, password: hashedPassword,authProvider:'local' }); // create a new user
-//   await newUser.save(); // save the user to the database
-
-  res.json({ message: "User Registered Successfully!" }); // send the user data to the client
+  res.json({ message: "User Registered Successfully!" }); 
+});
 
 router.post("/login", async (req, res) => {
-  const { username, password } = req.body; // get the data from the request body
-  const user = await UserModel.findOne({ username }); // check if user already exists
+  const { username, password } = req.body; 
+  const user = await UserModel.findOne({ username }); 
   if (!user) {
-    return res.json({ message: "User doesn't exist" }); // if user doesn't exist, return an error message
+    return res.json({ message: "User doesn't exist" }); 
   }
-  const isPasswordValid = await bcrypt.compare(password, user.password); // compare the password
+  const isPasswordValid = await bcrypt.compare(password, user.password); 
 
   if (!isPasswordValid) {
-    return res.json({ message: "Username or password is incorrect" }); // if password is incorrect, return an error message
+    return res.json({ message: "Username or password is incorrect" }); 
   }
-  const token = jwt.sign({ id: user._id }, "secret"); // create a token
-  res.json({ token, userID: user._id }); // send the token to the client)
+  const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET || "secret"); 
+  res.json({ token, userID: user._id }); 
+});
+
+// Get user information
+router.get("/user/:id", async (req, res) => {
+  try {
+    const user = await UserModel.findById(req.params.id).select("-password");
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    res.json(user);
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching user data" });
+  }
+});
+
+// Update user profile
+router.put("/user/:id", async (req, res) => {
+  try {
+    const { username, email } = req.body;
+    
+    // Check if username is already taken by another user
+    const existingUser = await UserModel.findOne({ 
+      username, 
+      _id: { $ne: req.params.id } 
+    });
+    
+    if (existingUser) {
+      return res.status(400).json({ message: "Username already taken" });
+    }
+    
+    const updatedUser = await UserModel.findByIdAndUpdate(
+      req.params.id,
+      { username, email },
+      { new: true }
+    ).select("-password");
+    
+    if (!updatedUser) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    
+    res.json(updatedUser);
+  } catch (error) {
+    res.status(500).json({ message: "Error updating user profile" });
+  }
 });
 
 export { router as useRouter };
