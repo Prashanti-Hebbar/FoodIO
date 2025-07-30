@@ -1,3 +1,4 @@
+
 /* About.css - Clean Version */
 
 /* Container */
@@ -183,3 +184,17 @@
     line-height: 1.4;
   }
 }
+=======
+.card:hover{
+  border: 2px solid #e76f51;
+  cursor: pointer;
+  transition: all 0.3s ease-out;
+}
+
+.card-body:hover,
+.card-title:hover,
+.card-text:hover {
+  border: none; 
+}
+
+

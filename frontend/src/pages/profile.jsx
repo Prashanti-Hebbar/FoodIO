@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import EditProfile from '../components/EditProfile';
+import { Link, useNavigate } from 'react-router-dom';
 import "../profile.css";
 
 const Profile = () => {
   const navigate = useNavigate();
   const [activeSection, setActiveSection] = useState('myRecipes');
+  const [showEditProfile, setShowEditProfile] = useState(false);
   const [userRecipes, setUserRecipes] = useState([
     { id: 1, title: "Pasta Carbonara", image: "ban.jpg" },
     { id: 2, title: "Chicken Curry", image: "ban.jpg" },
@@ -37,10 +40,6 @@ const Profile = () => {
     }
   };
 
-  const handleLogout = () => {
-    navigate('/');
-  };
-
   const RecipeGrid = ({ title, recipes, setRecipes }) => (
     <div className="recipes-grid">
       <div className="recipes-container">
@@ -52,7 +51,7 @@ const Profile = () => {
               <div className="recipe-actions">
                 {title === "My Recipes" && (
                   <>
-                    <a className="edit-btn" href="/AddRecipe">Edit</a>
+                    <Link className="edit-btn" to="/AddRecipe">Edit</Link>
                     <button className="delete-btn" onClick={() => handleDelete(recipe.id, title)}>Delete</button>
                   </>
                 )}
@@ -71,13 +70,18 @@ const Profile = () => {
     <div className="profile-page">
       <div className="banner">
         <img src="ban.jpg" alt="Profile Banner" />
-        <button className="banner-logout-btn" onClick={handleLogout}>Logout</button>
       </div>
     
       <div className="profile-content">
         <div className="profile-header">
           <img src="ban.jpg" alt="Profile" className="profile-image" />
           <h1 className="username">Prashanti Hebbar</h1>
+          <button 
+            className="edit-profile-btn"
+            onClick={() => setShowEditProfile(true)}
+          >
+            Edit Profile
+          </button>
         </div>
         
         <div className="recipe-buttons">
@@ -105,6 +109,10 @@ const Profile = () => {
         {activeSection === 'favoriteRecipes' && <RecipeGrid title="Favorite Recipes" recipes={favoriteRecipes} />}
         {activeSection === 'savedRecipes' && <RecipeGrid title="Saved Recipes" recipes={savedRecipes} />}
       </div>
+      
+      {showEditProfile && (
+        <EditProfile onClose={() => setShowEditProfile(false)} />
+      )}
     </div>
   );
 };

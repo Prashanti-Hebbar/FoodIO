@@ -36,4 +36,48 @@ router.post("/login", async (req, res) => {
   res.json({ token, userID: user._id }); 
 });
 
+// Get user information
+router.get("/user/:id", async (req, res) => {
+  try {
+    const user = await UserModel.findById(req.params.id).select("-password");
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    res.json(user);
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching user data" });
+  }
+});
+
+// Update user profile
+router.put("/user/:id", async (req, res) => {
+  try {
+    const { username, email } = req.body;
+    
+    // Check if username is already taken by another user
+    const existingUser = await UserModel.findOne({ 
+      username, 
+      _id: { $ne: req.params.id } 
+    });
+    
+    if (existingUser) {
+      return res.status(400).json({ message: "Username already taken" });
+    }
+    
+    const updatedUser = await UserModel.findByIdAndUpdate(
+      req.params.id,
+      { username, email },
+      { new: true }
+    ).select("-password");
+    
+    if (!updatedUser) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    
+    res.json(updatedUser);
+  } catch (error) {
+    res.status(500).json({ message: "Error updating user profile" });
+  }
+});
+
 export { router as useRouter };
