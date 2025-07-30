@@ -2,17 +2,40 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import recipes from '../pages/recipes'
 import "../navbar.css"
+import axios from 'axios'
 
 const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
   const [searchTerm, setSearchTerm] = useState('')
   const [searchResults, setSearchResults] = useState([])
   const navigate = useNavigate()
 
-  const handleLogout = () => {
-    // Clear all user data
-    localStorage.clear();
-    setIsLoggedIn(false);
-    navigate("/home");
+
+  // **** your previous logout***
+  // const handleLogout = () => {
+  //   // Clear all user data
+  //   localStorage.clear();
+  //   setIsLoggedIn(false);
+  //   navigate("/home");
+  // };
+
+    const handleLogout = async() => {
+    console.log(process.env.REACT_APP_BACKEND_URL)
+    try
+          {
+            //*** Your render url here ***
+            let res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/auth/logout`,
+            {
+              withCredentials:true
+            });
+            console.log(res);
+            console.log(res.data);
+            setIsLoggedIn(false);
+ 
+          }catch(err)
+          {
+            console.log("there's some issue",err);
+          }
+    navigate('/');
   };
 
   const handleSearch = (e) => {

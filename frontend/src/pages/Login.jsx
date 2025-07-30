@@ -2,6 +2,8 @@ import { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import "../App.css";
+import { signInWithPopup } from "firebase/auth";
+import { auth, provider } from "../services/firebase";
 
 const Login = ({ setIsLoggedIn }) => {
   const [username, setUsername] = useState("");
@@ -20,6 +22,8 @@ const Login = ({ setIsLoggedIn }) => {
       const response = await axios.post("https://foodio-backend-cgsj.onrender.com/auth/login", {
         username,
         password
+      },{
+        withCredentials:true
       });
 
       console.log('Login response:', response.data);
@@ -37,6 +41,24 @@ const Login = ({ setIsLoggedIn }) => {
     } catch (error) {
       console.log('Login error:', error);
       alert("Login failed. Please check your credentials.");
+    }
+  };
+  const handleGoogleAuth = async () => {
+    try
+    {
+      const result = await signInWithPopup(auth,provider);
+      const  token = await result.user.getIdToken();
+      let res = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/auth/firebaseAuth`,{idtoken:token},
+        {
+          withCredentials:true
+        })
+         setIsLoggedIn(true);
+        alert("Login successful!");
+        navigate("/home");
+
+    }catch(err)
+    {
+      console.log("There's some issue with firebase", err);
     }
   };
 
@@ -62,6 +84,7 @@ const Login = ({ setIsLoggedIn }) => {
         <br />
         <button id="loginbutton" type="submit">Login</button>
       </form>
+        <button id="googleLogin" onClick={handleGoogleAuth}>Continue with google </button>
       <br /><br />
       <p>New user? <Link to="/register" style={{ color: '#3b73af' }}>Register</Link></p>
     </div>

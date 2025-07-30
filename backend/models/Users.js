@@ -11,9 +11,25 @@ const userSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
+    uid:
+    {
+        type:String,
+        require:false,
+        sparse: true,
+    },
     password: {
         type: String,
-        required: true
+        required: false
+    },
+    authProvider:
+    {
+        type:String,
+        required:true
+    },
+    profilePhoto:
+    {
+        type:String,
+        require:false
     },
     savedRecipes: [{ type: mongoose.Schema.Types.ObjectId, ref: "recipes" }]
 });

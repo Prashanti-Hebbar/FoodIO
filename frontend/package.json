@@ -9,7 +9,6 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.8.3",
-    "google-auth-library": "^10.1.0",
     "jspdf": "^3.0.0",
     "process": "^0.11.10",
     "react": "^18.3.1",

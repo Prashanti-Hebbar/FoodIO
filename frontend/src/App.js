@@ -39,6 +39,7 @@ function App() {
   useEffect(() => {
     const user = localStorage.getItem("username");
     setIsLoggedIn(!!user);
+
   }, []);
   
   return (
@@ -55,7 +56,7 @@ function App() {
         <Route path="/About" element={ <About /> } />
         <Route path="/ViewRecipe" element={<ViewRecipe />}/>
         <Route path="/recipe/:id" element={<ViewRecipe />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/profile" element={<Profile setIsLoggedIn={setIsLoggedIn} />} />
         <Route path="/Categories" element={<Categories />} />
         <Route path="/recipes/breakfast" element={<Breakfast />} />
         <Route path="/recipes/Lunch" element={<Lunch />} />
