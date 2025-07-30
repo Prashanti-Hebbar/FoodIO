@@ -26,12 +26,9 @@ import Indian from "./pages/categories/Indian";
 import Italian from "./pages/categories/Itallian";
 import Japanese from "./pages/categories/Japanese";
 import Mexican from "./pages/categories/Mexican";
-<<<<<<< HEAD
 import { SavedRecipesProvider } from "./pages/savedRecipes";
-=======
 import AIChatPage from "./pages/AIChatPage";
 import ScrollToTop from "./components/ScrollToTop";
->>>>>>> 7ffc97ebed7da6598f67a09bd0fede85a9d30486
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -75,11 +72,8 @@ function App() {
         <Route path="/recipes/italian" element={<Italian />} />
         <Route path="/recipes/japanese" element={<Japanese />} />
         <Route path="/recipes/mexican" element={<Mexican />} />
-<<<<<<< HEAD
         <Route path="/pages/savedRecipes" element={<SavedRecipesProvider/>}/>
-=======
         <Route path="/ai-chat" element={<AIChatPage/>}/>
->>>>>>> 7ffc97ebed7da6598f67a09bd0fede85a9d30486
       </Routes>
     </Router>
   );
