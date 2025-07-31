@@ -19,7 +19,8 @@
     font-family: var(--primary-font);
   }
 
-  .navbar-custom {
+.navbar-custom {
+    position: fixed; /* 🔥 THIS LINE IS MISSING */
     top: 0;
     width: 100%;
     padding: 12px 20px;
@@ -37,7 +38,7 @@
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2),
                 inset 0 0 30px rgba(255, 204, 0, 0.05);
     font-family: var(--primary-font);
-  }
+}
   
   /* Brand Name */
   .navbar-brand {
