@@ -39,6 +39,7 @@ function App() {
   }, []);
   
   return (
+    <div style={{ paddingTop: '40px' }}>
     <Router>
       <ScrollToTop />
       <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
@@ -75,6 +76,7 @@ function App() {
       </Routes>
       <Footer />
     </Router>
+    </div>
   );
 }
 export default App;

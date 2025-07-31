@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import EditProfile from '../components/EditProfile';
 import { Link, useNavigate } from 'react-router-dom';
 import "../profile.css";
