@@ -15,7 +15,8 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    savedRecipes: [{ type: mongoose.Schema.Types.ObjectId, ref: "recipes" }]
+    savedRecipes: [{ type: mongoose.Schema.Types.ObjectId, ref: "recipes" }],
+    favorites: [{ type: mongoose.Schema.Types.ObjectId, ref: "recipes" }]
 });
 
-export const UserModel = mongoose.model('User', userSchema);
+export const UserModel = mongoose.model('User', userSchema); // Export the User model we use this name as table name in our database 
