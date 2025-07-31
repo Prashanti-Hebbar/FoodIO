@@ -118,7 +118,7 @@ router.post("/:Recipeid/favourite", async (req,res) =>{
 
 router.get("/favorites", async (req,res) => {
   try{
-  const userId = "688249dc7f6a84a0aa00a0ae"||req.user.id;
+  const userId = req.user.id; // fetches id from jwt middleware
   const response = await UserModel.findById(userId).populate("favorites");
   if(!response) return res.status(404).json({error: "No favorites found."});
   console.log("Favorites fetched");
@@ -130,7 +130,7 @@ router.get("/favorites", async (req,res) => {
 
 router.delete("/:Recipeid/favourite", async (req,res) =>{
   try{
-  const userId ="688249dc7f6a84a0aa00a0ae"||req.user.id ; // Fetches id from jwt middleware
+  const userId = req.user.id ; // Fetches id from jwt middleware
   const recipeId = req.params.Recipeid;
 
   //Finds and deletes from user
