@@ -11,42 +11,42 @@ const Home = () => {
     {
       name: "Sarah Johnson",
       role: "Home Chef",
-      avatar: "../user1.jpg",
+      avatar: "/user1.jpg",
       content:
         "Foodio has completely transformed my cooking experience! The recipes are easy to follow and the community is so supportive. I've discovered so many amazing dishes!",
     },
     {
       name: "Michael Chen",
       role: "Professional Chef",
-      avatar: "../user2.jpg",
+      avatar: "/user2.jpg",
       content:
         "As a professional chef, I love how Foodio allows me to share my creations with food enthusiasts. The platform is intuitive and the feedback from users is invaluable.",
     },
     {
       name: "Emily Rodriguez",
       role: "Food Blogger",
-      avatar: "../user3.jpg",
+      avatar: "/user3.jpg",
       content:
         "I'm a busy mom and Foodio has been a lifesaver! The quick and easy recipes help me prepare delicious meals for my family without spending hours in the kitchen.",
     },
     {
       name: "David Kim",
       role: "Tech Enthusiast",
-      avatar: "../user4.jpg",
+      avatar: "/user4.jpg",
       content:
         "The AI recipe suggestions are incredible! It's like having a personal chef who knows exactly what I love to cook. Foodio has revolutionized my meal planning.",
     },
     {
       name: "Maria Santos",
       role: "Cooking Beginner",
-      avatar: "../user5.jpg",
+      avatar: "/user5.jpg",
       content:
         "Perfect for beginners like me! The step-by-step instructions and video tutorials make cooking feel approachable and fun. I've gained so much confidence!",
     },
     {
       name: "James Wilson",
       role: "Food Explorer",
-      avatar: "../user6.jpg",
+      avatar: "/user6.jpg",
       content:
         "Love the diverse recipe collection! From authentic international dishes to modern fusion, Foodio has expanded my culinary horizons tremendously.",
     },
@@ -54,48 +54,48 @@ const Home = () => {
 
   const [recipes, setRecipes] = useState({
     topRated: [
-      { id: 1, title: "Delicious Pasta", image: "../pasta.jpg", rating: 4.5 },
-      { id: 2, title: "Spicy Tacos", image: "../tacos.jpg", rating: 4.2 },
-      { id: 3, title: "Pumpkin Cupcakes", image: "../cakes.jpg", rating: 4.5 },
-      { id: 4, title: "Apple Pie", image: "../pie.jpg", rating: 4.2 },
-      { id: 5, title: "Best Lasagna", image: "../lasagna.jpg", rating: 4.5 },
-      { id: 6, title: "Harira", image: "../harira.jpg", rating: 4.2 },
+      { id: 1, title: "Delicious Pasta", image: "/pasta.jpg", rating: 4.5 },
+      { id: 2, title: "Spicy Tacos", image: "/tacos.jpg", rating: 4.2 },
+      { id: 3, title: "Pumpkin Cupcakes", image: "/cakes.jpg", rating: 4.5 },
+      { id: 4, title: "Apple Pie", image: "/pie.jpg", rating: 4.2 },
+      { id: 5, title: "Best Lasagna", image: "/lasagna.jpg", rating: 4.5 },
+      { id: 6, title: "Harira", image: "/harira.jpg", rating: 4.2 },
     ],
     trending: [
-      { id: 7, title: "Vegan Curry", image: "../curry.jpg", rating: 4.8 },
-      { id: 8, title: "Chocolate Cake", image: "../choco.jpg", rating: 4.7 },
-      { id: 9, title: "corn fritters", image: "../corn.jpg", rating: 4.8 },
+      { id: 7, title: "Vegan Curry", image: "/curry.jpg", rating: 4.8 },
+      { id: 8, title: "Chocolate Cake", image: "/choco.jpg", rating: 4.7 },
+      { id: 9, title: "corn fritters", image: "/corn.jpg", rating: 4.8 },
       {
         id: 10,
         title: "Bread Cheese Lollipop",
-        image: "../lollipop.jpg",
+        image: "/lollipop.jpg",
         rating: 4.7,
       },
       {
         id: 11,
         title: "Sweet Potato Boats",
-        image: "../boats.jpg",
+        image: "/boats.jpg",
         rating: 4.8,
       },
-      { id: 12, title: "Walnut Chikki", image: "../chikki.jpg", rating: 4.7 },
+      { id: 12, title: "Walnut Chikki", image: "/chikki.jpg", rating: 4.7 },
     ],
     newest: [
-      { id: 13, title: "Summer Salad", image: "../salad.jpg", rating: 4.0 },
-      { id: 14, title: "Grilled Salmon", image: "../salmon.jpg", rating: 4.3 },
-      { id: 15, title: "Loco Moco", image: "../loco.jpg", rating: 4.0 },
+      { id: 13, title: "Summer Salad", image: "/salad.jpg", rating: 4.0 },
+      { id: 14, title: "Grilled Salmon", image: "/salmon.jpg", rating: 4.3 },
+      { id: 15, title: "Loco Moco", image: "/loco.jpg", rating: 4.0 },
       {
         id: 16,
         title: "Cinnamon Roll Casserole",
-        image: "../toast.jpg",
+        image: "/toast.jpg",
         rating: 4.3,
       },
       {
         id: 17,
         title: "Frikadellen",
-        image: "../Frikadellen.jpg",
+        image: "/Frikadellen.jpg",
         rating: 4.0,
       },
-      { id: 18, title: "coffe jelly", image: "../jelly.jpg", rating: 4.3 },
+      { id: 18, title: "coffe jelly", image: "/jelly.jpg", rating: 4.3 },
     ],
   });
 
@@ -242,7 +242,7 @@ const Home = () => {
         <div className="carousel-inner">
           <div className="carousel-item active">
             <img
-              src="../carousel1.jpg"
+              src="/carousel1.jpg"
               className="d-block w-100"
               alt="Recipe 1"
               style={{ objectFit: "cover", height: "550px" }}
@@ -254,7 +254,7 @@ const Home = () => {
           </div>
           <div className="carousel-item">
             <img
-              src="../carousel2.jpg"
+              src="/carousel2.jpg"
               className="d-block w-100"
               alt="Recipe 2"
               style={{ objectFit: "cover", height: "550px" }}
@@ -266,7 +266,7 @@ const Home = () => {
           </div>
           <div className="carousel-item">
             <img
-              src="../carousel3.jpg"
+              src="/carousel3.jpg"
               className="d-block w-100"
               alt="Recipe 3"
               style={{ objectFit: "cover", height: "550px" }}
@@ -390,3 +390,4 @@ const Home = () => {
 };
 
 export default Home;
+
