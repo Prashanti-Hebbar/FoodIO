@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import EditProfile from '../components/EditProfile';
 import "../profile.css";
 
 const Profile = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [activeSection, setActiveSection] = useState('myRecipes');
   const [showEditProfile, setShowEditProfile] = useState(false);
   const [userRecipes, setUserRecipes] = useState([
