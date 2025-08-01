@@ -108,9 +108,11 @@ const Home = () => {
   };
 
   const renderRecipes = (recipeType) => (
-    <div className="d-flex flex-nowrap overflow-auto">
+    <div className="d-flex flex-nowrap overflow-auto recipes-scroll-container">
       {recipes[recipeType].map((recipe) => (
-        <div key={recipe.id} className="col-md-3 mb-4 me-4">
+       <div key={recipe.id} className="flex-shrink-0 mb-4 me-3 custom-recipe-card">
+
+
           <div className="card">
             <div className="card-actions position-absolute end-0 m-2">
               <button
