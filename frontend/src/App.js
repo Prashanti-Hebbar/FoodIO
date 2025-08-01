@@ -30,6 +30,11 @@ import { SavedRecipesProvider } from "./pages/savedRecipes";
 import AIChatPage from "./pages/AIChatPage";
 import ScrollToTop from "./components/ScrollToTop";
 import Footer from "./components/Footer";
+import Blog from './pages/Blog';
+import Community from './pages/Community';
+import HelpCenter from './pages/HelpCenter';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsOfService from './pages/TermsOfService';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -74,6 +79,11 @@ function App() {
         <Route path="/recipes/mexican" element={<Mexican />} />
         <Route path="/pages/savedRecipes" element={<SavedRecipesProvider/>}/>
         <Route path="/ai-chat" element={<AIChatPage/>}/>
+        <Route path="/Blog" element={<Blog />} />
+        <Route path="/Community" element={<Community />} />
+        <Route path="/HelpCenter" element={<HelpCenter />} />
+        <Route path="/PrivacyPolicy" element={<PrivacyPolicy />} />
+        <Route path="/TermsOfService" element={<TermsOfService />} />
       </Routes>
       <Footer />
     </Router>
