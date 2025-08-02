@@ -17,23 +17,26 @@ const Login = ({ setIsLoggedIn }) => {
     }
 
     try {
-      const response = await axios.post("https://foodio-backend-cgsj.onrender.com/auth/login", {
+      const response = await axios.post("http://localhost:3001/auth/login", {
         username,
         password
+      },
+      {
+        withCredentials:true
       });
 
       console.log('Login response:', response.data);
 
-      if (response.data.token) {
-        localStorage.setItem("username", username);
-        localStorage.setItem("token", response.data.token);
-        localStorage.setItem("userID", response.data.userID);
+      // if (response.data.token) {
+        // localStorage.setItem("username", username);
+        // localStorage.setItem("token", response.data.token);
+        localStorage.setItem("loggedIn", 'true');
         setIsLoggedIn(true);
         alert("Login successful!");
-        navigate("/home");
-      } else {
-        alert(response.data.message);
-      }
+        navigate("/");
+      // } else {
+      //   alert(response.data.message);
+      // }
     } catch (error) {
       console.log('Login error:', error);
       alert("Login failed. Please check your credentials.");

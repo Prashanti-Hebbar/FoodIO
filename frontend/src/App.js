@@ -39,10 +39,21 @@ import TermsOfService from './pages/TermsOfService';
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  useEffect(() => {
-    const user = localStorage.getItem("username");
-    setIsLoggedIn(!!user);
-  }, []);
+useEffect(() => {
+  const checkLogin = () => {
+    const user = localStorage.getItem("loggedIn");
+    setIsLoggedIn(user === "true");
+  };
+
+  checkLogin();
+
+  // Optional: listen to localStorage changes (e.g., in multi-tab)
+  window.addEventListener("storage", checkLogin);
+
+  return () => {
+    window.removeEventListener("storage", checkLogin);
+  };
+}, []);
   
   return (
     <Router>
