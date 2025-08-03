@@ -1,6 +1,8 @@
 .lunch-wrapper {
     min-height: 100vh;
     background: #f8f9fa;
+    overflow-x: hidden;
+    max-width: 100vw;
   }
   
   .hero-section {
@@ -94,8 +96,10 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     gap: 2.5rem;
-    padding: 3rem 5% 4rem 5%; /* Added extra bottom padding for hover effects */
-    overflow: visible; /* Ensure cards can extend beyond container */
+    padding: 3rem 5% 4rem 5%;
+    overflow: hidden;
+    max-width: 100%;
+    box-sizing: border-box;
   }
   
   .recipe-card {
@@ -124,7 +128,7 @@
   }
   
   .recipe-card:hover {
-    transform: translateY(-8px) scale(1.02);
+    transform: translateY(-8px);
     box-shadow: 
       0 20px 40px rgba(0,0,0,0.15),
       0 10px 25px rgba(0,0,0,0.1),
@@ -184,16 +188,15 @@
   }
   
   .card-media img {
-    width: 110%;
-    height: 110%;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
-    transition: transform 0.5s ease;
+    transition: transform 0.3s ease;
     transform-origin: center center;
-    transform: translate(-5%, -5%) scale(0.95);
   }
   
   .recipe-card:hover .card-media img {
-    transform: translate(-5%, -5%) scale(1);
+    transform: scale(1.03);
   }
   
   .card-overlay {
