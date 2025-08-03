@@ -1,18 +1,32 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import recipes from '../pages/recipes';
-import '../navbar.css';
+import "../navbar.css";
+import axios from 'axios';
+import { useUserContext } from '../context/userContext';
 
 const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
+  const { setUserData } = useUserContext();
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [isNavCollapsed, setIsNavCollapsed] = useState(true);
   const navigate = useNavigate();
 
-  const handleLogout = () => {
-    localStorage.clear();
-    setIsLoggedIn(false);
-    navigate('/home');
+  const handleLogout = async () => {
+    const confirmed = window.confirm("Are you sure you want to logout?");
+    if (confirmed) {
+      try {
+        await axios.post("http://localhost:3001/auth/logout", {}, {
+          withCredentials: true
+        });
+        localStorage.clear();
+        setIsLoggedIn(false);
+        setUserData(null);
+        navigate("/home");
+      } catch (err) {
+        console.log('Error during logout:', err);
+      }
+    }
   };
 
   const handleSearch = (e) => {
@@ -158,12 +172,12 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
               </button>
             ) : (
               <>
-                <a className="loginlink" href="/login" onClick={handleNavLinkClick}>
+                <Link className="loginlink" to="/login" onClick={handleNavLinkClick}>
                   Login
-                </a>
-                <a className="reglink" href="/register" onClick={handleNavLinkClick}>
+                </Link>
+                <Link className="reglink" to="/register" onClick={handleNavLinkClick}>
                   Register
-                </a>
+                </Link>
               </>
             )}
             <a className="myprofile" href="/profile" onClick={handleNavLinkClick}>
@@ -171,7 +185,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
             </a>
           </div>
         </div>
-      </nav>
+        </nav>
     </div>
   );
 };
