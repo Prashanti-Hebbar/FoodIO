@@ -9,6 +9,109 @@ body {
   background-position: center;
   height: 100vh;
   transition: all 0.3s ease;
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+  
+  /* Container for Login, Register, and Home */
+  .login {
+    background: white;
+    padding: 20px;
+    width: 420px;
+    height: 600px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+   margin-left: auto;
+   margin-right: auto;
+   margin-top: 20px;
+   
+  }
+
+  #login-heading {
+    color: #DA8F48;
+    font-family:cursive;
+    /* font-size: larger; */
+  }
+  #hat {
+    width: 200px;
+    height: 200px;
+    align-items: center;
+  }
+
+  .register {
+    background:rgb(243, 200, 147);
+    padding: 20px;
+    width: 420px;
+    height: 600px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+   margin-left: auto;
+   margin-right: auto;
+   margin-top: 20px;
+  }
+
+  #register-heading {
+    color: white;
+    font-family:cursive;
+  }
+
+  #tools {
+    width: 200px;
+    height: 200px;
+    align-items: center;
+  }
+
+  /* Input Fields */
+  input {
+    width: 90%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  /* Buttons */
+  #loginbutton {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: rgb(244, 138, 33);
+    color: white;
+    cursor: pointer;
+  }
+
+  #regbutton {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color:darkorange;
+    color: white;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #DA8F48;
+  }
+
+  /* carousel */
+  /* General Carousel Styling */
+.carousel {
+  max-width: 95%; /* Set max width */
+  margin: 40px auto; /* Center and add space above/below */
+  /* border-radius: 10px; */
+  overflow: hidden;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+}
 }
 
 .login {
@@ -149,7 +252,8 @@ button:hover {
 .container.mt-4 {
   max-width: 95%; /* Targets the specific container with the margin-top class */
   padding: 20px; /* Add some padding around the featured recipes */
-  overflow: visible; /* Ensure cards can extend beyond container */
+  overflow: hidden; /* Prevent horizontal scrolling */
+  box-sizing: border-box;
 }
 
 .container.mt-4 h2 {
@@ -532,8 +636,11 @@ button:hover {
 
 /* Recipe Container Fixes */
 .d-flex.flex-nowrap.overflow-auto {
-  overflow: visible !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
   padding: 20px 0 40px 0; /* Add extra padding to accommodate hover transforms */
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .col-md-3.mb-4.me-4 {
@@ -568,7 +675,7 @@ button:hover {
 }
 
 .card:hover {
-  transform: translateY(-6px) scale(1.015);
+  transform: translateY(-6px);
   box-shadow: 
     0 20px 40px rgba(0,0,0,0.15),
     0 10px 25px rgba(0,0,0,0.1),
@@ -579,14 +686,13 @@ button:hover {
 
 .card img {
   height: 200px;
-  width: 110%;
+  width: 100%;
   object-fit: cover;
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
-  transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+  transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
   position: relative;
   transform-origin: center center;
-  transform: translateX(-5%) scale(0.95);
 }
 
 .card img::after {
@@ -603,7 +709,7 @@ button:hover {
 }
 
 .card:hover img {
-  transform: translateX(-5%) scale(1);
+  transform: scale(1.03);
 }
 
 .card-body {
@@ -652,7 +758,7 @@ button:hover {
   }
   
   .card:hover {
-    transform: translateY(-4px) scale(1.01);
+    transform: translateY(-4px);
   }
 
   .card img {
