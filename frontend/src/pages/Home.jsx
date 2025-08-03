@@ -82,10 +82,10 @@ const Home = () => {
         return null;
     };
 
-    const renderRecipes = (recipeType) => (        <div className="d-flex flex-nowrap overflow-auto">
+    const renderRecipes = (recipeType) => (        <div className="cards-container">
             {recipes[recipeType].map((recipe) => (
                 <div key={recipe.id} className="col-md-3 mb-4 me-4">
-                    <div className="card">
+                    <div className="glass-card">
                         <div className="card-actions position-absolute end-0 m-2">
                             <button 
                                 className={`btn btn-link ${recipe.isFavorite ? 'text-warning' : 'text-white'}`}
@@ -106,10 +106,10 @@ const Home = () => {
                                 <i className="fas fa-share-alt"></i>
                             </button>
                         </div>
-                        <img src={recipe.image} className="card-img-top" alt={recipe.title} />
+                        <img src={recipe.image} className="glass-card-img" alt={recipe.title} />
                         <div className="card-body">
                             <h5 className="card-title">{recipe.title}</h5>
-                            <p className="card-text">Rating: {recipe.rating}</p>
+                            <p className="card-text text-white" >Rating: {recipe.rating}</p>
                             <Link to={`/ViewRecipe?id=${recipe.id}`} className="btn btn-primary">View Recipe</Link>
                         </div>
                     </div>
@@ -193,7 +193,7 @@ const Home = () => {
 };
 
 
-    return (
+    return ( /////i have got to work right
       <div>
         <div id="recipeCarousel" className="carousel slide" data-bs-ride="carousel">
           <div className="carousel-inner">
@@ -230,13 +230,13 @@ const Home = () => {
         </div>
 
         <div className="container mt-4 p-5">
-                <h2 className='mt-5'><b>Top Rated Recipes</b></h2>
+                <h2 className='text-white'><b>Top Rated Recipes</b></h2>
                 {renderRecipes('topRated')}
 
-                <h2 className='mt-5'><b>Trending Recipes</b></h2>
+                <h2 className='text-white'><b>Trending Recipes</b></h2>
                 {renderRecipes('trending')}
 
-                <h2 className='mt-5'><b>Newest Recipes</b></h2>
+                <h2 className='text-white'><b>Newest Recipes</b></h2>
                 {renderRecipes('newest')}
 
                 {/* Testimonials Section */}
@@ -265,7 +265,7 @@ const Home = () => {
                                                 <i key={starIndex} className="fas fa-star"></i>
                                             ))}
                                         </div>
-                                        <p className="testimonial-text">
+                                        <p className="testimonial-text text-white">
                                             {testimonial.content}
                                         </p>
                                         <div className="testimonial-author">

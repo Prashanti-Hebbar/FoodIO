@@ -2,7 +2,7 @@ import React from 'react';
 
 function Footer() {
     return (
-        <div className="container-fluid mt-5 p-5 border-top" style={{ backgroundColor: "#eeeeee", width: "100%" }}>
+        <div className="glass-footer">
             <div className="row">
                 <div className="col-md-4">
                     <h5>FoodIO</h5>

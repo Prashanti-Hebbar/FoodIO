@@ -6,11 +6,13 @@ body{
     background-size: cover; 
     background-repeat: no-repeat; 
     background-position: center; 
+    background: linear-gradient(135deg, #9B3D2A, #EE6007);
+    background-attachment: fixed;
+
     margin: 0; 
     height: 700px;
   }
 
-  
   /* Container for Login, Register, and Home */
   .login {
     background: white;
@@ -215,6 +217,82 @@ body{
 }
 
 /* Recipe Card Styles */
+ .glass-card {
+  width: 300px;
+  height: 480px;
+  overflow: auto;
+  background: rgba(255, 255, 255, 0.1);         /* translucent */
+  border-radius: 16px;                          /* rounded corners */
+  padding: 20px;
+  backdrop-filter: blur(10px);                 /* blur behind the card */
+  -webkit-backdrop-filter: blur(10px);         /* Safari support */
+  border: 1px solid rgba(255, 255, 255, 0.2);   /* subtle border */
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);    /* soft shadow */
+  color: white;                                /* text color on dark bg */
+  transition: transform 0.3s ease;
+}
+
+.glass-card:hover {
+  transform: translateY(-5px);                 /* hover animation */
+}
+
+
+.glass-card img {
+  width: 100%;
+  height: 250px;        /* or any fixed height */
+  object-fit: cover;    /* crop and fit the image nicely */
+  border-radius: 12px;  /* optional, for rounded image corners */
+  display: block;
+}
+
+.cards-container {
+  display: flex;
+  gap: 1rem; /* optional spacing between cards */
+  overflow-x: auto;
+}
+
+.cards-container::-webkit-scrollbar {
+  height: 6px;
+}
+
+.cards-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.cards-container::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+}
+
+
+.glass-footer{
+  width: max;
+  height: 400px;
+  overflow: auto;
+  background: rgba(0, 0, 0, 0.1);         /* translucent */
+  border-radius: 16px;                          /* rounded corners */
+  padding: 20px;
+  backdrop-filter: blur(10px);                 /* blur behind the card */
+  -webkit-backdrop-filter: blur(10px);         /* Safari support */
+  border: 1px solid rgba(255, 255, 255, 0.2);   /* subtle border */
+  box-shadow: 0 4px 30px rgba(253, 253, 253, 0.1);    /* soft shadow */
+  color: white;                                /* text color on dark bg */
+  transition: transform 0.3s ease;
+}
+
+
+@media (max-width: 576px) { /* Adjust breakpoint as needed */
+  .glass-card {
+      height: 400px;
+      width: 250px;
+  }
+  .glass-card img {
+      height: 180px; /* Adjust image height on smaller screens */
+  }
+}
+
+
+
 .card {
   border: none; /* Remove default card border */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
@@ -338,7 +416,8 @@ body{
 
 /* Testimonials 3D Carousel Styles */
 .testimonials-section {
-  width: 103%;
+  padding:5px;
+  width: max;
   min-height: 100vh;
   display: flex;
   align-items: center;
@@ -347,6 +426,7 @@ body{
   background-image: linear-gradient(45deg, #FFD700, #FF9800, #F44336);
   font-family: 'Montserrat', sans-serif;
   position: relative;
+  border-radius: 20px;
 }
 
 .testimonials-section h2 {
@@ -393,18 +473,18 @@ body{
 }
 
 .testimonial-card {
-  width: 100%;
-  height: 100%;
-  padding: 2rem;
-  background-color: hsl(280deg, 40%, calc(100% - var(--abs-offset) * 50%));
-  border-radius: 1rem;
-  color: #9CA3AF;
-  text-align: justify;
-  transition: all 0.3s ease-out;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  width: 250px;
+  height: 480px;
+  overflow: auto;
+  background: rgba(255, 255, 255, 0.1);         /* translucent */
+  border-radius: 16px;                          /* rounded corners */
+  padding: 20px;
+  backdrop-filter: blur(10px);                 /* blur behind the card */
+  -webkit-backdrop-filter: blur(10px);         /* Safari support */
+  border: 1px solid rgba(255, 255, 255, 0.2);   /* subtle border */
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);    /* soft shadow */
+  color: white;                                /* text color on dark bg */
+  transition: transform 0.3s ease;
 }
 
 .testimonial-rating {
