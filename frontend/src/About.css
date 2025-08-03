@@ -1,4 +1,4 @@
-.card:hover{
+.card:hover {
   border: 2px solid #e76f51;
   cursor: pointer;
   transition: all 0.3s ease-out;
@@ -7,7 +7,141 @@
 .card-body:hover,
 .card-title:hover,
 .card-text:hover {
-  border: none; 
+  border: none;
 }
 
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.animate-on-scroll.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hero-section {
+  animation: fadeInUp 1s ease-out 0.2s both;
+}
+
+.feature-card {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.feature-card.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.feature-card:nth-child(1) { transition-delay: 0.1s; }
+.feature-card:nth-child(2) { transition-delay: 0.2s; }
+.feature-card:nth-child(3) { transition-delay: 0.3s; }
+.feature-card:nth-child(4) { transition-delay: 0.4s; }
+.feature-card:nth-child(5) { transition-delay: 0.5s; }
+.feature-card:nth-child(6) { transition-delay: 0.6s; }
+
+.faq-section {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease-out;
+}
+
+.faq-section.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.faq-item {
+  opacity: 0;
+  transform: translateX(-20px);
+  transition: all 0.5s ease-out;
+}
+
+.faq-item.animate {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.faq-item:nth-child(1) { transition-delay: 0.1s; }
+.faq-item:nth-child(2) { transition-delay: 0.2s; }
+.faq-item:nth-child(3) { transition-delay: 0.3s; }
+.faq-item:nth-child(4) { transition-delay: 0.4s; }
+.faq-item:nth-child(5) { transition-delay: 0.5s; }
+
+.card {
+  transition: all 0.3s ease-out, transform 0.3s ease-out;
+}
+
+.card:hover {
+  border: 2px solid #e76f51;
+  cursor: pointer;
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(231, 111, 81, 0.15);
+}
+
+.section-title {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease-out;
+}
+
+.section-title.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.container-fluid {
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out 0.1s both;
+}
