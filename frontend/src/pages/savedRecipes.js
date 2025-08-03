@@ -1,37 +1,60 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import { createContext, useState, useEffect } from "react";
 
-const SavedRecipes = () => {
-  const [savedRecipes, setSavedRecipes] = useState([]);
-  const userID = localStorage.getItem("userID");
+// Create Context
+export const SavedRecipesContext = createContext();
 
-  useEffect(() => {
-    const fetchSavedRecipes = async () => {
-      try {
-        const response = await axios.get(`https://foodio-backend-cgsj.onrender.com/recipes/savedRecipes/${userID}`);
-        setSavedRecipes(response.data.savedRecipes);
-      } catch (err) {
-        console.log(err);
-      }
+export const SavedRecipesProvider = ({ children }) => {
+    const [savedRecipes, setSavedRecipes] = useState([]);
+
+    // Load saved recipes on component mount
+    useEffect(() => {
+        const fetchSavedRecipes = async () => {
+            const userID = localStorage.getItem("username");
+            if (userID) {
+                try {
+                    // Try to fetch from API if user is logged in
+                    const response = await fetch(`https://foodio-backend-cgsj.onrender.com/recipes/savedRecipes/${userID}`);
+                    if (response.ok) {
+                        const data = await response.json();
+                        setSavedRecipes(data.savedRecipes || []);
+                    } else {
+                        // Fallback to localStorage
+                        const storedRecipes = JSON.parse(localStorage.getItem("savedRecipes")) || [];
+                        setSavedRecipes(storedRecipes);
+                    }
+                } catch (err) {
+                    console.log("API failed, using localStorage:", err);
+                    // Fallback to localStorage
+                    const storedRecipes = JSON.parse(localStorage.getItem("savedRecipes")) || [];
+                    setSavedRecipes(storedRecipes);
+                }
+            } else {
+                // No user logged in, use localStorage
+                const storedRecipes = JSON.parse(localStorage.getItem("savedRecipes")) || [];
+                setSavedRecipes(storedRecipes);
+            }
+        };
+
+        fetchSavedRecipes();
+    }, []);
+
+    // Save recipes to localStorage whenever it changes (backup)
+    useEffect(() => {
+        localStorage.setItem("savedRecipes", JSON.stringify(savedRecipes));
+    }, [savedRecipes]);
+
+    const saveRecipe = (recipe) => {
+        setSavedRecipes((prevRecipes) => [...prevRecipes, recipe]);
     };
 
-    fetchSavedRecipes();
-  }, [userID]);
+    const removeRecipe = (recipeId) => {
+        setSavedRecipes((prevRecipes) => prevRecipes.filter((r) => r.id !== recipeId));
+    };
 
-  return (
-    <div className="saved-recipes">
-      <h2>My Saved Recipes</h2>
-      <div className="recipes-grid">
-        {savedRecipes.map((recipe) => (
-          <div key={recipe._id} className="recipe-card">
-            <img src={recipe.imageUrl} alt={recipe.name} />
-            <h3>{recipe.name}</h3>
-            <p>Cooking Time: {recipe.cookingTime} minutes</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
+    return (
+        <SavedRecipesContext.Provider value={{ savedRecipes, saveRecipe, removeRecipe }}>
+            {children}
+        </SavedRecipesContext.Provider>
+    );
 };
 
-export default SavedRecipes;
