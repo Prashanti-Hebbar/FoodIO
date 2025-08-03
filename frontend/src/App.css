@@ -207,6 +207,7 @@ body{
 .container.mt-4 {
   max-width: 95%; /* Targets the specific container with the margin-top class */
   padding: 20px; /* Add some padding around the featured recipes */
+  overflow: visible; /* Ensure cards can extend beyond container */
 }
 
 .container.mt-4 h2 {
@@ -214,50 +215,134 @@ body{
   text-align: left; /* Center the headings */
 }
 
+/* Recipe Container Fixes */
+.d-flex.flex-nowrap.overflow-auto {
+  overflow: visible !important;
+  padding: 20px 0 40px 0; /* Add extra padding to accommodate hover transforms */
+}
+
+.col-md-3.mb-4.me-4 {
+  padding: 10px; /* Add padding around cards to prevent clipping */
+}
+
 /* Recipe Card Styles */
 .card {
-  border: none; /* Remove default card border */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
-  transition: transform 0.2s; /* Smooth scaling on hover */
-  overflow: hidden; /* Ensure image doesn't overflow */
-  border-radius: 8px; /* Rounded corners for the card */
+  background: linear-gradient(145deg, #ffffff, #f8f9fa);
+  border: 1px solid rgba(255,255,255,0.2);
+  box-shadow: 
+    0 8px 32px rgba(0,0,0,0.1),
+    0 4px 16px rgba(0,0,0,0.06),
+    0 2px 8px rgba(0,0,0,0.04),
+    inset 0 1px 0 rgba(255,255,255,0.8);
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  overflow: hidden;
+  border-radius: 16px;
+  position: relative;
+  margin: 10px; /* Extra margin to prevent clipping */
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent);
+  z-index: 1;
 }
 
 .card:hover {
-  transform: scale(1.02); /* Scale up slightly on hover */
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Darker shadow on hover */
+  transform: translateY(-6px) scale(1.015);
+  box-shadow: 
+    0 20px 40px rgba(0,0,0,0.15),
+    0 10px 25px rgba(0,0,0,0.1),
+    0 5px 15px rgba(0,0,0,0.06),
+    0 0 0 1px rgba(255,255,255,0.1),
+    inset 0 1px 0 rgba(255,255,255,0.9);
 }
 
 .card img {
-  height: 200px; /* Set a fixed height for the images - Adjust as needed */
-  object-fit: cover; /* Maintain aspect ratio and cover the entire area */
-  border-top-left-radius: 8px; /* Rounded corners for the top of the image */
-  border-top-right-radius: 8px;
+  height: 200px;
+  width: 110%;
+  object-fit: cover;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+  transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+  position: relative;
+  transform-origin: center center;
+  transform: translateX(-5%) scale(0.95);
+}
+
+.card img::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg, 
+    rgba(0,0,0,0) 0%, 
+    rgba(0,0,0,0.02) 40%, 
+    rgba(0,0,0,0.1) 100%
+  );
+  pointer-events: none;
+}
+
+.card:hover img {
+  transform: translateX(-5%) scale(1);
 }
 
 .card-body {
-  padding: 20px;
+  padding: 24px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(248,249,250,0.6));
+  position: relative;
+}
+
+.card-body::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 24px;
+  right: 24px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0,0,0,0.06), transparent);
 }
 
 .card-title {
-  font-weight: bold;
-  margin-bottom: 10px;
+  font-weight: 700;
+  font-size: 1.2rem;
+  margin-bottom: 12px;
+  color: #2c3e50;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.05);
 }
 
 .card-text {
-  color: #666; /* Slightly darker text color */
-  margin-bottom: 15px;
+  color: #6c757d;
+  margin-bottom: 18px;
+  font-size: 0.95rem;
+  line-height: 1.5;
 }
 
 .btn-primary {
-  background-color: #007bff; /* Example: Bootstrap primary blue */
-  border-color: #007bff;
-  transition: background-color 0.3s;
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  border: none;
+  border-radius: 25px;
+  padding: 12px 24px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+  box-shadow: 
+    0 6px 20px rgba(0,123,255,0.3),
+    inset 0 1px 0 rgba(255,255,255,0.2);
+  text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+  transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 .btn-primary:hover {
-  background-color: #0056b3; /* Darker blue on hover */
-  border-color: #0056b3;
+  background: linear-gradient(135deg, #0056b3, #004494);
+  transform: translateY(-2px);
+  box-shadow: 
+    0 8px 25px rgba(0,123,255,0.4),
+    inset 0 1px 0 rgba(255,255,255,0.3);
 }
 
 /* Responsive adjustments (example) */
@@ -267,8 +352,33 @@ body{
       max-width: 50%;
   }
 
+  .card {
+    box-shadow: 
+      0 6px 20px rgba(0,0,0,0.08),
+      0 3px 10px rgba(0,0,0,0.04),
+      inset 0 1px 0 rgba(255,255,255,0.8);
+  }
+  
+  .card:hover {
+    transform: translateY(-4px) scale(1.01);
+  }
+
   .card img {
       height: 150px; /* Adjust image height on smaller screens */
+  }
+  
+  .card-body {
+    padding: 18px;
+  }
+  
+  .card-actions {
+    top: 8px;
+    right: 8px;
+    gap: 6px;
+  }
+  
+  .card-actions button {
+    padding: 6px;
   }
 }
 
@@ -283,17 +393,33 @@ body{
 }
 
 .card-actions {
-  z-index: 1;
+  z-index: 2;
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .card-actions button {
-  padding: 5px;
-  margin: 0 2px;
-  transition: all 0.3s ease;
+  padding: 8px;
+  background: linear-gradient(135deg, rgba(0,0,0,0.7), rgba(0,0,0,0.5));
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+  box-shadow: 
+    0 4px 12px rgba(0,0,0,0.3),
+    inset 0 1px 0 rgba(255,255,255,0.1);
 }
 
 .card-actions button:hover {
-  transform: scale(1.1);
+  transform: translateY(-2px) scale(1.1);
+  background: linear-gradient(135deg, rgba(0,0,0,0.8), rgba(0,0,0,0.6));
+  box-shadow: 
+    0 6px 16px rgba(0,0,0,0.4),
+    inset 0 1px 0 rgba(255,255,255,0.2);
 }
 
 .share-options {
