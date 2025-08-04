@@ -1,31 +1,48 @@
 /* Full page background */
 .ai-chat-page {
     min-height: 100vh;
-    background: linear-gradient(135deg, #ff6b00 0%, #ff8533 50%, #ffb366 100%);
     background-size: cover;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 2rem;
 }
+.download-button {
+    background: #ffffff;
+    color: #ff6b00;
+    border: 2px solid #ff6b00;
+}
+
+.download-button:hover {
+    background: #ff6b00;
+    color: #ffffff;
+}
+.close-button {
+    background: transparent;
+    border: none;
+    color: #ff6b00;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    float: right;
+}
+
 
 /* Semi-transparent overlay to improve readability */
 .ai-chat-overlay {
     background: rgba(255, 255, 255, 0.88);
     padding: 2rem;
     border-radius: 16px;
-    max-width: 800px;
+    max-width: 600px;
     width: 100%;
     box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
     backdrop-filter: blur(3px);
     font-family: 'Segoe UI', sans-serif;
-    max-height: 90vh;
-    overflow-y: auto;
 }
 
 .container {
     padding: 0;
-    background: none;
+    background: none; /* Remove duplicate background */
     box-shadow: none;
     border-radius: 0;
     margin: 0;
@@ -58,7 +75,6 @@
     border-radius: 8px;
     font-size: 1rem;
     transition: border 0.3s, box-shadow 0.3s;
-    box-sizing: border-box;
 }
 
 .form-group select:focus,
@@ -90,133 +106,21 @@
 .button:disabled {
     background: #cccccc;
     cursor: not-allowed;
-    transform: none;
 }
 
 .recipe-card {
     margin-top: 1.5rem;
     background: #ffffff;
     border-left: 6px solid #ff6b00;
-    padding: 1.5rem;
+    padding: 1rem;
     border-radius: 12px;
+    white-space: pre-wrap;
     color: #333333;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
-    position: relative;
 }
 
-.close-button {
-    background: transparent;
-    border: none;
+.recipe-card h3 {
+    margin-top: 0;
     color: #ff6b00;
-    font-size: 1.2rem;
-    font-weight: bold;
-    cursor: pointer;
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    padding: 0.5rem;
-    border-radius: 50%;
-    transition: background-color 0.3s;
-}
-
-.close-button:hover {
-    background-color: rgba(255, 107, 0, 0.1);
-}
-
-.recipe-content {
-    margin-top: 2rem;
-    line-height: 1.6;
-}
-
-.recipe-content h1 {
-    color: #ff6b00;
-    font-size: 1.8rem;
-    margin-bottom: 1rem;
-    border-bottom: 2px solid #ff6b00;
-    padding-bottom: 0.5rem;
-}
-
-.recipe-content h2 {
-    color: #e65a00;
-    font-size: 1.4rem;
-    margin-top: 1.5rem;
-    margin-bottom: 0.8rem;
-}
-
-.recipe-content h3 {
-    color: #333333;
-    font-size: 1.2rem;
-    margin-top: 1rem;
-    margin-bottom: 0.5rem;
-}
-
-.recipe-content ul,
-.recipe-content ol {
-    margin-left: 1.2rem;
-    margin-bottom: 1rem;
-}
-
-.recipe-content li {
-    margin-bottom: 0.4rem;
-    line-height: 1.5;
-}
-
-.recipe-content p {
-    margin-bottom: 0.8rem;
-    line-height: 1.6;
-}
-
-.recipe-content strong {
-    color: #ff6b00;
-}
-
-.recipe-content code {
-    background-color: #f5f5f5;
-    padding: 0.2rem 0.4rem;
-    border-radius: 4px;
-    font-family: monospace;
-}
-
-.recipe-content blockquote {
-    border-left: 4px solid #ff6b00;
-    margin: 1rem 0;
-    padding-left: 1rem;
-    color: #666666;
-    font-style: italic;
-}
-
-.download-button {
-    background: #ffffff;
-    color: #ff6b00;
-    border: 2px solid #ff6b00;
-    text-decoration: none;
-}
-
-.download-button:hover {
-    background: #ff6b00;
-    color: #ffffff;
-    transform: translateY(-2px);
-}
-
-@media (max-width: 768px) {
-    .ai-chat-page {
-        padding: 1rem;
-    }
-    
-    .ai-chat-overlay {
-        padding: 1.5rem;
-        max-height: 95vh;
-    }
-    
-    .container h2 {
-        font-size: 1.5rem;
-    }
-    
-    .recipe-content h1 {
-        font-size: 1.5rem;
-    }
-    
-    .recipe-content h2 {
-        font-size: 1.2rem;
-    }
+    font-size: 1.3rem;
 }
