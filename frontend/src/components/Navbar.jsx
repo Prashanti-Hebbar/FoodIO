@@ -1,14 +1,22 @@
-import { useState, useRef } from "react";
-import { Link} from "react-router-dom";
+import { useState, useRef, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { UserIcon } from "lucide-react";
 import axios from 'axios';
 import { useUserContext } from '../context/userContext';
 
-const Navbar = ({ isLoggedIn, setIsLoggedIn, isHomeScreen }) => {
-  const {setUserData} = useUserContext();
+const Navbar = ({ isLoggedIn, setIsLoggedIn, isHomeScreen, recipesProp }) => {
+  const navigate = useNavigate();
+  const { setUserData } = useUserContext();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const dropdownTimeout = useRef(null);
+
+  // Search state (was missing)
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+
+  // Use passed-in recipes or fallback to empty object
+  const recipes = recipesProp || {};
 
   // Dashboard dropdown handlers
   const handleDashboardEnter = () => {
@@ -38,41 +46,53 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, isHomeScreen }) => {
     const confirmed = window.confirm("Are you sure you want to logout?");
     if (confirmed) {
       try {
-        // Perform logout logic here
-        let res = await axios.post("http://localhost:3001/auth/logout",{}, {
-          withCredentials: true
-        });
+        await axios.post(
+          "http://localhost:3001/auth/logout",
+          {},
+          { withCredentials: true }
+        );
         localStorage.clear();
         setIsLoggedIn(false);
         setUserData(null);
         navigate("/home");
       } catch (err) {
-          console.log('Error during logout:', err);
+        console.log("Error during logout:", err);
       }
     }
   };
 
   const handleSearch = (e) => {
-    const term = e.target.value
-    setSearchTerm(term)
+    const term = e.target.value;
+    setSearchTerm(term);
 
     if (term.trim()) {
-      const results = Object.values(recipes)
-        .flat()
-        .filter(recipe => 
-          recipe.title.toLowerCase().includes(term.toLowerCase())
-        )
-      setSearchResults(results)
+      // Flatten if recipes is an object of arrays; adjust based on actual shape
+      const allRecipes = Array.isArray(recipes)
+        ? recipes
+        : Object.values(recipes).flat();
+      const results = allRecipes.filter((recipe) =>
+        recipe.title?.toLowerCase().includes(term.toLowerCase())
+      );
+      setSearchResults(results);
     } else {
-      setSearchResults([])
+      setSearchResults([]);
     }
-  }
+  };
 
   const handleRecipeClick = (id) => {
-    navigate(`/viewRecipe?id=${id}`)
-    setSearchTerm('')
-    setSearchResults([])
-  }
+    navigate(`/viewRecipe?id=${id}`);
+    setSearchTerm('');
+    setSearchResults([]);
+  };
+
+  // Optional: close dropdowns on outside click (not required but UX)
+  useEffect(() => {
+    const onClickOutside = (e) => {
+      // could add logic to close menus if clicking outside
+    };
+    document.addEventListener("click", onClickOutside);
+    return () => document.removeEventListener("click", onClickOutside);
+  }, []);
 
   return (
     <nav
@@ -89,7 +109,9 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, isHomeScreen }) => {
 
           {/* Nav Links */}
           <div className="hidden md:flex space-x-6 items-center">
-            <Link to="/" className="hover:text-yellow-400">Home</Link>
+            <Link to="/" className="hover:text-yellow-400">
+              Home
+            </Link>
 
             <div
               className="relative"
@@ -125,17 +147,36 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, isHomeScreen }) => {
               )}
             </div>
 
-            <Link to="/About" className="hover:text-yellow-400">About</Link>
-            <Link to="/ai-chat" className="hover:text-yellow-400">Chat with AI</Link>
+            <Link to="/About" className="hover:text-yellow-400">
+              About
+            </Link>
+            <Link to="/ai-chat" className="hover:text-yellow-400">
+              Chat with AI
+            </Link>
           </div>
 
           {/* Search Bar */}
-          <div className="flex-grow mx-4 max-w-md hidden md:block">
+          <div className="flex-grow mx-4 max-w-md hidden md:block relative">
             <input
               type="text"
+              value={searchTerm}
+              onChange={handleSearch}
               placeholder="Search"
               className="w-full px-4 py-2 rounded-full text-black focus:outline-none focus:ring-2 focus:ring-yellow-300"
             />
+            {searchResults.length > 0 && (
+              <div className="absolute left-0 right-0 bg-white rounded shadow mt-1 max-h-60 overflow-auto z-10">
+                {searchResults.map((r) => (
+                  <div
+                    key={r.id}
+                    className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                    onClick={() => handleRecipeClick(r.id)}
+                  >
+                    {r.title}
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
 
           {/* Auth Buttons or Profile */}
@@ -190,3 +231,4 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, isHomeScreen }) => {
 };
 
 export default Navbar;
+
