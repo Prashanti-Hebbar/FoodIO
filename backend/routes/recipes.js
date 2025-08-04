@@ -115,43 +115,95 @@ router.delete("/savedRecipes/:recipeId", verifyToken, async (req, res) => {
   }
 });
 
+
 router.post("/api/get-recipe", async (req, res) => {
   const { diet, cuisine, time, ingredients } = req.body;
 
-  const prompt = `Generate a clear, beginner-friendly recipe using:
-Diet: ${diet}
-Cuisine: ${cuisine}
-Max preparation time: ${time} minutes
-Available ingredients: ${ingredients}
-
-Please provide:
-- Recipe name
-- Ingredients with quantities
-- Step-by-step preparation instructions.`;
+  const SPOON_KEY = "YOUR_SPOOnACULAR_API_KEY"; // Replace with your actual Spoonacular API key
+  const GEMINI_KEY = "YOUR_GEMINI_API_KEY"; // Replace with your actual Gemini API key
 
   try {
-    const response = await axios.post(
-      'https://openrouter.ai/api/v1/chat/completions',
+    // Get base recipe from Spoonacular
+    const spoonacularRes = await axios.get(
+      `https://api.spoonacular.com/recipes/complexSearch`,
       {
-        model: 'moonshotai/kimi-k2:free', 
-        messages: [
-          { role: 'system', content: 'You are a helpful AI recipe generator.' },
-          { role: 'user', content: prompt }
-        ]
-      },
-      {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`
+        params: {
+          apiKey: SPOON_KEY,
+          diet: diet === "Any" ? "" : diet,
+          cuisine: cuisine === "Any" ? "" : cuisine,
+          includeIngredients: ingredients || "",
+          maxReadyTime: time || "",
+          number: 1,
+          addRecipeInformation: true
         }
       }
     );
 
-    const recipe = response.data.choices[0].message.content;
+    let baseRecipeText;
+
+    if (spoonacularRes.data.results.length) {
+      const recipeData = spoonacularRes.data.results[0];
+      baseRecipeText = `
+Recipe Name: ${recipeData.title}
+Ingredients: ${recipeData.extendedIngredients?.map(i => i.original).join(", ")}
+Instructions: ${recipeData.analyzedInstructions?.[0]?.steps?.map(s => s.step).join(" ")}
+`;
+    } else {
+      // Fallback: let Gemini create from scratch
+      baseRecipeText = `
+Generate a ${diet} ${cuisine} recipe.
+Max preparation time: ${time} minutes.
+Ingredients: ${ingredients}.
+Include instructions, tips, and nutrition info.
+`;
+    }
+
+    // Enhance with Gemini
+    const geminiRes = await axios.post(
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_KEY}`,
+      {
+        contents: [
+          {
+            parts: [
+              {
+                text: `Format the following recipe into clean Markdown with:
+# Recipe Name
+## Ingredients
+- List all ingredients with quantities
+## Instructions
+1. Step-by-step instructions
+## Cooking Tips
+- Helpful tips
+## Nutritional Info
+- Basic nutritional highlights
+
+Here’s the recipe:
+${baseRecipeText}`
+              }
+            ]
+          }
+        ]
+      },
+      { headers: { "Content-Type": "application/json" }, timeout: 10000 }
+    );
+
+    const recipe =
+      geminiRes.data?.candidates?.[0]?.content?.parts?.[0]?.text ||
+      "No recipe generated.";
+
     res.json({ recipe });
   } catch (error) {
-    console.error(error?.response?.data || error.message);
-    res.status(500).json({ error: "Failed to generate recipe. Please try again later." });
+    console.error("Error in get-recipe:", error?.response?.data || error.message);
+
+    if (["ENOTFOUND", "ECONNABORTED", "ECONNREFUSED"].includes(error.code)) {
+      return res.status(503).json({
+        error: "No internet connection. Please check your network and try again."
+      });
+    }
+
+    res.status(500).json({
+      error: "Failed to generate recipe. Please try again later."
+    });
   }
 });
 
