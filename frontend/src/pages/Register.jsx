@@ -32,7 +32,6 @@ const Register = ({ setIsLoggedIn }) => {
       <input type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
       <br />
       <button id="regbutton" onClick={handleRegister}>Register</button>
-      <br /><br />
       <p>Already have an account? <Link to="/login" style={{ color: '#15467F' }}>Login</Link></p>
     </div>
   );
