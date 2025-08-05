@@ -1,27 +1,31 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import recipes from '../pages/recipes'
-import '../navbar.css'
+import "../navbar.css"
+import axios from 'axios';
+import { useUserContext } from '../context/userContext';
 
 const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
-	const [searchTerm, setSearchTerm] = useState('')
-	const [searchResults, setSearchResults] = useState([])
-	const navigate = useNavigate()
+  const {setUserData} = useUserContext();
+  const [searchTerm, setSearchTerm] = useState('')
+  const [searchResults, setSearchResults] = useState([])
+  const navigate = useNavigate()
 
-
-	const handleLogout = () => {
-		// Clear all user data
-		localStorage.clear()
-		setIsLoggedIn(false)
-		navigate('/home')
-	}
-
-  const handleLogout = () => {
+  const handleLogout = async () => {
     const confirmed = window.confirm("Are you sure you want to logout?");
     if (confirmed) {
-      localStorage.clear();
-      setIsLoggedIn(false);
-      navigate("/home");
+      try {
+        // Perform logout logic here
+        let res = await axios.post("http://localhost:3001/auth/logout",{}, {
+          withCredentials: true
+        });
+        localStorage.clear();
+        setIsLoggedIn(false);
+        setUserData(null);
+        navigate("/home");
+      } catch (err) {
+          console.log('Error during logout:', err);
+      }
     }
   };
 
