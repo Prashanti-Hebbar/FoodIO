@@ -1,4 +1,4 @@
-import {Route, Routes, Navigate} from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Navigate} from "react-router-dom";
 import { useState, useEffect } from "react";
 import Navbar from "./components/Navbar";
 import Categories from "./components/Categories";
@@ -35,7 +35,6 @@ import Community from './pages/Community';
 import HelpCenter from './pages/HelpCenter';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfService from './pages/TermsOfService';
-import { useLocation } from "react-router-dom";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -55,14 +54,11 @@ useEffect(() => {
     window.removeEventListener("storage", checkLogin);
   };
 }, []);
-
-  const location = useLocation();
-  const isHomeScreen =  location.pathname === "/" || location.pathname === "/home";
   
   return (
-    <>
+    <Router>
       <ScrollToTop />
-      <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} isHomeScreen={isHomeScreen} />
+      <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
       <Routes>
         <Route path="/" element={<Home /> } />
         <Route path="/" element={!isLoggedIn ? <Navigate to="/login" /> : <Home />} />
@@ -101,7 +97,7 @@ useEffect(() => {
         <Route path="/TermsOfService" element={<TermsOfService />} />
       </Routes>
       <Footer />
-    </>
+    </Router>
   );
 }
 export default App;
