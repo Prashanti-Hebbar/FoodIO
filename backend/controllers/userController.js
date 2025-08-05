@@ -1,9 +1,9 @@
-import { UserModel } from "../models/Users.js";
+import User from "../models/Users.js";
 const getProfile = async (req, res) => {
 
       try {
 
-        const user = await UserModel.findOne({_id:req.user.id});
+        const user = await User.findOne({_id:req.user.id});
         if (!user) {
 
         return res.status(404).json({ message: "User not found" });
@@ -20,7 +20,7 @@ const updatedUser = async (req,res) =>
     try {
     const { username, email } = req.body;
     // Check if username is already taken by another user
-    const existingUser = await UserModel.findOne({ 
+    const existingUser = await User.findOne({ 
       username, 
       _id: { $ne: req.user.id } 
     });
@@ -29,7 +29,7 @@ const updatedUser = async (req,res) =>
       return res.status(400).json({ message: "Username already taken" });
     }
     
-    const updatedUser = await UserModel.findByIdAndUpdate(
+    const updatedUser = await User.findByIdAndUpdate(
       req.user.id,
       { username, email },
       { new: true }

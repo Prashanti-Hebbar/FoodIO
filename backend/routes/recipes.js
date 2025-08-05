@@ -1,7 +1,6 @@
 import express from "express";
-import mongoose from "mongoose";
 import { RecipesModel } from "../models/Recipes.js";
-import { UserModel } from "../models/Users.js";
+import User from "../models/Users.js";
 import jwt from "jsonwebtoken";
 import axios from "axios";
 
@@ -23,6 +22,7 @@ const verifyToken = (req, res, next) => {
   }
 };
 
+// Get all recipes
 router.get("/", async (req, res) => {
   try {
     const response = await RecipesModel.find({});
@@ -32,6 +32,7 @@ router.get("/", async (req, res) => {
   }
 });
 
+// Create a new recipe
 router.post("/", async (req, res) => {
   const recipe = new RecipesModel(req.body);
   try {
@@ -55,7 +56,7 @@ router.put("/save", verifyToken, async (req, res) => {
     }
     
     // Add recipe to user's saved recipes if not already saved
-    const user = await UserModel.findById(userId);
+    const user = await User.findById(userId);
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
@@ -79,7 +80,7 @@ router.put("/save", verifyToken, async (req, res) => {
 router.get("/savedRecipes", verifyToken, async (req, res) => {
   try {
     const userId = req.userId;
-    const user = await UserModel.findById(userId);
+    const user = await User.findById(userId);
     
     if (!user) {
       return res.status(404).json({ message: "User not found" });
@@ -101,7 +102,7 @@ router.delete("/savedRecipes/:recipeId", verifyToken, async (req, res) => {
     const userId = req.userId;
     const { recipeId } = req.params;
     
-    const user = await UserModel.findById(userId);
+    const user = await User.findById(userId);
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
@@ -115,6 +116,7 @@ router.delete("/savedRecipes/:recipeId", verifyToken, async (req, res) => {
   }
 });
 
+// Generate a recipe using AI
 router.post("/api/get-recipe", async (req, res) => {
   const { diet, cuisine, time, ingredients } = req.body;
 
@@ -152,6 +154,22 @@ Please provide:
   } catch (error) {
     console.error(error?.response?.data || error.message);
     res.status(500).json({ error: "Failed to generate recipe. Please try again later." });
+  }
+});
+
+// Remove a recipe from the database
+router.delete("/:recipeId", async (req, res) => {
+  try {
+    const { recipeId } = req.params;
+
+    const deletedRecipe = await RecipesModel.findByIdAndDelete(recipeId);
+    if (!deletedRecipe) {
+      return res.status(404).json({ message: "Recipe not found" });
+    }
+
+    res.status(200).json({ message: "Recipe deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ error: "Failed to delete recipe" });
   }
 });
 
