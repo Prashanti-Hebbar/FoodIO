@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 
 function Footer() {
     return (
@@ -14,28 +15,28 @@ function Footer() {
                 <div className="col-md-2 mb-4">
                     <h5>Quick Links</h5>
                     <ul className="list-unstyled">
-                        <li><a href="#" className="text-muted" style={{ textDecoration: "none" }}>Top Rated</a></li>
-                        <li><a href="#" className="text-muted" style={{ textDecoration: "none" }}>Trending</a></li>
-                        <li><a href="#" className="text-muted" style={{ textDecoration: "none" }}>Submit Recipe</a></li>
-                        <li><a href="#" className="text-muted" style={{ textDecoration: "none" }}>Community</a></li>
-                        <li><a href="#" className="text-muted" style={{ textDecoration: "none" }}>Blog</a></li>
-                        <li><a href="#" className="text-muted" style={{ textDecoration: "none" }}>Help Center</a></li>
+                        <li><Link to="/Home#top-rated" className="text-muted" style={{ textDecoration: "none" }}>Top Rated</Link></li>
+                        <li><Link to="/Home#trending" className="text-muted" style={{ textDecoration: "none" }}>Trending</Link></li>
+                        <li><Link to="/AddRecipe" className="text-muted" style={{ textDecoration: "none" }}>Submit Recipe</Link></li>
+                        <li><Link to="/Community" className="text-muted" style={{ textDecoration: "none" }}>Community</Link></li>
+                        <li><Link to="/Blog" className="text-muted" style={{ textDecoration: "none" }}>Blog</Link></li>
+                        <li><Link to="/HelpCenter" className="text-muted" style={{ textDecoration: "none" }}>Help Center</Link></li>
                     </ul>
                 </div>
 
                 <div className="col-md-3 mb-4">
                     <h5>Connect With Us</h5>
                     <div className="d-flex gap-3 mb-3">
-                        <a href="#" className="text-dark text-muted" aria-label="Facebook"><i className="bi bi-facebook fs-4"></i></a>
-                        <a href="#" className="text-dark text-muted" aria-label="Instagram"><i className="bi bi-instagram fs-4"></i></a>
-                        <a href="#" className="text-dark text-muted" aria-label="Twitter"><i className="bi bi-twitter fs-4"></i></a>
-                        <a href="#" className="text-dark text-muted" aria-label="Pinterest"><i className="bi bi-pinterest fs-4"></i></a>
+                        <a href="https://www.facebook.com" className="text-dark text-muted" aria-label="Facebook"><i className="bi bi-facebook fs-4"></i></a>
+                        <a href="https://www.instagram.com" className="text-dark text-muted" aria-label="Instagram"><i className="bi bi-instagram fs-4"></i></a>
+                        <a href="https://www.twitter.com" className="text-dark text-muted" aria-label="Twitter"><i className="bi bi-twitter fs-4"></i></a>
+                        <a href="https://www.pinterest.com" className="text-dark text-muted" aria-label="Pinterest"><i className="bi bi-pinterest fs-4"></i></a>
                     </div>
 
                     <h6>Download Our App</h6>
                     <div className="d-flex gap-2">
-                        <a href="#" className="btn btn-outline-dark btn-sm">App Store</a>
-                        <a href="#" className="btn btn-outline-dark btn-sm">Google Play</a>
+                        <a href="https://www.pinterest.com" className="btn btn-outline-dark btn-sm">App Store</a>
+                        <a href="https://www.pinterest.com" className="btn btn-outline-dark btn-sm">Google Play</a>
                     </div>
                 </div>
 
@@ -51,8 +52,8 @@ function Footer() {
             <div className="d-flex justify-content-between align-items-center flex-wrap">
                 <p>&copy; 2024 Foodio. All rights reserved.</p>
                 <div>
-                    <a href="#" className="text-muted me-3" style={{ textDecoration: "none" }}>Privacy Policy</a>
-                    <a href="#" className="text-muted" style={{ textDecoration: "none" }}>Terms of Service</a>
+                    <Link to="/PrivacyPolicy" className="text-muted me-3" style={{ textDecoration: "none" }}>Privacy Policy</Link>
+                    <Link to="/TermsOfService" className="text-muted" style={{ textDecoration: "none" }}>Terms of Service</Link>
                 </div>
             </div>
         </div>

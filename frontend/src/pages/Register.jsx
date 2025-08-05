@@ -12,11 +12,15 @@ const Register = ({ setIsLoggedIn }) => {
   const navigate = useNavigate();
 
   const handleRegister = async () => {
-    await axios.post("https://foodio-backend-cgsj.onrender.com/auth/register", { username, email, password });
-    localStorage.setItem("username", username);
-    setIsLoggedIn(true);
+    // await axios.post("https://foodio-backend-cgsj.onrender.com/auth/register", { username, email, password });
+    await axios.post("http://localhost:3001/auth/register", { username, email, password },
+      {
+        withCredentials: true, // Include credentials for cookie handling
+      });
+          localStorage.setItem("loggedIn", true);
+        setIsLoggedIn(true);
     alert("Registration successful!");
-    navigate("/login");
+    navigate("/");
   };
 
   return (
@@ -28,7 +32,6 @@ const Register = ({ setIsLoggedIn }) => {
       <input type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
       <br />
       <button id="regbutton" onClick={handleRegister}>Register</button>
-      <br /><br />
       <p>Already have an account? <Link to="/login" style={{ color: '#15467F' }}>Login</Link></p>
     </div>
   );
