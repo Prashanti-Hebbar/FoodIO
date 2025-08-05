@@ -27,16 +27,16 @@ function Footer() {
                 <div className="col-md-3 mb-4">
                     <h5>Connect With Us</h5>
                     <div className="d-flex gap-3 mb-3">
-                        <a href="https://www.facebook.com" className="text-dark text-muted" aria-label="Facebook"><i className="bi bi-facebook fs-4"></i></a>
-                        <a href="https://www.instagram.com" className="text-dark text-muted" aria-label="Instagram"><i className="bi bi-instagram fs-4"></i></a>
-                        <a href="https://www.twitter.com" className="text-dark text-muted" aria-label="Twitter"><i className="bi bi-twitter fs-4"></i></a>
-                        <a href="https://www.pinterest.com" className="text-dark text-muted" aria-label="Pinterest"><i className="bi bi-pinterest fs-4"></i></a>
+                        <a href="#" className="text-dark text-muted" aria-label="Facebook"><i className="bi bi-facebook fs-4"></i></a>
+                        <a href="#" className="text-dark text-muted" aria-label="Instagram"><i className="bi bi-instagram fs-4"></i></a>
+                        <a href="#" className="text-dark text-muted" aria-label="Twitter"><i className="bi bi-twitter fs-4"></i></a>
+                        <a href="#" className="text-dark text-muted" aria-label="Pinterest"><i className="bi bi-pinterest fs-4"></i></a>
                     </div>
 
                     <h6>Download Our App</h6>
                     <div className="d-flex gap-2">
-                        <a href="https://www.pinterest.com" className="btn btn-outline-dark btn-sm">App Store</a>
-                        <a href="https://www.pinterest.com" className="btn btn-outline-dark btn-sm">Google Play</a>
+                        <a href="#" className="btn btn-outline-dark btn-sm">App Store</a>
+                        <a href="#" className="btn btn-outline-dark btn-sm">Google Play</a>
                     </div>
                 </div>
 

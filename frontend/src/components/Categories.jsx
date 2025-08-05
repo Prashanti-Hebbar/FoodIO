@@ -1,9 +1,9 @@
-// import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../Categories.css';
 
 const Categories = () => {
-  // const [isLoading, setIsLoading] = useState(null);
+  const [isLoading, setIsLoading] = useState(null);
 
   const categoryGroups = [
     {
