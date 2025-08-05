@@ -1,14 +1,18 @@
 import { useState, useRef } from "react";
-import { Link} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { UserIcon } from "lucide-react";
 import axios from 'axios';
 import { useUserContext } from '../context/userContext';
 
 const Navbar = ({ isLoggedIn, setIsLoggedIn, isHomeScreen }) => {
-  const {setUserData} = useUserContext();
+  const { setUserData } = useUserContext();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+  const [recipes, setRecipes] = useState([]); // You may want to fetch/set this from props or context
   const dropdownTimeout = useRef(null);
+  const navigate = useNavigate();
 
   // Dashboard dropdown handlers
   const handleDashboardEnter = () => {
@@ -38,8 +42,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, isHomeScreen }) => {
     const confirmed = window.confirm("Are you sure you want to logout?");
     if (confirmed) {
       try {
-        // Perform logout logic here
-        let res = await axios.post("http://localhost:3001/auth/logout",{}, {
+        await axios.post("http://localhost:3001/auth/logout", {}, {
           withCredentials: true
         });
         localStorage.clear();
@@ -47,32 +50,32 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, isHomeScreen }) => {
         setUserData(null);
         navigate("/home");
       } catch (err) {
-          console.log('Error during logout:', err);
+        console.log('Error during logout:', err);
       }
     }
   };
 
   const handleSearch = (e) => {
-    const term = e.target.value
-    setSearchTerm(term)
+    const term = e.target.value;
+    setSearchTerm(term);
 
     if (term.trim()) {
       const results = Object.values(recipes)
         .flat()
-        .filter(recipe => 
+        .filter(recipe =>
           recipe.title.toLowerCase().includes(term.toLowerCase())
-        )
-      setSearchResults(results)
+        );
+      setSearchResults(results);
     } else {
-      setSearchResults([])
+      setSearchResults([]);
     }
-  }
+  };
 
   const handleRecipeClick = (id) => {
-    navigate(`/viewRecipe?id=${id}`)
-    setSearchTerm('')
-    setSearchResults([])
-  }
+    navigate(`/viewRecipe?id=${id}`);
+    setSearchTerm('');
+    setSearchResults([]);
+  };
 
   return (
     <nav
@@ -130,12 +133,27 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, isHomeScreen }) => {
           </div>
 
           {/* Search Bar */}
-          <div className="flex-grow mx-4 max-w-md hidden md:block">
+          <div className="flex-grow mx-4 max-w-md hidden md:block relative">
             <input
               type="text"
               placeholder="Search"
               className="w-full px-4 py-2 rounded-full text-black focus:outline-none focus:ring-2 focus:ring-yellow-300"
+              value={searchTerm}
+              onChange={handleSearch}
             />
+            {searchResults.length > 0 && (
+              <div className="absolute bg-white text-black w-full mt-1 rounded shadow-lg z-10">
+                {searchResults.map((recipe) => (
+                  <div
+                    key={recipe.id}
+                    className="px-4 py-2 hover:bg-yellow-100 cursor-pointer"
+                    onClick={() => handleRecipeClick(recipe.id)}
+                  >
+                    {recipe.title}
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
 
           {/* Auth Buttons or Profile */}
