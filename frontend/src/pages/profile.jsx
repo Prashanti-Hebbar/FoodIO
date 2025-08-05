@@ -6,7 +6,7 @@ import "../profile.css";
 import { useUserContext } from '../context/userContext';
 
 const Profile = () => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const [activeSection, setActiveSection] = useState('myRecipes');
   const { userData, setUserData } = useUserContext();
   const [showEditProfile, setShowEditProfile] = useState(false);
@@ -168,3 +168,5 @@ const Profile = () => {
       )}
     </div>
   );
+};
+export default Profile;
