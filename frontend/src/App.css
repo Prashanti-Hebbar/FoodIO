@@ -572,3 +572,22 @@ body{
     font-size: 0.75rem;
   }
 }
+.recipes-scroll-container {
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+.custom-recipe-card {
+  scroll-snap-align: center;
+  flex-shrink: 0;
+  width: 100%;
+  max-width: 100vw;
+}
+
+@media (min-width: 576px) {
+  .custom-recipe-card {
+    width: 80%;
+    max-width: 350px;
+  }
+}
+
