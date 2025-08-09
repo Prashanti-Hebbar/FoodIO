@@ -1,0 +1,175 @@
+
+button:not([class*="hover-effect"]):hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(244, 138, 33, 0.2);
+  transition: all 0.3s ease;
+}
+
+button:not([class*="focus-effect"]):focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(244, 138, 33, 0.3);
+}
+
+button:not([class*="active-effect"]):active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 4px rgba(244, 138, 33, 0.15);
+}
+
+input:not([class*="hover-effect"]):hover,
+textarea:not([class*="hover-effect"]):hover,
+select:not([class*="hover-effect"]):hover {
+  border-color: #f4a055;
+  transition: all 0.3s ease;
+}
+
+
+input:not([class*="focus-effect"]):focus,
+textarea:not([class*="focus-effect"]):focus,
+select:not([class*="focus-effect"]):focus {
+  border-color: #ff9900;
+  box-shadow: 0 0 0 3px rgba(244, 138, 33, 0.2);
+  outline: none;
+}
+
+#loginbutton:hover, 
+#regbutton:hover {
+  background-color: #ff9900;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(244, 138, 33, 0.3);
+}
+
+#loginbutton:focus, 
+#regbutton:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255, 153, 0, 0.4);
+}
+
+#loginbutton:active, 
+#regbutton:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 4px rgba(244, 138, 33, 0.2);
+}
+
+.back-btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(244, 138, 33, 0.15);
+}
+
+.back-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 10px rgba(244, 138, 33, 0.1);
+}
+
+.save-btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255, 153, 0, 0.3);
+}
+
+.save-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 15px rgba(255, 153, 0, 0.2);
+}
+
+.button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255, 107, 0, 0.3);
+}
+
+.button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(255, 107, 0, 0.2);
+}
+
+
+.download-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255, 107, 0, 0.2);
+}
+
+.download-button:active {
+  background: #ff6b00;
+  color: #ffffff;
+  transform: translateY(1px);
+}
+
+.close-button:hover {
+  color: #ff6b00;
+  transform: scale(1.1);
+}
+
+.close-button:focus {
+  outline: none;
+  color: #ff6b00;
+}
+
+.close-button:active {
+  transform: scale(0.95);
+}
+
+
+/* Navbar specific styles */
+.navbar .btn-secondary:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255, 204, 0, 0.3);
+}
+
+.navbar .btn-secondary:active {
+  transform: scale(0.98);
+}
+
+.navbar-nav .nav-item .nav-link:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255, 204, 0, 0.3);
+  border-radius: 5px;
+}
+
+/* Search inputs */
+input[type="search"]:hover {
+  border-color: #f4a055;
+}
+
+input[type="search"]:focus {
+  border-color: #ff9900;
+  box-shadow: 0 0 0 3px rgba(244, 138, 33, 0.2);
+  outline: none;
+}
+
+input[type="checkbox"]:hover,
+input[type="radio"]:hover {
+  cursor: pointer;
+}
+
+select:hover {
+  cursor: pointer;
+  border-color: #f4a055;
+  transition: all 0.3s ease;
+}
+
+select:focus {
+  border-color: #ff9900;
+  box-shadow: 0 0 0 3px rgba(244, 138, 33, 0.2);
+  outline: none;
+}
+
+input[type="range"]:hover {
+  cursor: pointer;
+}
+
+input[type="range"]:focus {
+  outline: none;
+}
+
+input[type="date"]:hover,
+input[type="time"]:hover,
+input[type="datetime-local"]:hover {
+  cursor: pointer;
+  border-color: #f4a055;
+}
+
+button, 
+input, 
+textarea, 
+select {
+  transition: all 0.3s ease;
+}
