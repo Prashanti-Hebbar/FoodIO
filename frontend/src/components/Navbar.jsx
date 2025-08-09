@@ -36,6 +36,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
     if (term.trim()) {
       const results = Object.values(recipes)
         .flat()
+
         .filter((recipe) =>
           recipe.title.toLowerCase().includes(term.toLowerCase())
         );
@@ -55,9 +56,6 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
   const handleNavToggle = () => {
     setIsNavCollapsed(!isNavCollapsed);
   };
-
-  const handleNavLinkClick = () => {
-    setIsNavCollapsed(true);
   };
 
   return (
