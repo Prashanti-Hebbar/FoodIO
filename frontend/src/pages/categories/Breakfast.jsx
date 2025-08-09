@@ -1,10 +1,10 @@
-// import React, { useState,} from 'react';
-// import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import "../../styles/AllCat.css";
 
 const Breakfast = () => {
-  // const navigate = useNavigate();
-  // const [setSelectedRecipe] = useState(null);
+  const navigate = useNavigate();
+  const [setSelectedRecipe] = useState(null);
 
   const breakfastRecipes = [
     { id: 19, title: "Poha", image: "../ban.jpg", rating: 4.6 },

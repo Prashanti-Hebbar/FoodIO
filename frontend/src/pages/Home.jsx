@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import "../App.css";
 import "./recipes";
 import { Link } from "react-router-dom";
-import HeroSection from "./HeroSection";
 
 const Home = () => {
   const [activeTestimonial, setActiveTestimonial] = useState(2);
@@ -189,6 +188,7 @@ const Home = () => {
         url: window.location.href,
       };
 
+
       const shareDialog = document.createElement("dialog");
       document.body.style.overflow = "hidden";
 
@@ -235,7 +235,7 @@ const Home = () => {
 
   return (
     <div>
-      {/* <div
+      <div
         id="recipeCarousel"
         className="carousel slide"
         data-bs-ride="carousel"
@@ -302,9 +302,8 @@ const Home = () => {
           ></span>
           <span className="visually-hidden">Next</span>
         </button>
-      </div> */}
+      </div>
 
-      <HeroSection />
       <div className="container mt-4 p-5">
         <h2 id="top-rated" className="mt-5">
           <b>Top Rated Recipes</b>
@@ -392,3 +391,4 @@ const Home = () => {
 };
 
 export default Home;
+
