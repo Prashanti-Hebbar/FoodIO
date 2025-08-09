@@ -75,152 +75,164 @@ const About = () => {
       <div className="row mt-5 p-5 text-center">
         <h2>Frequently Asked Questions (FAQs)</h2>
 
-        {/* Question 1 */}
-        <div className="mb-3">
-          <button
-            className="btn btn-outline-warning w-100 text-start"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#faq1"
-            aria-expanded="false"
-            aria-controls="faq1"
-            style={{
-              backgroundColor: "transparent",
-              borderWidth: "1.5px",
-              borderColor: "#e76f51",
-              borderStyle: "solid",
-              lineHeight: "40px",
-              fontSize: "20px",
-              color: "#e76f51",
-            }}
-          >
-            How do I submit a recipe on Foodio?
-          </button>
-          <div className="collapse mt-2" id="faq1">
+        <div id="faqAccordion">
+          {/* Question 1 */}
+          <div className="mb-3">
+            <button
+              className="btn btn-outline-warning w-100 text-start"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#faq1"
+              aria-expanded="false"
+              aria-controls="faq1"
+              style={{
+                backgroundColor: "transparent",
+                borderWidth: "1.5px",
+                borderColor: "#e76f51",
+                borderStyle: "solid",
+                lineHeight: "40px",
+                fontSize: "20px",
+                color: "#e76f51",
+              }}
+            >
+              How do I submit a recipe on Foodio?
+            </button>
             <div
-              className="card card-body" style={{backgroundColor: "#eeeeee"}}>
-              After registering and logging in, navigate to the "Submit Recipe" section, fill in your recipe details, upload photos, and hit submit. Your recipe will then be shared with our community!
+              className="collapse mt-2"
+              id="faq1"
+              data-bs-parent="#faqAccordion"
+            >
+              <div className="card card-body" style={{ backgroundColor: "#eeeeee" }}>
+                After registering and logging in, navigate to the "Submit Recipe" section, fill in your recipe details, upload photos, and hit submit. Your recipe will then be shared with our community!
+              </div>
             </div>
           </div>
-        </div>
 
-        {/* Question 2 */}
-        <div className="mb-3">
-          <button
-            className="btn btn-outline-warning w-100 text-start"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#faq2"
-            aria-expanded="false"
-            aria-controls="faq2"
-            style={{
-              backgroundColor: "transparent",
-              borderWidth: "1.5px",
-              borderColor: "#e76f51",
-              borderStyle: "solid",
-              lineHeight: "40px",
-              fontSize: "20px",
-              color: "#e76f51",
-            }}
-          >
-            Is Foodio free to use?
-          </button>
-          <div className="collapse mt-2" id="faq2">
-            <div
-              className="card card-body" style={{backgroundColor: "#eeeeee"}}
+          {/* Question 2 */}
+          <div className="mb-3">
+            <button
+              className="btn btn-outline-warning w-100 text-start"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#faq2"
+              aria-expanded="false"
+              aria-controls="faq2"
+              style={{
+                backgroundColor: "transparent",
+                borderWidth: "1.5px",
+                borderColor: "#e76f51",
+                borderStyle: "solid",
+                lineHeight: "40px",
+                fontSize: "20px",
+                color: "#e76f51",
+              }}
             >
-              Yes! Foodio is completely free for all users. You can browse, share, and interact with recipes without any subscription fees.
+              Is Foodio free to use?
+            </button>
+            <div
+              className="collapse mt-2"
+              id="faq2"
+              data-bs-parent="#faqAccordion"
+            >
+              <div className="card card-body" style={{ backgroundColor: "#eeeeee" }}>
+                Yes! Foodio is completely free for all users. You can browse, share, and interact with recipes without any subscription fees.
+              </div>
             </div>
           </div>
-        </div>
 
-        {/* Question 3 */}
-        <div className="mb-3">
-          <button
-            className="btn btn-outline-warning w-100 text-start"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#faq3"
-            aria-expanded="false"
-            aria-controls="faq3"
-            style={{
-              backgroundColor: "transparent",
-              borderWidth: "1.5px",
-              borderColor: "#e76f51",
-              borderStyle: "solid",
-              lineHeight: "40px",
-              fontSize: "20px",
-              color: "#e76f51",
-            }}
-          >
-            Can I save recipes to view later?
-          </button>
-          <div className="collapse mt-2" id="faq3">
-            <div
-              className="card card-body" style={{backgroundColor: "#eeeeee"}}
+          {/* Question 3 */}
+          <div className="mb-3">
+            <button
+              className="btn btn-outline-warning w-100 text-start"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#faq3"
+              aria-expanded="false"
+              aria-controls="faq3"
+              style={{
+                backgroundColor: "transparent",
+                borderWidth: "1.5px",
+                borderColor: "#e76f51",
+                borderStyle: "solid",
+                lineHeight: "40px",
+                fontSize: "20px",
+                color: "#e76f51",
+              }}
             >
-              Absolutely! Use the "Bookmark" feature on any recipe to save it to your personal collection for easy access anytime.
+              Can I save recipes to view later?
+            </button>
+            <div
+              className="collapse mt-2"
+              id="faq3"
+              data-bs-parent="#faqAccordion"
+            >
+              <div className="card card-body" style={{ backgroundColor: "#eeeeee" }}>
+                Absolutely! Use the "Bookmark" feature on any recipe to save it to your personal collection for easy access anytime.
+              </div>
             </div>
           </div>
-        </div>
 
-        {/* Question 4 */}
-        <div className="mb-3">
-          <button
-            className="btn btn-outline-warning w-100 text-start"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#faq4"
-            aria-expanded="false"
-            aria-controls="faq4"
-            style={{
-              backgroundColor: "transparent",
-              borderWidth: "1.5px",
-              borderColor: "#e76f51",
-              borderStyle: "solid",
-              lineHeight: "40px",
-              fontSize: "20px",
-              color: "#e76f51",
-            }}
-          >
-            How do the rating and review system work?
-          </button>
-          <div className="collapse mt-2" id="faq4">
-            <div
-              className="card card-body" style={{backgroundColor: "#eeeeee"}}
+          {/* Question 4 */}
+          <div className="mb-3">
+            <button
+              className="btn btn-outline-warning w-100 text-start"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#faq4"
+              aria-expanded="false"
+              aria-controls="faq4"
+              style={{
+                backgroundColor: "transparent",
+                borderWidth: "1.5px",
+                borderColor: "#e76f51",
+                borderStyle: "solid",
+                lineHeight: "40px",
+                fontSize: "20px",
+                color: "#e76f51",
+              }}
             >
-              After trying a recipe, you can rate it from 1 to 5 stars and leave a review to share your feedback with the community.
+              How do the rating and review system work?
+            </button>
+            <div
+              className="collapse mt-2"
+              id="faq4"
+              data-bs-parent="#faqAccordion"
+            >
+              <div className="card card-body" style={{ backgroundColor: "#eeeeee" }}>
+                After trying a recipe, you can rate it from 1 to 5 stars and leave a review to share your feedback with the community.
+              </div>
             </div>
           </div>
-        </div>
 
-        {/* Question 5 */}
-        <div className="mb-3">
-          <button
-            className="btn btn-outline-warning w-100 text-start"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#faq5"
-            aria-expanded="false"
-            aria-controls="faq5"
-            style={{
-              backgroundColor: "transparent",
-              borderWidth: "1.5px",
-              borderColor: "#e76f51",
-              borderStyle: "solid",
-              lineHeight: "40px",
-              fontSize: "20px",
-              color: "#e76f51",
-            }}
-          >
-            Is there a mobile app for Foodio?
-          </button>
-          <div className="collapse mt-2" id="faq5">
-            <div
-              className="card card-body"
-              style={{backgroundColor: "#eeeeee"}}
+          {/* Question 5 */}
+          <div className="mb-3">
+            <button
+              className="btn btn-outline-warning w-100 text-start"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#faq5"
+              aria-expanded="false"
+              aria-controls="faq5"
+              style={{
+                backgroundColor: "transparent",
+                borderWidth: "1.5px",
+                borderColor: "#e76f51",
+                borderStyle: "solid",
+                lineHeight: "40px",
+                fontSize: "20px",
+                color: "#e76f51",
+              }}
             >
-              We are currently working on mobile apps for iOS and Android! Meanwhile, you can use Foodio through any mobile browser with our fully responsive design.
+              Is there a mobile app for Foodio?
+            </button>
+            <div
+              className="collapse mt-2"
+              id="faq5"
+              data-bs-parent="#faqAccordion"
+            >
+              <div className="card card-body" style={{ backgroundColor: "#eeeeee" }}>
+                We are currently working on mobile apps for iOS and Android! Meanwhile, you can use Foodio through any mobile browser with our fully responsive design.
+              </div>
             </div>
           </div>
         </div>
