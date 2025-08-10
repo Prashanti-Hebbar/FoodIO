@@ -167,4 +167,6 @@ const Profile = () => {
         <EditProfile onClose={() => setShowEditProfile(false)} />
       )}
     </div>
-  );
+  )
+}
+export default Profile
