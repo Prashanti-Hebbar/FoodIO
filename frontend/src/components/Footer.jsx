@@ -50,7 +50,7 @@ function Footer() {
 
             <hr className="bg-light" />
             <div className="d-flex justify-content-between align-items-center flex-wrap">
-                <p>&copy; 2024 Foodio. All rights reserved.</p>
+                <p>&copy; {new Date().getFullYear()} Foodio. All rights reserved.</p>
                 <div>
                     <Link to="/PrivacyPolicy" className="text-muted me-3" style={{ textDecoration: "none" }}>Privacy Policy</Link>
                     <Link to="/TermsOfService" className="text-muted" style={{ textDecoration: "none" }}>Terms of Service</Link>
