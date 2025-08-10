@@ -15,8 +15,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
     const confirmed = window.confirm("Are you sure you want to logout?");
     if (confirmed) {
       try {
-        // Perform logout logic here
-        let res = await axios.post("http://localhost:3001/auth/logout",{}, {
+        await axios.post("http://localhost:3001/auth/logout", {}, {
           withCredentials: true
         });
         localStorage.clear();
@@ -24,32 +23,32 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
         setUserData(null);
         navigate("/home");
       } catch (err) {
-          console.log('Error during logout:', err);
+        console.log('Error during logout:', err);
       }
     }
   };
 
   const handleSearch = (e) => {
-    const term = e.target.value
-    setSearchTerm(term)
+    const term = e.target.value;
+    setSearchTerm(term);
 
     if (term.trim()) {
       const results = Object.values(recipes)
         .flat()
-        .filter(recipe => 
+        .filter(recipe =>
           recipe.title.toLowerCase().includes(term.toLowerCase())
-        )
-      setSearchResults(results)
+        );
+      setSearchResults(results);
     } else {
-      setSearchResults([])
+      setSearchResults([]);
     }
-  }
+  };
 
   const handleRecipeClick = (id) => {
-    navigate(`/viewRecipe?id=${id}`)
-    setSearchTerm('')
-    setSearchResults([])
-  }
+    navigate(`/viewRecipe?id=${id}`);
+    setSearchTerm('');
+    setSearchResults([]);
+  };
 
   return (
     <div>
