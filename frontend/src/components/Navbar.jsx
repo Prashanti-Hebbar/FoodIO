@@ -2,42 +2,53 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import recipes from '../pages/recipes'
 import "../navbar.css"
+import axios from 'axios';
+import { useUserContext } from '../context/userContext';
 
 const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
+  const {setUserData} = useUserContext();
   const [searchTerm, setSearchTerm] = useState('')
   const [searchResults, setSearchResults] = useState([])
   const navigate = useNavigate()
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
     const confirmed = window.confirm("Are you sure you want to logout?");
     if (confirmed) {
-      localStorage.clear();
-      setIsLoggedIn(false);
-      navigate("/home");
+      try {
+        await axios.post("http://localhost:3001/auth/logout", {}, {
+          withCredentials: true
+        });
+        localStorage.clear();
+        setIsLoggedIn(false);
+        setUserData(null);
+        navigate("/home");
+      } catch (err) {
+        console.log('Error during logout:', err);
+      }
     }
   };
 
   const handleSearch = (e) => {
-    const term = e.target.value
-    setSearchTerm(term)
+    const term = e.target.value;
+    setSearchTerm(term);
 
     if (term.trim()) {
       const results = Object.values(recipes)
         .flat()
-        .filter(recipe => 
+        .filter(recipe =>
           recipe.title.toLowerCase().includes(term.toLowerCase())
-        )
-      setSearchResults(results)
+        );
+      setSearchResults(results);
     } else {
-      setSearchResults([])
+      setSearchResults([]);
     }
-  }
+  };
 
   const handleRecipeClick = (id) => {
-    navigate(`/viewRecipe?id=${id}`)
-    setSearchTerm('')
-    setSearchResults([])
-  }
+    navigate(`/viewRecipe?id=${id}`);
+    setSearchTerm('');
+    setSearchResults([]);
+  };
 
   return (
     <div>

@@ -11,28 +11,30 @@ const EditProfile = ({ onClose }) => {
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const token = localStorage.getItem("token");
-        const userID = localStorage.getItem("userID");
-        const response = await axios.get(
-          `https://foodio-backend-cgsj.onrender.com/auth/user/${userID}`,
-          { 
-            headers: { 
-              Authorization: `Bearer ${token}` 
-            }
-          }
-        );
-        setFormData(response.data);
-      } catch (error) {
-        console.error("Error fetching user data:", error);
-        alert("Failed to load user data. Please try again.");
-      }
-    };
+  // no need to do this now **** implemented in the profile.jsx
 
-    fetchUserData();
-  }, []);
+  // useEffect(() => {
+  //   const fetchUserData = async () => {
+  //     try {
+  //       const token = localStorage.getItem("token");
+  //       const userID = localStorage.getItem("userID");
+  //       const response = await axios.get(
+  //         `https://foodio-backend-cgsj.onrender.com/auth/user/${userID}`,
+  //         { 
+  //           headers: { 
+  //             Authorization: `Bearer ${token}` 
+  //           }
+  //         }
+  //       );
+  //       setFormData(response.data);
+  //     } catch (error) {
+  //       console.error("Error fetching user data:", error);
+  //       alert("Failed to load user data. Please try again.");
+  //     }
+  //   };
+
+  //   fetchUserData();
+  // }, []);
 
   const validateForm = () => {
     const newErrors = {};
@@ -61,16 +63,11 @@ const EditProfile = ({ onClose }) => {
     if (validateForm()) {
       setIsLoading(true);
       try {
-        const token = localStorage.getItem("token");
-        const userID = localStorage.getItem("userID");
-        
         await axios.put(
-          `https://foodio-backend-cgsj.onrender.com/auth/user/${userID}`,
+          `http://localhost:3001/auth/updateUser`,
           formData,
           {
-            headers: {
-              Authorization: `Bearer ${token}`
-            }
+            withCredentials:true
           }
         );
 
