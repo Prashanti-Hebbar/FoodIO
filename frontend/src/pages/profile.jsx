@@ -114,9 +114,9 @@ const Profile = () => {
     <div className="profile-page">
       <div className="banner">
         <img src="ban.jpg" alt="Profile Banner" />
-        <button className="banner-logout-btn" onClick={handleLogout}>
+        {/* <button className="banner-logout-btn" onClick={handleLogout}>
           Logout
-        </button>
+        </button> */}
       </div>
 
       <div className="profile-content">
@@ -170,4 +170,4 @@ const Profile = () => {
   );
 };
 
-  export default Profile;
+export default Profile;
