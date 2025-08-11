@@ -122,20 +122,59 @@ li {
     box-shadow: 0 4px 10px rgba(230, 126, 34, 0.3);
 }
 
-@media (max-width: 768px) {
-    .container {
-        padding: 20px 10px;
-    }
-    
-    h1 {
-        font-size: 2rem;
-    }
-    
-    h2 {
-        font-size: 1.5rem;
-    }
-    
-    .nutritional-info ul {
-        grid-template-columns: repeat(2, 1fr);
-    }
+.recipe-left {
+  position: sticky;
+  top: 20px;
+  height: calc(100vh - 40px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
+.recipe-right {
+  max-height: 100vh;
+  overflow-y: auto;
+  padding-right: 15px;
+}
+
+/* Make changes for small devices */
+@media (max-width: 768px) {
+  .container {
+    padding: 20px 10px;
+  }
+  
+  h1 {
+    font-size: 2rem;
+  }
+  
+  h2 {
+    font-size: 1.5rem;
+  }
+  
+  .nutritional-info ul {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Override sticky behavior on small devices */
+  .recipe-left {
+    position: static !important; /* remove sticky */
+    height: auto !important;
+    margin-bottom: 20px;
+  }
+
+  .recipe-right {
+    max-height: none !important;
+    overflow-y: visible !important;
+    padding-right: 0;
+  }
+
+  /* Make image full-width on small screens */
+  .recipe-image {
+    width: 100% !important;
+    height: auto !important;
+    max-height: 400px;
+  }
+}
+
+
+
