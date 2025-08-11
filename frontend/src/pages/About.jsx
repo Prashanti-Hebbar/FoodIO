@@ -1,22 +1,48 @@
-
-import React from 'react';
+import React, { useEffect } from 'react';
 import "../About.css";
 
 const About = () => {
+  useEffect(() => {
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate');
+        }
+      });
+    }, observerOptions);
+
+    const animateElements = document.querySelectorAll('.animate-on-scroll, .feature-card, .faq-section, .faq-item, .section-title');
+    
+    animateElements.forEach((el) => {
+      observer.observe(el);
+    });
+
+    return () => {
+      animateElements.forEach((el) => {
+        observer.unobserve(el);
+      });
+    };
+  }, []);
+
   return (
     <div className="container-fluid p-5">
       <div className='row mb-4 p-3'>
         <h1 className="text-center">Welcome to FoodIO👩‍🍳🍽️</h1>
         <p className="mt-2 text-center">
-          Welcome to <strong>Foodio</strong> — your premier destination for exploring, sharing, and savoring exquisite recipes from every corner of the globe! At <strong>Foodio</strong>, we believe that food is much more than mere nourishment; it’s a universal language that brings people together, celebrates diverse cultures, and ignites creativity in every kitchen. Join us on this flavorful journey where inspiration meets community, and every dish tells a story.
+          Welcome to <strong>Foodio</strong> — your premier destination for exploring, sharing, and savoring exquisite recipes from every corner of the globe! At <strong>Foodio</strong>, we believe that food is much more than mere nourishment; it's a universal language that brings people together, celebrates diverse cultures, and ignites creativity in every kitchen. Join us on this flavorful journey where inspiration meets community, and every dish tells a story.
         </p>
       </div>
 
       <div className='row mt-5 p-5'>
-        <h2 className="text-center mb-4">Why Choose FoodIO?</h2>
+        <h2 className="text-center mb-4 section-title">Why Choose FoodIO?</h2>
 
         <div className="row justify-content-center">
-          <div className="col-md-4 col-sm-6 mb-4">
+          <div className="col-md-4 col-sm-6 mb-4 feature-card">
             <div className="card h-100">
               <div className="card-body text-center">
                 <h5 className="card-title">Endless Recipes</h5>
@@ -25,7 +51,7 @@ const About = () => {
             </div>
           </div>
 
-          <div className="col-md-4 col-sm-6 mb-4">
+          <div className="col-md-4 col-sm-6 mb-4 feature-card">
             <div className="card h-100">
               <div className="card-body text-center">
                 <h5 className="card-title">Community-Driven</h5>
@@ -34,7 +60,7 @@ const About = () => {
             </div>
           </div>
 
-          <div className="col-md-4 col-sm-6 mb-4">
+          <div className="col-md-4 col-sm-6 mb-4 feature-card">
             <div className="card h-100">
               <div className="card-body text-center">
                 <h5 className="card-title">Easy-to-Follow Guides</h5>
@@ -43,7 +69,7 @@ const About = () => {
             </div>
           </div>
 
-          <div className="col-md-4 col-sm-6 mb-4">
+          <div className="col-md-4 col-sm-6 mb-4 feature-card">
             <div className="card h-100">
               <div className="card-body text-center">
                 <h5 className="card-title">Save & Share</h5>
@@ -52,7 +78,7 @@ const About = () => {
             </div>
           </div>
 
-          <div className="col-md-4 col-sm-6 mb-4">
+          <div className="col-md-4 col-sm-6 mb-4 feature-card">
             <div className="card h-100">
               <div className="card-body text-center">
                 <h5 className="card-title">Interactive & Fun</h5>
@@ -61,7 +87,7 @@ const About = () => {
             </div>
           </div>
 
-          <div className="col-md-4 col-sm-6 mb-4">
+          <div className="col-md-4 col-sm-6 mb-4 feature-card">
             <div className="card h-100">
               <div className="card-body text-center">
                 <h5 className="card-title">Fresh Content Always</h5>
@@ -73,11 +99,11 @@ const About = () => {
       </div>
 
 
-      <div className="row mt-5 p-5 text-center">
-        <h2>Frequently Asked Questions (FAQs)</h2>
+      <div className="row mt-5 p-5 text-center faq-section">
+        <h2 className="section-title">Frequently Asked Questions (FAQs)</h2>
 
         {/* Question 1 */}
-        <div className="mb-3">
+        <div className="mb-3 faq-item">
           <button
             className="btn btn-outline-warning w-100 text-start"
             type="button"
@@ -106,7 +132,7 @@ const About = () => {
         </div>
 
         {/* Question 2 */}
-        <div className="mb-3">
+        <div className="mb-3 faq-item">
           <button
             className="btn btn-outline-warning w-100 text-start"
             type="button"
@@ -136,7 +162,7 @@ const About = () => {
         </div>
 
         {/* Question 3 */}
-        <div className="mb-3">
+        <div className="mb-3 faq-item">
           <button
             className="btn btn-outline-warning w-100 text-start"
             type="button"
@@ -166,7 +192,7 @@ const About = () => {
         </div>
 
         {/* Question 4 */}
-        <div className="mb-3">
+        <div className="mb-3 faq-item">
           <button
             className="btn btn-outline-warning w-100 text-start"
             type="button"
@@ -196,7 +222,7 @@ const About = () => {
         </div>
 
         {/* Question 5 */}
-        <div className="mb-3">
+        <div className="mb-3 faq-item">
           <button
             className="btn btn-outline-warning w-100 text-start"
             type="button"
