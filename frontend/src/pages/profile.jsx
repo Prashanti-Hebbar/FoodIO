@@ -50,16 +50,16 @@ const Profile = () => {
 
   const handleDelete = async (recipeId, section) => {
     try {
-      if (section === "My Recipes") {
+      if (section === "myRecipes") {
         await fetch(`http://localhost:3001/recipes/${recipeId}`, {
           method: "DELETE",
         });
         setUserRecipes(userRecipes.filter((recipe) => recipe.id !== recipeId));
-      } else if (section === "Favorite Recipes") {
+      } else if (section === "favoriteRecipes") {
         setFavoriteRecipes(
           favoriteRecipes.filter((recipe) => recipe.id !== recipeId)
         );
-      } else if (section === "Saved Recipes") {
+      } else if (section === "savedRecipes") {
         setSavedRecipes(
           savedRecipes.filter((recipe) => recipe.id !== recipeId)
         );
