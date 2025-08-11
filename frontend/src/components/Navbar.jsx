@@ -52,9 +52,17 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
 
   return (
     <div>
-      <nav className="navbar navbar-expand-lg navbar-custom">
+      <nav className="navbar navbar-expand-xl navbar-dark navbar-custom">
         <Link className="navbar-brand" to="/Home">FoodIO</Link>
-        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
           <span className="navbar-toggler-icon"></span>
         </button>
 

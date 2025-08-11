@@ -14,7 +14,7 @@
     position: relative;
     padding: 12px 20px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    height: 60px;
+    min-height: 60px; /* allow collapse to expand height */
     z-index: 1050;
     font-family: var(--primary-font);
   }
@@ -24,7 +24,7 @@
     width: 100%;
     padding: 12px 20px;
     z-index: 1050;
-    height: 60px;
+    min-height: 60px; /* allow collapse to expand height */
     background: linear-gradient(
       135deg,
       rgba(45, 45, 45, 0.9) 0%,
@@ -37,6 +37,14 @@
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2),
                 inset 0 0 30px rgba(255, 204, 0, 0.05);
     font-family: var(--primary-font);
+  }
+
+  /* Toggler visibility and style on dark background */
+  .navbar-dark .navbar-toggler {
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+  .navbar-toggler:focus {
+    box-shadow: none;
   }
   
   /* Brand Name */
@@ -265,8 +273,27 @@
       color: var(--primary-color);
       border-color: var(--primary-color);
   }
-  /* Mobile Responsive */
-  @media (max-width: 768px) {
+  /* Collapsed navbar (<= xl-1): apply full-width dropdown on md and lg too */
+  @media (max-width: 1199.98px) {
+    /* Make collapsed menu a full-width dropdown panel */
+    .navbar .navbar-collapse {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100vw;
+      background: inherit; /* match navbar gradient */
+      border-top: 1px solid rgba(255, 204, 0, 0.15);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+      padding: 12px 20px;
+      z-index: 1100; /* above navbar */
+    }
+
+    .navbar .navbar-collapse.show {
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+
     .navbar-nav {
       text-align: center;
     }
@@ -274,11 +301,33 @@
     .form-inline {
       display: flex;
       flex-direction: column;
+      width: 100%;
     }
     
     .form-inline .form-control {
       width: 100%;
-      margin-bottom: 10px;
+      margin: 10px 0 0 0;
+      margin-left: 0;
+    }
+
+    .auth-buttons {
+      justify-content: center;
+      margin: 12px 0 0 0;
+      padding-right: 0;
+      width: 100%;
+    }
+
+    .ChatButton {
+      margin: 8px 0 0 0;
+      width: 100%;
+      justify-content: center;
+    }
+
+    /* Improve dropdown inside collapsed area */
+    .navbar .dropdown-menu {
+      background: rgba(0, 0, 0, 0.8);
+      border: none;
+      box-shadow: none;
     }
   }
   
