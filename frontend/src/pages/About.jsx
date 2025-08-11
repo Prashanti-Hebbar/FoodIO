@@ -102,6 +102,7 @@ const About = () => {
       <div className="row mt-5 p-5 text-center faq-section">
         <h2 className="section-title">Frequently Asked Questions (FAQs)</h2>
 
+
         {/* Question 1 */}
         <div className="mb-3 faq-item">
           <button
@@ -125,11 +126,16 @@ const About = () => {
           </button>
           <div className="collapse mt-2" id="faq1">
             <div
-              className="card card-body" style={{backgroundColor: "#eeeeee"}}>
-              After registering and logging in, navigate to the "Submit Recipe" section, fill in your recipe details, upload photos, and hit submit. Your recipe will then be shared with our community!
+              className="collapse mt-2"
+              id="faq1"
+              data-bs-parent="#faqAccordion"
+            >
+              <div className="card card-body" style={{ backgroundColor: "#eeeeee" }}>
+                After registering and logging in, navigate to the "Submit Recipe" section, fill in your recipe details, upload photos, and hit submit. Your recipe will then be shared with our community!
+              </div>
             </div>
           </div>
-        </div>
+
 
         {/* Question 2 */}
         <div className="mb-3 faq-item">
@@ -154,12 +160,16 @@ const About = () => {
           </button>
           <div className="collapse mt-2" id="faq2">
             <div
-              className="card card-body" style={{backgroundColor: "#eeeeee"}}
+              className="collapse mt-2"
+              id="faq2"
+              data-bs-parent="#faqAccordion"
             >
-              Yes! Foodio is completely free for all users. You can browse, share, and interact with recipes without any subscription fees.
+              <div className="card card-body" style={{ backgroundColor: "#eeeeee" }}>
+                Yes! Foodio is completely free for all users. You can browse, share, and interact with recipes without any subscription fees.
+              </div>
             </div>
           </div>
-        </div>
+
 
         {/* Question 3 */}
         <div className="mb-3 faq-item">
@@ -184,12 +194,16 @@ const About = () => {
           </button>
           <div className="collapse mt-2" id="faq3">
             <div
-              className="card card-body" style={{backgroundColor: "#eeeeee"}}
+              className="collapse mt-2"
+              id="faq3"
+              data-bs-parent="#faqAccordion"
             >
-              Absolutely! Use the "Bookmark" feature on any recipe to save it to your personal collection for easy access anytime.
+              <div className="card card-body" style={{ backgroundColor: "#eeeeee" }}>
+                Absolutely! Use the "Bookmark" feature on any recipe to save it to your personal collection for easy access anytime.
+              </div>
             </div>
           </div>
-        </div>
+
 
         {/* Question 4 */}
         <div className="mb-3 faq-item">
@@ -214,12 +228,16 @@ const About = () => {
           </button>
           <div className="collapse mt-2" id="faq4">
             <div
-              className="card card-body" style={{backgroundColor: "#eeeeee"}}
+              className="collapse mt-2"
+              id="faq4"
+              data-bs-parent="#faqAccordion"
             >
-              After trying a recipe, you can rate it from 1 to 5 stars and leave a review to share your feedback with the community.
+              <div className="card card-body" style={{ backgroundColor: "#eeeeee" }}>
+                After trying a recipe, you can rate it from 1 to 5 stars and leave a review to share your feedback with the community.
+              </div>
             </div>
           </div>
-        </div>
+
 
         {/* Question 5 */}
         <div className="mb-3 faq-item">
@@ -244,10 +262,13 @@ const About = () => {
           </button>
           <div className="collapse mt-2" id="faq5">
             <div
-              className="card card-body"
-              style={{backgroundColor: "#eeeeee"}}
+              className="collapse mt-2"
+              id="faq5"
+              data-bs-parent="#faqAccordion"
             >
-              We are currently working on mobile apps for iOS and Android! Meanwhile, you can use Foodio through any mobile browser with our fully responsive design.
+              <div className="card card-body" style={{ backgroundColor: "#eeeeee" }}>
+                We are currently working on mobile apps for iOS and Android! Meanwhile, you can use Foodio through any mobile browser with our fully responsive design.
+              </div>
             </div>
           </div>
         </div>
