@@ -12,15 +12,26 @@ const Register = ({ setIsLoggedIn }) => {
   const navigate = useNavigate();
 
   const handleRegister = async () => {
-    // await axios.post("https://foodio-backend-cgsj.onrender.com/auth/register", { username, email, password });
-    await axios.post("http://localhost:3001/auth/register", { username, email, password },
-      {
-        withCredentials: true, // Include credentials for cookie handling
-      });
-          localStorage.setItem("loggedIn", true);
-        setIsLoggedIn(true);
-    alert("Registration successful!");
-    navigate("/");
+    // Basic validation
+    if (!username || !email || !password) {
+      return;
+    }
+    try {
+      const response = await axios.post(
+        "https://foodio-backend-cgsj.onrender.com/auth/register", 
+        { username, email, password },
+        { withCredentials: true }
+      );
+      localStorage.setItem("loggedIn", "true");
+      setIsLoggedIn(true);
+      alert("Registration successful!");
+      navigate("/");
+      } catch (error) {
+      if (error.response) {
+        // Server responded with error status
+        console.log("Error response:", error.response.data);
+      }
+    }
   };
 
   return (

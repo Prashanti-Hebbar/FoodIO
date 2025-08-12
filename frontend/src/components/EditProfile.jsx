@@ -64,7 +64,7 @@ const EditProfile = ({ onClose }) => {
       setIsLoading(true);
       try {
         await axios.put(
-          `http://localhost:3001/auth/updateUser`,
+          `https://foodio-backend-cgsj.onrender.com/auth/updateUser`,
           formData,
           {
             withCredentials:true

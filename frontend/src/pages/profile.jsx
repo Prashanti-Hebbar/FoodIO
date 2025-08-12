@@ -31,7 +31,7 @@ const Profile = () => {
     const fetchUserData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3001/auth/user`,
+          `https://foodio-backend-cgsj.onrender.com/auth/user`,
           {
             withCredentials: true
           }
@@ -51,7 +51,7 @@ const Profile = () => {
   const handleDelete = async (recipeId, section) => {
     try {
       if (section === "My Recipes") {
-        await fetch(`http://localhost:3001/recipes/${recipeId}`, {
+        await fetch(`https://foodio-backend-cgsj.onrender.com/recipes/${recipeId}`, {
           method: "DELETE",
         });
         setUserRecipes(userRecipes.filter((recipe) => recipe.id !== recipeId));
