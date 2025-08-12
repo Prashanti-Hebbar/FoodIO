@@ -1,13 +1,21 @@
+
 import { useState, useRef } from "react";
-import { Link} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { UserIcon } from "lucide-react";
 import axios from 'axios';
 import { useUserContext } from '../context/userContext';
 
-const Navbar = ({ isLoggedIn, setIsLoggedIn, isHomeScreen }) => {
-  const {setUserData} = useUserContext();
+const Navbar = ({ isLoggedIn, setIsLoggedIn, isHomeScreen, recipes = [] }) => {
+  console.log("Recipes in Navbar:", recipes);
+
+  const { setUserData } = useUserContext();
+  const navigate = useNavigate();
+
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+
   const dropdownTimeout = useRef(null);
 
   // Dashboard dropdown handlers
@@ -38,41 +46,51 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, isHomeScreen }) => {
     const confirmed = window.confirm("Are you sure you want to logout?");
     if (confirmed) {
       try {
-        // Perform logout logic here
-        let res = await axios.post("http://localhost:3001/auth/logout",{}, {
-          withCredentials: true
-        });
+        await axios.post("http://localhost:3001/auth/logout", {}, { withCredentials: true });
         localStorage.clear();
         setIsLoggedIn(false);
         setUserData(null);
         navigate("/home");
       } catch (err) {
-          console.log('Error during logout:', err);
+        console.log('Error during logout:', err);
       }
     }
   };
 
   const handleSearch = (e) => {
-    const term = e.target.value
-    setSearchTerm(term)
+    const term = e.target.value;
+    setSearchTerm(term);
 
     if (term.trim()) {
-      const results = Object.values(recipes)
-        .flat()
-        .filter(recipe => 
+      const results = recipes
+        .filter(recipe =>
           recipe.title.toLowerCase().includes(term.toLowerCase())
-        )
-      setSearchResults(results)
+        ) .sort((a, b) => {
+        const aTitle = a.title.toLowerCase();
+        const bTitle = b.title.toLowerCase();
+
+        const aStarts = aTitle.startsWith(term);
+        const bStarts = bTitle.startsWith(term);
+
+        // Prioritize ones that start with the search term
+        if (aStarts && !bStarts) return -1;
+        if (!aStarts && bStarts) return 1;
+
+        // Otherwise, fallback to alphabetical order
+        return aTitle.localeCompare(bTitle);
+      });
+      setSearchResults(results);
     } else {
-      setSearchResults([])
+      setSearchResults([]);
     }
-  }
+  };
 
   const handleRecipeClick = (id) => {
-    navigate(`/viewRecipe?id=${id}`)
-    setSearchTerm('')
-    setSearchResults([])
-  }
+     console.log("Navigating to recipe with id:", id);
+    navigate(`/viewRecipe?id=${id}`);
+    setSearchTerm('');
+    setSearchResults([]);
+  };
 
   return (
     <nav
@@ -130,12 +148,28 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, isHomeScreen }) => {
           </div>
 
           {/* Search Bar */}
-          <div className="flex-grow mx-4 max-w-md hidden md:block">
+          <div className="flex-grow mx-4 max-w-md hidden md:block relative">
             <input
               type="text"
               placeholder="Search"
+              value={searchTerm}
+              onChange={handleSearch}
               className="w-full px-4 py-2 rounded-full text-black focus:outline-none focus:ring-2 focus:ring-yellow-300"
             />
+            {searchResults.length > 0 && (
+              <div className="absolute bg-white text-black mt-1 w-full max-w-md rounded shadow-lg z-50 max-h-60 overflow-auto">
+                {searchResults.map(recipe => {
+      console.log('Search result:', recipe.title, recipe.id);
+      return (
+                  <div  key={recipe.id}
+                    onClick={() => handleRecipeClick(recipe.id)}
+                    className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                  >
+                    {recipe.title}
+                  </div>
+                )})}
+              </div>
+            )}
           </div>
 
           {/* Auth Buttons or Profile */}

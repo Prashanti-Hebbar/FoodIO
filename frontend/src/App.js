@@ -39,7 +39,27 @@ import { useLocation } from "react-router-dom";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-
+// Move recipes state up here
+  const [recipes, setRecipes] = useState([
+    { id: 1, title: "Delicious Pasta" },
+    { id: 2, title: "Spicy Tacos" },
+    { id: 3, title: "Pumpkin Cupcakes" },
+    { id: 4, title: "Apple Pie" },
+    { id: 5, title: "Best Lasagna" },
+    { id: 6, title: "Harira" },
+    { id: 7, title: "Vegan Curry" },
+    { id: 8, title: "Chocolate Cake" },
+    { id: 9, title: "Corn Fritters" },
+    { id: 10, title: "Bread Cheese Lollipop" },
+    { id: 11, title: "Sweet Potato Boats" },
+    { id: 12, title: "Walnut Chikki" },
+    { id: 13, title: "Summer Salad" },
+    { id: 14, title: "Grilled Salmon" },
+    { id: 15, title: "Loco Moco" },
+    { id: 16, title: "Cinnamon Roll Casserole" },
+    { id: 17, title: "Frikadellen" },
+    { id: 18, title: "Coffee Jelly" }
+  ]);
 useEffect(() => {
   const checkLogin = () => {
     const user = localStorage.getItem("loggedIn");
@@ -62,7 +82,7 @@ useEffect(() => {
   return (
     <>
       <ScrollToTop />
-      <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} isHomeScreen={isHomeScreen} />
+      <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} isHomeScreen={isHomeScreen}  recipes={recipes}/>
       <Routes>
         <Route path="/" element={<Home /> } />
         <Route path="/" element={!isLoggedIn ? <Navigate to="/login" /> : <Home />} />
