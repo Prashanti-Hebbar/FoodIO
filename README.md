@@ -44,7 +44,7 @@ cd foodio
 Install dependencies:
 
 # Backend dependencies
-cd server
+cd backend
 
 npm install
 
@@ -64,7 +64,7 @@ PORT=5000
 
 Run the development servers:
 # Start backend server
-cd server
+cd backend
 
 npm run dev
 
