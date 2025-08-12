@@ -210,7 +210,7 @@ ${baseRecipeText}`
 
 
 
-router.post("/:Recipeid/favourite", async (req,res) =>{
+router.post("/:Recipeid/favorite", async (req,res) =>{
   try{
   const userId = req.user.id ; // Fetches id from jwt middleware
   const recipeId = req.params.Recipeid;
@@ -238,14 +238,18 @@ router.get("/favorites", async (req,res) => {
   res.status(500).json({error: "Internal Server Error"});
 }})
 
-router.delete("/:Recipeid/favourite", async (req,res) =>{
+router.delete("/:Recipeid/favorite", async (req,res) =>{
   try{
-  const userId = req.user.id ; // Fetches id from jwt middleware
+  const userId = req.user.id  ; // Fetches id from jwt middleware
   const recipeId = req.params.Recipeid;
 
   //Finds and deletes from user
-  const response = await UserModel.findByIdAndDelete(userId, { $pull: { favorites: recipeId } }, { new: true });
-  if(response) return console.log("Successfully deleted.");
+  const response = await UserModel.findByIdAndUpdate(userId, { $pull: { favorites: recipeId } }, { new: true });
+      if (!response) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    console.log("Successfully removed from favorites.");
   res.status(200).json(response);
 } catch(err) {
   console.log(err);
