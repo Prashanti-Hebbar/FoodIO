@@ -20,11 +20,10 @@
     "react-icons": "^5.5.0",
     "react-router-dom": "^7.3.0",
     "react-scripts": "^5.0.1",
-<<<<<<< HEAD
-=======
+
     "react-type-animation": "^3.2.0",
     "serve": "^14.2.0",
->>>>>>> 6471e3f (redesigned herosection and navbar)
+
     "web-vitals": "^2.1.4"
   },
   "scripts": {
