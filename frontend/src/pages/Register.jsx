@@ -20,7 +20,7 @@ const Register = ({ setIsLoggedIn }) => {
           localStorage.setItem("loggedIn", true);
         setIsLoggedIn(true);
     alert("Registration successful!");
-    navigate("/");
+    navigate("/login");
   };
 
   return (
