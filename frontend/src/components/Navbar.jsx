@@ -54,7 +54,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
     <div>
       <nav className="navbar navbar-expand-lg navbar-custom">
         <Link className="navbar-brand" to="/Home">FoodIO</Link>
-        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>
 
@@ -83,7 +83,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
 
           <form className="form-inline d-flex align-items-center position-relative">
             <input 
-              className="form-control mr-sm-2" 
+              className="form-control mr-sm-2 respsearch" 
               type="search" 
               placeholder="Search" 
               value={searchTerm}
