@@ -2,6 +2,15 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import { UserModel } from "../models/Users.js";
 
+// Helper to set cookie
+const setAuthCookie = (res, token) => {
+  res.cookie("token", token, {
+    httpOnly: true,
+    secure: process.env.PRODUCTION === "true",
+    sameSite: "strict",
+  });
+};
+
 // Register Controller
 const register = async (req, res) => {
   try {
@@ -22,19 +31,8 @@ const register = async (req, res) => {
 
     await newUser.save();
 
-    const token = jwt.sign(
-      { id: newUser._id },
-      process.env.JWT_SECRET || "secret",
-      { expiresIn: "7d" }
-    );
-
-    res.cookie("token", token, {
-      httpOnly: true,
-      secure: process.env.PRODUCTION === "true", 
-      sameSite: "strict",
-    });
-
-    res.status(201).json({ message: "User registered successfully" });
+    // No cookie set here — user will log in after registering
+    res.status(201).json({ message: "User registered successfully. Please log in." });
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Internal server error" });
@@ -62,11 +60,7 @@ const login = async (req, res) => {
       { expiresIn: "7d" }
     );
 
-    res.cookie("token", token, {
-      httpOnly: true,
-      secure: process.env.PRODUCTION === "true",
-      sameSite: "strict",
-    });
+    setAuthCookie(res, token);
 
     res.status(200).json({ message: "Logged in successfully" });
   } catch (err) {
@@ -75,10 +69,11 @@ const login = async (req, res) => {
   }
 };
 
+// Logout Controller
 const logout = async (req, res) => {
   try {
     res.clearCookie("token", {
-   httpOnly: true,
+      httpOnly: true,
       secure: process.env.PRODUCTION === "true",
       sameSite: "strict",
     });
@@ -89,4 +84,5 @@ const logout = async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 };
-export { register, login,logout };
+
+export { register, login, logout };
