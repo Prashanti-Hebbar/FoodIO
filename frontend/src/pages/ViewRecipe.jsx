@@ -25,7 +25,6 @@ const ViewRecipe = () => {
     const generatePDF = () => {
         const doc = new jsPDF('p', 'pt', 'a4');
         
-        // Recipe content formatting
         const content = `
             ${recipe.title}
             
@@ -52,28 +51,29 @@ const ViewRecipe = () => {
                 .join('\n')}
         `;
 
-        // Add content to PDF
         doc.setFontSize(12);
         doc.text(content, 40, 40, { 
             maxWidth: 500,
             lineHeight: 1.5
         });
 
-        // Save the PDF
         doc.save(`${recipe.title.toLowerCase().replace(/\s+/g, '-')}-recipe.pdf`);
     };
 
     if (!recipe) {
-        return <div>Loading...</div>; // Or a "Recipe not found" message
+        return <div>Loading...</div>;
     }
 
     return (
         <div className="container mt-4" ref={pdfRef}>
             <div className="row">
-                <div className="col-md-6">
+                {/* Left Section - Fixed Image */}
+                <div className="col-md-6 recipe-left">
                     <img src={recipe.image} className="img-fluid rounded recipe-image" alt={recipe.title} />
                 </div>
-                <div className="col-md-6">
+
+                {/* Right Section - Scrollable */}
+                <div className="col-md-6 recipe-right">
                     <h1 id='h1'>{recipe.title}</h1>
                     <div className="d-flex align-items-center">
                         <div className="rating">
@@ -110,7 +110,6 @@ const ViewRecipe = () => {
                             )}
                         </div>
                     </div>
-
 
                     <h2 id='h2'>Ingredients</h2>
                     <ul className="ingredients-list">
@@ -151,4 +150,5 @@ const ViewRecipe = () => {
         </div>
     );
 };
+
 export default ViewRecipe;
