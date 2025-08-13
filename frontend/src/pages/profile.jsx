@@ -10,7 +10,7 @@ const Profile = () => {
   const [activeSection, setActiveSection] = useState('myRecipes');
   const { userData, setUserData } = useUserContext();
   const [showEditProfile, setShowEditProfile] = useState(false);
-
+  
   const [userRecipes, setUserRecipes] = useState([
     { id: 1, title: "Pasta Carbonara", image: "ban.jpg" },
     { id: 2, title: "Chicken Curry", image: "ban.jpg" },

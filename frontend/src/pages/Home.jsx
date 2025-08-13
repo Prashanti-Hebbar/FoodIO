@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import "../App.css";
 import "./recipes";
 import { Link } from "react-router-dom";
-
+import { toast } from "react-toastify";
 const Home = () => {
+
+
   const [activeTestimonial, setActiveTestimonial] = useState(2);
   const MAX_VISIBILITY = 3;
 
@@ -110,8 +112,10 @@ const Home = () => {
   const renderRecipes = (recipeType) => (
     <div className="d-flex flex-nowrap overflow-auto">
       {recipes[recipeType].map((recipe) => (
-      <div key={recipe.id} className="flex-shrink-0 mb-4 me-3 custom-recipe-card">
-
+        <div
+          key={recipe.id}
+          className="flex-shrink-0 mb-4 me-3 custom-recipe-card"
+        >
           <div className="card">
             <div className="card-actions position-absolute end-0 m-2">
               <button
@@ -189,7 +193,6 @@ const Home = () => {
         url: window.location.href,
       };
 
-
       const shareDialog = document.createElement("dialog");
       document.body.style.overflow = "hidden";
 
@@ -209,12 +212,14 @@ const Home = () => {
         </div>
       `;
 
-      shareDialog.querySelector("#closeDialog").addEventListener("click", () => {
-        shareDialog.close();
-        document.body.removeChild(shareDialog);
-        document.body.style.overflow = "auto";
-        document.removeEventListener("click", handleOutsideClick);
-      });
+      shareDialog
+        .querySelector("#closeDialog")
+        .addEventListener("click", () => {
+          shareDialog.close();
+          document.body.removeChild(shareDialog);
+          document.body.style.overflow = "auto";
+          document.removeEventListener("click", handleOutsideClick);
+        });
 
       document.body.appendChild(shareDialog);
       shareDialog.showModal();
@@ -392,4 +397,3 @@ const Home = () => {
 };
 
 export default Home;
-

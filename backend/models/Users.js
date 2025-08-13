@@ -15,6 +15,9 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    token:{
+        type:String,
+    },
     savedRecipes: [{ type: mongoose.Schema.Types.ObjectId, ref: "recipes" }]
 });
 

@@ -1,8 +1,6 @@
 import { UserModel } from "../models/Users.js";
 const getProfile = async (req, res) => {
-
       try {
-
         const user = await UserModel.findOne({_id:req.user.id});
         if (!user) {
 
