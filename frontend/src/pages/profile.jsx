@@ -31,7 +31,7 @@ const Profile = () => {
     const fetchUserData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3001/auth/user`,
+          `https://foodio-backend-cgsj.onrender.com/auth/user`,
           {
             withCredentials: true
           }
@@ -46,12 +46,13 @@ const Profile = () => {
     if (userData === null) {
       fetchUserData();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleDelete = async (recipeId, section) => {
     try {
       if (section === "My Recipes") {
-        await fetch(`http://localhost:3001/recipes/${recipeId}`, {
+        await fetch(`https://foodio-backend-cgsj.onrender.com/recipes/${recipeId}`, {
           method: "DELETE",
         });
         setUserRecipes(userRecipes.filter((recipe) => recipe.id !== recipeId));
@@ -93,8 +94,7 @@ const Profile = () => {
                     </button>
                   </>
                 )}
-                {(title === "Favorite Recipes" ||
-                  title === "Saved Recipes") && (
+                {(title === "Favorite Recipes" || title === "Saved Recipes") && (
                   <button
                     className="remove-btn"
                     onClick={() => handleDelete(recipe.id, title)}
@@ -123,7 +123,7 @@ const Profile = () => {
         <div className="profile-header">
           <img src="ban.jpg" alt="Profile" className="profile-image" />
           <h1 className="username">{userData?.username || "Prashanti Hebbar"} </h1>
-          <button 
+          <button
             className="edit-profile-btn"
             onClick={() => setShowEditProfile(true)}
           >
@@ -162,7 +162,7 @@ const Profile = () => {
           <RecipeGrid title="Saved Recipes" recipes={savedRecipes} />
         )}
       </div>
-      
+
       {showEditProfile && (
         <EditProfile onClose={() => setShowEditProfile(false)} />
       )}

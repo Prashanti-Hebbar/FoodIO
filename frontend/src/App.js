@@ -35,6 +35,7 @@ import Community from './pages/Community';
 import HelpCenter from './pages/HelpCenter';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfService from './pages/TermsOfService';
+import Careers from './pages/Careers';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -115,6 +116,7 @@ useEffect(() => {
         <Route path="/pages/savedRecipes" element={<SavedRecipesProvider/>}/>
         <Route path="/ai-chat" element={<AIChatPage/>}/>
         <Route path="/Blog" element={<Blog />} />
+        <Route path="/Careers" element={<Careers />} />
         <Route path="/Community" element={<Community />} />
         <Route path="/HelpCenter" element={<HelpCenter />} />
         <Route path="/PrivacyPolicy" element={<PrivacyPolicy />} />

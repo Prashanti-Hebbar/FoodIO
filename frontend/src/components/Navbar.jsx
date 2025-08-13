@@ -46,7 +46,10 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, isHomeScreen, recipes = [] }) => {
     const confirmed = window.confirm("Are you sure you want to logout?");
     if (confirmed) {
       try {
-        await axios.post("http://localhost:3001/auth/logout", {}, { withCredentials: true });
+
+        await axios.post("https://foodio-backend-cgsj.onrender.com/auth/logout", {}, {
+          withCredentials: true
+        });
         localStorage.clear();
         setIsLoggedIn(false);
         setUserData(null);
