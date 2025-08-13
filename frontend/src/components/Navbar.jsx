@@ -15,7 +15,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
     const confirmed = window.confirm("Are you sure you want to logout?");
     if (confirmed) {
       try {
-        await axios.post("http://localhost:3001/auth/logout", {}, {
+        await axios.post("https://foodio-backend-cgsj.onrender.com/auth/logout", {}, {
           withCredentials: true
         });
         localStorage.clear();
