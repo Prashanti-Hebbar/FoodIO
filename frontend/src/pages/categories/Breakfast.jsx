@@ -7,12 +7,12 @@ const Breakfast = () => {
   const [setSelectedRecipe] = useState(null);
 
   const breakfastRecipes = [
-    { id: 19, title: "Poha", image: "../ban.jpg", rating: 4.6 },
-    {id: 20,title: "Aloo Paratha",image: "../aloo_paratha.jpg",rating: 4.7},
-    { id: 21, title: "Upma", image: "../upma.jpg", rating: 4.5 },
-    { id: 22, title: "Dosa", image: "../dosa.jpg", rating: 4.8 },
-    { id: 23, title: "Idli", image: "../idli.jpg", rating: 4.6 },
-    {id: 24,title: "Besan Chilla",image: "../besan_chilla.jpg",rating: 4.4},
+    { id: 19, title: "Poha", image: "https://www.spiceupthecurry.com/wp-content/uploads/2014/04/batata-poha-recipe-1-500x500.jpg", rating: 4.6 },
+    {id: 20,title: "Aloo Paratha",image: "https://www.indianhealthyrecipes.com/wp-content/uploads/2020/08/aloo-paratha-recipe.jpg",rating: 4.7},
+    { id: 21, title: "Upma", image: "https://yennadosa.com/wp-content/uploads/2024/07/yenna-blog.png", rating: 4.5 },
+    { id: 22, title: "Dosa", image: "https://delishglobe.com/wp-content/uploads/2024/09/Masala-dosa-1.png", rating: 4.8 },
+    { id: 23, title: "Idli", image: "https://vaya.in/recipes/wp-content/uploads/2018/02/Idli-and-Sambar-1.jpg", rating: 4.6 },
+    {id: 24,title: "Besan Chilla",image: "https://i.ytimg.com/vi/KeEMDKsI0rU/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLDurg-qEHjB1whS_78b6NmnCmefPw",rating: 4.4},
   ];
 
   const handleFavorite = (recipeId) => {

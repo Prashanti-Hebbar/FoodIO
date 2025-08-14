@@ -29,9 +29,11 @@ const Profile = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await axios.get("http://localhost:3001/auth/user", {
+
+        const response = await axios.get(`https://foodio-backend-cgsj.onrender.com/auth/user`, {
           withCredentials: true,
         });
+
 
         setUserData(response.data.user);
 
@@ -50,11 +52,17 @@ const Profile = () => {
     if (userData === null) {
       fetchUserData();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handleDelete = (recipeId, section) => {
-    switch (section) {
-      case "My Recipes":
+
+  const handleDelete = async (recipeId, section) => {
+    try {
+      if (section === "My Recipes") {
+        await fetch(`https://foodio-backend-cgsj.onrender.com/recipes/${recipeId}`, {
+          method: "DELETE",
+        });
+
         setUserRecipes(userRecipes.filter((recipe) => recipe.id !== recipeId));
         break;
       case "Favorite Recipes":
@@ -115,7 +123,14 @@ const Profile = () => {
                   </>
                 )}
                 {(title === "Favorite Recipes" || title === "Saved Recipes") && (
-                  <button className="remove-btn" onClick={() => handleDelete(recipe.id, title)}>Remove</button>
+
+                  <button
+                    className="remove-btn"
+                    onClick={() => handleDelete(recipe.id, title)}
+                  >
+                    Remove
+                  </button>
+
                 )}
               </div>
             </div>
@@ -133,9 +148,11 @@ const Profile = () => {
 
       <div className="profile-content">
         <div className="profile-header">
+
           <img src={avatarUrl} alt="Profile" className="profile-image" />
           <h1 className="username">{userData?.username || "Username"}</h1>
           <button className="edit-profile-btn" onClick={() => setShowEditProfile(true)}>
+
             Edit Profile
           </button>
         </div>
@@ -168,6 +185,7 @@ const Profile = () => {
 
         {showEditProfile && <EditProfile onClose={() => setShowEditProfile(false)} />}
       </div>
+
     </div>
   );
 };

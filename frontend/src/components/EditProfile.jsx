@@ -61,12 +61,13 @@ const EditProfile = ({ onClose }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (!validateForm()) return;
 
     setIsLoading(true);
     try {
       await axios.put(
-        "http://localhost:3001/auth/updateUser",
+        `https://foodio-backend-cgsj.onrender.com/auth/updateUser`,
         formData,
         { withCredentials: true }
       );
@@ -78,6 +79,7 @@ const EditProfile = ({ onClose }) => {
       alert("Failed to update profile.");
     } finally {
       setIsLoading(false);
+
     }
   };
 
