@@ -8,7 +8,7 @@ const Whole30 = () => {
         {
           id: 1,
           title: "Grilled Lemon Garlic Chicken",
-          image: "../whole30/lemon_garlic_chicken.jpg",
+          image: "https://www.tasteofhome.com/wp-content/uploads/2024/09/Easy-Grilled-Lemon-Chicken_EXPS_TOHD24_40183_JuliaHartbeck_6.jpg",
           rating: 4.9,
           prepTime: "25 minutes",
           description: "Juicy grilled chicken with lemon and garlic seasoning",
@@ -25,7 +25,7 @@ const Whole30 = () => {
         {
           id: 2,
           title: "Cauliflower Rice Stir-Fry",
-          image: "../whole30/cauliflower_rice_stir_fry.jpg",
+          image: "https://cdn.loveandlemons.com/wp-content/uploads/2023/01/cauliflower-fried-rice.jpg",
           rating: 4.8,
           prepTime: "20 minutes",
           description: "A delicious, low-carb stir-fry with cauliflower rice",
@@ -42,7 +42,7 @@ const Whole30 = () => {
         {
           id: 3,
           title: "Zucchini Noodles with Avocado Pesto",
-          image: "../whole30/zucchini_pesto_noodles.jpg",
+          image: "https://pinchofyum.com/wp-content/uploads/Zucchini-Spaghetti-6.jpg",
           rating: 4.9,
           prepTime: "15 minutes",
           description: "Healthy zucchini noodles tossed in creamy avocado pesto",
@@ -59,7 +59,7 @@ const Whole30 = () => {
         {
           id: 4,
           title: "Sweet Potato Hash with Eggs",
-          image: "../whole30/sweet_potato_hash.jpg",
+          image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhfgCjosgWJguqCC93JdL9RzsQ99RXRVbZWA&s",
           rating: 5.0,
           prepTime: "30 minutes",
           description: "A nutritious sweet potato and egg breakfast hash",
@@ -76,7 +76,7 @@ const Whole30 = () => {
         {
           id: 5,
           title: "Baked Salmon with Garlic and Herbs",
-          image: "../whole30/baked_salmon.jpg",
+          image: "https://cdn.momsdish.com/wp-content/uploads/2021/05/Garlic-Herb-Roasted-Salmon011.jpg",
           rating: 4.8,
           prepTime: "25 minutes",
           description: "Oven-baked salmon with a flavorful herb crust",
@@ -93,7 +93,7 @@ const Whole30 = () => {
         {
           id: 6,
           title: "Coconut Curry Chicken",
-          image: "../whole30/coconut_curry_chicken.jpg",
+          image: "https://www.wellplated.com/wp-content/uploads/2019/07/Slow-Cooker-Chicken-Curry-Recipe.jpg",
           rating: 4.9,
           prepTime: "35 minutes",
           description: "Rich and creamy coconut curry chicken",

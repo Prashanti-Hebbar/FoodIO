@@ -8,7 +8,7 @@ const Appetizer = () => {
         {
           id: 1,
           title: "Samosa",
-          image: "../appetizers/samosa.jpg",
+          image: "https://static.toiimg.com/thumb/61050397.cms?imgsize=246859&width=800&height=800",
           rating: 4.9,
           prepTime: "45 minutes",
           description: "Crispy, deep-fried pastry filled with spiced potatoes and peas",
@@ -25,7 +25,7 @@ const Appetizer = () => {
         {
           id: 2,
           title: "Paneer Tikka",
-          image: "../appetizers/paneer_tikka.jpg",
+          image: "https://orders.popskitchen.in/storage/2024/09/image-358.png",
           rating: 4.8,
           prepTime: "30 minutes",
           description: "Grilled spiced paneer cubes with bell peppers and onions",
@@ -42,7 +42,7 @@ const Appetizer = () => {
         {
           id: 3,
           title: "Vegetable Pakora",
-          image: "../appetizers/vegetable_pakora.jpg",
+          image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqxHWAXstc2X1NLPKNstpaRJs-uU4Rb_ESmQ&s",
           rating: 4.7,
           prepTime: "20 minutes",
           description: "Crispy deep-fried vegetable fritters made with gram flour",
@@ -59,7 +59,7 @@ const Appetizer = () => {
         {
           id: 4,
           title: "Dahi Puri",
-          image: "../appetizers/dahi_puri.jpg",
+          image: "https://hogr.app/blog/wp-content/uploads/2022/10/dahi-puri-chat-is-indian-road-side-snack-item-which-is-especially-popular-state-maharashtra-india-scaled.webp",
           rating: 4.9,
           prepTime: "25 minutes",
           description: "Crispy puris filled with yogurt, chutneys, and spiced potatoes",
@@ -76,7 +76,7 @@ const Appetizer = () => {
         {
           id: 5,
           title: "Hara Bhara Kabab",
-          image: "../appetizers/hara_bhara_kabab.jpg",
+          image: "https://www.vegrecipesofindia.com/wp-content/uploads/2013/01/hara-bhara-kabab-recipe-1-500x500.jpg",
           rating: 4.8,
           prepTime: "30 minutes",
           description: "Healthy pan-fried spinach and pea patties with spices",
@@ -93,7 +93,7 @@ const Appetizer = () => {
         {
           id: 6,
           title: "Masala Papad",
-          image: "../appetizers/masala_papad.jpg",
+          image: "https://www.whiskaffair.com/wp-content/uploads/2020/09/Masala-Papad-2-3.jpg",
           rating: 4.7,
           prepTime: "10 minutes",
           description: "Crispy roasted papad topped with spicy onions and tomatoes",

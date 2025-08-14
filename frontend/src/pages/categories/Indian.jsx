@@ -8,7 +8,7 @@ const Indian = () => {
       {
         id: 1,
         title: "Butter Chicken",
-        image: "../indian/butter_chicken.jpg",
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCulL8q1n1-gntGIYlScWgrfkN5fF6nfB-eA&s",
         rating: 4.9,
         prepTime: "45 minutes",
         description: "Creamy and rich butter chicken cooked in a spiced tomato-based curry",
@@ -25,7 +25,7 @@ const Indian = () => {
       {
         id: 2,
         title: "Palak Paneer",
-        image: "../indian/palak_paneer.jpg",
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkte8ho3c7qf_nwHaJs-2C-yLiJT1LZjK1dg&s",
         rating: 4.8,
         prepTime: "30 minutes",
         description: "Soft paneer cubes cooked in a flavorful spinach gravy",
@@ -42,7 +42,7 @@ const Indian = () => {
       {
         id: 3,
         title: "Chole (Chickpea Curry)",
-        image: "../indian/chole.jpg",
+        image: "https://www.indianhealthyrecipes.com/wp-content/uploads/2022/06/coconut-chickpea-curry.webp",
         rating: 4.7,
         prepTime: "40 minutes",
         description: "Spicy and tangy chickpea curry cooked with Indian spices",
@@ -59,7 +59,7 @@ const Indian = () => {
       {
         id: 4,
         title: "Masala Dosa",
-        image: "../indian/masala_dosa.jpg",
+        image: "https://revi.b-cdn.net/wp-content/uploads/2017/03/masala-dosa-2.jpg",
         rating: 4.9,
         prepTime: "1 hour",
         description: "Crispy fermented rice crepes stuffed with spicy potato filling",
@@ -76,7 +76,7 @@ const Indian = () => {
       {
         id: 5,
         title: "Biryani",
-        image: "../indian/biryani.jpg",
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUkFl4-e90gihmLEM7TZZ-LTbwkWQ47VaLMQ&s",
         rating: 5.0,
         prepTime: "1 hour",
         description: "Aromatic basmati rice cooked with spices, meat, and saffron",
@@ -93,7 +93,7 @@ const Indian = () => {
       {
         id: 6,
         title: "Rasgulla",
-        image: "../indian/rasgulla.jpg",
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSob3EerZuChoGLlNXmz5-YZSC4-W-fmFxXSA&s",
         rating: 4.8,
         prepTime: "50 minutes",
         description: "Soft and spongy cheese balls soaked in sugar syrup",

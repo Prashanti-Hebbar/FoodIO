@@ -8,7 +8,7 @@ const Veg = () => {
         {
           id: 1,
           title: "Vegetable Stir-Fry",
-          image: "../vegetarian/vegetable_stir_fry.jpg",
+          image: "https://natashaskitchen.com/wp-content/uploads/2020/08/Vegetable-Stir-Fry-SQ.jpg",
           rating: 4.8,
           prepTime: "20 minutes",
           description: "Colorful stir-fried vegetables in a savory garlic sauce",
@@ -25,7 +25,7 @@ const Veg = () => {
         {
           id: 2,
           title: "Chickpea Salad",
-          image: "../vegetarian/chickpea_salad.jpg",
+          image: "https://www.themediterraneandish.com/wp-content/uploads/2023/12/TMD-Chickpea-Salad-Leads-01-Angle-Horizontal.jpg",
           rating: 4.9,
           prepTime: "10 minutes",
           description: "Refreshing and protein-packed chickpea salad",
@@ -42,7 +42,7 @@ const Veg = () => {
         {
           id: 3,
           title: "Spinach and Paneer Curry",
-          image: "../vegetarian/spinach_paneer_curry.jpg",
+          image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdNAM6-f8JSRB4M45Vy0pe7QsRcbTTf1Vln4CsFPn0NQ3vPId0oYV3HXntkfVpRw9hNrI&usqp=CAU",
           rating: 4.9,
           prepTime: "30 minutes",
           description: "Creamy spinach curry with soft paneer cubes",
@@ -59,7 +59,7 @@ const Veg = () => {
         {
           id: 4,
           title: "Lentil Soup",
-          image: "../vegetarian/lentil_soup.jpg",
+          image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTwiwE3eGMsi3i-KSa2hzdolSWCEmSWGAg6w&s",
           rating: 5.0,
           prepTime: "35 minutes",
           description: "Hearty and nutritious lentil soup with aromatic spices",
@@ -76,7 +76,7 @@ const Veg = () => {
         {
           id: 5,
           title: "Stuffed Bell Peppers",
-          image: "../vegetarian/stuffed_bell_peppers.jpg",
+          image: "https://embed.widencdn.net/img/beef/t9bwp7fitq/exact/Stuffed%20Peppers%20-%20NCBA%20Beef%20Aug%20202431717.jpg?keep=c&u=7fueml",
           rating: 4.7,
           prepTime: "40 minutes",
           description: "Bell peppers filled with a savory rice and veggie mixture",
@@ -93,7 +93,7 @@ const Veg = () => {
         {
           id: 6,
           title: "Vegetable Pasta",
-          image: "../vegetarian/vegetable_pasta.jpg",
+          image: "https://buildyourbite.com/wp-content/uploads/2022/08/Roasted-vegetable-pasta-recipe-3.jpg",
           rating: 4.9,
           prepTime: "25 minutes",
           description: "Delicious pasta tossed with fresh vegetables and herbs",
