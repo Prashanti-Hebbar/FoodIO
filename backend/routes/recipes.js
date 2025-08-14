@@ -34,17 +34,28 @@ router.get("/", async (req, res) => {
 
 // Create a new recipe
 router.post("/", async (req, res) => {
+  //start session.
+  const session = await mongoose.startSession();
+  session.startTransaction();
   const recipe = new RecipesModel(req.body);
   try {
     const response = await recipe.save();
+    //if created successfully transaction commited.
+    await session.commitTransaction();
+    session.endSession();
     res.json(response);
   } catch (err) {
+    await session.abortTransaction();
+    session.endSession();
     res.json(err);
   }
 });
 
 // Save a recipe to user's saved recipes
 router.put("/save", verifyToken, async (req, res) => {
+  const session = await mongoose.startSession();
+  session.startTransaction();
+
   try {
     const { recipeId } = req.body;
     const userId = req.userId;
@@ -52,12 +63,17 @@ router.put("/save", verifyToken, async (req, res) => {
     // Check if recipe exists
     const recipe = await RecipesModel.findById(recipeId);
     if (!recipe) {
+      await session.abortTransaction();
+      session.endSession();
       return res.status(404).json({ message: "Recipe not found" });
     }
     
     // Add recipe to user's saved recipes if not already saved
     const user = await UserModel.findById(userId);
+    
     if (!user) {
+      await session.abortTransaction();
+      session.endSession();
       return res.status(404).json({ message: "User not found" });
     }
     
@@ -69,9 +85,12 @@ router.put("/save", verifyToken, async (req, res) => {
     // Add recipe to saved recipes
     user.savedRecipes.push(recipeId);
     await user.save();
+    await session.commitTransaction();
     
     res.json({ message: "Recipe saved successfully", savedRecipes: user.savedRecipes });
   } catch (err) {
+    await session.abortTransaction();
+    session.endSession();
     res.status(500).json({ error: err.message });
   }
 });
@@ -98,20 +117,30 @@ router.get("/savedRecipes", verifyToken, async (req, res) => {
 
 // Remove a recipe from saved recipes
 router.delete("/savedRecipes/:recipeId", verifyToken, async (req, res) => {
+  const session = await mongoose.startSession();
+  session.startTransaction();
+
   try {
     const userId = req.userId;
     const { recipeId } = req.params;
     
     const user = await UserModel.findById(userId);
     if (!user) {
+      await session.abortTransaction();
+      session.endSession();
       return res.status(404).json({ message: "User not found" });
     }
     
     user.savedRecipes = user.savedRecipes.filter(id => id.toString() !== recipeId);
     await user.save();
-    
+    await session.commitTransaction();
+    session.endSession();
+
     res.json({ message: "Recipe removed from saved recipes", savedRecipes: user.savedRecipes });
   } catch (err) {
+    //if runtime error occurs abort database transaction.
+    await session.abortTransaction();
+    session.endSession();
     res.status(500).json({ error: err.message });
   }
 });
@@ -210,16 +239,27 @@ ${baseRecipeText}`
 
 // Remove a recipe from the database
 router.delete("/:recipeId", async (req, res) => {
+  //start a session.
+  const session = await mongoose.startSession();
+  session.startTransaction();
+
   try {
     const { recipeId } = req.params;
 
     const deletedRecipe = await RecipesModel.findByIdAndDelete(recipeId);
+    await session.commitTransaction();
     if (!deletedRecipe) {
+      //if recipe not found abort transaction.
+      await session.abortTransaction();
+      session.endSession();
       return res.status(404).json({ message: "Recipe not found" });
     }
 
     res.status(200).json({ message: "Recipe deleted successfully" });
   } catch (error) {
+    //if it provides runtime error it abort the transaction.
+    await session.abortTransaction();
+    session.endSession();
     res.status(500).json({ error: "Failed to delete recipe" });
   }
 });

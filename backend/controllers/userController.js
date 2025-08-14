@@ -1,9 +1,14 @@
 import { UserModel } from "../models/Users.js";
+import mongoose from "mongoose";
 const getProfile = async (req, res) => {
+  const session = await mongoose.startSession();
+  session.startTransaction();
 
       try {
 
         const user = await UserModel.findOne({_id:req.user.id});
+        await session.commitTransaction();
+        session.endSession();
         if (!user) {
 
         return res.status(404).json({ message: "User not found" });
@@ -17,6 +22,9 @@ const getProfile = async (req, res) => {
 }
 const updatedUser = async (req,res) =>
   {
+  const session = await mongoose.startSession();
+  session.startTransaction();
+
     try {
     const { username, email } = req.body;
     // Check if username is already taken by another user
@@ -35,13 +43,21 @@ const updatedUser = async (req,res) =>
       { new: true }
     ).select("-password");
 
+    await session.commitTransaction();
+    session.endSession();
+
     if (!updatedUser) {
+      await session.abortTransaction();
+      session.endSession();
       return res.status(404).json({ message: "User not found" });
     }
     
     res.json(updatedUser);
   } catch (error) {
+    await session.abortTransaction();
+    session.endSession();
     res.status(500).json({ message: "Error updating user profile" });
   }
+  
   }
 export { getProfile,updatedUser };
