@@ -8,7 +8,7 @@ const Japanese = () => {
         {
           id: 1,
           title: "Sushi Rolls",
-          image: "../japanese/sushi_rolls.jpg",
+          image: "https://www.allrecipes.com/thmb/XT7-9MROYJZvNyQR4J40HGOVDmQ=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/19511smoked-salmon-sushi-rollfabeveryday4x3-159a22b4d3ac49fe9a146db94b53c930.jpg",
           rating: 4.9,
           prepTime: "40 minutes",
           description: "Traditional Japanese sushi rolls with rice, seaweed, and fresh fillings",
@@ -23,7 +23,7 @@ const Japanese = () => {
         {
           id: 2,
           title: "Miso Soup",
-          image: "../japanese/miso_soup.jpg",
+          image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdYBr6d-_3otsb3-kN3Ujbi7peQriJx02SNA&s",
           rating: 4.8,
           prepTime: "15 minutes",
           description: "A light and healthy soup made with miso paste, tofu, and seaweed",
@@ -38,7 +38,7 @@ const Japanese = () => {
         {
           id: 3,
           title: "Ramen",
-          image: "../japanese/ramen.jpg",
+          image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvJcmgBxotz7E_V0FcPu6tKHuW-SOEncooCQ&s",
           rating: 4.9,
           prepTime: "45 minutes",
           description: "Flavorful Japanese noodle soup with broth, toppings, and soft-boiled eggs",
@@ -53,7 +53,7 @@ const Japanese = () => {
         {
           id: 4,
           title: "Teriyaki Chicken",
-          image: "../japanese/teriyaki_chicken.jpg",
+          image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3oDb5tGl5xDpuc1XTaHxk7lyNd42o8eoxIw&s",
           rating: 4.7,
           prepTime: "30 minutes",
           description: "Juicy chicken glazed with a sweet and savory teriyaki sauce",
@@ -68,7 +68,7 @@ const Japanese = () => {
         {
           id: 5,
           title: "Tempura",
-          image: "../japanese/tempura.jpg",
+          image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8ds7Qf2s131bbQp-4LgNaatBXtnIvzYnx6A&s",
           rating: 4.8,
           prepTime: "35 minutes",
           description: "Light and crispy battered vegetables and shrimp",
@@ -83,7 +83,7 @@ const Japanese = () => {
         {
           id: 6,
           title: "Matcha Ice Cream",
-          image: "../japanese/matcha_ice_cream.jpg",
+          image: "https://salu-salo.com/wp-content/uploads/2019/06/Matcha-Ice-Cream-No-Churn-2.jpg",
           rating: 5.0,
           prepTime: "20 minutes + freezing time",
           description: "Creamy and rich green tea-flavored ice cream",
