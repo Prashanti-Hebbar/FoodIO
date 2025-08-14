@@ -2,29 +2,32 @@ body {
   margin: 0;
   padding: 0;
   font-family: Arial, sans-serif;
-  /* background-image: url("C:\Users\prash\OneDrive\Desktop\Captures\my program\Foodio\public\loginbackground.jpg"); */
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  margin: 0;
-  height: 700px;
+  height: 100vh;
+  transition: all 0.3s ease;
 }
 
 .login {
-  background: white;
+  background: var(--card-bg);
+  color: var(--text-primary);
   padding: 20px;
   width: 420px;
   height: 600px;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 8px var(--card-shadow);
   text-align: center;
   margin-left: auto;
   margin-right: auto;
   margin-top: 20px;
+  border: 1px solid var(--border-color);
 }
 
 #login-heading {
-  color: #da8f48;
+  color: var(--primary-color);
   font-family: cursive;
 }
 
@@ -35,20 +38,22 @@ body {
 }
 
 .register {
-  background: rgb(243, 200, 147);
+  background: var(--card-bg);
+  color: var(--text-primary);
   padding: 20px;
   width: 420px;
   height: 600px;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 8px var(--card-shadow);
   text-align: center;
   margin-left: auto;
   margin-right: auto;
   margin-top: 20px;
+  border: 1px solid var(--border-color);
 }
 
 #register-heading {
-  color: white;
+  color: var(--primary-color);
   font-family: cursive;
 }
 
@@ -62,37 +67,229 @@ input {
   width: 90%;
   padding: 10px;
   margin: 10px 0;
-  border: 1px solid #ccc;
+  border: 1px solid var(--border-color);
   border-radius: 5px;
   font-size: 16px;
+  background-color: var(--card-bg);
+  color: var(--text-primary);
+  transition: all 0.3s ease;
 }
 
-#loginbutton {
+input:focus {
+  border-color: var(--primary-color);
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(218, 143, 72, 0.2);
+}
+
+#loginbutton, #regbutton {
   width: 100%;
   padding: 10px;
   margin-top: 10px;
   border: none;
   border-radius: 5px;
   font-size: 16px;
-  background-color: rgb(244, 138, 33);
+  background-color: var(--primary-color);
   color: white;
   cursor: pointer;
-}
-
-#regbutton {
-  width: 100%;
-  padding: 10px;
-  margin-top: 10px;
-  border: none;
-  border-radius: 5px;
-  font-size: 16px;
-  background-color: darkorange;
-  color: white;
-  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 button:hover {
-  background-color: #da8f48;
+  background-color: var(--primary-hover);
+}
+
+/* Update carousel styles for dark mode */
+.carousel-indicators button {
+  background-color: var(--text-muted);
+  transition: all 0.3s ease;
+}
+
+.carousel-indicators button.active {
+  background-color: var(--primary-color);
+  transform: scale(1.2);
+}
+
+.carousel-indicators button:hover {
+  background-color: var(--primary-color);
+  transform: scale(1.1);
+}
+
+.carousel-caption {
+  background: rgba(0, 0, 0, 0.6); 
+  padding: 15px;
+  border-radius: 10px;
+  bottom: 30px;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.carousel-caption h5 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
+}
+
+.carousel-caption p {
+  font-size: 16px;
+  color: #ddd;
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.container.mt-4 {
+  max-width: 95%; 
+  padding: 20px; 
+}
+
+.container.mt-4 h2 {
+  margin-bottom: 20px; 
+  text-align: left;
+  color: var(--text-primary);
+}
+
+.d-flex.flex-nowrap.overflow-auto {
+  padding: 20px 10px; 
+  margin: -20px -10px; 
+}
+
+.col-md-3.mb-4.me-4 {
+  margin-bottom: 40px !important; 
+}
+
+.card {
+  border: 1px solid var(--border-color);
+  background-color: var(--card-bg);
+  color: var(--text-primary);
+  box-shadow: 0 4px 8px var(--card-shadow);
+  transition: all 0.3s ease;
+  overflow: hidden;
+  border-radius: 8px;
+  position: relative;
+  margin: 10px; 
+}
+
+.card:hover {
+  transform: scale(1.05) translateY(-5px);
+  box-shadow: 0 8px 25px rgba(218, 143, 72, 0.3);
+  z-index: 10; 
+}
+
+.card img {
+  height: 200px; 
+  object-fit: cover; 
+  border-top-left-radius: 8px; 
+  border-top-right-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+.card:hover img {
+  transform: scale(1.1);
+}
+
+.card-body {
+  padding: 20px;
+  background-color: var(--card-bg);
+}
+
+.card-title {
+  color: var(--text-primary);
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.card-text {
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* Update testimonials section for dark mode */
+.testimonials-section {
+  width: 103%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: linear-gradient(
+    45deg,
+    #ffd700,
+    #ff9800,
+    #f44336,
+    #da8f48,
+    #f48922
+  );
+  background-size: 400% 400%;
+  animation: gradientShift 8s ease infinite;
+  font-family: "Montserrat", sans-serif;
+  position: relative;
+}
+
+.testimonials-section h2 {
+  color: white !important;
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 3rem;
+  text-align: center;
+  position: absolute;
+  top: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+}
+
+.testimonial-card {
+  width: 100%;
+  height: 100%;
+  padding: 2rem;
+  background-color: var(--card-bg);
+  border-radius: 1rem;
+  color: var(--text-secondary);
+  text-align: justify;
+  transition: all 0.3s ease-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 8px 32px var(--card-shadow);
+  border: 1px solid var(--border-color);
+}
+
+.testimonial-author h6 {
+  color: var(--text-primary);
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  font-size: 1.25rem;
+}
+
+.testimonial-author small {
+  color: var(--text-muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 0.875rem;
+}
+
+/* Navigation arrows for carousel */
+.carousel-nav {
+  color: rgba(255, 255, 255, 0.8); 
+  font-size: 5rem;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 50%;
+  z-index: 2;
+  cursor: pointer;
 }
 
 [data-aos] {

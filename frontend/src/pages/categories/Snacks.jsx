@@ -8,7 +8,7 @@ const Snacks = () => {
         {
           id: 1,
           title: "Samosa",
-          image: "../snacks/samosa.jpg",
+          image: "https://static.toiimg.com/thumb/61050397.cms?imgsize=246859&width=800&height=800",
           rating: 4.9,
           prepTime: "40 minutes",
           description: "Crispy, deep-fried pastry filled with spiced potatoes and peas",
@@ -26,7 +26,7 @@ const Snacks = () => {
         {
           id: 2,
           title: "Pakora",
-          image: "../snacks/pakora.jpg",
+          image: "https://i0.wp.com/www.happyandharried.com/wp-content/uploads/2017/10/ONION-PAKORA-ONION-FRITTERS-IN-CHICKPEA-FLOUR-BATTER-HAPPYHARRIED.jpg",
           rating: 4.8,
           prepTime: "25 minutes",
           description: "Crunchy fritters made with chickpea flour and vegetables",
@@ -44,7 +44,7 @@ const Snacks = () => {
         {
           id: 3,
           title: "Aloo Tikki",
-          image: "../snacks/aloo_tikki.jpg",
+          image: "https://www.indianveggiedelight.com/wp-content/uploads/2023/07/aloo-tikki.jpg",
           rating: 4.7,
           prepTime: "30 minutes",
           description: "Crispy potato patties with Indian spices",
@@ -61,7 +61,7 @@ const Snacks = () => {
         {
           id: 4,
           title: "Dahi Puri",
-          image: "../snacks/dahi_puri.jpg",
+          image: "https://indiasweethouse.in/cdn/shop/files/DahiPuri_cc4c6b71-0316-4c3c-918f-675362b26ec1.png?v=1719576457",
           rating: 4.9,
           prepTime: "20 minutes",
           description: "Mini puris stuffed with potatoes, chutneys, and yogurt",
@@ -78,7 +78,7 @@ const Snacks = () => {
         {
           id: 5,
           title: "Masala Corn",
-          image: "../snacks/masala_corn.jpg",
+          image: "https://i0.wp.com/eatsbyramya.com/wp-content/uploads/2022/04/IMG_7128_jpg.jpg?resize=1024%2C1020&ssl=1",
           rating: 4.7,
           prepTime: "10 minutes",
           description: "Spicy and buttery sweet corn with lemon and chaat masala",
@@ -94,7 +94,7 @@ const Snacks = () => {
         {
           id: 6,
           title: "Bread Pizza",
-          image: "../snacks/bread_pizza.jpg",
+          image: "https://www.awesomecuisine.com/wp-content/uploads/2009/05/bread-pizza.jpg",
           rating: 4.8,
           prepTime: "15 minutes",
           description: "Quick and easy pizza made on bread slices with veggies and cheese",

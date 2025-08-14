@@ -8,7 +8,7 @@ const Drinks = () => {
         {
           id: 1,
           title: "Mango Lassi",
-          image: "../drinks/mango_lassi.jpg",
+          image: "https://www.whiskaffair.com/wp-content/uploads/2020/05/Mango-Lassi-2-3.jpg",
           rating: 4.9,
           prepTime: "10 minutes",
           description: "Refreshing Indian mango yogurt smoothie",
@@ -24,7 +24,7 @@ const Drinks = () => {
         {
           id: 2,
           title: "Masala Chai",
-          image: "../drinks/masala_chai.jpg",
+          image: "https://budleaf.com/wp-content/uploads/2023/04/How-to-make-masala-chai-1568x1039.jpeg",
           rating: 4.8,
           prepTime: "15 minutes",
           description: "Spiced Indian tea made with milk and aromatic spices",
@@ -42,7 +42,7 @@ const Drinks = () => {
         {
           id: 3,
           title: "Jaljeera",
-          image: "../drinks/jaljeera.jpg",
+          image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_8mmIhhP7ihBxDM7nUZqOePdvfITQd0YQ1g&s",
           rating: 4.7,
           prepTime: "10 minutes",
           description: "Tangy and spicy Indian cumin-flavored drink",
@@ -59,7 +59,7 @@ const Drinks = () => {
         {
           id: 4,
           title: "Cold Coffee",
-          image: "../drinks/cold_coffee.jpg",
+          image: "https://www.milkmaid.in/sites/default/files/2024-05/Cold-Coffee-335x300.jpg",
           rating: 4.8,
           prepTime: "5 minutes",
           description: "Chilled coffee blended with milk and sugar",
@@ -75,7 +75,7 @@ const Drinks = () => {
         {
           id: 5,
           title: "Aam Panna",
-          image: "../drinks/aam_panna.jpg",
+          image: "https://i0.wp.com/binjalsvegkitchen.com/wp-content/uploads/2016/05/Pudina-Aam-Panna-H1-1.jpg?resize=600%2C900&ssl=1",
           rating: 4.7,
           prepTime: "20 minutes",
           description: "Refreshing summer drink made with raw mango and spices",
@@ -92,7 +92,7 @@ const Drinks = () => {
         {
           id: 6,
           title: "Thandai",
-          image: "../drinks/thandai.jpg",
+          image: "https://palatesdesire.com/wp-content/uploads/2022/03/Thandai-recipe@palates-desire-2.jpg",
           rating: 4.9,
           prepTime: "30 minutes",
           description: "Traditional Indian spiced milk drink",
