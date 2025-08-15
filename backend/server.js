@@ -8,8 +8,11 @@ import { recipeRouter } from './routes/recipes.js';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 
-const app = express();
+
+const app = express(); 
 const PORT = process.env.PORT || 3001;
+
+
 
 // Enable CORS with credentials for cookies
 app.use(cors({
@@ -22,6 +25,7 @@ app.use(cookieParser());
 
 app.use("/auth", useRouter);
 app.use("/recipes", recipeRouter);
+
 
 mongoose.connect(process.env.MONGO_URI)
   .then(() => {
