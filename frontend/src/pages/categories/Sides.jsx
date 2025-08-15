@@ -8,7 +8,7 @@ const Sides = () => {
         {
           id: 1,
           title: "Garlic Naan",
-          image: "../sides/garlic_naan.jpg",
+          image: "https://www.vegrecipesofindia.com/wp-content/uploads/2022/12/garlic-naan-3.jpg",
           rating: 4.9,
           prepTime: "25 minutes",
           description: "Soft and fluffy naan bread flavored with garlic and butter",
@@ -25,7 +25,7 @@ const Sides = () => {
         {
           id: 2,
           title: "Jeera Rice",
-          image: "../sides/jeera_rice.jpg",
+          image: "https://www.indianhealthyrecipes.com/wp-content/uploads/2022/12/jeera-rice-recipe.webp",
           rating: 4.8,
           prepTime: "20 minutes",
           description: "Aromatic basmati rice flavored with cumin seeds",
@@ -42,7 +42,7 @@ const Sides = () => {
         {
           id: 3,
           title: "Boondi Raita",
-          image: "../sides/boondi_raita.jpg",
+          image: "https://dinedelicious.in/wp-content/uploads/2021/03/Boondi-raita-Recipe-2-500x500.jpg",
           rating: 4.7,
           prepTime: "10 minutes",
           description: "Refreshing yogurt dip with crispy boondi and spices",
@@ -58,7 +58,7 @@ const Sides = () => {
         {
           id: 4,
           title: "Aloo Gobi",
-          image: "../sides/aloo_gobi.jpg",
+          image: "https://www.indianhealthyrecipes.com/wp-content/uploads/2022/03/aloo-gobi-recipe.jpg",
           rating: 4.9,
           prepTime: "30 minutes",
           description: "Classic dry curry made with potatoes, cauliflower, and spices",
@@ -75,7 +75,7 @@ const Sides = () => {
         {
           id: 5,
           title: "Masala Papad",
-          image: "../sides/masala_papad.jpg",
+          image: "https://www.flavourstreat.com/wp-content/uploads/2022/05/masala-papad-001.jpg",
           rating: 4.7,
           prepTime: "10 minutes",
           description: "Crispy roasted papad topped with spicy onions and tomatoes",
@@ -91,7 +91,7 @@ const Sides = () => {
         {
           id: 6,
           title: "Mango Chutney",
-          image: "../sides/mango_chutney.jpg",
+          image: "https://sinfullyspicy.com/wp-content/uploads/2025/04/1200-by-1200-images-1-500x375.jpg",
           rating: 4.8,
           prepTime: "15 minutes",
           description: "Sweet and tangy mango chutney with Indian spices",

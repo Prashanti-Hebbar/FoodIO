@@ -18,7 +18,7 @@ function AIChat() {
         setRecipe('');
 
         try {
-            const response = await axios.post('http://localhost:3001/recipes/api/get-recipe', {
+            const response = await axios.post('https://foodio-backend-cgsj.onrender.com/recipes/api/get-recipe', {
                 diet,
                 cuisine,
                 time,
