@@ -36,8 +36,26 @@ import HelpCenter from './pages/HelpCenter';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfService from './pages/TermsOfService';
 import Careers from './pages/Careers';
+import { FaMoon, FaSun } from "react-icons/fa";
 
 function App() {
+
+  const[theme,setTheme]=useState("light");
+
+   useEffect(() => {
+    const savedTheme = localStorage.getItem("theme") || "light";
+    setTheme(savedTheme);
+    document.documentElement.setAttribute("data-theme", savedTheme);
+  }, []);
+
+   const toggleTheme = () => {
+    const newTheme = theme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+    document.documentElement.setAttribute("data-theme", newTheme);
+    localStorage.setItem("theme", newTheme);
+  };
+
+
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 // Move recipes state up here
   const [recipes, setRecipes] = useState([
@@ -79,6 +97,27 @@ useEffect(() => {
   return (
     <Router>
       <ScrollToTop />
+
+      
+    {/* Dark Mode Toggle Button */}
+    <button
+      onClick={toggleTheme}
+      style={{
+        position: "fixed",
+        top: "10px",
+        right: "10px",
+        padding: "8px 12px",
+        borderRadius: "5px",
+        border: "none",
+        cursor: "pointer",
+        background: "var(--primary-color)",
+        color: "white",
+        zIndex: 1000
+      }}
+    >
+      {theme === "light" ?  <FaMoon color="black" /> : <FaSun color="#FFD700"/>}
+    </button>
+
 
       <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} recipes={recipes}/>
 
