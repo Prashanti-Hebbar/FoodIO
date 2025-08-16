@@ -8,7 +8,7 @@ import {
   generateRecipe,
   deleteRecipe,
   verifyToken
-} from "../controllers/recipesController.js";
+} from "../controllers/recipeController.js";
 
 const router = express.Router();
 
