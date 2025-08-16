@@ -57,25 +57,21 @@ const Profile = () => {
 
 
   const handleDelete = async (recipeId, section) => {
-    try {
-      if (section === "My Recipes") {
-        await fetch(`https://foodio-backend-cgsj.onrender.com/recipes/${recipeId}`, {
-          method: "DELETE",
-        });
-
-        setUserRecipes(userRecipes.filter((recipe) => recipe.id !== recipeId));
-        break;
-      case "Favorite Recipes":
-        setFavoriteRecipes(favoriteRecipes.filter((recipe) => recipe.id !== recipeId));
-        break;
-      case "Saved Recipes":
-        setSavedRecipes(savedRecipes.filter((recipe) => recipe.id !== recipeId));
-        break;
-      default:
-        break;
+  try {
+    if (section === "My Recipes") {
+      await fetch(`https://foodio-backend-cgsj.onrender.com/recipes/${recipeId}`, {
+        method: "DELETE",
+      });
+      setUserRecipes(userRecipes.filter((recipe) => recipe.id !== recipeId));
+    } else if (section === "Favorite Recipes") {
+      setFavoriteRecipes(favoriteRecipes.filter((recipe) => recipe.id !== recipeId));
+    } else if (section === "Saved Recipes") {
+      setSavedRecipes(savedRecipes.filter((recipe) => recipe.id !== recipeId));
     }
-  };
-
+  } catch (error) {
+    console.error("Error deleting recipe:", error);
+  }
+};
   const handleAvatarUpload = async (event) => {
     const file = event.target.files[0];
     if (!file) return;
