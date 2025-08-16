@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { UserIcon } from "lucide-react";
 import axios from 'axios';
 import { useUserContext } from '../context/userContext';
+import "../navbar.css";
 
 const Navbar = ({ isLoggedIn, setIsLoggedIn, isHomeScreen, recipes = [] }) => {
   console.log("Recipes in Navbar:", recipes);
