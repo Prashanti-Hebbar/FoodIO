@@ -177,51 +177,38 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, isHomeScreen, recipes = [] }) => {
           </div>
 
           {/* Auth Buttons or Profile */}
-          <div className="flex items-center space-x-2 relative">
-            
-            {!isLoggedIn ? (
-              <>
-                <Link
-                  to="/login"
-                  className="px-4 py-1 border border-yellow-400 text-yellow-400 rounded hover:bg-yellow-500 hover:text-black"
-                >
-                  LOGIN
-                </Link>
-                <Link
-                  to="/register"
-                  className="px-4 py-1 bg-yellow-400 text-black rounded hover:bg-yellow-300 font-semibold"
-                >
-                  REGISTER
-                </Link>
-              </>
-            ) : (
-              <div
-                className="relative"
-                onMouseEnter={handleUserEnter}
-                onMouseLeave={handleUserLeave}
-              >
-                <Link to="/profile">
-                    <div className="bg-black/20 rounded p-1 cursor-pointer">
-                  <UserIcon className="h-6 w-6" />
-                </div>
-                    </Link>
+          
 
-                
-                {userMenuOpen && (
-                  <div className="absolute right-0 mt-2 bg-black/90 text-white rounded shadow-lg w-32">
-                    
-                    <button
-                      onClick={handleLogout}
-                      className="w-full text-left px-4 py-2 hover:bg-white/10"
-                    >
-                      Logout
-                    </button>
-                  </div>
-                )}
-              </div>
-            )}
-          </div>
-        </div>
+<div className="flex items-center space-x-2 relative">
+  <Link
+    to="/register"
+    className="px-4 py-1 bg-yellow-400 text-black rounded hover:bg-yellow-300 font-semibold"
+  >
+    REGISTER
+  </Link>
+  <div
+    className="relative"
+    onMouseEnter={handleUserEnter}
+    onMouseLeave={handleUserLeave}
+  >
+    <Link to="/profile">
+      <div className="bg-black/20 rounded p-1 cursor-pointer">
+        <UserIcon className="h-6 w-6" />
+      </div>
+    </Link>
+    {userMenuOpen && (
+      <div className="absolute right-0 mt-2 bg-black/90 text-white rounded shadow-lg w-32">
+        <button
+          onClick={handleLogout}
+          className="w-full text-left px-4 py-2 hover:bg-white/10"
+        >
+          Logout
+        </button>
+      </div>
+    )}
+  </div>
+</div>
+</div>
       </div>
     </nav>
   );
