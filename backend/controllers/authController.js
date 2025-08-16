@@ -98,7 +98,7 @@ const login = async (req, res) => {
     }
   } catch (err) {
     console.log("Something went wrong", err);
-    res.json({ message: `Something went wrong ${err}` });
+    res.json({ message: `${err}` });
   }
 };
 
