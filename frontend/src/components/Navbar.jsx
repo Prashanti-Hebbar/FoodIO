@@ -178,12 +178,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, isHomeScreen, recipes = [] }) => {
 
           {/* Auth Buttons or Profile */}
           <div className="flex items-center space-x-2 relative">
-            <Link
-                      to="/profile"
-                      className="block px-4 py-2 hover:bg-white/10"
-                    >
-                      Profile
-                    </Link>
+            
             {!isLoggedIn ? (
               <>
                 <Link
@@ -205,9 +200,13 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, isHomeScreen, recipes = [] }) => {
                 onMouseEnter={handleUserEnter}
                 onMouseLeave={handleUserLeave}
               >
-                <div className="bg-black/20 rounded p-1 cursor-pointer">
+                <Link to="/profile">
+                    <div className="bg-black/20 rounded p-1 cursor-pointer">
                   <UserIcon className="h-6 w-6" />
                 </div>
+                    </Link>
+
+                
                 {userMenuOpen && (
                   <div className="absolute right-0 mt-2 bg-black/90 text-white rounded shadow-lg w-32">
                     
