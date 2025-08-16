@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
-import { UserModel } from "../models/Users.js";
+import User from "../models/Users.js";
 
 // Helper to set cookie
 const setAuthCookie = (res, token) => {
@@ -16,14 +16,14 @@ const register = async (req, res) => {
   try {
     const { username, email, password } = req.body;
 
-    const existingUser = await UserModel.findOne({ username });
+    const existingUser = await User.findOne({ username });
     if (existingUser) {
       return res.status(400).json({ message: "User already exists" });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const newUser = new UserModel({
+    const newUser = new User({
       username,
       email,
       password: hashedPassword,
@@ -44,7 +44,7 @@ const login = async (req, res) => {
   try {
     const { username, password } = req.body;
 
-    const user = await UserModel.findOne({ username });
+    const user = await User.findOne({ username });
     if (!user) {
       return res.status(400).json({ message: "Invalid username or password" });
     }
