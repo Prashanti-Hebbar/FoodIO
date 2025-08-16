@@ -56,9 +56,9 @@
   "license": "ISC",
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
-
     "@babel/plugin-transform-private-property-in-object": "^7.25.9",
     "autoprefixer": "^10.4.21",
+    "html-webpack-plugin": "^5.6.4",
     "postcss": "^8.5.6",
     "tailwindcss": "^3.4.9"
   }
