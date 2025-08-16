@@ -8,7 +8,7 @@ const Keto = () => {
         {
           id: 1,
           title: "Keto Butter Chicken",
-          image: "../keto/butter_chicken.jpg",
+          image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRSOBfEag9GHFrxriO65pEs5vA9HO_N0itnQ&s",
           rating: 4.9,
           prepTime: "30 minutes",
           description: "Creamy and rich butter chicken with a keto-friendly sauce",
@@ -26,7 +26,7 @@ const Keto = () => {
         {
           id: 2,
           title: "Keto Cauliflower Mac and Cheese",
-          image: "../keto/cauliflower_mac_cheese.jpg",
+          image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxr8TBUNTO6rrHitYox4Wfv9yxsCLVC9-xTg&s",
           rating: 4.8,
           prepTime: "20 minutes",
           description: "Cheesy and creamy mac and cheese made with cauliflower",
@@ -43,7 +43,7 @@ const Keto = () => {
         {
           id: 3,
           title: "Keto Avocado Bacon Salad",
-          image: "../keto/avocado_bacon_salad.jpg",
+          image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRE2ccLXdd9BXwJd7bn1N7yl0G4VtD2FS_48w&s",
           rating: 4.9,
           prepTime: "10 minutes",
           description: "Fresh salad with crispy bacon and creamy avocado",
@@ -60,7 +60,7 @@ const Keto = () => {
         {
           id: 4,
           title: "Keto Garlic Butter Steak",
-          image: "../keto/garlic_butter_steak.jpg",
+          image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRU7nmUNRez4x9qQ2psMchj2NvST7IJ43Ksag&s",
           rating: 5.0,
           prepTime: "20 minutes",
           description: "Juicy steak cooked in garlic butter for maximum flavor",
@@ -76,7 +76,7 @@ const Keto = () => {
         {
           id: 5,
           title: "Keto Zucchini Lasagna",
-          image: "../keto/zucchini_lasagna.jpg",
+          image: "https://www.allrecipes.com/thmb/kuPeHUeeKvxJjV6pLel-AFi016M=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/261026_UltimateLowCarbZucchiniLasagne_MFS_182-1-2x1-dec427f468f24181b1c2778ccae13735.jpg",
           rating: 4.7,
           prepTime: "40 minutes",
           description: "Delicious lasagna made with zucchini instead of pasta",
@@ -93,7 +93,7 @@ const Keto = () => {
         {
           id: 6,
           title: "Keto Chocolate Mousse",
-          image: "../keto/chocolate_mousse.jpg",
+          image: "https://healthyrecipesblogs.com/wp-content/uploads/2019/10/keto-chocolate-mousse-featured-2021.jpg",
           rating: 4.9,
           prepTime: "10 minutes",
           description: "Creamy chocolate mousse with no added sugar",

@@ -80,9 +80,9 @@ useEffect(() => {
     <Router>
       <ScrollToTop />
 
-      <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} isHomeScreen={isHomeScreen}  recipes={recipes}/>
+      <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} recipes={recipes}/>
 
-      <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+      {/* <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} /> */}
 
       <Routes>
         <Route path="/" element={<Home /> } />

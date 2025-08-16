@@ -8,7 +8,7 @@ const LowCarb = () => {
         {
           id: 1,
           title: "Grilled Chicken Salad",
-          image: "../lowcarb/grilled_chicken_salad.jpg",
+          image: "https://www.crunchycreamysweet.com/wp-content/uploads/2018/06/easy-grilled-chicken-salad-1.jpg",
           rating: 4.8,
           prepTime: "20 minutes",
           description: "Fresh salad with grilled chicken, avocado, and a light dressing",
@@ -26,7 +26,7 @@ const LowCarb = () => {
         {
           id: 2,
           title: "Zucchini Noodles with Pesto",
-          image: "../lowcarb/zucchini_noodles.jpg",
+          image: "https://www.twopeasandtheirpod.com/wp-content/uploads/2013/08/Zucchini-Noodles-with-Pesto-7.jpg",
           rating: 4.7,
           prepTime: "15 minutes",
           description: "Light and flavorful zucchini noodles tossed in homemade pesto",
@@ -44,7 +44,7 @@ const LowCarb = () => {
         {
           id: 3,
           title: "Cauliflower Fried Rice",
-          image: "../lowcarb/cauliflower_fried_rice.jpg",
+          image: "https://thebigmansworld.com/wp-content/uploads/2022/06/cauliflower-fried-rice-recipe.jpg",
           rating: 4.9,
           prepTime: "20 minutes",
           description: "Low-carb alternative to fried rice using cauliflower",
@@ -62,7 +62,7 @@ const LowCarb = () => {
         {
           id: 4,
           title: "Keto Avocado Egg Salad",
-          image: "../lowcarb/avocado_egg_salad.jpg",
+          image: "https://i.ytimg.com/vi/KCZJsIkEmyw/maxresdefault.jpg",
           rating: 4.8,
           prepTime: "10 minutes",
           description: "Creamy avocado and egg salad with a hint of lime",
@@ -79,7 +79,7 @@ const LowCarb = () => {
         {
           id: 5,
           title: "Garlic Butter Shrimp",
-          image: "../lowcarb/garlic_butter_shrimp.jpg",
+          image: "https://www.jocooks.com/wp-content/uploads/2021/09/garlic-butter-shrimp-1-10.jpg",
           rating: 4.9,
           prepTime: "15 minutes",
           description: "Juicy shrimp cooked in garlic butter and lemon juice",
@@ -96,7 +96,7 @@ const LowCarb = () => {
         {
           id: 6,
           title: "Stuffed Bell Peppers",
-          image: "../lowcarb/stuffed_bell_peppers.jpg",
+          image: "https://embed.widencdn.net/img/beef/t9bwp7fitq/exact/Stuffed%20Peppers%20-%20NCBA%20Beef%20Aug%20202431717.jpg?keep=c&u=7fueml",
           rating: 4.7,
           prepTime: "30 minutes",
           description: "Bell peppers stuffed with a flavorful mix of ground meat and vegetables",

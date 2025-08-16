@@ -8,7 +8,7 @@ const Desserts = () => {
         {
           id: 1,
           title: "Gulab Jamun",
-          image: "../dessert/gulab_jamun.jpg",
+          image: "https://static.toiimg.com/thumb/63799510.cms?width=1200&height=900",
           rating: 4.9,
           prepTime: "45 minutes",
           description: "Soft, fried milk-based dumplings soaked in sugar syrup",
@@ -25,7 +25,7 @@ const Desserts = () => {
         {
           id: 2,
           title: "Rasgulla",
-          image: "../dessert/rasgulla.jpg",
+          image: "https://madhurasrecipe.com/wp-content/uploads/2023/10/Rasgulla-Featured-Image.jpg",
           rating: 4.8,
           prepTime: "50 minutes",
           description: "Soft and spongy cheese balls soaked in light sugar syrup",
@@ -40,7 +40,7 @@ const Desserts = () => {
         {
           id: 3,
           title: "Kheer",
-          image: "../dessert/kheer.jpg",
+          image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWq5RkgNtHG4LL98GYxvZaCmwn8gXF5eFl5Q&s",
           rating: 4.9,
           prepTime: "40 minutes",
           description: "Traditional Indian rice pudding with nuts and saffron",
@@ -57,7 +57,7 @@ const Desserts = () => {
         {
           id: 4,
           title: "Jalebi",
-          image: "../dessert/jalebi.jpg",
+          image: "https://www.chilitochoc.com/wp-content/uploads/2025/03/instant-jalebi-recipe.jpg",
           rating: 4.7,
           prepTime: "1 hour",
           description: "Crispy, deep-fried spirals soaked in sugar syrup",
@@ -74,7 +74,7 @@ const Desserts = () => {
         {
           id: 5,
           title: "Besan Ladoo",
-          image: "../dessert/besan_ladoo.jpg",
+          image: "https://cdn1.foodviva.com/static-content/food-images/desserts-sweets-recipes/besan-laddu/besan-laddu.jpg",
           rating: 4.8,
           prepTime: "30 minutes",
           description: "Sweet gram flour balls flavored with ghee and cardamom",
@@ -89,7 +89,7 @@ const Desserts = () => {
         {
           id: 6,
           title: "Gajar Ka Halwa",
-          image: "../dessert/gajar_halwa.jpg",
+          image: "https://www.cubesnjuliennes.com/wp-content/uploads/2019/11/Gajar-Ka-Halwa-2.jpg",
           rating: 4.9,
           prepTime: "45 minutes",
           description: "Rich carrot pudding made with milk, ghee, and nuts",

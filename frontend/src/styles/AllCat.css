@@ -1,6 +1,8 @@
 .lunch-wrapper {
     min-height: 100vh;
     background: #f8f9fa;
+    overflow-x: hidden;
+    max-width: 100vw;
   }
   
   .hero-section {
@@ -94,21 +96,95 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     gap: 2.5rem;
-    padding: 3rem 5%;
+    padding: 3rem 5% 4rem 5%;
+    overflow: hidden;
+    max-width: 100%;
+    box-sizing: border-box;
   }
   
   .recipe-card {
-    background: white;
+    background: linear-gradient(145deg, #ffffff, #f8f9fa);
     border-radius: 20px;
     overflow: hidden;
-    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
-    transition: all 0.3s ease;
+    box-shadow: 
+      0 8px 32px rgba(0,0,0,0.1),
+      0 4px 16px rgba(0,0,0,0.06),
+      0 2px 8px rgba(0,0,0,0.04),
+      inset 0 1px 0 rgba(255,255,255,0.8);
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    position: relative;
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+  
+  .recipe-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent);
+    z-index: 1;
+  }
+  
+  .recipe-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 
+      0 20px 40px rgba(0,0,0,0.15),
+      0 10px 25px rgba(0,0,0,0.1),
+      0 5px 15px rgba(0,0,0,0.06),
+      0 0 0 1px rgba(255,255,255,0.1),
+      inset 0 1px 0 rgba(255,255,255,0.9);
   }
   
   .card-media {
     position: relative;
     height: 220px;
     overflow: hidden;
+    border-radius: 16px 16px 0 0;
+    will-change: transform;
+  }
+  
+  .card-media::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg, 
+      rgba(0,0,0,0) 0%, 
+      rgba(0,0,0,0.02) 40%, 
+      rgba(0,0,0,0.1) 100%
+    );
+    pointer-events: none;
+  }
+  
+  .card-badges {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    display: flex;
+    gap: 8px;
+    z-index: 3;
+  }
+  
+  .time-badge,
+  .rating-badge {
+    background: linear-gradient(135deg, rgba(0,0,0,0.7), rgba(0,0,0,0.5));
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    box-shadow: 
+      0 4px 12px rgba(0,0,0,0.3),
+      inset 0 1px 0 rgba(255,255,255,0.1);
+    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  }
+  
+  .rating-badge {
+    background: linear-gradient(135deg, rgba(255,107,107,0.9), rgba(255,165,0,0.8));
   }
   
   .card-media img {
@@ -116,6 +192,11 @@
     height: 100%;
     object-fit: cover;
     transition: transform 0.5s ease;
+    transform-origin: center center;
+  }
+  
+  .recipe-card:hover .card-media img {
+    transform: scale(1.1);
   }
   
   .card-overlay {
@@ -133,38 +214,90 @@
     opacity: 1;
   }
   
-  .recipe-card:hover .card-media img {
-    transform: scale(1.1);
+  .card-content {
+    padding: 1.8rem;
+    background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(248,249,250,0.6));
+    position: relative;
   }
   
-  .card-content {
-    padding: 1.5rem;
+  .card-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 1.8rem;
+    right: 1.8rem;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(0,0,0,0.06), transparent);
+  }
+  
+  .card-content h3 {
+    font-weight: 700;
+    font-size: 1.3rem;
+    margin-bottom: 0.8rem;
+    color: #2c3e50;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  }
+  
+  .recipe-description {
+    color: #6c757d;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
   }
   
   .recipe-tags {
     display: flex;
-    gap: 0.5rem;
+    gap: 0.6rem;
     margin: 1rem 0;
+    flex-wrap: wrap;
   }
   
   .recipe-tag {
-    background: #f8f9fa;
-    padding: 0.4rem 1rem;
-    border-radius: 20px;
-    font-size: 0.9rem;
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    border: 1px solid rgba(0,0,0,0.08);
+    padding: 0.5rem 1rem;
+    border-radius: 25px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #495057;
+    box-shadow: 
+      0 2px 4px rgba(0,0,0,0.04),
+      inset 0 1px 0 rgba(255,255,255,0.7);
+    transition: all 0.2s ease;
+  }
+  
+  .recipe-tag:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    background: linear-gradient(135deg, #FF6B6B, #FFD93D);
+    color: white;
   }
   
   .recipe-footer {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     margin-top: 1.5rem;
-    padding-top: 1rem;
-    border-top: 1px solid #eee;
-    color: #666;
+    padding-top: 1.2rem;
+    border-top: 1px solid rgba(0,0,0,0.06);
+    color: #6c757d;
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+  
+  .recipe-footer span {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.3rem 0.8rem;
+    background: linear-gradient(135deg, rgba(255,255,255,0.8), rgba(248,249,250,0.4));
+    border-radius: 15px;
+    border: 1px solid rgba(0,0,0,0.04);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
   }
   
   .view-recipe-btn {
-    background: #FF6B6B;
+    background: rgb(230, 126, 34);
     color: white;
     border: none;
     padding: 1rem 2rem;
@@ -173,10 +306,17 @@
     cursor: pointer;
     transform: translateY(20px);
     transition: all 0.3s ease;
+    opacity: 0;
   }
   
   .recipe-card:hover .view-recipe-btn {
     transform: translateY(0);
+    opacity: 1;
+  }
+  
+  .view-recipe-btn:hover {
+    background: rgb(182, 96, 22);
+    transform: translateY(0) scale(1.05);
   }
   
   @media (max-width: 768px) {
@@ -192,6 +332,33 @@
     .recipes-showcase {
       grid-template-columns: 1fr;
       padding: 2rem;
+      gap: 1.5rem;
+    }
+    
+    .recipe-card {
+      box-shadow: 
+        0 6px 20px rgba(0,0,0,0.08),
+        0 3px 10px rgba(0,0,0,0.04),
+        inset 0 1px 0 rgba(255,255,255,0.8);
+    }
+    
+    .recipe-card:hover {
+      transform: translateY(-4px) scale(1.01);
+    }
+    
+    .card-content {
+      padding: 1.4rem;
+    }
+    
+    .view-recipe-btn {
+      padding: 0.9rem 2rem;
+      font-size: 0.9rem;
+    }
+    
+    .time-badge,
+    .rating-badge {
+      padding: 4px 10px;
+      font-size: 0.8rem;
     }
   }
   

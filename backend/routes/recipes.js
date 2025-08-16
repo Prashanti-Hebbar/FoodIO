@@ -1,9 +1,6 @@
 import express from "express";
-import { RecipesModel } from "../models/Recipes.js";
-import { UserModel } from "../models/Users.js";
-import jwt from "jsonwebtoken";
-import axios from "axios";
 
+// <<<<<<< session-for-database-transactions
 const router = express.Router();
 
 // Middleware to verify user token
@@ -263,5 +260,28 @@ router.delete("/:recipeId", async (req, res) => {
     res.status(500).json({ error: "Failed to delete recipe" });
   }
 });
+// =======
+import {
+  getAllRecipes,
+  createRecipe,
+  saveRecipe,
+  getSavedRecipes,
+  removeSavedRecipe,
+  generateRecipe,
+  deleteRecipe,
+  verifyToken
+} from "../controllers/recipeController.js";
+
+const router = express.Router();
+
+router.get("/", getAllRecipes);
+router.post("/", createRecipe);
+router.put("/save", verifyToken, saveRecipe);
+router.get("/savedRecipes", verifyToken, getSavedRecipes);
+router.delete("/savedRecipes/:recipeId", verifyToken, removeSavedRecipe);
+router.post("/api/get-recipe", generateRecipe);
+router.delete("/:recipeId", deleteRecipe);
+
+// >>>>>>> main
 
 export { router as recipeRouter };
