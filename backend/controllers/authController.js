@@ -1,6 +1,11 @@
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
+// <<<<<<< session-for-database-transactions
+import { UserModel } from "../models/Users.js";
+import mongoose from "mongoose";
+// =======
 import User from "../models/Users.js";
+// >>>>>>> main
 
 // Helper to set cookie
 const setAuthCookie = (res, token) => {
@@ -13,11 +18,15 @@ const setAuthCookie = (res, token) => {
 
 // Register Controller
 const register = async (req, res) => {
+  const session = await mongoose.startSession();
+  session.startTransaction();
   try {
     const { username, email, password } = req.body;
 
     const existingUser = await User.findOne({ username });
     if (existingUser) {
+      await session.abortTransaction();
+      session.endSession();
       return res.status(400).json({ message: "User already exists" });
     }
 
@@ -30,10 +39,14 @@ const register = async (req, res) => {
     });
 
     await newUser.save();
+    await session.commitTransaction();
+    session.endSession();
 
     // No cookie set here — user will log in after registering
     res.status(201).json({ message: "User registered successfully. Please log in." });
   } catch (err) {
+    await session.abortTransaction();
+    session.endSession()
     console.error(err);
     res.status(500).json({ message: "Internal server error" });
   }
