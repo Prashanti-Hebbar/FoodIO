@@ -93,7 +93,8 @@ function Footer() {
   }, []);
 
   return (
-    <footer className="enhanced-footer" aria-label="Site footer">
+    // Change hardcoded colors to use CSS variables
+    <footer className="enhanced-footer" style={{ backgroundColor: 'var(--bg-color)', color: 'var(--text-color)' }}>
       <div className="container-fluid px-4">
         <div className="row align-items-start g-4 justify-content-between">
           <div className="col-12 col-md-6 col-lg-3 footer-section">
@@ -234,7 +235,7 @@ function Footer() {
         </section>
 
         <div className="copyright-section">
-          <p className="copyright-text">&copy; 2024 Foodio. All rights reserved.</p>
+          <p className="copyright-text">&copy; {new Date().getFullYear()} Foodio. All rights reserved.</p>
           <div className="copyright-links">
             <Link to="/PrivacyPolicy" className="copyright-link">Privacy Policy</Link>
             <Link to="/TermsOfService" className="copyright-link">Terms of Service</Link>

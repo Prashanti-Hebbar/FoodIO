@@ -8,7 +8,7 @@ const Italian = () => {
         {
           id: 1,
           title: "Margherita Pizza",
-          image: "../italian/margherita_pizza.jpg",
+          image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqLEoGo3bHJYJEpRIaveeChxuCkXPoLk3RNg&s",
           rating: 4.8,
           prepTime: "30 minutes",
           description: "Classic Italian pizza topped with fresh tomatoes, basil, and mozzarella",
@@ -23,7 +23,7 @@ const Italian = () => {
         {
           id: 2,
           title: "Spaghetti Carbonara",
-          image: "../italian/spaghetti_carbonara.jpg",
+          image: "https://www.allrecipes.com/thmb/a_0W8yk_LLCtH-VPqg2uLD9I5Pk=/0x512/filters:no_upscale():max_bytes(150000):strip_icc()/11973-spaghetti-carbonara-ii-DDMFS-4x3-6edea51e421e4457ac0c3269f3be5157.jpg",
           rating: 4.9,
           prepTime: "25 minutes",
           description: "Creamy pasta with pancetta, eggs, Parmesan, and black pepper",
@@ -38,7 +38,7 @@ const Italian = () => {
         {
           id: 3,
           title: "Lasagna",
-          image: "../italian/lasagna.jpg",
+          image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUPDjxBJlk7s44DNHz2D9AJ2f1vBYwXw_Ypw&s",
           rating: 4.7,
           prepTime: "1 hour",
           description: "Layers of pasta, meat sauce, ricotta, and cheese baked to perfection",
@@ -53,7 +53,7 @@ const Italian = () => {
         {
           id: 4,
           title: "Minestrone Soup",
-          image: "../italian/minestrone_soup.jpg",
+          image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlLnTDF5PsCsyCfxn6tDxJYdDqwkYX9OMc_A&s",
           rating: 4.6,
           prepTime: "40 minutes",
           description: "Hearty vegetable soup with beans, pasta, and Italian herbs",
@@ -68,7 +68,7 @@ const Italian = () => {
         {
           id: 5,
           title: "Risotto alla Milanese",
-          image: "../italian/risotto_milanese.jpg",
+          image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQ8HC6HMLhBnUUcBbE1smE5tKpo0BMtUdz4w&s",
           rating: 4.8,
           prepTime: "35 minutes",
           description: "Creamy saffron-infused risotto with Parmesan and butter",
@@ -83,7 +83,7 @@ const Italian = () => {
         {
           id: 6,
           title: "Tiramisu",
-          image: "../italian/tiramisu.jpg",
+          image: "https://i0.wp.com/mediterraneantaste.com/wp-content/uploads/2023/11/tiramisu-4583.jpg?fit=1024%2C683&ssl=1",
           rating: 5.0,
           prepTime: "20 minutes + chilling time",
           description: "Classic Italian dessert made with layers of coffee-soaked ladyfingers and mascarpone cream",

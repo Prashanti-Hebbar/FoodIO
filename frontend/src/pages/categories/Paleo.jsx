@@ -8,7 +8,7 @@ const Paleo = () => {
         {
           id: 1,
           title: "Grilled Chicken with Roasted Vegetables",
-          image: "../paleo/grilled_chicken.jpg",
+          image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6OQCqpilQ0KIOxPclC6Z75ANJhNk0FGXvpQ&s",
           rating: 4.9,
           prepTime: "30 minutes",
           description: "Juicy grilled chicken with a side of roasted veggies",
@@ -25,7 +25,7 @@ const Paleo = () => {
         {
           id: 2,
           title: "Cauliflower Fried Rice",
-          image: "../paleo/cauliflower_fried_rice.jpg",
+          image: "https://www.kitchensanctuary.com/wp-content/uploads/2020/09/Cauliflower-Egg-Fried-Rice-square-FS-14.jpg",
           rating: 4.8,
           prepTime: "20 minutes",
           description: "A delicious paleo-friendly alternative to classic fried rice",
@@ -42,7 +42,7 @@ const Paleo = () => {
         {
           id: 3,
           title: "Zucchini Noodles with Meatballs",
-          image: "../paleo/zucchini_noodles_meatballs.jpg",
+          image: "https://lifemadesweeter.com/wp-content/uploads/Zucchini-Noodles-with-Meatballs-recipe-photo-picture-1-10-500x375.jpg",
           rating: 4.9,
           prepTime: "35 minutes",
           description: "Savory meatballs served with zucchini noodles and marinara sauce",
@@ -59,7 +59,7 @@ const Paleo = () => {
         {
           id: 4,
           title: "Baked Salmon with Lemon and Dill",
-          image: "../paleo/baked_salmon.jpg",
+          image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGAbEDRmsrtFw3dfuEynddW2OVsb2WjbOkeg&s",
           rating: 5.0,
           prepTime: "25 minutes",
           description: "Oven-baked salmon fillets with fresh lemon and dill",
@@ -76,7 +76,7 @@ const Paleo = () => {
         {
           id: 5,
           title: "Sweet Potato and Avocado Breakfast Hash",
-          image: "../paleo/sweet_potato_hash.jpg",
+          image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5b8E6eZfwLLJSOqkbwm6O4N0YozMgDlEofQ&s",
           rating: 4.8,
           prepTime: "30 minutes",
           description: "A hearty sweet potato hash with avocado and eggs",
@@ -93,7 +93,7 @@ const Paleo = () => {
         {
           id: 6,
           title: "Coconut Chicken Curry",
-          image: "../paleo/coconut_curry.jpg",
+          image: "https://hips.hearstapps.com/hmg-prod/images/190509-coconut-chicken-curry-157-1558039780.jpg?crop=0.8891228070175439xw:1xh;center,top&resize=1200:*",
           rating: 4.9,
           prepTime: "35 minutes",
           description: "A rich and creamy coconut curry with chicken and spices",
