@@ -1,3 +1,12 @@
+:root {
+  --scroll-bg-light: rgb(230, 126, 34);
+  --scroll-bg-dark: rgb(255, 153, 0);
+  --scroll-hover-light: rgb(182, 96, 22);
+  --scroll-hover-dark: rgb(204, 102, 0);
+  --scroll-arrow-light: white;
+  --scroll-arrow-dark: #222;
+}
+
 .scroll-to-top-container {
   position: fixed;
   bottom: 40px;
@@ -45,18 +54,38 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  transition: transform 0.2s ease;
-  background-color: rgb(230, 126, 34);
-  transition: background-color 0.2s;
+  transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
-.scroll-button:hover {
-  background-color: rgb(182, 96, 22);
+/* Light/Dark Theme Background */
+[data-theme="light"] .scroll-button {
+  background-color: var(--scroll-bg-light);
 }
 
+[data-theme="dark"] .scroll-button {
+  background-color: var(--scroll-bg-dark);
+}
+
+/* Hover */
+[data-theme="light"] .scroll-button:hover {
+  background-color: var(--scroll-hover-light);
+}
+
+[data-theme="dark"] .scroll-button:hover {
+  background-color: var(--scroll-hover-dark);
+}
+
+/* Arrow Icon */
 .arrow-icon {
   width: 24px;
   height: 24px;
   z-index: 2;
-  color: white;
+}
+
+[data-theme="light"] .arrow-icon {
+  color: var(--scroll-arrow-light);
+}
+
+[data-theme="dark"] .arrow-icon {
+  color: var(--scroll-arrow-dark);
 }

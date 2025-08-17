@@ -1,5 +1,6 @@
 import React from 'react';
 import AiRecipeForm from './AiRecipeForm';
+import '../styles/aichat.css';
 
 function AIChatPage() {
     return (
