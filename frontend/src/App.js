@@ -37,7 +37,7 @@ import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfService from './pages/TermsOfService';
 import Careers from './pages/Careers';
 import { FaMoon, FaSun } from "react-icons/fa";
-
+import CustomCursor from "./components/CustomCursor";
 function App() {
 
   const[theme,setTheme]=useState("light");
@@ -96,6 +96,7 @@ useEffect(() => {
   
   return (
     <Router>
+       <CustomCursor />
       <ScrollToTop />
 
       
