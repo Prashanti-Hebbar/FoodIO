@@ -218,8 +218,8 @@ Thanks to these wonderful people who have contributed to Foodio:
 
 ## 📱 Screenshots & Demo
 
-![Screenshot 1](/website_screenshot_1.png)
-![Screenshot 2](/website_screenshot_2.png)
+![Screenshot 1](frontend/public/website_screenshot_1.png)
+![Screenshot 2](frontend/public/website_screenshot_2.png)
 
 
 ---
