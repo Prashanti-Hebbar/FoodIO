@@ -1,431 +1,219 @@
-import React, { useState } from "react";
-import "../App.css";
-import "./recipes";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import EditProfile from "../components/EditProfile";
+import axios from "axios";
+import "../profile.css";
+import { useUserContext } from "../context/userContext";
 
-const Home = () => {
-  const [activeTestimonial, setActiveTestimonial] = useState(2);
-  const MAX_VISIBILITY = 3;
+const Profile = () => {
+  const navigate = useNavigate();
+  const [activeSection, setActiveSection] = useState("myRecipes");
+  const [showEditProfile, setShowEditProfile] = useState(false);
 
-  const testimonials = [
-    {
-      name: "Sarah Johnson",
-      role: "Home Chef",
-      avatar: "/user1.jpg",
-      content:
-        "Foodio has completely transformed my cooking experience! The recipes are easy to follow and the community is so supportive. I've discovered so many amazing dishes!",
-    },
-    {
-      name: "Michael Chen",
-      role: "Professional Chef",
-      avatar: "/user2.jpg",
-      content:
-        "As a professional chef, I love how Foodio allows me to share my creations with food enthusiasts. The platform is intuitive and the feedback from users is invaluable.",
-    },
-    {
-      name: "Emily Rodriguez",
-      role: "Food Blogger",
-      avatar: "/user3.jpg",
-      content:
-        "I'm a busy mom and Foodio has been a lifesaver! The quick and easy recipes help me prepare delicious meals for my family without spending hours in the kitchen.",
-    },
-    {
-      name: "David Kim",
-      role: "Tech Enthusiast",
-      avatar: "/user4.jpg",
-      content:
-        "The AI recipe suggestions are incredible! It's like having a personal chef who knows exactly what I love to cook. Foodio has revolutionized my meal planning.",
-    },
-    {
-      name: "Maria Santos",
-      role: "Cooking Beginner",
-      avatar: "/user5.jpg",
-      content:
-        "Perfect for beginners like me! The step-by-step instructions and video tutorials make cooking feel approachable and fun. I've gained so much confidence!",
-    },
-    {
-      name: "James Wilson",
-      role: "Food Explorer",
-      avatar: "/user6.jpg",
-      content:
-        "Love the diverse recipe collection! From authentic international dishes to modern fusion, Foodio has expanded my culinary horizons tremendously.",
-    },
-  ];
+  const { userData, setUserData, avatarUrl, setAvatarUrl } = useUserContext();
 
-  const [recipes, setRecipes] = useState({
-    topRated: [
-      { id: 1, title: "Delicious Pasta", image: "/pasta.jpg", rating: 4.5 },
-      { id: 2, title: "Spicy Tacos", image: "/tacos.jpg", rating: 4.2 },
-      { id: 3, title: "Pumpkin Cupcakes", image: "/cakes.jpg", rating: 4.5 },
-      { id: 4, title: "Apple Pie", image: "/pie.jpg", rating: 4.2 },
-      { id: 5, title: "Best Lasagna", image: "/lasagna.jpg", rating: 4.5 },
-      { id: 6, title: "Harira", image: "/harira.jpg", rating: 4.2 },
-    ],
-    trending: [
-      { id: 7, title: "Vegan Curry", image: "/curry.jpg", rating: 4.8 },
-      { id: 8, title: "Chocolate Cake", image: "/choco.jpg", rating: 4.7 },
-      { id: 9, title: "corn fritters", image: "/corn.jpg", rating: 4.8 },
-      {
-        id: 10,
-        title: "Bread Cheese Lollipop",
-        image: "/lollipop.jpg",
-        rating: 4.7,
-      },
-      {
-        id: 11,
-        title: "Sweet Potato Boats",
-        image: "/boats.jpg",
-        rating: 4.8,
-      },
-      { id: 12, title: "Walnut Chikki", image: "/chikki.jpg", rating: 4.7 },
-    ],
-    newest: [
-      { id: 13, title: "Summer Salad", image: "/salad.jpg", rating: 4.0 },
-      { id: 14, title: "Grilled Salmon", image: "/salmon.jpg", rating: 4.3 },
-      { id: 15, title: "Loco Moco", image: "/loco.jpg", rating: 4.0 },
-      {
-        id: 16,
-        title: "Cinnamon Roll Casserole",
-        image: "/toast.jpg",
-        rating: 4.3,
-      },
-      {
-        id: 17,
-        title: "Frikadellen",
-        image: "/Frikadellen.jpg",
-        rating: 4.0,
-      },
-      { id: 18, title: "coffe jelly", image: "/jelly.jpg", rating: 4.3 },
-    ],
+  // My Recipes - dummy (can later fetch from API)
+  const [userRecipes, setUserRecipes] = useState([
+    { id: 1, title: "Pasta Carbonara", image: "ban.jpg" },
+    { id: 2, title: "Chicken Curry", image: "ban.jpg" },
+    { id: 3, title: "Berry Smoothie", image: "ban.jpg" },
+  ]);
+
+  // 🔹 Favorites & Saved (persistent in localStorage)
+  const [favoriteRecipes, setFavoriteRecipes] = useState(() => {
+    return JSON.parse(localStorage.getItem("favoriteRecipes")) || [];
   });
 
-  const findRecipeById = (recipeId, recipeList) => {
-    for (let category in recipeList) {
-      const recipe = recipeList[category].find((r) => r.id === recipeId);
-      if (recipe) return recipe;
+  const [savedRecipes, setSavedRecipes] = useState(() => {
+    return JSON.parse(localStorage.getItem("savedRecipes")) || [];
+  });
+
+  // 🔹 Fetch User Data & Avatar
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await axios.get(
+          `https://foodio-backend-cgsj.onrender.com/auth/user`,
+          { withCredentials: true }
+        );
+
+        setUserData(response.data.user);
+
+        if (response.data.user.avatar) {
+          setAvatarUrl(
+            `http://localhost:3001/uploads/${response.data.user.avatar}`
+          );
+        } else {
+          setAvatarUrl("ban.jpg"); // fallback avatar
+        }
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+        alert("Failed to load user data. Please try again.");
+      }
+    };
+
+    if (userData === null) {
+      fetchUserData();
     }
-    return null;
+  }, []);
+
+  // 🔹 Delete/Remove Recipe
+  const handleDelete = async (recipeId, section) => {
+    try {
+      if (section === "My Recipes") {
+        await fetch(
+          `https://foodio-backend-cgsj.onrender.com/recipes/${recipeId}`,
+          {
+            method: "DELETE",
+          }
+        );
+        setUserRecipes(userRecipes.filter((recipe) => recipe.id !== recipeId));
+      } else if (section === "Favorite Recipes") {
+        const updated = favoriteRecipes.filter((r) => r.id !== recipeId);
+        setFavoriteRecipes(updated);
+        localStorage.setItem("favoriteRecipes", JSON.stringify(updated));
+      } else if (section === "Saved Recipes") {
+        const updated = savedRecipes.filter((r) => r.id !== recipeId);
+        setSavedRecipes(updated);
+        localStorage.setItem("savedRecipes", JSON.stringify(updated));
+      }
+    } catch (error) {
+      console.error("Error deleting recipe:", error);
+    }
   };
 
-  const renderRecipes = (recipeType) => (
-    <div className="d-flex flex-nowrap overflow-auto">
-      {recipes[recipeType].map((recipe) => (
-      <div key={recipe.id} className="flex-shrink-0 mb-4 me-3 custom-recipe-card">
+  // 🔹 Avatar Upload
+  const handleAvatarUpload = async (event) => {
+    const file = event.target.files[0];
+    if (!file) return;
 
-          <div className="card">
-            <div className="card-actions position-absolute end-0 m-2">
-              <button
-                className={`btn btn-link ${
-                  recipe.isFavorite ? "text-warning" : "text-white"
-                }`}
-                onClick={() => handleFavorite(recipe.id)}
-              >
-                <i className="fas fa-star"></i>
-              </button>
-              <button
-                className={`btn btn-link ${
-                  recipe.isSaved ? "text-primary" : "text-white"
-                }`}
-                onClick={() => handleSave(recipe.id)}
-              >
-                <i className="fas fa-bookmark"></i>
-              </button>
-              <button
-                className="btn btn-link text-white"
-                onClick={() => handleShare(recipe)}
-              >
-                <i className="fas fa-share-alt"></i>
-              </button>
-            </div>
-            <img
-              src={recipe.image}
-              className="card-img-top"
-              alt={recipe.title}
-            />
-            <div className="card-body">
-              <h5 className="card-title">{recipe.title}</h5>
-              <p className="card-text">Rating: {recipe.rating}</p>
-              <Link
-                to={`/ViewRecipe?id=${recipe.id}`}
-                className="btn btn-primary"
-              >
-                View Recipe
-              </Link>
+    const formData = new FormData();
+    formData.append("avatar", file);
+    formData.append("userId", userData._id);
+
+    try {
+      const res = await axios.post("http://localhost:3001/profile", formData, {
+        withCredentials: true,
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+
+      setAvatarUrl(`http://localhost:3001/uploads/${res.data.filename}`);
+      setUserData((prev) => ({ ...prev, avatar: res.data.filename }));
+
+      alert("Profile picture uploaded successfully!");
+    } catch (err) {
+      console.error("Upload failed", err);
+      alert("Upload failed.");
+    }
+  };
+
+  // 🔹 Logout
+  const handleLogout = () => {
+    navigate("/");
+  };
+
+  // 🔹 RecipeGrid Component
+  const RecipeGrid = ({ title, recipes }) => (
+    <div className="recipes-grid">
+      <div className="recipes-container">
+        {recipes.map((recipe) => (
+          <div key={recipe.id} className="recipe-card">
+            <img src={recipe.image} alt={recipe.title} />
+            <div className="recipe-info">
+              <h3>{recipe.title}</h3>
+              <div className="recipe-actions">
+                {title === "My Recipes" && (
+                  <>
+                    <Link className="edit-btn" to="/AddRecipe">
+                      Edit
+                    </Link>
+                    <button
+                      className="delete-btn"
+                      onClick={() => handleDelete(recipe.id, title)}
+                    >
+                      Delete
+                    </button>
+                  </>
+                )}
+                {(title === "Favorite Recipes" ||
+                  title === "Saved Recipes") && (
+                  <button
+                    className="remove-btn"
+                    onClick={() => handleDelete(recipe.id, title)}
+                  >
+                    Remove
+                  </button>
+                )}
+              </div>
             </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
-
-  const handleFavorite = (recipeId) => {
-  const updatedRecipes = { ...recipes };
-  const recipe = findRecipeById(recipeId, updatedRecipes);
-
-  if (recipe) {
-    recipe.isFavorite = !recipe.isFavorite;
-    setRecipes(updatedRecipes);
-
-    // Get favorites list from localStorage
-    let favorites = JSON.parse(localStorage.getItem("favoriteRecipes")) || [];
-
-    if (recipe.isFavorite) {
-      // Add if not already favorited
-      if (!favorites.some((r) => r.id === recipe.id)) {
-        favorites.push(recipe);
-        localStorage.setItem("favoriteRecipes", JSON.stringify(favorites));
-        alert(`${recipe.title} was added to Favorite Recipes!`);
-      }
-    } else {
-      // Remove if unfavorited
-      favorites = favorites.filter((r) => r.id !== recipe.id);
-      localStorage.setItem("favoriteRecipes", JSON.stringify(favorites));
-      alert(`${recipe.title} was removed from Favorite Recipes!`);
-    }
-  }
-};
-
-
-  const handleSave = (recipeId) => {
-  const updatedRecipes = { ...recipes };
-  const recipe = findRecipeById(recipeId, updatedRecipes);
-
-  if (recipe) {
-    recipe.isSaved = !recipe.isSaved;
-    setRecipes(updatedRecipes);
-
-    // Load saved list from localStorage
-    let saved = JSON.parse(localStorage.getItem("savedRecipes")) || [];
-
-    if (recipe.isSaved) {
-      // Add if not already there
-      if (!saved.some((r) => r.id === recipe.id)) {
-        saved.push(recipe);
-        localStorage.setItem("savedRecipes", JSON.stringify(saved));
-        alert(`${recipe.title} was added to Saved Recipes!`);
-      }
-    } else {
-      // Remove from saved list
-      saved = saved.filter((r) => r.id !== recipe.id);
-      localStorage.setItem("savedRecipes", JSON.stringify(saved));
-      alert(`${recipe.title} was removed from Saved Recipes!`);
-    }
-  }
-};
-  const handleShare = (recipe) => {
-    if (navigator.share) {
-      navigator.share({
-        title: recipe.title,
-        text: `Check out this recipe for ${recipe.title}!`,
-        url: window.location.href,
-      });
-    } else {
-      const shareData = {
-        title: recipe.title,
-        url: window.location.href,
-      };
-
-
-      const shareDialog = document.createElement("dialog");
-      document.body.style.overflow = "hidden";
-
-      shareDialog.innerHTML = `
-        <div class="share-options p-3">
-          <h5>Share Recipe</h5>
-          <button onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=${shareData.url}')">
-            <i class="fab fa-facebook"></i> Facebook
-          </button>
-          <button onclick="window.open('https://twitter.com/intent/tweet?text=${shareData.title}&url=${shareData.url}')">
-            <i class="fab fa-twitter"></i> Twitter
-          </button>
-          <button onclick="window.open('https://wa.me/?text=${shareData.title} ${shareData.url}')">
-            <i class="fab fa-whatsapp"></i> WhatsApp
-          </button>
-          <button id="closeDialog">Close</button>
-        </div>
-      `;
-
-      shareDialog.querySelector("#closeDialog").addEventListener("click", () => {
-        shareDialog.close();
-        document.body.removeChild(shareDialog);
-        document.body.style.overflow = "auto";
-        document.removeEventListener("click", handleOutsideClick);
-      });
-
-      document.body.appendChild(shareDialog);
-      shareDialog.showModal();
-
-      const handleOutsideClick = (e) => {
-        if (!shareDialog.contains(e.target)) {
-          shareDialog.close();
-          document.body.removeChild(shareDialog);
-          document.body.style.overflow = "auto";
-          document.removeEventListener("click", handleOutsideClick);
-        }
-      };
-
-      setTimeout(() => {
-        document.addEventListener("click", handleOutsideClick);
-      }, 10);
-    }
-  };
 
   return (
-    <div>
-      <div
-        id="recipeCarousel"
-        className="carousel slide"
-        data-bs-ride="carousel"
-      >
-        <div className="carousel-inner">
-          <div className="carousel-item active">
-            <img
-              src="../carousel1.jpg"
-              className="d-block w-100"
-              alt="Recipe 1"
-              style={{ objectFit: "cover", height: "550px" }}
-            />
-            <div className="carousel-caption d-none d-md-block">
-              <h5>Delicious Dishes</h5>
-              <p>Explore a world of culinary delights.</p>
-            </div>
-          </div>
-          <div className="carousel-item">
-            <img
-              src="../carousel2.jpg"
-              className="d-block w-100"
-              alt="Recipe 2"
-              style={{ objectFit: "cover", height: "550px" }}
-            />
-            <div className="carousel-caption d-none d-md-block">
-              <h5>Healthy & Nutritious</h5>
-              <p>Discover recipes that nourish your body and soul.</p>
-            </div>
-          </div>
-          <div className="carousel-item">
-            <img
-              src="../carousel3.jpg"
-              className="d-block w-100"
-              alt="Recipe 3"
-              style={{ objectFit: "cover", height: "550px" }}
-            />
-            <div className="carousel-caption d-none d-md-block">
-              <h5>Quick & Easy</h5>
-              <p>Whip up delicious meals in minutes.</p>
-            </div>
-          </div>
-        </div>
-        <button
-          className="carousel-control-prev"
-          type="button"
-          data-bs-target="#recipeCarousel"
-          data-bs-slide="prev"
-        >
-          <span
-            className="carousel-control-prev-icon"
-            aria-hidden="true"
-          ></span>
-          <span className="visually-hidden">Previous</span>
-        </button>
-        <button
-          className="carousel-control-next"
-          type="button"
-          data-bs-target="#recipeCarousel"
-          data-bs-slide="next"
-        >
-          <span
-            className="carousel-control-next-icon"
-            aria-hidden="true"
-          ></span>
-          <span className="visually-hidden">Next</span>
-        </button>
+    <div className="profile-page">
+      <div className="banner">
+        <img src="ban.jpg" alt="Profile Banner" />
       </div>
 
-      <div className="container mt-4 p-5">
-        <h2 id="top-rated" className="mt-5">
-          <b>Top Rated Recipes</b>
-        </h2>
-        {renderRecipes("topRated")}
+      <div className="profile-content ">
+        <div className="profile-header display:flex">
+          <img src={avatarUrl} alt="Profile" className="profile-image" />
+          <h1 className="username">{userData?.username || "Username"}</h1>
 
-        <h2 id="trending" className="mt-5">
-          <b>Trending Recipes</b>
-        </h2>
-        {renderRecipes("trending")}
-
-        <h2 className="mt-5">
-          <b>Newest Recipes</b>
-        </h2>
-        {renderRecipes("newest")}
-
-        {/* Testimonials Section */}
-        <div className="testimonials-section">
-          <h2>
-            <b>What Our Users Say</b>
-          </h2>
-          <div className="testimonials-carousel-container">
-            <div className="testimonials-carousel">
-              {activeTestimonial > 0 && (
-                <button
-                  className="carousel-nav left"
-                  onClick={() => setActiveTestimonial((i) => i - 1)}
-                >
-                  <i className="fas fa-chevron-left"></i>
-                </button>
-              )}
-              {testimonials.map((testimonial, i) => (
-                <div
-                  key={i}
-                  className="testimonial-card-container"
-                  style={{
-                    "--active": i === activeTestimonial ? 1 : 0,
-                    "--offset": (activeTestimonial - i) / 3,
-                    "--direction": Math.sign(activeTestimonial - i),
-                    "--abs-offset": Math.abs(activeTestimonial - i) / 3,
-                    pointerEvents: activeTestimonial === i ? "auto" : "none",
-                    opacity:
-                      Math.abs(activeTestimonial - i) >= MAX_VISIBILITY
-                        ? "0"
-                        : "1",
-                    display:
-                      Math.abs(activeTestimonial - i) > MAX_VISIBILITY
-                        ? "none"
-                        : "block",
-                  }}
-                >
-                  <div className="testimonial-card">
-                    <div className="testimonial-rating">
-                      {[...Array(5)].map((_, starIndex) => (
-                        <i key={starIndex} className="fas fa-star"></i>
-                      ))}
-                    </div>
-                    <p className="testimonial-text">{testimonial.content}</p>
-                    <div className="testimonial-author">
-                      <img
-                        src={testimonial.avatar}
-                        alt={testimonial.name}
-                        className="testimonial-avatar"
-                      />
-                      <h6>{testimonial.name}</h6>
-                      <small>{testimonial.role}</small>
-                    </div>
-                  </div>
-                </div>
-              ))}
-              {activeTestimonial < testimonials.length - 1 && (
-                <button
-                  className="carousel-nav right"
-                  onClick={() => setActiveTestimonial((i) => i + 1)}
-                >
-                  <i className="fas fa-chevron-right"></i>
-                </button>
-              )}
-            </div>
-          </div>
+          <button
+            className="edit-profile-btn"
+            onClick={() => setShowEditProfile(true)}
+          >
+            Edit Profile
+          </button>
         </div>
+
+        <div className="recipe-buttons">
+          <button
+            className={`recipe-btn ${
+              activeSection === "myRecipes" ? "active" : ""
+            }`}
+            onClick={() => setActiveSection("myRecipes")}
+          >
+            My Recipes
+          </button>
+          <button
+            className={`recipe-btn ${
+              activeSection === "favoriteRecipes" ? "active" : ""
+            }`}
+            onClick={() => setActiveSection("favoriteRecipes")}
+          >
+            Favorite Recipes
+          </button>
+          <button
+            className={`recipe-btn ${
+              activeSection === "savedRecipes" ? "active" : ""
+            }`}
+            onClick={() => setActiveSection("savedRecipes")}
+          >
+            Saved Recipes
+          </button>
+        </div>
+
+        {activeSection === "myRecipes" && (
+          <RecipeGrid title="My Recipes" recipes={userRecipes} />
+        )}
+        {activeSection === "favoriteRecipes" && (
+          <RecipeGrid title="Favorite Recipes" recipes={favoriteRecipes} />
+        )}
+        {activeSection === "savedRecipes" && (
+          <RecipeGrid title="Saved Recipes" recipes={savedRecipes} />
+        )}
       </div>
+
+      {showEditProfile && (
+        <EditProfile onClose={() => setShowEditProfile(false)} />
+      )}
     </div>
   );
 };
 
-export default Home;
-
+export default Profile;
