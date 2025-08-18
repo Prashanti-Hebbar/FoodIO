@@ -218,7 +218,9 @@ Thanks to these wonderful people who have contributed to Foodio:
 
 ## 📱 Screenshots & Demo
 
-*Coming soon! We're working on adding screenshots and a live demo to showcase Foodio's beautiful interface and features.*
+![Screenshot 1](/website_screenshot_1.png)
+![Screenshot 2](/website_screenshot_2.png)
+
 
 ---
 
