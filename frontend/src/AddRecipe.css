@@ -43,10 +43,12 @@
 -------------------------- */
 .page-container {
   min-height: 80vh;
-  background: var(--bg-gradient);
+  background: linear-gradient(135deg, #fff4e6, #ffd8a8); /* soft creamy orange gradient */
   padding: 40px 20px;
   transition: all 0.3s ease;
 }
+
+
 
 /* Header */
 .header {

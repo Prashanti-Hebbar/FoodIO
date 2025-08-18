@@ -329,14 +329,15 @@ button:hover {
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  background: linear-gradient(
-    45deg,
-    #ffd700,
-    #ff9800,
-    #f44336,
-    #da8f48,
-    #f48922
-  );
+background: linear-gradient(
+  45deg,
+  #fff3cc,  /* very light golden-orange */
+  #ffe0b3,  /* soft creamy orange */
+  #ffd1a1,  /* pastel peachy-orange */
+  #ffc38f,  /* light apricot */
+  #ffb680   /* muted soft tangerine */
+);
+
   background-size: 400% 400%;
   animation: gradientShift 8s ease infinite;
   font-family: "Montserrat", sans-serif;

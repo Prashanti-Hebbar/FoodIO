@@ -94,7 +94,7 @@ function Footer() {
 
   return (
     // Change hardcoded colors to use CSS variables
-    <footer className="enhanced-footer" style={{ backgroundColor: 'var(--bg-color)', color: 'var(--text-color)' }}>
+    <footer className="enhanced-footer">
       <div className="container-fluid px-4">
         <div className="row align-items-start g-4 justify-content-between">
           <div className="col-12 col-md-6 col-lg-3 footer-section">
