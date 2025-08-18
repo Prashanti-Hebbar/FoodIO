@@ -97,11 +97,10 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, isHomeScreen, recipes = [] }) => {
   };
 
   return (
-    <nav
-      className={`w-full z-50 text-white ${
-        isHomeScreen ? "fixed top-0" : "relative"
-      } backdrop-blur-md shadow-[rgba(0,0,0,0.2)_0px_4px_20px,rgba(255,204,0,0.05)_0px_0px_30px_inset] bg-black/60`}
-    >
+   <nav
+  className="sticky top-0 w-full z-50 text-white backdrop-blur-md shadow-[rgba(0,0,0,0.2)_0px_4px_20px,rgba(255,204,0,0.05)_0px_0px_30px_inset] bg-black/60"
+>
+
       <div className="max-w-7xl lg:mx-16 mx-auto px-2 sm:px-4 lg:px-8">
         <div className="py-4 flex justify-between items-center h-16">
           {/* Logo */}
