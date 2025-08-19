@@ -1,45 +1,21 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import recipes from '../pages/recipes';
 import "../navbar.css";
 import axios from 'axios';
 import { useUserContext } from '../context/userContext';
-import "../navbar.css";
 
-const Navbar = ({ isLoggedIn, setIsLoggedIn, isHomeScreen, recipes = [] }) => {
-  console.log("Recipes in Navbar:", recipes);
-
+const Navbar = ({ isLoggedIn, setIsLoggedIn, recipes = [] }) => {
   const { setUserData } = useUserContext();
   const navigate = useNavigate();
-
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [userMenuOpen, setUserMenuOpen] = useState(false);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [searchResults, setSearchResults] = useState([]);
-
-  const dropdownTimeout = useRef(null);
-
-  // Dashboard dropdown handlers
-  const handleDashboardEnter = () => {
-    clearTimeout(dropdownTimeout.current);
-    setIsDropdownOpen(true);
-  };
-
-const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
-  const { setUserData } = useUserContext();
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [isNavCollapsed, setIsNavCollapsed] = useState(true);
-  const navigate = useNavigate();
 
   const handleLogout = async () => {
     const confirmed = window.confirm("Are you sure you want to logout?");
     if (confirmed) {
       try {
-
-        await axios.post("https://foodio-backend-cgsj.onrender.com/auth/logout", {}, {
-          withCredentials: true
-        });
+        await axios.post("https://foodio-backend-cgsj.onrender.com/auth/logout", {}, { withCredentials: true });
         localStorage.clear();
         setIsLoggedIn(false);
         setUserData(null);
@@ -57,23 +33,18 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
     if (term.trim()) {
       const results = Object.values(recipes)
         .flat()
-
         .filter((recipe) =>
           recipe.title.toLowerCase().includes(term.toLowerCase())
-        ) .sort((a, b) => {
-        const aTitle = a.title.toLowerCase();
-        const bTitle = b.title.toLowerCase();
-
-        const aStarts = aTitle.startsWith(term);
-        const bStarts = bTitle.startsWith(term);
-
-        // Prioritize ones that start with the search term
-        if (aStarts && !bStarts) return -1;
-        if (!aStarts && bStarts) return 1;
-
-        // Otherwise, fallback to alphabetical order
-        return aTitle.localeCompare(bTitle);
-      });
+        )
+        .sort((a, b) => {
+          const aTitle = a.title.toLowerCase();
+          const bTitle = b.title.toLowerCase();
+          const aStarts = aTitle.startsWith(term);
+          const bStarts = bTitle.startsWith(term);
+          if (aStarts && !bStarts) return -1;
+          if (!aStarts && bStarts) return 1;
+          return aTitle.localeCompare(bTitle);
+        });
       setSearchResults(results);
     } else {
       setSearchResults([]);
@@ -81,7 +52,6 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
   };
 
   const handleRecipeClick = (id) => {
-     console.log("Navigating to recipe with id:", id);
     navigate(`/viewRecipe?id=${id}`);
     setSearchTerm('');
     setSearchResults([]);
@@ -91,6 +61,9 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
   const handleNavToggle = () => {
     setIsNavCollapsed(!isNavCollapsed);
   };
+
+  const handleNavLinkClick = () => {
+    setIsNavCollapsed(true);
   };
 
   return (
@@ -99,7 +72,6 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
         <a className="navbar-brand" href="/Home" onClick={handleNavLinkClick}>
           FoodIO
         </a>
-
         <button
           className="navbar-toggler"
           type="button"
@@ -110,18 +82,13 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
         >
           <span className="navbar-toggler-icon"></span>
         </button>
-
-        <div
-          className={`collapse navbar-collapse ${!isNavCollapsed ? 'show' : ''}`}
-          id="navbarSupportedContent"
-        >
+        <div className={`collapse navbar-collapse ${!isNavCollapsed ? 'show' : ''}`} id="navbarSupportedContent">
           <ul className="navbar-nav mr-auto">
             <li className="nav-item active">
               <a className="nav-link" href="/Home" onClick={handleNavLinkClick}>
                 Home
               </a>
             </li>
-
             <div className="dropdown">
               <button
                 className="btn btn-secondary dropdown-toggle"
@@ -152,34 +119,30 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
                 </li>
               </ul>
             </div>
-
             <li className="nav-item">
               <a className="nav-link" href="/About" onClick={handleNavLinkClick}>
                 About
               </a>
             </li>
           </ul>
-
           <a className="ChatButton" href="/ai-chat" onClick={handleNavLinkClick}>
             Chat with AI
           </a>
           <form className="form-inline d-flex align-items-center position-relative">
             <input
-              className="form-control mr-sm-2"
+              className="form-control mr-sm-2 w-full px-4 py-2 rounded-full text-black focus:outline-none focus:ring-2 focus:ring-yellow-300"
               type="search"
               placeholder="Search"
               value={searchTerm}
               onChange={handleSearch}
-              className="w-full px-4 py-2 rounded-full text-black focus:outline-none focus:ring-2 focus:ring-yellow-300"
             />
             {searchResults.length > 0 && (
               <div className="search-results">
                 {searchResults.map((recipe) => (
                   <div
                     key={recipe.id}
-                    className="search-item"
+                    className="search-item px-4 py-2 hover:bg-gray-100 cursor-pointer"
                     onClick={() => handleRecipeClick(recipe.id)}
-                    className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
                   >
                     <img
                       src={recipe.image}
@@ -188,11 +151,10 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
                     />
                     <span className="search-result-title">{recipe.title}</span>
                   </div>
-                )})}
+                ))}
               </div>
             )}
           </form>
-
           <div className="auth-buttons">
             {isLoggedIn ? (
               <button
@@ -219,7 +181,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
             </a>
           </div>
         </div>
-        </nav>
+      </nav>
     </div>
   );
 };
