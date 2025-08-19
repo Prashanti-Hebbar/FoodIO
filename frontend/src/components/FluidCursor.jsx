@@ -4,10 +4,10 @@ import { useEffect, useRef } from "react";
 const EMOJIS = ["🍕","🍩","🍓","🍪","🍔","🍰","🍇","🍉","🌮","🍣","🍦","🥐","🍬"];
 
 export default function EmojiTrail({
-  density = 1,     // slightly more for a richer trail
-  size = 24,       // bigger + glowing
-  max = 150,       // allow more before cleanup
-  z = 999999
+  density = 1,     // how many per mousemove
+  size = 22,       // font size in px
+  max = 120,       // max total emojis on screen
+  z = 999999       // z-index so it stays on top
 }) {
   const nodes = useRef([]);
   const idx = useRef(0);
@@ -19,17 +19,14 @@ export default function EmojiTrail({
         el.className = "emoji-trail";
         el.textContent = EMOJIS[idx.current++ % EMOJIS.length];
 
-        // jitter so they don't align too perfectly
-        const jitterX = (Math.random() * 20) - 10;
-        const jitterY = (Math.random() * 20) - 10;
+        // slight random jitter so they don't stack perfectly
+        const jitterX = (Math.random() * 12) - 6;
+        const jitterY = (Math.random() * 12) - 6;
 
         el.style.left = `${e.clientX + jitterX}px`;
         el.style.top  = `${e.clientY + jitterY}px`;
-        el.style.fontSize = `${size + Math.random() * 10}px`;
+        el.style.fontSize = `${size}px`;
         el.style.zIndex = z;
-
-        // random animation duration for variety
-        el.style.animationDuration = `${800 + Math.random() * 600}ms`;
 
         document.body.appendChild(el);
         nodes.current.push(el);
@@ -39,7 +36,7 @@ export default function EmojiTrail({
         });
       }
 
-      // clean old ones
+      // keep things performant
       if (nodes.current.length > max) {
         const excess = nodes.current.splice(0, nodes.current.length - max);
         excess.forEach(n => n.remove());
@@ -54,5 +51,5 @@ export default function EmojiTrail({
     };
   }, [density, size, max, z]);
 
-  return null;
+  return null; // nothing to render—elements are added to <body>
 }
