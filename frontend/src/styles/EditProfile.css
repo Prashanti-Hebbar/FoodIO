@@ -1,73 +1,102 @@
-.edit-profile-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.4);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
+/* Root variables for light & dark themes */
+:root {
+  --bg-light: #fff;
+  --bg-dark: #2b2b2b;
+  --overlay-light: rgba(0, 0, 0, 0.4);
+  --overlay-dark: rgba(0, 0, 0, 0.7);
+  --text-light: #222;
+  --text-dark: #e0e0e0;
+  --input-bg-light: #fff;
+  --input-bg-dark: #3a3a3a;
+  --input-border-light: #ccc;
+  --input-border-dark: #555;
+  --input-focus-light: #999;
+  --input-focus-dark: #aaa;
+  --error-color: #d00;
+  --cancel-bg-light: #eee;
+  --cancel-bg-dark: #444;
+  --cancel-hover-light: #ddd;
+  --cancel-hover-dark: #555;
+  --save-bg: #e67e22;
+  --save-hover: #cf6d17;
 }
 
-.edit-profile-modal {
-  background: #fff;
-  border-radius: 6px;
-  width: 380px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  position: relative;
-  padding: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
+/* Overlay */
+[data-theme="light"] .edit-profile-overlay {
+  background: var(--overlay-light);
 }
 
+[data-theme="dark"] .edit-profile-overlay {
+  background: var(--overlay-dark);
+}
+
+/* Modal container */
+[data-theme="light"] .edit-profile-modal {
+  background: var(--bg-light);
+  color: var(--text-light);
+}
+
+[data-theme="dark"] .edit-profile-modal {
+  background: var(--bg-dark);
+  color: var(--text-dark);
+}
+
+/* Headings */
 .edit-profile-modal h2 {
   margin: 0 0 1.5rem 0;
   font-size: 1.25rem;
   text-align: center;
-  color: #222;
   font-weight: 600;
-  order: 1;
 }
 
+/* Form */
 .edit-profile-modal form {
   display: flex;
   flex-direction: column;
-  order: 2;
   width: 100%;
 }
 
 .form-group label {
   font-size: 0.9rem;
-  color: #444;
   margin-bottom: 0.5rem;
   display: block;
 }
 
-.form-group input {
-  width: 100%;
-  padding: 0.75rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 0.95rem;
+[data-theme="light"] .form-group input {
+  background: var(--input-bg-light);
+  border: 1px solid var(--input-border-light);
+  color: var(--text-light);
+}
+
+[data-theme="dark"] .form-group input {
+  background: var(--input-bg-dark);
+  border: 1px solid var(--input-border-dark);
+  color: var(--text-dark);
 }
 
 .form-group input:focus {
-  border-color: #999;
   outline: none;
 }
 
+[data-theme="light"] .form-group input:focus {
+  border-color: var(--input-focus-light);
+}
+
+[data-theme="dark"] .form-group input:focus {
+  border-color: var(--input-focus-dark);
+}
+
+/* Error */
 .error-input {
-  border-color: #d00;
+  border-color: var(--error-color);
 }
 
 .error-message {
-  color: #d00;
+  color: var(--error-color);
   font-size: 0.8rem;
 }
 
+/* Buttons */
 .button-group {
   display: flex;
   justify-content: flex-end;
@@ -88,24 +117,36 @@
   cursor: not-allowed;
 }
 
-.cancel-button {
-  background: #eee;
-  color: #333;
+/* Cancel button */
+[data-theme="light"] .cancel-button {
+  background: var(--cancel-bg-light);
+  color: var(--text-light);
 }
 
-.cancel-button:hover:not(:disabled) {
-  background: #ddd;
+[data-theme="dark"] .cancel-button {
+  background: var(--cancel-bg-dark);
+  color: var(--text-dark);
 }
 
+[data-theme="light"] .cancel-button:hover:not(:disabled) {
+  background: var(--cancel-hover-light);
+}
+
+[data-theme="dark"] .cancel-button:hover:not(:disabled) {
+  background: var(--cancel-hover-dark);
+}
+
+/* Save button */
 .save-button {
-  background: #e67e22;
+  background: var(--save-bg);
   color: #fff;
 }
 
 .save-button:hover:not(:disabled) {
-  background: #cf6d17;
+  background: var(--save-hover);
 }
 
+/* Responsive */
 @media (max-width: 480px) {
   .edit-profile-modal {
     width: 90%;

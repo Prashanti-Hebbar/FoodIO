@@ -1,9 +1,54 @@
-.page-container {
-  min-height: 80vh;
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-  padding: 40px 20px;
+/* ==========================
+   Recipe Page CSS - Light & Dark Mode
+========================== */
+
+/* --------------------------
+   Root Variables
+-------------------------- */
+:root {
+  --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  --container-bg: #fff;
+  --text-color: #2c3e50;
+  --label-color: #2c3e50;
+  --input-border: #e0e0e0;
+  --input-focus: #6c5ce7;
+  --btn-bg: linear-gradient(45deg, orange, orangered);
+  --btn-shadow: rgba(108, 92, 231, 0.3);
+  --file-bg: #f8f9fa;
+  --file-border: #e0e0e0;
+  --back-btn-bg: #fff;
+  --back-btn-color: #333;
+  --back-btn-shadow: rgba(0,0,0,0.1);
 }
 
+/* Dark Mode Variables */
+.dark-mode {
+  --bg-gradient: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 100%);
+  --container-bg: #1f1f1f;
+  --text-color: #f5f5f5;
+  --label-color: #f5f5f5;
+  --input-border: #555;
+  --input-focus: #6c5ce7;
+  --btn-bg: linear-gradient(45deg, #e67e22, #c0392b);
+  --btn-shadow: rgba(108, 92, 231, 0.6);
+  --file-bg: #2a2a2a;
+  --file-border: #555;
+  --back-btn-bg: #333;
+  --back-btn-color: #f5f5f5;
+  --back-btn-shadow: rgba(0,0,0,0.5);
+}
+
+/* --------------------------
+   Page Container
+-------------------------- */
+.page-container {
+  min-height: 80vh;
+  background: var(--bg-gradient);
+  padding: 40px 20px;
+  transition: all 0.3s ease;
+}
+
+/* Header */
 .header {
   display: flex;
   align-items: center;
@@ -11,34 +56,37 @@
   margin: 0 auto 30px;
 }
 
+/* Back Button */
 .back-btn {
   padding: 12px 24px;
   margin-right: 20px;
   border: none;
   border-radius: 50px;
-  background: #fff;
-  color: #333;
+  background: var(--back-btn-bg);
+  color: var(--back-btn-color);
   font-weight: 600;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 15px var(--back-btn-shadow);
   transition: all 0.3s ease;
   cursor: pointer;
 }
-
 .back-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  box-shadow: 0 6px 20px var(--back-btn-shadow);
 }
 
+/* Content Container */
 .content-container {
   max-width: 800px;
-
   margin: 0 auto;
-  background: white;
+  background: var(--container-bg);
   padding: 40px;
   border-radius: 20px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+  color: var(--text-color);
 }
 
+/* Form Styles */
 .recipe-form {
   display: flex;
   flex-direction: column;
@@ -47,7 +95,7 @@
 
 .recipe-form label {
   font-weight: 600;
-  color: #2c3e50;
+  color: var(--label-color);
   margin-bottom: 8px;
   font-size: 1.1rem;
 }
@@ -56,15 +104,17 @@
 .recipe-form input[type="number"],
 .recipe-form textarea {
   padding: 12px 16px;
-  border: 2px solid #e0e0e0;
+  border: 2px solid var(--input-border);
   border-radius: 10px;
   font-size: 1rem;
   transition: all 0.3s ease;
+  background: var(--container-bg);
+  color: var(--text-color);
 }
 
 .recipe-form input:focus,
 .recipe-form textarea:focus {
-  border-color: #6c5ce7;
+  border-color: var(--input-focus);
   outline: none;
   box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.1);
 }
@@ -80,6 +130,7 @@
   gap: 20px;
 }
 
+/* Image Preview */
 .image-preview {
   width: 100%;
   max-height: 300px;
@@ -88,8 +139,9 @@
   margin-top: 10px;
 }
 
+/* Save Button */
 .save-btn {
-  background: linear-gradient(45deg, orange, orangered);
+  background: var(--btn-bg);
   color: white;
   padding: 15px 30px;
   border: none;
@@ -102,27 +154,32 @@
   text-transform: uppercase;
   letter-spacing: 1px;
 }
-
 .save-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(108, 92, 231, 0.3);
+  box-shadow: 0 8px 25px var(--btn-shadow);
 }
 
+/* File Input */
 input[type="file"] {
-  background: #f8f9fa;
+  background: var(--file-bg);
   padding: 20px;
   border-radius: 10px;
-  border: 2px dashed #e0e0e0;
+  border: 2px dashed var(--file-border);
   cursor: pointer;
+  transition: all 0.3s ease;
 }
 
+/* Heading */
 h1 {
-  color: #2c3e50;
+  color: var(--text-color);
   font-size: 2.5rem;
   margin: 0;
   font-weight: 700;
 }
 
+/* --------------------------
+   Responsive
+-------------------------- */
 @media (max-width: 768px) {
   .content-container {
     padding: 20px;
@@ -136,6 +193,7 @@ h1 {
     font-size: 2rem;
   }
 }
+
 @media (max-width: 454px) {
   .back-btn {
     padding: 4px 8px;
@@ -145,6 +203,27 @@ h1 {
   }
   
   h1 {
-    font-size: 1.0rem;
+    font-size: 1rem;
+  }
+}
+
+/* --------------------------
+   Optional: Detect system dark mode
+-------------------------- */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-gradient: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 100%);
+    --container-bg: #1f1f1f;
+    --text-color: #f5f5f5;
+    --label-color: #f5f5f5;
+    --input-border: #555;
+    --input-focus: #6c5ce7;
+    --btn-bg: linear-gradient(45deg, #e67e22, #c0392b);
+    --btn-shadow: rgba(108, 92, 231, 0.6);
+    --file-bg: #2a2a2a;
+    --file-border: #555;
+    --back-btn-bg: #333;
+    --back-btn-color: #f5f5f5;
+    --back-btn-shadow: rgba(0,0,0,0.5);
   }
 }
