@@ -1,50 +1,36 @@
-// <<<<<<< session-for-database-transactions
-import { UserModel } from "../models/Users.js";
-import mongoose from "mongoose";
-// =======
 import User from "../models/Users.js";
-// >>>>>>> main
+import mongoose from "mongoose";
+
 const getProfile = async (req, res) => {
   const session = await mongoose.startSession();
   session.startTransaction();
 
-      try {
-
-// <<<<<<< session-for-database-transactions
-        const user = await UserModel.findOne({_id:req.user.id});
-        await session.commitTransaction();
-        session.endSession();
-// =======
-        const user = await User.findOne({_id:req.user.id});
-// >>>>>>> main
-        if (!user) {
-
-        return res.status(404).json({ message: "User not found" });
+  try {
+    const user = await User.findOne({ _id: req.user.id });
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
     }
-
-    res.status(200).json({user});
-} catch (error) {
-
+    res.status(200).json({ user });
+  } catch (error) {
     res.status(500).json({ message: "Error fetching user data" });
   }
-}
-const updatedUser = async (req,res) =>
-  {
+};
+
+const updatedUser = async (req, res) => {
   const session = await mongoose.startSession();
   session.startTransaction();
 
-    try {
+  try {
     const { username, email } = req.body;
-    // Check if username is already taken by another user
-    const existingUser = await User.findOne({ 
-      username, 
-      _id: { $ne: req.user.id } 
+    const existingUser = await User.findOne({
+      username,
+      _id: { $ne: req.user.id }
     });
-    
+
     if (existingUser) {
       return res.status(400).json({ message: "Username already taken" });
     }
-    
+
     const updatedUser = await User.findByIdAndUpdate(
       req.user.id,
       { username, email },
@@ -59,13 +45,13 @@ const updatedUser = async (req,res) =>
       session.endSession();
       return res.status(404).json({ message: "User not found" });
     }
-    
+
     res.json(updatedUser);
   } catch (error) {
     await session.abortTransaction();
     session.endSession();
     res.status(500).json({ message: "Error updating user profile" });
   }
-  
-  }
-export { getProfile,updatedUser };
+};
+
+export { getProfile, updatedUser };
