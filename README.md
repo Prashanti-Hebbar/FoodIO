@@ -111,12 +111,13 @@ No complex configuration required. Just clone, install, and run.
 2.  **Install Dependencies:**
     ```bash
     # Backend dependencies
-    cd server
+    cd backend
     npm install
     
     # Frontend dependencies
-    cd ../client
+    cd frontend
     npm install
+    npm start
     ```
 
 3.  **🔑 Set Up Environment Variables:**
@@ -131,11 +132,11 @@ No complex configuration required. Just clone, install, and run.
 4.  **🎉 Start the Application:**
     ```bash
     # Start backend server
-    cd server
-    npm run dev
+    cd backend
+    npm start
     
     # Start frontend server (in new terminal)
-    cd ../client
+    cd frontend
     npm start
     ```
     
