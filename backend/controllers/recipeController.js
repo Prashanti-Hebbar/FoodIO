@@ -1,5 +1,5 @@
 import { RecipesModel } from "../models/Recipes.js";
-import { UserModel } from "../models/Users.js";
+import User from "../models/Users.js";
 import jwt from "jsonwebtoken";
 import axios from "axios";
 
@@ -47,7 +47,7 @@ export const saveRecipe = async (req, res) => {
     const recipe = await RecipesModel.findById(recipeId);
     if (!recipe) return res.status(404).json({ message: "Recipe not found" });
 
-    const user = await UserModel.findById(userId);
+    const user = await User.findById(userId);
     if (!user) return res.status(404).json({ message: "User not found" });
 
     if (user.savedRecipes.includes(recipeId)) {
@@ -67,7 +67,7 @@ export const saveRecipe = async (req, res) => {
 export const getSavedRecipes = async (req, res) => {
   try {
     const userId = req.userId;
-    const user = await UserModel.findById(userId);
+    const user = await User.findById(userId);
     if (!user) return res.status(404).json({ message: "User not found" });
 
     const savedRecipes = await RecipesModel.find({ _id: { $in: user.savedRecipes } });
@@ -83,7 +83,7 @@ export const removeSavedRecipe = async (req, res) => {
     const userId = req.userId;
     const { recipeId } = req.params;
 
-    const user = await UserModel.findById(userId);
+    const user = await User.findById(userId);
     if (!user) return res.status(404).json({ message: "User not found" });
 
     user.savedRecipes = user.savedRecipes.filter(id => id.toString() !== recipeId);
