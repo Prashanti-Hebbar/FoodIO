@@ -4,6 +4,26 @@ import recipes from '../pages/recipes';
 import "../navbar.css";
 import axios from 'axios';
 import { useUserContext } from '../context/userContext';
+import "../navbar.css";
+
+const Navbar = ({ isLoggedIn, setIsLoggedIn, isHomeScreen, recipes = [] }) => {
+  console.log("Recipes in Navbar:", recipes);
+
+  const { setUserData } = useUserContext();
+  const navigate = useNavigate();
+
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [userMenuOpen, setUserMenuOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+
+  const dropdownTimeout = useRef(null);
+
+  // Dashboard dropdown handlers
+  const handleDashboardEnter = () => {
+    clearTimeout(dropdownTimeout.current);
+    setIsDropdownOpen(true);
+  };
 
 const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
   const { setUserData } = useUserContext();
@@ -16,7 +36,8 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
     const confirmed = window.confirm("Are you sure you want to logout?");
     if (confirmed) {
       try {
-        await axios.post("http://localhost:3001/auth/logout", {}, {
+
+        await axios.post("https://foodio-backend-cgsj.onrender.com/auth/logout", {}, {
           withCredentials: true
         });
         localStorage.clear();
@@ -39,7 +60,20 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
 
         .filter((recipe) =>
           recipe.title.toLowerCase().includes(term.toLowerCase())
-        );
+        ) .sort((a, b) => {
+        const aTitle = a.title.toLowerCase();
+        const bTitle = b.title.toLowerCase();
+
+        const aStarts = aTitle.startsWith(term);
+        const bStarts = bTitle.startsWith(term);
+
+        // Prioritize ones that start with the search term
+        if (aStarts && !bStarts) return -1;
+        if (!aStarts && bStarts) return 1;
+
+        // Otherwise, fallback to alphabetical order
+        return aTitle.localeCompare(bTitle);
+      });
       setSearchResults(results);
     } else {
       setSearchResults([]);
@@ -47,6 +81,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
   };
 
   const handleRecipeClick = (id) => {
+     console.log("Navigating to recipe with id:", id);
     navigate(`/viewRecipe?id=${id}`);
     setSearchTerm('');
     setSearchResults([]);
@@ -135,6 +170,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
               placeholder="Search"
               value={searchTerm}
               onChange={handleSearch}
+              className="w-full px-4 py-2 rounded-full text-black focus:outline-none focus:ring-2 focus:ring-yellow-300"
             />
             {searchResults.length > 0 && (
               <div className="search-results">
@@ -143,7 +179,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
                     key={recipe.id}
                     className="search-item"
                     onClick={() => handleRecipeClick(recipe.id)}
-                    style={{ cursor: 'pointer' }}
+                    className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
                   >
                     <img
                       src={recipe.image}
@@ -152,7 +188,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
                     />
                     <span className="search-result-title">{recipe.title}</span>
                   </div>
-                ))}
+                )})}
               </div>
             )}
           </form>

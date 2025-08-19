@@ -8,7 +8,7 @@ const Dinner = () => {
         {
           id: 1,
           title: "Palak Paneer",
-          image: "../dinner/palak_paneer.jpg",
+          image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzInsg3XxMcqrU233PO3em4HBiNRWuDwMWoQ&s",
           rating: 4.9,
           prepTime: "35 minutes",
           description: "Soft paneer cubes cooked in a creamy spinach gravy",
@@ -25,7 +25,7 @@ const Dinner = () => {
         {
           id: 2,
           title: "Chicken Curry",
-          image: "../dinner/chicken_curry.jpg",
+          image: "https://www.cubesnjuliennes.com/wp-content/uploads/2020/07/Instant-Pot-Chicken-Curry-Recipe-500x500.jpg",
           rating: 4.8,
           prepTime: "40 minutes",
           description: "Spicy and flavorful Indian-style chicken curry",
@@ -42,7 +42,7 @@ const Dinner = () => {
         {
           id: 3,
           title: "Aloo Gobi",
-          image: "../dinner/aloo_gobi.jpg",
+          image: "https://www.indianhealthyrecipes.com/wp-content/uploads/2022/03/aloo-gobi-recipe.jpg",
           rating: 4.7,
           prepTime: "30 minutes",
           description: "Potatoes and cauliflower cooked with aromatic spices",
@@ -59,7 +59,7 @@ const Dinner = () => {
         {
           id: 4,
           title: "Matar Paneer",
-          image: "../dinner/matar_paneer.jpg",
+          image: "https://www.vegrecipesofindia.com/wp-content/uploads/2021/02/matar-paneer-2.jpg",
           rating: 4.8,
           prepTime: "35 minutes",
           description: "Cottage cheese and green peas cooked in a spiced tomato gravy",
@@ -76,7 +76,7 @@ const Dinner = () => {
         {
           id: 5,
           title: "Baingan Bharta",
-          image: "../dinner/baingan_bharta.jpg",
+          image: "https://upload.wikimedia.org/wikipedia/commons/4/4d/Baigan_Bharta_from_Nagpur.JPG",
           rating: 4.7,
           prepTime: "30 minutes",
           description: "Roasted eggplant mashed and cooked with spices",
@@ -93,7 +93,7 @@ const Dinner = () => {
         {
           id: 6,
           title: "Masoor Dal",
-          image: "../dinner/masoor_dal.jpg",
+          image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVIbyKLDUHbXA_krLojlIhLlLJbJYktiNkRQ&s",
           rating: 4.8,
           prepTime: "30 minutes",
           description: "Red lentils cooked with garlic and Indian spices",

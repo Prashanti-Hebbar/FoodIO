@@ -1,28 +1,29 @@
-import { createContext,useContext,useState } from "react";
+import { createContext, useContext, useState } from "react";
 
-const UserContext = createContext(
-    {
-        userData: null,
-        setUserData: () => {}
-    });
+const UserContext = createContext({
+  userData: null,
+  setUserData: () => {},
+  avatarUrl: "login_User_Icon.jpg",
+  setAvatarUrl: () => {},
+});
 
+const UserProvider = ({ children }) => {
+  const [userData, setUserData] = useState(null);
+  const [avatarUrl, setAvatarUrl] = useState("login_User_Icon.jpg");
 
-const UserProvider = ({children})=>
-    {
-        const [userData, setUserData] = useState(null);
-
-        return (
-            <UserContext.Provider value={{ userData, setUserData }}>
-                {children}
-            </UserContext.Provider>
-        );
-    };
+  return (
+    <UserContext.Provider value={{ userData, setUserData, avatarUrl, setAvatarUrl }}>
+      {children}
+    </UserContext.Provider>
+  );
+};
 
 const useUserContext = () => {
-    const context = useContext(UserContext);
-    if (!context) {
-        throw new Error("useUserContext must be used within a UserProvider");
-    }
-    return context;
-}
+  const context = useContext(UserContext);
+  if (!context) {
+    throw new Error("useUserContext must be used within a UserProvider");
+  }
+  return context;
+};
+
 export { UserProvider, useUserContext };

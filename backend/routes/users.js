@@ -1,7 +1,7 @@
 import express from "express";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
-import { UserModel } from "../models/Users.js";
+import User from "../models/Users.js";
 import { login, register,logout } from "../controllers/authController.js";
 import { getProfile,updatedUser } from "../controllers/userController.js";
 import { verifyJWT } from "../middleware/verifyJWT.js";
@@ -15,7 +15,7 @@ router.get('/user',verifyJWT,getProfile);
 
 // router.post("/register", async (req, res) => {
 //   const { username, email, password } = req.body; 
-//   const user = await UserModel.findOne({ username }); 
+//   const user = await User.findOne({ username }); 
 
 //   if (user) {
 //     return res.json({ message: "User already exists" }); 
@@ -23,7 +23,7 @@ router.get('/user',verifyJWT,getProfile);
 
 //   const hashedPassword = await bcrypt.hash(password, 10); 
 
-//   const newUser = new UserModel({ username, email, password: hashedPassword }); 
+//   const newUser = new User({ username, email, password: hashedPassword }); 
 //   await newUser.save(); 
 
 //   res.json({ message: "User Registered Successfully!" }); 
@@ -31,7 +31,7 @@ router.get('/user',verifyJWT,getProfile);
 
 // router.post("/login", async (req, res) => {
 //   const { username, password } = req.body; 
-//   const user = await UserModel.findOne({ username }); 
+//   const user = await User.findOne({ username }); 
 //   if (!user) {
 //     return res.json({ message: "User doesn't exist" }); 
 //   }
@@ -47,7 +47,7 @@ router.get('/user',verifyJWT,getProfile);
 // // Get user information
 // router.get("/user/:id", async (req, res) => {
 //   try {
-//     const user = await UserModel.findById(req.params.id).select("-password");
+//     const user = await User.findById(req.params.id).select("-password");
 //     if (!user) {
 //       return res.status(404).json({ message: "User not found" });
 //     }
@@ -63,7 +63,7 @@ router.get('/user',verifyJWT,getProfile);
 //     const { username, email } = req.body;
     
 //     // Check if username is already taken by another user
-//     const existingUser = await UserModel.findOne({ 
+//     const existingUser = await User.findOne({ 
 //       username, 
 //       _id: { $ne: req.params.id } 
 //     });
@@ -72,7 +72,7 @@ router.get('/user',verifyJWT,getProfile);
 //       return res.status(400).json({ message: "Username already taken" });
 //     }
     
-//     const updatedUser = await UserModel.findByIdAndUpdate(
+//     const updatedUser = await User.findByIdAndUpdate(
 //       req.params.id,
 //       { username, email },
 //       { new: true }

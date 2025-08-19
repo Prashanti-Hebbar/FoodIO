@@ -1,68 +1,75 @@
-/* Full page background */
+/* ==========================
+   Root Variables
+========================== */
+:root {
+    --bg-gradient: linear-gradient(135deg, #ff6b00 0%, #ff8533 50%, #ffb366 100%);
+    --overlay-bg: rgba(255, 255, 255, 0.88);
+    --text-color: #333333;
+    --accent-color: #ff6b00;
+    --accent-hover: #e65a00;
+    --input-border: #eeeeee;
+    --input-focus: rgba(255, 107, 0, 0.2);
+    --card-bg: #ffffff;
+    --card-border: #ff6b00;
+    --close-btn-bg-hover: rgba(255, 107, 0, 0.1);
+    --download-btn-bg: #ffffff;
+    --download-btn-color: #ff6b00;
+}
+
+/* --------------------------
+   Dark Mode Variables
+-------------------------- */
+.dark-mode {
+    --bg-gradient: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 50%, #3d3d3d 100%);
+    --overlay-bg: rgba(30, 30, 30, 0.88);
+    --text-color: #f5f5f5;
+    --accent-color: #e67e22;
+    --accent-hover: #c55a11;
+    --input-border: #555555;
+    --input-focus: rgba(230, 126, 34, 0.2);
+    --card-bg: #1f1f1f;
+    --card-border: #e67e22;
+    --close-btn-bg-hover: rgba(230, 126, 34, 0.1);
+    --download-btn-bg: #1f1f1f;
+    --download-btn-color: #e67e22;
+}
+
+/* --------------------------
+   Page Layout
+-------------------------- */
 .ai-chat-page {
     min-height: 100vh;
+    background: var(--bg-gradient);
     background-size: cover;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 2rem;
-}
-.download-button {
-    background: #ffffff;
-    color: #ff6b00;
-    border: 2px solid #ff6b00;
+    transition: all 0.3s ease;
 }
 
-.download-button:hover {
-    background: #ff6b00;
-    color: #ffffff;
-}
-.close-button {
-    background: transparent;
-    border: none;
-    color: #ff6b00;
-    font-size: 1.2rem;
-    font-weight: bold;
-    cursor: pointer;
-    float: right;
-}
-
-
-/* Semi-transparent overlay to improve readability */
 .ai-chat-overlay {
-    background: rgba(255, 255, 255, 0.88);
+    background: var(--overlay-bg);
     padding: 2rem;
     border-radius: 16px;
-    max-width: 600px;
+    max-width: 800px;
     width: 100%;
-    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.15);
     backdrop-filter: blur(3px);
     font-family: 'Segoe UI', sans-serif;
+    max-height: 90vh;
+    overflow-y: auto;
+    color: var(--text-color);
+    transition: all 0.3s ease;
 }
 
-.container {
-    padding: 0;
-    background: none; /* Remove duplicate background */
-    box-shadow: none;
-    border-radius: 0;
-    margin: 0;
-}
-
-.container h2 {
-    text-align: center;
-    color: #ff6b00;
-    font-size: 1.8rem;
-    margin-bottom: 1rem;
-}
-
-.form-group {
-    margin-bottom: 1rem;
-}
-
+/* --------------------------
+   Form Elements
+-------------------------- */
 .form-group label {
     display: block;
     margin-bottom: 0.4rem;
-    color: #333333;
+    color: var(--text-color);
     font-weight: 500;
 }
 
@@ -71,23 +78,26 @@
 .form-group textarea {
     width: 100%;
     padding: 0.6rem;
-    border: 2px solid #eeeeee;
+    border: 2px solid var(--input-border);
     border-radius: 8px;
     font-size: 1rem;
-    transition: border 0.3s, box-shadow 0.3s;
+    transition: all 0.3s ease;
+    background: var(--card-bg);
+    color: var(--text-color);
 }
 
 .form-group select:focus,
 .form-group input:focus,
 .form-group textarea:focus {
-    border-color: #ff6b00;
+    border-color: var(--accent-color);
     outline: none;
-    box-shadow: 0 0 0 3px rgba(255, 107, 0, 0.2);
+    box-shadow: 0 0 0 3px var(--input-focus);
 }
 
+/* Buttons */
 .button {
     width: 100%;
-    background: #ff6b00;
+    background: var(--accent-color);
     color: #ffffff;
     padding: 0.7rem;
     font-size: 1.1rem;
@@ -95,32 +105,118 @@
     border-radius: 8px;
     cursor: pointer;
     font-weight: 600;
-    transition: background 0.3s, transform 0.1s;
+    transition: all 0.3s, transform 0.1s;
 }
 
 .button:hover {
-    background: #e65a00;
+    background: var(--accent-hover);
     transform: translateY(-2px);
 }
 
 .button:disabled {
     background: #cccccc;
     cursor: not-allowed;
+    transform: none;
 }
 
+/* Recipe Card */
 .recipe-card {
     margin-top: 1.5rem;
-    background: #ffffff;
-    border-left: 6px solid #ff6b00;
-    padding: 1rem;
+    background: var(--card-bg);
+    border-left: 6px solid var(--card-border);
+    padding: 1.5rem;
     border-radius: 12px;
-    white-space: pre-wrap;
-    color: #333333;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+    color: var(--text-color);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.08);
+    position: relative;
+    transition: all 0.3s ease;
 }
 
-.recipe-card h3 {
-    margin-top: 0;
-    color: #ff6b00;
-    font-size: 1.3rem;
+/* Close Button */
+.close-button {
+    background: transparent;
+    border: none;
+    color: var(--accent-color);
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: background-color 0.3s;
+}
+
+.close-button:hover {
+    background-color: var(--close-btn-bg-hover);
+}
+
+/* Recipe Content */
+.recipe-content h1 {
+    color: var(--accent-color);
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid var(--accent-color);
+    padding-bottom: 0.5rem;
+}
+
+.recipe-content h2 {
+    color: var(--accent-hover);
+    font-size: 1.4rem;
+    margin-top: 1.5rem;
+    margin-bottom: 0.8rem;
+}
+
+.recipe-content h3 {
+    color: var(--text-color);
+    font-size: 1.2rem;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.recipe-content strong {
+    color: var(--accent-color);
+}
+
+.recipe-content code {
+    background-color: #2a2a2a;
+    color: #f5f5f5;
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    font-family: monospace;
+}
+
+.recipe-content blockquote {
+    border-left: 4px solid var(--accent-color);
+    margin: 1rem 0;
+    padding-left: 1rem;
+    color: #aaaaaa;
+    font-style: italic;
+}
+
+/* Download Button */
+.download-button {
+    background: var(--download-btn-bg);
+    color: var(--download-btn-color);
+    border: 2px solid var(--accent-color);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.download-button:hover {
+    background: var(--accent-color);
+    color: #ffffff;
+    transform: translateY(-2px);
+}
+
+/* --------------------------
+   Responsive
+-------------------------- */
+@media (max-width: 768px) {
+    .ai-chat-page { padding: 1rem; }
+    .ai-chat-overlay { padding: 1.5rem; max-height: 95vh; }
+    .container h2 { font-size: 1.5rem; }
+    .recipe-content h1 { font-size: 1.5rem; }
+    .recipe-content h2 { font-size: 1.2rem; }
 }
