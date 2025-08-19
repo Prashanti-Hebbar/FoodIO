@@ -1,7 +1,3 @@
-/* Import Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Montserrat:wght@700&display=swap');
-
-/* CSS Variables */
 :root {
     --primary-font: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
     --brand-font: 'Montserrat', sans-serif;
@@ -39,8 +35,29 @@
     font-family: var(--primary-font);
 }
 
-/* Brand Name */
-.navbar-brand {
+  .navbar-custom {
+    top: 0;
+    width: 100%;
+    padding: 12px 20px;
+    z-index: 1050;
+    height: auto;
+    min-height: 60px;
+    background: linear-gradient(
+      135deg,
+      rgba(45, 45, 45, 0.9) 0%,
+      rgba(65, 65, 65, 0.85) 50%,
+      rgba(35, 35, 35, 0.9) 100%
+    );
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 204, 0, 0.15);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2),
+                inset 0 0 30px rgba(255, 204, 0, 0.05);
+    font-family: var(--primary-font);
+  }
+  
+  /* Brand Name */
+  .navbar-brand {
     font-family: var(--brand-font);
     font-size: 26px;
     font-weight: 700;
@@ -52,10 +69,65 @@
 .navbar-brand:hover {
     color: var(--secondary-color) !important;
     text-shadow: 0 2px 10px rgba(255, 204, 0, 0.3);
-}
+  }
 
-/* Navigation Links */
-.navbar-nav .nav-item .nav-link {
+  /* Hamburger Menu Styling */
+  .navbar-toggler {
+    border: none;
+    padding: 4px 8px;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .navbar-toggler:focus {
+    box-shadow: none;
+  }
+
+  .navbar-toggler-icon {
+    background-image: none;
+    position: relative;
+    width: 24px;
+    height: 2px;
+    background-color: var(--primary-color);
+    display: block;
+    transition: all 0.3s ease;
+  }
+
+  .navbar-toggler-icon::before,
+  .navbar-toggler-icon::after {
+    content: '';
+    position: absolute;
+    width: 24px;
+    height: 2px;
+    background-color: var(--primary-color);
+    transition: all 0.3s ease;
+  }
+
+  .navbar-toggler-icon::before {
+    top: -8px;
+  }
+
+  .navbar-toggler-icon::after {
+    bottom: -8px;
+  }
+
+  /* Animation for hamburger menu when active */
+  .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
+    background-color: transparent;
+  }
+
+  .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon::before {
+    transform: rotate(45deg);
+    top: 0;
+  }
+
+  .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon::after {
+    transform: rotate(-45deg);
+    bottom: 0;
+  }
+  
+  /* Navigation Links */
+  .navbar-nav .nav-item .nav-link {
     font-family: var(--primary-font);
     font-size: 15px;
     font-weight: 500;
@@ -95,11 +167,13 @@
 }
 
 /* Dropdown Menu */
-[data-theme="light"] .dropdown-menu {
-    background-color: var(--dropdown-bg-light);
-}
-[data-theme="dark"] .dropdown-menu {
-    background-color: var(--dropdown-bg-dark);
+.dropdown-menu {
+    position: absolute;
+    z-index: 2000 !important;
+    background-color: rgba(0, 0, 0, 0.8);
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .dropdown-menu .dropdown-item {
@@ -134,10 +208,10 @@
     padding: 8px 15px;
     width: 500px;
     font-size: 14px;
-}
-
-/* Auth Buttons */
-.auth-buttons {
+  }
+  
+  /* Auth Buttons Container */
+  .auth-buttons {
     display: flex;
     align-items: center;
     gap: 12px;
@@ -228,56 +302,37 @@
     white-space: nowrap;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     backdrop-filter: blur(4px);
-}
-
-/* AI Chat Button */
-.ChatButton {
-    font-family: var(--primary-font);
-    text-decoration: none;
-    margin-left: 1rem;
-    font-size: 14px;
-    font-weight: 500;
-    letter-spacing: 0.3px;
-    padding: 10px 15px;
-    border-radius: 8px;
-    transition: all 0.3s ease-in-out;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    white-space: nowrap;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-}
-[data-theme="light"] .ChatButton {
-    background: rgba(255, 255, 255, 0.1);
-    color: white;
-}
-[data-theme="dark"] .ChatButton {
-    background: rgba(255, 255, 255, 0.05);
-    color: #e0e0e0;
-}
-.ChatButton:hover {
-    background: rgba(255, 204, 0, 0.1);
-    color: var(--primary-color);
-    border-color: var(--primary-color);
-}
-
-  /* Mobile Responsive */
-  @media (max-width: 768px) {
-    .navbar-nav {
-      text-align: center;
-    }
-    
-    .form-inline {
-      display: flex;
-      flex-direction: column;
-    }
-    
-    .form-inline .form-control {
-      width: 100%;
-      margin-bottom: 10px;
-    }
   }
-  
+
+  .link-light:hover {
+    opacity: 0.8;
+  }
+
+  /* AI Chat Button styling */
+  .ChatButton {
+      font-family: var(--primary-font);
+      text-decoration: none;
+      color: #ffffff;
+      margin-left: 1rem;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+      padding: 10px 15px;
+      border-radius: 8px;
+      transition: all 0.3s ease-in-out;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      white-space: nowrap;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .ChatButton:hover {
+      background: rgba(255, 204, 0, 0.1);
+      color: var(--primary-color);
+      border-color: var(--primary-color);
+  }
   .search-results {
     position: absolute;
     top: 100%;
@@ -315,4 +370,100 @@
     color: #333;
     font-size: 14px;
   }
-  
+
+  /* Mobile Responsive */
+  @media (max-width: 991.98px) {
+    .navbar-custom {
+      height: auto;
+      min-height: 60px;
+    }
+
+    .navbar-collapse {
+      background: rgba(45, 45, 45, 0.95);
+      backdrop-filter: blur(10px);
+      margin: 10px -20px -12px -20px;
+      padding: 20px;
+      border-radius: 0 0 10px 10px;
+      border-top: 1px solid rgba(255, 204, 0, 0.2);
+    }
+
+    .navbar-nav {
+      text-align: left;
+      margin-bottom: 20px;
+    }
+
+    .navbar-nav .nav-item {
+      margin: 5px 0;
+    }
+
+    .dropdown {
+      margin: 5px 0;
+    }
+
+    .ChatButton {
+      margin: 10px 0;
+      width: fit-content;
+    }
+    
+    .form-inline {
+      flex-direction: column;
+      align-items: stretch !important;
+      margin: 20px 0;
+    }
+    
+    .form-inline .form-control {
+      width: 100%;
+      margin: 0 0 10px 0;
+    }
+
+    .search-results {
+      position: relative;
+      width: 100%;
+      margin-top: 0;
+    }
+
+    .auth-buttons {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 10px;
+      margin-left: 0;
+      padding-right: 0;
+    }
+
+    .auth-buttons .btn,
+    .auth-buttons .loginlink,
+    .auth-buttons .reglink {
+      width: 100%;
+      text-align: center;
+      justify-content: center;
+    }
+
+    .myprofile {
+      align-self: center;
+      margin-top: 10px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .form-control {
+      width: 300px;
+    }
+
+    .search-results {
+      width: 300px;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .navbar-brand {
+      font-size: 22px;
+    }
+
+    .form-control {
+      width: 100%;
+    }
+
+    .search-results {
+      width: 100%;
+    }
+  }
