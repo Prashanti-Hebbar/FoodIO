@@ -56,19 +56,30 @@ const Categories = () => {
   ];
 
   return (
-    <div className="categories-wrapper">
+  <div className="relative min-h-screen overflow-hidden">
+    {/* Blurred background image */}
+    <div
+      className="absolute inset-0 bg-cover bg-center  blur-sm bg-white/20 z-0"
+      style={{ backgroundImage: "url('/bg.jpg')" }}
+    />
+
+
+
+
+    {/* Your original content */}
+    <div className="relative z-10 categories-wrapper">
       <div className="categories-hero">
         <div className="row" style={{ display: "flex", alignItems: "center" }}>
           <div className="col-8" data-aos="fade-right" data-aos-delay="100">
             <h1 style={{ fontSize: "4.5rem", fontWeight: "bold", color: "#fa5a4a" }}>
               Foodio Collections
             </h1>
-            <p style={{ fontSize: "1.2rem", color: "#6c7a89" }}>
+            <p style={{ fontSize: "1.2rem", color: "#4375aaff" }}>
               Explore Curated Collections. Experience Endless Flavor!
             </p>
           </div>
           <div className="col-4" data-aos="fade-left" data-aos-delay="200">
-            <img src="/menu.jpg" alt="menu-img" style={{ height: "200px"}} />
+            <img src="/menu.jpg" alt="menu-img" style={{ height: "200px" }} />
           </div>
         </div>
       </div>
@@ -113,7 +124,10 @@ const Categories = () => {
         ))}
       </div>
     </div>
-  );
+  </div>
+);
+
 };
 
 export default Categories;
+
