@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import recipes from '../pages/recipes';
-import "../navbar.css";
+
+import { useState, useRef } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { UserIcon } from "lucide-react";
 import axios from 'axios';
 import { useUserContext } from '../context/userContext';
 import "../navbar.css";
@@ -25,12 +25,23 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, isHomeScreen, recipes = [] }) => {
     setIsDropdownOpen(true);
   };
 
-const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
-  const { setUserData } = useUserContext();
-  const [searchTerm, setSearchTerm] = useState('');
-  const [searchResults, setSearchResults] = useState([]);
-  const [isNavCollapsed, setIsNavCollapsed] = useState(true);
-  const navigate = useNavigate();
+  const handleDashboardLeave = () => {
+    dropdownTimeout.current = setTimeout(() => {
+      setIsDropdownOpen(false);
+    }, 200);
+  };
+
+  // User dropdown handlers
+  const handleUserEnter = () => {
+    clearTimeout(dropdownTimeout.current);
+    setUserMenuOpen(true);
+  };
+
+  const handleUserLeave = () => {
+    dropdownTimeout.current = setTimeout(() => {
+      setUserMenuOpen(false);
+    }, 200);
+  };
 
   const handleLogout = async () => {
     const confirmed = window.confirm("Are you sure you want to logout?");
@@ -55,10 +66,8 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
     setSearchTerm(term);
 
     if (term.trim()) {
-      const results = Object.values(recipes)
-        .flat()
-
-        .filter((recipe) =>
+      const results = recipes
+        .filter(recipe =>
           recipe.title.toLowerCase().includes(term.toLowerCase())
         ) .sort((a, b) => {
         const aTitle = a.title.toLowerCase();
@@ -85,142 +94,122 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
     navigate(`/viewRecipe?id=${id}`);
     setSearchTerm('');
     setSearchResults([]);
-    setIsNavCollapsed(true);
-  };
-
-  const handleNavToggle = () => {
-    setIsNavCollapsed(!isNavCollapsed);
-  };
   };
 
   return (
-    <div>
-      <nav className="navbar navbar-expand-lg navbar-custom">
-        <a className="navbar-brand" href="/Home" onClick={handleNavLinkClick}>
-          FoodIO
-        </a>
+   <nav
+  className="sticky top-0 w-full z-50 text-white backdrop-blur-md shadow-[rgba(0,0,0,0.2)_0px_4px_20px,rgba(255,204,0,0.05)_0px_0px_30px_inset] bg-black/60"
+>
 
-        <button
-          className="navbar-toggler"
-          type="button"
-          onClick={handleNavToggle}
-          aria-controls="navbarSupportedContent"
-          aria-expanded={!isNavCollapsed}
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
+      <div className="max-w-7xl lg:mx-16 mx-auto px-2 sm:px-4 lg:px-8">
+        <div className="py-4 flex justify-between items-center h-16">
+          {/* Logo */}
+          <Link to="/" className="text-2xl font-bold text-yellow-400">
+            FOODIO
+          </Link>
 
-        <div
-          className={`collapse navbar-collapse ${!isNavCollapsed ? 'show' : ''}`}
-          id="navbarSupportedContent"
-        >
-          <ul className="navbar-nav mr-auto">
-            <li className="nav-item active">
-              <a className="nav-link" href="/Home" onClick={handleNavLinkClick}>
-                Home
-              </a>
-            </li>
+          {/* Nav Links */}
+          <div className="hidden md:flex space-x-6 items-center">
+            <Link to="/" className="hover:text-yellow-400">Home</Link>
 
-            <div className="dropdown">
+            <div
+              className="relative"
+              onMouseEnter={handleDashboardEnter}
+              onMouseLeave={handleDashboardLeave}
+            >
               <button
-                className="btn btn-secondary dropdown-toggle"
-                type="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
+                className="text-white hover:text-yellow-400 px-2 py-1 focus:outline-none"
+                aria-haspopup="true"
+                aria-expanded={isDropdownOpen}
+                aria-controls="dashboard-menu"
               >
-                Dashboard
+                Dashboard ▾
               </button>
-              <ul className="dropdown-menu">
-                <li>
-                  <a
-                    className="dropdown-item"
-                    href="/Categories"
-                    onClick={handleNavLinkClick}
+              {isDropdownOpen && (
+                <div
+                  id="dashboard-menu"
+                  className="absolute bg-black/90 text-white mt-2 rounded shadow-lg p-2 w-44"
+                >
+                  <Link
+                    to="/Categories"
+                    className="block px-4 py-2 hover:bg-white/10 focus:bg-white/10 focus:outline-none"
                   >
                     Categories
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className="dropdown-item"
-                    href="/AddRecipe"
-                    onClick={handleNavLinkClick}
+                  </Link>
+                  <Link
+                    to="/AddRecipe"
+                    className="block px-4 py-2 hover:bg-white/10 focus:bg-white/10 focus:outline-none"
                   >
                     Add New Recipe
-                  </a>
-                </li>
-              </ul>
+                  </Link>
+                </div>
+              )}
             </div>
 
-            <li className="nav-item">
-              <a className="nav-link" href="/About" onClick={handleNavLinkClick}>
-                About
-              </a>
-            </li>
-          </ul>
+            <Link to="/About" className="hover:text-yellow-400">About</Link>
+            <Link to="/ai-chat" className="hover:text-yellow-400">Chat with AI</Link>
+          </div>
 
-          <a className="ChatButton" href="/ai-chat" onClick={handleNavLinkClick}>
-            Chat with AI
-          </a>
-          <form className="form-inline d-flex align-items-center position-relative">
+          {/* Search Bar */}
+          <div className="flex-grow mx-4 max-w-md hidden md:block relative">
             <input
-              className="form-control mr-sm-2"
-              type="search"
+              type="text"
               placeholder="Search"
               value={searchTerm}
               onChange={handleSearch}
               className="w-full px-4 py-2 rounded-full text-black focus:outline-none focus:ring-2 focus:ring-yellow-300"
             />
             {searchResults.length > 0 && (
-              <div className="search-results">
-                {searchResults.map((recipe) => (
-                  <div
-                    key={recipe.id}
-                    className="search-item"
+              <div className="absolute bg-white text-black mt-1 w-full max-w-md rounded shadow-lg z-50 max-h-60 overflow-auto">
+                {searchResults.map(recipe => {
+      console.log('Search result:', recipe.title, recipe.id);
+      return (
+                  <div  key={recipe.id}
                     onClick={() => handleRecipeClick(recipe.id)}
                     className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
                   >
-                    <img
-                      src={recipe.image}
-                      alt={recipe.title}
-                      className="search-result-img"
-                    />
-                    <span className="search-result-title">{recipe.title}</span>
+                    {recipe.title}
                   </div>
                 )})}
               </div>
             )}
-          </form>
-
-          <div className="auth-buttons">
-            {isLoggedIn ? (
-              <button
-                className="btn btn-danger ms-2"
-                onClick={() => {
-                  handleLogout();
-                  handleNavLinkClick();
-                }}
-              >
-                Logout
-              </button>
-            ) : (
-              <>
-                <Link className="loginlink" to="/login" onClick={handleNavLinkClick}>
-                  Login
-                </Link>
-                <Link className="reglink" to="/register" onClick={handleNavLinkClick}>
-                  Register
-                </Link>
-              </>
-            )}
-            <a className="myprofile" href="/profile" onClick={handleNavLinkClick}>
-              <i className="fas fa-user"></i>
-            </a>
           </div>
-        </div>
-        </nav>
-    </div>
+
+          {/* Auth Buttons or Profile */}
+          
+
+<div className="flex items-center space-x-2 relative">
+  <Link
+    to="/register"
+    className="px-4 py-1 bg-yellow-400 text-black rounded hover:bg-yellow-300 font-semibold"
+  >
+    REGISTER
+  </Link>
+  <div
+    className="relative"
+    onMouseEnter={handleUserEnter}
+    onMouseLeave={handleUserLeave}
+  >
+    <Link to="/profile">
+      <div className="bg-black/20 rounded p-1 cursor-pointer">
+        <UserIcon className="h-6 w-6" />
+      </div>
+    </Link>
+    {userMenuOpen && (
+      <div className="absolute right-0 mt-2 bg-black/90 text-white rounded shadow-lg w-32">
+        <button
+          onClick={handleLogout}
+          className="w-full text-left px-4 py-2 hover:bg-white/10"
+        >
+          Logout
+        </button>
+      </div>
+    )}
+  </div>
+</div>
+</div>
+      </div>
+    </nav>
   );
 };
 
