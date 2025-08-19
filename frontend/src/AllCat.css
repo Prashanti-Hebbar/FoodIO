@@ -1,12 +1,40 @@
+/* Root variables for modal */
+:root {
+  --modal-bg-light: #ffffff;
+  --modal-bg-dark: #1e1e1e;
+  --overlay-bg-light: rgba(0,0,0,0.5);
+  --overlay-bg-dark: rgba(0,0,0,0.7);
+  --text-light: #222;
+  --text-dark: #e0e0e0;
+}
 
+/* Light theme */
+[data-theme="light"] .modal-overlay {
+  background-color: var(--overlay-bg-light);
+}
 
+[data-theme="light"] .modal-content {
+  background-color: var(--modal-bg-light);
+  color: var(--text-light);
+}
+
+/* Dark theme */
+[data-theme="dark"] .modal-overlay {
+  background-color: var(--overlay-bg-dark);
+}
+
+[data-theme="dark"] .modal-content {
+  background-color: var(--modal-bg-dark);
+  color: var(--text-dark);
+}
+
+/* Common modal styles */
 .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -14,11 +42,11 @@
 }
 
 .modal-content {
-  background: white;
   padding: 20px;
   border-radius: 8px;
   max-width: 500px;
   max-height: 80vh;
   overflow-y: auto;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
-

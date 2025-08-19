@@ -159,23 +159,59 @@ const Home = () => {
   );
 
   const handleFavorite = (recipeId) => {
-    const updatedRecipes = { ...recipes };
-    const recipe = findRecipeById(recipeId, updatedRecipes);
-    if (recipe) {
-      recipe.isFavorite = !recipe.isFavorite;
-      setRecipes(updatedRecipes);
+  const updatedRecipes = { ...recipes };
+  const recipe = findRecipeById(recipeId, updatedRecipes);
+
+  if (recipe) {
+    recipe.isFavorite = !recipe.isFavorite;
+    setRecipes(updatedRecipes);
+
+    // Get favorites list from localStorage
+    let favorites = JSON.parse(localStorage.getItem("favoriteRecipes")) || [];
+
+    if (recipe.isFavorite) {
+      // Add if not already favorited
+      if (!favorites.some((r) => r.id === recipe.id)) {
+        favorites.push(recipe);
+        localStorage.setItem("favoriteRecipes", JSON.stringify(favorites));
+        alert(`${recipe.title} was added to Favorite Recipes!`);
+      }
+    } else {
+      // Remove if unfavorited
+      favorites = favorites.filter((r) => r.id !== recipe.id);
+      localStorage.setItem("favoriteRecipes", JSON.stringify(favorites));
+      alert(`${recipe.title} was removed from Favorite Recipes!`);
     }
-  };
+  }
+};
+
 
   const handleSave = (recipeId) => {
-    const updatedRecipes = { ...recipes };
-    const recipe = findRecipeById(recipeId, updatedRecipes);
-    if (recipe) {
-      recipe.isSaved = !recipe.isSaved;
-      setRecipes(updatedRecipes);
-    }
-  };
+  const updatedRecipes = { ...recipes };
+  const recipe = findRecipeById(recipeId, updatedRecipes);
 
+  if (recipe) {
+    recipe.isSaved = !recipe.isSaved;
+    setRecipes(updatedRecipes);
+
+    // Load saved list from localStorage
+    let saved = JSON.parse(localStorage.getItem("savedRecipes")) || [];
+
+    if (recipe.isSaved) {
+      // Add if not already there
+      if (!saved.some((r) => r.id === recipe.id)) {
+        saved.push(recipe);
+        localStorage.setItem("savedRecipes", JSON.stringify(saved));
+        alert(`${recipe.title} was added to Saved Recipes!`);
+      }
+    } else {
+      // Remove from saved list
+      saved = saved.filter((r) => r.id !== recipe.id);
+      localStorage.setItem("savedRecipes", JSON.stringify(saved));
+      alert(`${recipe.title} was removed from Saved Recipes!`);
+    }
+  }
+};
   const handleShare = (recipe) => {
     if (navigator.share) {
       navigator.share({

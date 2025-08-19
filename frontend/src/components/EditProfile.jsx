@@ -1,84 +1,85 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
+import { useUserContext } from "../context/userContext";
 import "../styles/EditProfile.css";
 
 const EditProfile = ({ onClose }) => {
+  const { userData, setUserData, avatarUrl, setAvatarUrl } = useUserContext();
+
   const [formData, setFormData] = useState({
-    username: "",
-    email: "",
+    username: userData?.username || "",
+    email: userData?.email || "",
   });
-  
+
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
 
-  // no need to do this now **** implemented in the profile.jsx
-
-  // useEffect(() => {
-  //   const fetchUserData = async () => {
-  //     try {
-  //       const token = localStorage.getItem("token");
-  //       const userID = localStorage.getItem("userID");
-  //       const response = await axios.get(
-  //         `https://foodio-backend-cgsj.onrender.com/auth/user/${userID}`,
-  //         { 
-  //           headers: { 
-  //             Authorization: `Bearer ${token}` 
-  //           }
-  //         }
-  //       );
-  //       setFormData(response.data);
-  //     } catch (error) {
-  //       console.error("Error fetching user data:", error);
-  //       alert("Failed to load user data. Please try again.");
-  //     }
-  //   };
-
-  //   fetchUserData();
-  // }, []);
-
   const validateForm = () => {
     const newErrors = {};
-    
-    // Username validation
+
     if (!formData.username.trim()) {
       newErrors.username = "Username is required";
     } else if (formData.username.length < 3) {
-      newErrors.username = "Username must be at least 3 characters long";
+      newErrors.username = "Username must be at least 3 characters";
     }
 
-    // Email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!formData.email.trim()) {
       newErrors.email = "Email is required";
     } else if (!emailRegex.test(formData.email)) {
-      newErrors.email = "Please enter a valid email address";
+      newErrors.email = "Enter a valid email";
     }
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
+  const handleAvatarUpload = async (event) => {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const formData = new FormData();
+    formData.append("avatar", file);
+    formData.append("userId", userData._id);
+
+    try {
+      const res = await axios.post("http://localhost:3001/profile", formData, {
+        withCredentials: true,
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      setAvatarUrl(`http://localhost:3001/uploads/${res.data.filename}`);
+      setUserData(prev => ({ ...prev, avatar: res.data.filename }));
+      alert("Profile picture updated!");
+    } catch (err) {
+      console.error("Avatar upload error:", err);
+      alert("Failed to upload profile picture.");
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    if (validateForm()) {
-      setIsLoading(true);
-      try {
-        await axios.put(
-          `http://localhost:3001/auth/updateUser`,
-          formData,
-          {
-            withCredentials:true
-          }
-        );
 
-        alert("Profile updated successfully!");
-        onClose();
-      } catch (error) {
-        console.error("Update error:", error);
-        alert("Failed to update profile. Please try again.");
-      } finally {
-        setIsLoading(false);
-      }
+    if (!validateForm()) return;
+
+    setIsLoading(true);
+    try {
+      await axios.put(
+        `https://foodio-backend-cgsj.onrender.com/auth/updateUser`,
+        formData,
+        { withCredentials: true }
+      );
+      setUserData(prev => ({ ...prev, ...formData }));
+      alert("Profile updated!");
+      onClose();
+    } catch (error) {
+      console.error("Profile update error:", error);
+      alert("Failed to update profile.");
+    } finally {
+      setIsLoading(false);
+
     }
   };
 
@@ -88,7 +89,6 @@ const EditProfile = ({ onClose }) => {
       ...prev,
       [name]: value
     }));
-    // Clear error when user starts typing
     if (errors[name]) {
       setErrors(prev => ({
         ...prev,
@@ -104,6 +104,20 @@ const EditProfile = ({ onClose }) => {
       <div className="edit-profile-modal">
         <h2>Edit Profile</h2>
         <form onSubmit={handleSubmit}>
+
+          {/* Avatar Preview + Upload */}
+          <div className="form-group avatar-upload">
+            <label>Profile Picture</label>
+            <img 
+              src={avatarUrl} 
+              alt="Avatar Preview" 
+              className="avatar-preview"
+              style={{ width: 80, height: 80, borderRadius: "50%", objectFit: "cover", marginBottom: 10 }}
+            />
+            <input type="file" accept="image/*" onChange={handleAvatarUpload} />
+          </div>
+
+          {/* Username */}
           <div className="form-group">
             <label htmlFor="username">Username</label>
             <input
@@ -114,11 +128,10 @@ const EditProfile = ({ onClose }) => {
               onChange={handleChange}
               className={errors.username ? "error-input" : ""}
             />
-            {errors.username && (
-              <span className="error-message">{errors.username}</span>
-            )}
+            {errors.username && <span className="error-message">{errors.username}</span>}
           </div>
 
+          {/* Email */}
           <div className="form-group">
             <label htmlFor="email">Email</label>
             <input
@@ -129,21 +142,14 @@ const EditProfile = ({ onClose }) => {
               onChange={handleChange}
               className={errors.email ? "error-input" : ""}
             />
-            {errors.email && (
-              <span className="error-message">{errors.email}</span>
-            )}
+            {errors.email && <span className="error-message">{errors.email}</span>}
           </div>
 
-          <div className="form-group">
-            {errors.bio && (
-              <span className="error-message">{errors.bio}</span>
-            )}
-          </div>
-
+          {/* Buttons */}
           <div className="button-group">
             <button 
               type="button" 
-              onClick={onClose}
+              onClick={onClose} 
               className="cancel-button"
               disabled={isLoading}
             >

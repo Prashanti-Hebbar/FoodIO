@@ -8,7 +8,7 @@ const Lunch = () => {
       {
         id: 1,
         title: "Butter Chicken",
-        image: "../lunch/butter_chicken.jpg",
+        image: "https://www.spiceroots.com/spiceroots/wp-content/uploads/2008/05/butterchicken-1024x682-1.jpg",
         rating: 4.9,
         prepTime: "40 minutes",
         description: "Rich and creamy tomato-based chicken curry",
@@ -25,7 +25,7 @@ const Lunch = () => {
       {
         id: 2,
         title: "Paneer Tikka Masala",
-        image: "../lunch/paneer_tikka.jpg",
+        image: "https://www.nehascookbook.com/wp-content/uploads/2022/11/Paneer-tikka-masala-WS-500x500.jpg",
         rating: 4.8,
         prepTime: "35 minutes",
         description: "Grilled paneer cubes cooked in a spiced tomato gravy",
@@ -42,7 +42,7 @@ const Lunch = () => {
       {
         id: 3,
         title: "Vegetable Biryani",
-        image: "../lunch/vegetable_biryani.jpg",
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPbQMgD79WJwULTkrE5C-MsHcUMyKozMq-Kw&s",
         rating: 4.7,
         prepTime: "45 minutes",
         description: "Fragrant rice cooked with mixed vegetables and spices",
@@ -59,7 +59,7 @@ const Lunch = () => {
       {
         id: 4,
         title: "Dal Tadka",
-        image: "../lunch/dal_tadka.jpg",
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4kLMn_YJz4DEPNat_gUTF_QWOxqKiIRWMQw&s",
         rating: 4.8,
         prepTime: "30 minutes",
         description: "Yellow lentils tempered with garlic and spices",
@@ -76,7 +76,7 @@ const Lunch = () => {
       {
         id: 5,
         title: "Chole (Chickpea Curry)",
-        image: "../lunch/chole.jpg",
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnoEyXXksyo75o7kOH6S6sz6MvKfrLzfp2BA&s",
         rating: 4.9,
         prepTime: "40 minutes",
         description: "Spiced chickpea curry cooked in a tomato-based gravy",
@@ -93,7 +93,7 @@ const Lunch = () => {
       {
         id: 6,
         title: "Rajma (Kidney Bean Curry)",
-        image: "../lunch/rajma.jpg",
+        image: "https://www.indianveggiedelight.com/wp-content/uploads/2022/10/instant-pot-rajma-masala.jpg",
         rating: 4.8,
         prepTime: "45 minutes",
         description: "Slow-cooked kidney beans in a spiced tomato curry",
