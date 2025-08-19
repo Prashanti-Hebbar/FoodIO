@@ -137,6 +137,39 @@ li {
   padding-right: 15px;
 }
 
+/* Add these styles to the existing ViewRecipe.css */
+
+.recipe-image-container {
+  position: relative;
+  display: inline-block;
+}
+
+.recipe-stats {
+  margin-bottom: 20px;
+}
+
+.recipe-meta {
+  display: flex;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.favorites-count {
+  font-size: 0.9rem;
+  color: #666;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* Ensure the favorite button is positioned correctly */
+.recipe-image-container .favorite-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  z-index: 10;
+}
+
 /* Make changes for small devices */
 @media (max-width: 768px) {
   .container {

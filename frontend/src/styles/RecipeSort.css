@@ -1,0 +1,72 @@
+.recipe-sort {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+  padding: 15px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.sort-label {
+  font-weight: 600;
+  color: #333;
+  font-size: 0.9rem;
+}
+
+.sort-options {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.sort-btn {
+  background: #f8f9fa;
+  border: 1px solid #dee2e6;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  color: #495057;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.sort-btn:hover {
+  background: #e9ecef;
+  border-color: #adb5bd;
+}
+
+.sort-btn.active {
+  background: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+.sort-btn.active:hover {
+  background: #0056b3;
+  border-color: #0056b3;
+}
+
+@media (max-width: 768px) {
+  .recipe-sort {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  
+  .sort-options {
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .sort-btn {
+    flex: 1;
+    justify-content: center;
+    font-size: 0.8rem;
+    padding: 6px 8px;
+  }
+} 

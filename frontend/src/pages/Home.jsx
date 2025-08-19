@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "../App.css";
 import "./recipes";
 import { Link } from "react-router-dom";
+import FavoriteButton from "../components/FavoriteButton";
 
 const Home = () => {
   const [activeTestimonial, setActiveTestimonial] = useState(2);
@@ -52,7 +53,7 @@ const Home = () => {
     },
   ];
 
-  const [recipes, setRecipes] = useState({
+  const [recipes] = useState({
     topRated: [
       { id: 1, title: "Delicious Pasta", image: "/pasta.jpg", rating: 4.5 },
       { id: 2, title: "Spicy Tacos", image: "/tacos.jpg", rating: 4.2 },
@@ -99,37 +100,18 @@ const Home = () => {
     ],
   });
 
-  const findRecipeById = (recipeId, recipeList) => {
-    for (let category in recipeList) {
-      const recipe = recipeList[category].find((r) => r.id === recipeId);
-      if (recipe) return recipe;
-    }
-    return null;
-  };
+  
 
   const renderRecipes = (recipeType) => (
     <div className="d-flex flex-nowrap overflow-auto">
       {recipes[recipeType].map((recipe) => (
       <div key={recipe.id} className="flex-shrink-0 mb-4 me-3 custom-recipe-card">
 
-          <div className="card">
+          <div className="card recipe-card">
             <div className="card-actions position-absolute end-0 m-2">
-              <button
-                className={`btn btn-link ${
-                  recipe.isFavorite ? "text-warning" : "text-white"
-                }`}
-                onClick={() => handleFavorite(recipe.id)}
-              >
-                <i className="fas fa-star"></i>
-              </button>
-              <button
-                className={`btn btn-link ${
-                  recipe.isSaved ? "text-primary" : "text-white"
-                }`}
-                onClick={() => handleSave(recipe.id)}
-              >
-                <i className="fas fa-bookmark"></i>
-              </button>
+              <FavoriteButton
+                recipeId={localStorage.getItem(`recipeDbId:${recipe.id}`) || recipe.id}
+              />
               <button
                 className="btn btn-link text-white"
                 onClick={() => handleShare(recipe)}
@@ -158,23 +140,7 @@ const Home = () => {
     </div>
   );
 
-  const handleFavorite = (recipeId) => {
-    const updatedRecipes = { ...recipes };
-    const recipe = findRecipeById(recipeId, updatedRecipes);
-    if (recipe) {
-      recipe.isFavorite = !recipe.isFavorite;
-      setRecipes(updatedRecipes);
-    }
-  };
-
-  const handleSave = (recipeId) => {
-    const updatedRecipes = { ...recipes };
-    const recipe = findRecipeById(recipeId, updatedRecipes);
-    if (recipe) {
-      recipe.isSaved = !recipe.isSaved;
-      setRecipes(updatedRecipes);
-    }
-  };
+  
 
   const handleShare = (recipe) => {
     if (navigator.share) {

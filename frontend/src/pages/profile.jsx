@@ -30,8 +30,11 @@ const Profile = () => {
     const fetchUserData = async () => {
       try {
 
-        const response = await axios.get(`https://foodio-backend-cgsj.onrender.com/auth/user`, {
+        const response = await axios.get(`http://localhost:3001/auth/user`, {
           withCredentials: true,
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`
+          }
         });
 
 
@@ -72,36 +75,7 @@ const Profile = () => {
     console.error("Error deleting recipe:", error);
   }
 };
-  const handleAvatarUpload = async (event) => {
-    const file = event.target.files[0];
-    if (!file) return;
-
-    const formData = new FormData();
-    formData.append("avatar", file);
-
-    // ✅ Send userId along with the file
-    formData.append("userId", userData._id);
-
-    try {
-      const res = await axios.post("http://localhost:3001/profile", formData, {
-        withCredentials: true,
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-
-      // ✅ Update avatar URL
-      setAvatarUrl(`http://localhost:3001/uploads/${res.data.filename}`);
-
-      // ✅ Update context (optional but helpful)
-      setUserData(prev => ({ ...prev, avatar: res.data.filename }));
-
-      alert("Profile picture uploaded successfully!");
-    } catch (err) {
-      console.error("Upload failed", err);
-      alert("Upload failed.");
-    }
-  };
+  // Avatar upload handler currently unused on this page; remove to avoid lint warning
 
   const RecipeGrid = ({ title, recipes }) => (
     <div className="recipes-grid">

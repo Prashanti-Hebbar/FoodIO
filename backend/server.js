@@ -2,6 +2,8 @@ import express from 'express';
 import mongoose from 'mongoose';
 import { useRouter } from './routes/users.js';
 import { recipeRouter } from './routes/recipes.js';
+import { favoritesRouter } from './routes/favorites.js';
+import { ratingsRouter } from './routes/ratings.js';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import multer from 'multer';
@@ -39,6 +41,8 @@ app.use("/uploads", express.static("uploads"));
 // Routes
 app.use("/auth", useRouter);
 app.use("/recipes", recipeRouter);
+app.use("/favorites", favoritesRouter);
+app.use("/ratings", ratingsRouter);
 
 // DB connection
 mongoose.connect(process.env.MONGO_URI)

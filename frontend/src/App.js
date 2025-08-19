@@ -9,6 +9,7 @@ import AddRecipe from "./pages/AddRecipe";
 import About from "./pages/About";
 import ViewRecipe from "./pages/ViewRecipe";
 import Profile from "./pages/profile";
+import Favorites from "./pages/Favorites";
 import Breakfast from './pages/categories/Breakfast';
 import Lunch from "./pages/categories/Lunch";
 import Desserts from "./pages/categories/Desserts";
@@ -134,6 +135,7 @@ useEffect(() => {
         <Route path="/ViewRecipe" element={<ViewRecipe />}/>
         <Route path="/recipe/:id" element={<ViewRecipe />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/favorites" element={<Favorites />} />
         <Route path="/Categories" element={<Categories />} />
         <Route path="/recipes/breakfast" element={<Breakfast />} />
         <Route path="/recipes/Lunch" element={<Lunch />} />

@@ -1,11 +1,7 @@
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
-// <<<<<<< session-for-database-transactions
-import { UserModel } from "../models/Users.js";
-import mongoose from "mongoose";
-// =======
 import User from "../models/Users.js";
-// >>>>>>> main
+import mongoose from "mongoose";
 
 // Helper to set cookie
 const setAuthCookie = (res, token) => {
@@ -75,7 +71,12 @@ const login = async (req, res) => {
 
     setAuthCookie(res, token);
 
-    res.status(200).json({ message: "Logged in successfully" });
+    res.status(200).json({ 
+      message: "Logged in successfully",
+      token,
+      userID: user._id,
+      username: user.username
+    });
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Internal server error" });

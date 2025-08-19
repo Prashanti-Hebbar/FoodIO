@@ -3,6 +3,9 @@ import { useLocation } from 'react-router-dom';
 import { jsPDF } from 'jspdf';
 import "../ViewRecipe.css";
 import recipes from './recipes';
+import axios from 'axios';
+// Removed FavoriteButton usage on this page header
+import RatingComment from '../components/RatingComment';
 
 const ViewRecipe = () => {
     const location = useLocation();
@@ -10,6 +13,8 @@ const ViewRecipe = () => {
     const recipeId = parseInt(searchParams.get('id'), 10); // Get the ID from the URL
 
     const [recipe, setRecipe] = useState(null); // State to hold recipe data
+    const [averageRating, setAverageRating] = useState(0);
+    const [totalRatings, setTotalRatings] = useState(0);
     const pdfRef = useRef();
 
     useEffect(() => {
@@ -20,7 +25,34 @@ const ViewRecipe = () => {
         } else {
             console.error("Recipe not found!");
         }
+
+        // Try to fetch dynamic stats from backend if a mapped DB id exists
+        const dbId = localStorage.getItem(`recipeDbId:${recipeId}`);
+        if (dbId) {
+            axios.get(`http://localhost:3001/recipes/${dbId}`)
+                .then(r => {
+                    const data = r.data || {};
+                    setAverageRating(data.averageRating || 0);
+                    setTotalRatings(data.totalRatings || 0);
+                })
+                .catch(() => {
+                    // fallback to static defaults if backend not available
+                    setAverageRating(selectedRecipe?.rating || 0);
+                    setTotalRatings(selectedRecipe?.ratingCount || 0);
+                });
+        } else {
+            setAverageRating(selectedRecipe?.rating || 0);
+            setTotalRatings(selectedRecipe?.ratingCount || 0);
+        }
     }, [recipeId]);
+
+    const handleRatingUpdate = (newAverageRating, newTotalRatings) => {
+        setAverageRating(newAverageRating);
+        setTotalRatings(newTotalRatings);
+    };
+
+    // Favorites count removed from header for this page
+
 
     const generatePDF = () => {
         const doc = new jsPDF('p', 'pt', 'a4');
@@ -69,20 +101,18 @@ const ViewRecipe = () => {
             <div className="row">
                 {/* Left Section - Fixed Image */}
                 <div className="col-md-6 recipe-left">
-                    <img src={recipe.image} className="img-fluid rounded recipe-image" alt={recipe.title} />
+                    <div className="recipe-image-container">
+                        <img src={recipe.image} className="img-fluid rounded recipe-image" alt={recipe.title} />
+                    </div>
                 </div>
 
                 {/* Right Section - Scrollable */}
                 <div className="col-md-6 recipe-right">
                     <h1 id='h1'>{recipe.title}</h1>
-                    <div className="d-flex align-items-center">
-                        <div className="rating">
-                            {[...Array(5)].map((_, i) => (
-                                <span key={i} className={i < recipe.rating ? "text-warning" : "text-secondary"} style={{marginRight: "3px"}}>★</span>
-                            ))}
-                        </div>
-                        <span className="ms-2">({recipe.ratingCount} ratings)</span>
-                    </div>
+                    
+                    {/* Recipe Stats */}
+                    {/* Header ratings and heart removed by request. Rating stars are available in the Rate this Recipe section below. */}
+                    
                     <p className="mt-2">{recipe.description}</p>
 
                     <div className="row">
@@ -147,6 +177,12 @@ const ViewRecipe = () => {
                     </button>
                 </div>
             </div>
+
+            {/* Ratings and Comments Section */}
+            <RatingComment 
+                recipeId={localStorage.getItem(`recipeDbId:${recipeId}`) || recipeId}
+                onRatingUpdate={handleRatingUpdate}
+            />
         </div>
     );
 };

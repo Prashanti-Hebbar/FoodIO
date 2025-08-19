@@ -143,6 +143,12 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, isHomeScreen, recipes = [] }) => {
                   >
                     Add New Recipe
                   </Link>
+                  <Link
+                    to="/favorites"
+                    className="block px-4 py-2 hover:bg-white/10 focus:bg-white/10 focus:outline-none"
+                  >
+                    My Favorites
+                  </Link>
                 </div>
               )}
             </div>

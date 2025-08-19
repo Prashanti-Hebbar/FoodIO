@@ -16,11 +16,23 @@ const Register = ({ setIsLoggedIn }) => {
       return;
     }
     try {
-      const response = await axios.post(
-        "https://foodio-backend-cgsj.onrender.com/auth/register", 
+      await axios.post(
+        "http://localhost:3001/auth/register", 
         { username, email, password },
         { withCredentials: true }
       );
+      // Immediately log in to get token and userID
+      const loginRes = await axios.post(
+        "http://localhost:3001/auth/login",
+        { username, password },
+        { withCredentials: true }
+      );
+      const { token, userID } = loginRes.data || {};
+      if (token && userID) {
+        localStorage.setItem("token", token);
+        localStorage.setItem("userID", userID);
+        localStorage.setItem("username", username);
+      }
       localStorage.setItem("loggedIn", "true");
       setIsLoggedIn(true);
       alert("Registration successful!");

@@ -19,7 +19,8 @@ const userSchema = new mongoose.Schema({
     type :String,
     default:""
   },
-  savedRecipes: [{ type: mongoose.Schema.Types.ObjectId, ref: "recipes" }]
+  savedRecipes: [{ type: mongoose.Schema.Types.ObjectId, ref: "recipes" }],
+  favorites: [{ type: mongoose.Schema.Types.ObjectId, ref: "recipes" }]
 });
 
 export default mongoose.model("User", userSchema);  
