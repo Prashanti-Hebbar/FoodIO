@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 // <<<<<<< session-for-database-transactions
-import { UserModel } from "../models/Users.js";
+import User from "../models/Users.js";
 import mongoose from "mongoose";
 // =======
 import User from "../models/Users.js";
