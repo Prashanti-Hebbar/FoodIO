@@ -1,63 +1,6 @@
-/* Root variables for light & dark themes */
-:root {
-  --bg-light: #f8fafc;
-  --bg-dark: #1e1e1e;
-  --card-bg-light: #ffffff;
-  --card-bg-dark: #2b2b2b;
-  --text-light: #1e293b;
-  --text-dark: #e0e0e0;
-  --text-muted-light: #64748b;
-  --text-muted-dark: #a0a0a0;
-  --hover-bg-light: #f1f5f9;
-  --hover-bg-dark: #333;
-}
-
-/* Light theme */
-[data-theme="light"] .categories-wrapper {
-  background: var(--bg-light);
-}
-
-[data-theme="light"] .category-card,
-[data-theme="light"] .collapsible-text {
-  background: var(--card-bg-light);
-  color: var(--text-light);
-}
-
-[data-theme="light"] .categories-hero p,
-[data-theme="light"] .collapsible label {
-  color: var(--text-muted-light);
-}
-
-[data-theme="light"] .collapsible label:hover,
-[data-theme="light"] .collapsible-text a:hover {
-  background: var(--hover-bg-light);
-}
-
-/* Dark theme */
-[data-theme="dark"] .categories-wrapper {
-  background: var(--bg-dark);
-}
-
-[data-theme="dark"] .category-card,
-[data-theme="dark"] .collapsible-text {
-  background: var(--card-bg-dark);
-  color: var(--text-dark);
-}
-
-[data-theme="dark"] .categories-hero p,
-[data-theme="dark"] .collapsible label {
-  color: var(--text-muted-dark);
-}
-
-[data-theme="dark"] .collapsible label:hover,
-[data-theme="dark"] .collapsible-text a:hover {
-  background: var(--hover-bg-dark);
-}
-
-/* Common styles */
 .categories-wrapper {
   min-height: 100vh;
-
+  background: transparent;
   padding: 2rem;
 }
 
@@ -79,6 +22,7 @@
 
 .categories-hero p {
   font-size: 1.5rem;
+  color: #64748b;
   font-weight: 300;
 }
 
@@ -89,12 +33,14 @@
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 2rem;
   padding: 1rem;
+  
 }
 
 .category-card {
+  background: white;
   border-radius: 12px;
   padding: 2rem;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   transition: all 0.3s ease;
   border: 1px solid #e2e8f0;
   cursor: pointer;
@@ -102,7 +48,8 @@
 
 .category-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+  border-color: var(--card-color);
 }
 
 .card-header {
@@ -115,21 +62,27 @@
 .card-icon {
   font-size: 2.5rem;
   padding: 1rem;
+  background: var(--card-color);
   border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
 }
 
 .category-card:hover .card-icon {
   transform: scale(1.05);
-  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
 .card-header h2 {
   font-size: 1.8rem;
   font-weight: 600;
+  color: #1e293b;
   margin: 0;
   transition: color 0.3s ease;
+}
+
+.category-card:hover .card-header h2 {
+  color: var(--card-color);
 }
 
 .collapsible {
@@ -145,12 +98,22 @@
 .collapsible label {
   position: relative;
   font-weight: 500;
+  background: #f8fafc;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  color: #64748b;
   display: block;
   margin-bottom: 10px;
   cursor: pointer;
   padding: 15px;
   border-radius: 8px;
   transition: all 0.3s ease;
+}
+
+.collapsible label:hover {
+  background: #f1f5f9;
+  color: #475569;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
 }
 
 .collapsible label:after {
@@ -180,7 +143,8 @@
 .collapsible input:checked ~ .collapsible-text {
   max-height: 500px;
   padding: 1rem 0;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  background: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   opacity: 1;
 }
 
@@ -189,11 +153,20 @@
   margin: 5px 8px;
   width: 50vh;
   padding: 8px 16px;
+  background: #f8fafc;
   border-radius: 6px;
+  color: #475569;
   text-decoration: none;
   font-size: 0.9rem;
   font-weight: 500;
   transition: all 0.2s ease;
+}
+
+.collapsible-text a:hover {
+  background: var(--card-color);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 html {
