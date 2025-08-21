@@ -30,6 +30,11 @@
     background: var(--navbar-bg-dark);
 }
 
+a {
+  color: inherit;      /* Inherit text color from parent */
+  text-decoration: none; /* Remove underline */
+}
+
 .navbar, .navbar-custom {
     position: relative;
     padding: 12px 20px;
