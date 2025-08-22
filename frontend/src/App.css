@@ -12,7 +12,7 @@ body {
   background-repeat: no-repeat;
   background-position: center;
   height: 100vh;
-  transition: all 0.3s ease;
+  transition: all var(--transition-normal);
   overflow-x: hidden;
   max-width: 100vw;
 }
@@ -20,16 +20,18 @@ body {
   
   /* Container for Login, Register, and Home */
   .login {
-    background: white;
+    background: var(--card-bg);
     padding: 20px;
     width: 420px;
     height: 600px;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: var(--shadow-md);
     text-align: center;
    margin-left: auto;
    margin-right: auto;
    margin-top: 20px;
+   border: 1px solid var(--border-color);
+   transition: all var(--transition-normal);
    
   }
 
@@ -45,16 +47,18 @@ body {
   }
 
   .register {
-    background:rgb(243, 200, 147);
+    background: var(--primary-light);
     padding: 20px;
     width: 420px;
     height: 600px;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: var(--shadow-md);
     text-align: center;
    margin-left: auto;
    margin-right: auto;
    margin-top: 20px;
+   border: 1px solid var(--border-color);
+   transition: all var(--transition-normal);
   }
 
   #register-heading {
@@ -73,9 +77,17 @@ body {
     width: 90%;
     padding: 10px;
     margin: 10px 0;
-    border: 1px solid #ccc;
+    border: 1px solid var(--input-border);
     border-radius: 5px;
     font-size: 16px;
+    background-color: var(--input-bg);
+    color: var(--text-primary);
+    transition: all var(--transition-fast);
+  }
+  
+  input:focus {
+    border-color: var(--input-focus);
+    box-shadow: 0 0 0 2px rgba(255, 204, 0, 0.1);
   }
   
   /* Buttons */

@@ -5,8 +5,8 @@
 :root {
     --primary-font: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
     --brand-font: 'Montserrat', sans-serif;
-    --primary-color: #ffcc00;
-    --secondary-color: #ff9900;
+    --primary-color: var(--button-primary);
+    --secondary-color: var(--button-primary-hover);
 
     /* Light/Dark Backgrounds */
     --navbar-bg-light: linear-gradient(135deg, rgba(45, 45, 45, 0.9), rgba(65, 65, 65, 0.85), rgba(35, 35, 35, 0.9));
@@ -15,10 +15,10 @@
     --dropdown-bg-dark: rgba(15, 15, 15, 0.95);
     --link-color-light: white;
     --link-color-dark: #e0e0e0;
-    --search-bg-light: #fff;
-    --search-bg-dark: #2b2b2b;
-    --search-text-light: #000;
-    --search-text-dark: #eee;
+    --search-bg-light: var(--input-bg);
+    --search-text-light: var(--text-primary);
+    --search-bg-dark: var(--input-bg);
+    --search-text-dark: var(--text-primary);
 }
 
 /* Navbar */

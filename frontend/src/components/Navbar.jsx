@@ -2,14 +2,19 @@
 import { useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { UserIcon } from "lucide-react";
+import { FaMoon, FaSun } from "react-icons/fa";
 import axios from 'axios';
 import { useUserContext } from '../context/userContext';
+import { useTheme } from '../context/ThemeContext';
+import { useFoodAlertContext } from '../context/FoodAlertContext';
 import "../navbar.css";
 
 const Navbar = ({ isLoggedIn, setIsLoggedIn, isHomeScreen, recipes = [] }) => {
   console.log("Recipes in Navbar:", recipes);
 
   const { setUserData } = useUserContext();
+  const { theme, toggleTheme } = useTheme();
+  const { showConfirmation } = useFoodAlertContext();
   const navigate = useNavigate();
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -44,21 +49,24 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, isHomeScreen, recipes = [] }) => {
   };
 
   const handleLogout = async () => {
-    const confirmed = window.confirm("Are you sure you want to logout?");
-    if (confirmed) {
-      try {
-
-        await axios.post("https://foodio-backend-cgsj.onrender.com/auth/logout", {}, {
-          withCredentials: true
-        });
-        localStorage.clear();
-        setIsLoggedIn(false);
-        setUserData(null);
-        navigate("/home");
-      } catch (err) {
-        console.log('Error during logout:', err);
+    showConfirmation(
+      "Logout Confirmation",
+      "Are you sure you want to logout? You'll need to log in again to access your account.",
+      "Logout",
+      async () => {
+        try {
+          await axios.post("https://foodio-backend-cgsj.onrender.com/auth/logout", {}, {
+            withCredentials: true
+          });
+          localStorage.clear();
+          setIsLoggedIn(false);
+          setUserData(null);
+          navigate("/home");
+        } catch (err) {
+          console.log('Error during logout:', err);
+        }
       }
-    }
+    );
   };
 
   const handleSearch = (e) => {
@@ -175,38 +183,62 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, isHomeScreen, recipes = [] }) => {
             )}
           </div>
 
-          {/* Auth Buttons or Profile */}
-          
+          {/* Theme Toggle Button */}
+          <button
+            onClick={toggleTheme}
+            className="hidden md:flex items-center justify-center w-10 h-10 rounded-full bg-yellow-400 hover:bg-yellow-300 transition-colors duration-200 mx-2"
+            title={theme === "light" ? "Switch to dark mode" : "Switch to light mode"}
+          >
+            {theme === "light" ? (
+              <FaMoon className="w-5 h-5 text-black" />
+            ) : (
+              <FaSun className="w-5 h-5 text-yellow-600" />
+            )}
+          </button>
 
-<div className="flex items-center space-x-2 relative">
-  <Link
-    to="/register"
-    className="px-4 py-1 bg-yellow-400 text-black rounded hover:bg-yellow-300 font-semibold"
-  >
-    REGISTER
-  </Link>
-  <div
-    className="relative"
-    onMouseEnter={handleUserEnter}
-    onMouseLeave={handleUserLeave}
-  >
-    <Link to="/profile">
-      <div className="bg-black/20 rounded p-1 cursor-pointer">
-        <UserIcon className="h-6 w-6" />
-      </div>
-    </Link>
-    {userMenuOpen && (
-      <div className="absolute right-0 mt-2 bg-black/90 text-white rounded shadow-lg w-32">
-        <button
-          onClick={handleLogout}
-          className="w-full text-left px-4 py-2 hover:bg-white/10"
-        >
-          Logout
-        </button>
-      </div>
-    )}
-  </div>
-</div>
+          {/* Auth Buttons or Profile */}
+          <div className="flex items-center space-x-2 relative">
+            {/* Mobile Theme Toggle */}
+            <button
+              onClick={toggleTheme}
+              className="md:hidden flex items-center justify-center w-8 h-8 rounded-full bg-yellow-400 hover:bg-yellow-300 transition-colors duration-200"
+              title={theme === "light" ? "Switch to dark mode" : "Switch to light mode"}
+            >
+              {theme === "light" ? (
+                <FaMoon className="w-4 h-4 text-black" />
+              ) : (
+                <FaSun className="w-4 h-4 text-yellow-600" />
+              )}
+            </button>
+            
+            <Link
+              to="/register"
+              className="px-4 py-1 bg-yellow-400 text-black rounded hover:bg-yellow-300 font-semibold"
+            >
+              REGISTER
+            </Link>
+            <div
+              className="relative"
+              onMouseEnter={handleUserEnter}
+              onMouseLeave={handleUserLeave}
+            >
+              <Link to="/profile">
+                <div className="bg-black/20 rounded p-1 cursor-pointer">
+                  <UserIcon className="h-6 w-6" />
+                </div>
+              </Link>
+              {userMenuOpen && (
+                <div className="absolute right-0 mt-2 bg-black/90 text-white rounded shadow-lg w-32">
+                  <button
+                    onClick={handleLogout}
+                    className="w-full text-left px-4 py-2 hover:bg-white/10"
+                  >
+                    Logout
+                  </button>
+                </div>
+              )}
+            </div>
+          </div>
 </div>
       </div>
     </nav>
