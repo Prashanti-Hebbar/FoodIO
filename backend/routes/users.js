@@ -2,10 +2,15 @@ import express from "express";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import { UserModel } from "../models/Users.js";
+import { googleLogin} from "../controllers/authController.js";
 import { login, register,logout } from "../controllers/authController.js";
 import { getProfile,updatedUser } from "../controllers/userController.js";
 import { verifyJWT } from "../middleware/verifyJWT.js";
 const router = express.Router();
+
+
+
+router.post("/google",googleLogin);
 
 router.post('/register',register);
 router.post('/login',login);

@@ -119,7 +119,7 @@ body {
   color: var(--text-primary);
   padding: 20px;
   width: 420px;
-  height: 600px;
+  height: 800px;
   border-radius: 8px;
   box-shadow: 0 4px 8px var(--card-shadow);
   text-align: center;
@@ -145,7 +145,7 @@ body {
   color: var(--text-primary);
   padding: 20px;
   width: 420px;
-  height: 600px;
+  height: 800px;
   border-radius: 8px;
   box-shadow: 0 4px 8px var(--card-shadow);
   text-align: center;

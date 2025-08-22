@@ -1,6 +1,51 @@
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import { UserModel } from "../models/Users.js";
+import {OAuth2Client} from "google-auth-library";
+
+const client=new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
+//google auth controller
+export const googleLogin=async(req,res)=>{
+  const{token}=req.body;
+  try{
+    const ticket=await client.verifyIdToken({
+      idToken:token,
+      audience:process.env.GOOGLE_CLIENT_ID,
+    });
+    const payload=ticket.getPayload();
+    const{email,name,picture}=payload;
+    //checking if user already exist
+    let user=await UserModel.findOne({email});
+
+    if(!user){
+      //signup using google
+      user=new UserModel({
+        username:name,
+        email,
+        password:null,//google users will not have password
+        picture,
+      });
+      await user.save();
+    }
+
+    //creating jwt for session
+    const myToken=jwt.sign(
+      {
+        id:user._id},
+        process.env.JWT_SECRET||"secret",
+       { expiresIn:"7d"
+      }
+      
+    );
+    return res.json({token:myToken,userID:user._id});
+
+
+  }
+  catch(error){
+    console.error("Google Auth Error:",error);
+    return res.status(400).json({message:"Google authentication failed"});
+  }
+}
 
 // Helper to set cookie
 const setAuthCookie = (res, token) => {

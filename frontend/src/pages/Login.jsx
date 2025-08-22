@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import { GoogleLogin } from "@react-oauth/google";
 import { Link, useNavigate } from "react-router-dom";
 import "../App.css";
 
@@ -42,6 +43,31 @@ const Login = ({ setIsLoggedIn }) => {
       alert("Login failed. Please check your credentials.");
     }
   };
+  const handleGoogleSuccess = async (credentialResponse) => {
+    try {
+      const token = credentialResponse.credential;
+
+      const res = await axios.post(
+        "https://foodio-backend-cgsj.onrender.com/auth/google",
+        { token },
+        { withCredentials: true }
+      );
+
+      console.log("Google login response:", res.data);
+
+      if (res.data.token) {
+        localStorage.setItem("loggedIn", "true");
+        setIsLoggedIn(true);
+        alert("Google login successful!");
+        navigate("/");
+      } else {
+        alert(res.data.message || "Google login failed");
+      }
+    } catch (error) {
+      console.error("Google login error:", error);
+      alert("Google login failed.");
+    }
+  };
 
   return (
     <div className="login">
@@ -65,6 +91,26 @@ const Login = ({ setIsLoggedIn }) => {
         <br />
         <button id="loginbutton" type="submit">Login</button>
       </form>
+
+      <br/>
+      
+{/* --- OR Divider --- */}
+<div style={{ display: "flex", alignItems: "center", margin: "20px 0" }}>
+  <hr style={{ flex: 1, border: "none", height: "1px", background: "#ccc" }} />
+  <span style={{ margin: "0 10px", color: "#666" }}>OR</span>
+  <hr style={{ flex: 1, border: "none", height: "1px", background: "#ccc" }} />
+</div>
+      {/*google login button*/}
+      <div >
+      <GoogleLogin
+      onSuccess={handleGoogleSuccess}
+      onError={()=>{
+        console.log("google login falied");
+        alert("google login failed.Try again");
+      }}
+      />
+      </div>
+      
       <br /><br />
       <p>New user? <Link to="/register" style={{ color: '#3b73af' }}>Register</Link></p>
     </div>
