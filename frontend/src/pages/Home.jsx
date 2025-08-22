@@ -2,10 +2,14 @@ import React, { useState } from "react";
 import "../App.css";
 import "./recipes";
 import { Link } from "react-router-dom";
+import { useFoodAlertContext } from "../context/FoodAlertContext";
+import { useTheme } from "../context/ThemeContext";
 
 const Home = () => {
   const [activeTestimonial, setActiveTestimonial] = useState(2);
   const MAX_VISIBILITY = 3;
+  const { showFavorite, showSave } = useFoodAlertContext();
+  const { theme, toggleTheme } = useTheme();
 
   const testimonials = [
     {
@@ -174,13 +178,19 @@ const Home = () => {
       if (!favorites.some((r) => r.id === recipe.id)) {
         favorites.push(recipe);
         localStorage.setItem("favoriteRecipes", JSON.stringify(favorites));
-        alert(`${recipe.title} was added to Favorite Recipes!`);
+        showFavorite(
+          "Recipe Added to Favorites! ❤️",
+          `${recipe.title} has been added to your favorite recipes collection.`
+        );
       }
     } else {
       // Remove if unfavorited
       favorites = favorites.filter((r) => r.id !== recipe.id);
       localStorage.setItem("favoriteRecipes", JSON.stringify(favorites));
-      alert(`${recipe.title} was removed from Favorite Recipes!`);
+      showFavorite(
+        "Recipe Removed from Favorites 💔",
+        `${recipe.title} has been removed from your favorite recipes.`
+      );
     }
   }
 };
@@ -202,13 +212,19 @@ const Home = () => {
       if (!saved.some((r) => r.id === recipe.id)) {
         saved.push(recipe);
         localStorage.setItem("savedRecipes", JSON.stringify(saved));
-        alert(`${recipe.title} was added to Saved Recipes!`);
+        showSave(
+          "Recipe Saved! 📚",
+          `${recipe.title} has been added to your saved recipes for later.`
+        );
       }
     } else {
       // Remove from saved list
       saved = saved.filter((r) => r.id !== recipe.id);
       localStorage.setItem("savedRecipes", JSON.stringify(saved));
-      alert(`${recipe.title} was removed from Saved Recipes!`);
+      showSave(
+        "Recipe Unsaved 📖",
+        `${recipe.title} has been removed from your saved recipes.`
+      );
     }
   }
 };
@@ -272,6 +288,17 @@ const Home = () => {
 
   return (
     <div>
+      {/* Theme Toggle Button for Testing */}
+      <div className="text-center mt-3 mb-3">
+        <button 
+          onClick={toggleTheme}
+          className="btn btn-primary"
+          style={{ position: 'fixed', top: '80px', right: '20px', zIndex: 1000 }}
+        >
+          {theme === 'light' ? '🌙 Dark Mode' : '☀️ Light Mode'}
+        </button>
+      </div>
+      
       <div
         id="recipeCarousel"
         className="carousel slide"
