@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { UserIcon } from "lucide-react";
 import axios from 'axios';
 import { useUserContext } from '../context/userContext';
+import "../navbar.css";
 
 const Navbar = ({ isLoggedIn, setIsLoggedIn, isHomeScreen, recipes = [] }) => {
   console.log("Recipes in Navbar:", recipes);
@@ -96,11 +97,10 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, isHomeScreen, recipes = [] }) => {
   };
 
   return (
-    <nav
-      className={`w-full z-50 text-white ${
-        isHomeScreen ? "fixed top-0" : "relative"
-      } backdrop-blur-md shadow-[rgba(0,0,0,0.2)_0px_4px_20px,rgba(255,204,0,0.05)_0px_0px_30px_inset] bg-black/60`}
-    >
+   <nav
+  className="sticky top-0 w-full z-50 text-white backdrop-blur-md shadow-[rgba(0,0,0,0.2)_0px_4px_20px,rgba(255,204,0,0.05)_0px_0px_30px_inset] bg-black/60"
+>
+
       <div className="max-w-7xl lg:mx-16 mx-auto px-2 sm:px-4 lg:px-8">
         <div className="py-4 flex justify-between items-center h-16">
           {/* Logo */}
@@ -176,51 +176,38 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, isHomeScreen, recipes = [] }) => {
           </div>
 
           {/* Auth Buttons or Profile */}
-          <div className="flex items-center space-x-2 relative">
-            {!isLoggedIn ? (
-              <>
-                <Link
-                  to="/login"
-                  className="px-4 py-1 border border-yellow-400 text-yellow-400 rounded hover:bg-yellow-500 hover:text-black"
-                >
-                  LOGIN
-                </Link>
-                <Link
-                  to="/register"
-                  className="px-4 py-1 bg-yellow-400 text-black rounded hover:bg-yellow-300 font-semibold"
-                >
-                  REGISTER
-                </Link>
-              </>
-            ) : (
-              <div
-                className="relative"
-                onMouseEnter={handleUserEnter}
-                onMouseLeave={handleUserLeave}
-              >
-                <div className="bg-black/20 rounded p-1 cursor-pointer">
-                  <UserIcon className="h-6 w-6" />
-                </div>
-                {userMenuOpen && (
-                  <div className="absolute right-0 mt-2 bg-black/90 text-white rounded shadow-lg w-32">
-                    <Link
-                      to="/profile"
-                      className="block px-4 py-2 hover:bg-white/10"
-                    >
-                      Profile
-                    </Link>
-                    <button
-                      onClick={handleLogout}
-                      className="w-full text-left px-4 py-2 hover:bg-white/10"
-                    >
-                      Logout
-                    </button>
-                  </div>
-                )}
-              </div>
-            )}
-          </div>
-        </div>
+          
+
+<div className="flex items-center space-x-2 relative">
+  <Link
+    to="/register"
+    className="px-4 py-1 bg-yellow-400 text-black rounded hover:bg-yellow-300 font-semibold"
+  >
+    REGISTER
+  </Link>
+  <div
+    className="relative"
+    onMouseEnter={handleUserEnter}
+    onMouseLeave={handleUserLeave}
+  >
+    <Link to="/profile">
+      <div className="bg-black/20 rounded p-1 cursor-pointer">
+        <UserIcon className="h-6 w-6" />
+      </div>
+    </Link>
+    {userMenuOpen && (
+      <div className="absolute right-0 mt-2 bg-black/90 text-white rounded shadow-lg w-32">
+        <button
+          onClick={handleLogout}
+          className="w-full text-left px-4 py-2 hover:bg-white/10"
+        >
+          Logout
+        </button>
+      </div>
+    )}
+  </div>
+</div>
+</div>
       </div>
     </nav>
   );
