@@ -122,7 +122,7 @@ No complex configuration required. Just clone, install, and run.
     # Frontend dependencies
     cd frontend
     npm install
-    npm start
+    npm run dev
     ```
 
 3.  **🔑 Set Up Environment Variables:**
@@ -142,7 +142,7 @@ No complex configuration required. Just clone, install, and run.
     
     # Start frontend server (in new terminal)
     cd frontend
-    npm start
+    npm run dev
     ```
     
     Your app will be running on `http://localhost:3000`!
