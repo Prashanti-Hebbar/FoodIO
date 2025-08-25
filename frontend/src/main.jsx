@@ -8,12 +8,15 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import App from "./App.jsx";
 import { UserProvider } from "./context/userContext.jsx";
 import { ThemeProvider } from "./context/ThemeContext.jsx";
+import RecipeContextProvider from "./context/RecipeContext.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <ThemeProvider>
       <UserProvider>
-        <App />
+        <RecipeContextProvider>
+          <App />
+        </RecipeContextProvider>
       </UserProvider>
     </ThemeProvider>
   </StrictMode>
