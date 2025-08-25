@@ -1,6 +1,7 @@
 /* Import Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Montserrat:wght@700&display=swap');
-
+@import 'tailwindcss'; /* Tailwind Plugin */
+ 
 /* CSS Variables */
 :root {
     --primary-font: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -28,6 +29,11 @@
 
 [data-theme="dark"] .navbar-custom {
     background: var(--navbar-bg-dark);
+}
+
+a {
+  color: inherit;      /* Inherit text color from parent */
+  text-decoration: none; /* Remove underline */
 }
 
 .navbar, .navbar-custom {

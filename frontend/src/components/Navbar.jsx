@@ -109,7 +109,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, isHomeScreen, recipes = [] }) => {
           </Link>
 
           {/* Nav Links */}
-          <div className="hidden md:flex space-x-6 items-center">
+          <div className=" md:flex space-x-6 items-center">
             <Link to="/" className="hover:text-yellow-400">Home</Link>
 
             <div

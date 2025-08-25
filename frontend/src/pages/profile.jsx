@@ -21,11 +21,11 @@ const Profile = () => {
 
   // 🔹 Favorites & Saved (persistent in localStorage)
   const [favoriteRecipes, setFavoriteRecipes] = useState(() => {
-    return JSON.parse(localStorage.getItem("favoriteRecipes")) || [];
+    return JSON.parse(localStorage.getItem("favList")) || [];
   });
 
   const [savedRecipes, setSavedRecipes] = useState(() => {
-    return JSON.parse(localStorage.getItem("savedRecipes")) || [];
+    return JSON.parse(localStorage.getItem("saveList")) || [];
   });
 
   // 🔹 Fetch User Data & Avatar
@@ -71,11 +71,11 @@ const Profile = () => {
       } else if (section === "Favorite Recipes") {
         const updated = favoriteRecipes.filter((r) => r.id !== recipeId);
         setFavoriteRecipes(updated);
-        localStorage.setItem("favoriteRecipes", JSON.stringify(updated));
+        localStorage.setItem("favlist", JSON.stringify(updated));
       } else if (section === "Saved Recipes") {
         const updated = savedRecipes.filter((r) => r.id !== recipeId);
         setSavedRecipes(updated);
-        localStorage.setItem("savedRecipes", JSON.stringify(updated));
+        localStorage.setItem("saveList", JSON.stringify(updated));
       }
     } catch (error) {
       console.error("Error deleting recipe:", error);
