@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import { RecipeContext } from '../../context/RecipeContext';
 import { handleFav, handleSave, handleShare } from '../../utils/RecipeFunctions';
 
+//Reusable card that can be rendered in multiple places.
 const RecipeCard = ({recipe}) => {
   const {favList, saveList, favDispatch, saveDispatch}=useContext(RecipeContext);
 
@@ -52,3 +53,4 @@ const RecipeCard = ({recipe}) => {
 };
 
 export default RecipeCard;
+

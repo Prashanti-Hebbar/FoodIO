@@ -1,5 +1,6 @@
 import RecipeListRenderer from './RecipeListRenderer'
 
+//Sets the list to be rendered by RecipeListRenderer
 const RecipeSection = () => {
   return (
     <div className="container mt-4 p-5">
@@ -14,5 +15,6 @@ const RecipeSection = () => {
     </div>
   )
 }
+
 
 export default RecipeSection
