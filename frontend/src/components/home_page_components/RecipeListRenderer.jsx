@@ -1,6 +1,7 @@
 import recipes from "../../pages/recipes";
 import RecipeCard from "./RecipeCard";
 
+//Maps over the list of recipeType like trending, newest, top-rated and calls RecipeCard
 const RecipeListRenderer = ({ recipeType}) => {
   return (
     <div className="d-flex flex-nowrap overflow-auto">
@@ -12,3 +13,4 @@ const RecipeListRenderer = ({ recipeType}) => {
 };
 
 export default RecipeListRenderer;
+
