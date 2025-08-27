@@ -1,4 +1,10 @@
-import { BrowserRouter as Router, Route, Routes, Navigate} from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Navigate,
+} from "react-router-dom";
+
 import { useState, useEffect } from "react";
 import Navbar from "./components/Navbar";
 import Categories from "./components/Categories";
@@ -9,7 +15,7 @@ import AddRecipe from "./pages/AddRecipe";
 import About from "./pages/About";
 import ViewRecipe from "./pages/ViewRecipe";
 import Profile from "./pages/profile";
-import Breakfast from './pages/categories/Breakfast';
+import Breakfast from "./pages/categories/Breakfast";
 import Lunch from "./pages/categories/Lunch";
 import Desserts from "./pages/categories/Desserts";
 import Dinner from "./pages/categories/Dinner";
@@ -18,9 +24,9 @@ import Sides from "./pages/categories/Sides";
 import Snacks from "./pages/categories/Snacks";
 import Drinks from "./pages/categories/Drinks";
 import LowCarb from "./pages/categories/LowCarb";
-import Keto from "./pages/categories/keto";
-import Vegetarian from "./pages/categories/vegetarian";
-import Whole30 from "./pages/categories/whole30";
+import Keto from "./pages/categories/Keto";
+import Veg from "./pages/categories/Vegetarian";
+import Whole30 from "./pages/categories/Whole30";
 import Paleo from "./pages/categories/Paleo";
 import Indian from "./pages/categories/Indian";
 import Italian from "./pages/categories/Itallian";
@@ -30,35 +36,33 @@ import { SavedRecipesProvider } from "./pages/savedRecipes";
 import AIChatPage from "./pages/AIChatPage";
 import ScrollToTop from "./components/ScrollToTop";
 import Footer from "./components/Footer";
-import Blog from './pages/Blog';
-import Community from './pages/Community';
-import HelpCenter from './pages/HelpCenter';
-import PrivacyPolicy from './pages/PrivacyPolicy';
-import TermsOfService from './pages/TermsOfService';
-import Careers from './pages/Careers';
+import Blog from "./pages/Blog";
+import Community from "./pages/Community";
+import HelpCenter from "./pages/HelpCenter";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsOfService from "./pages/TermsOfService";
+import Careers from "./pages/Careers";
 import { FaMoon, FaSun } from "react-icons/fa";
 import CustomCursor from "./components/CustomCursor";
 import FluidCursor from "./components/FluidCursor";
 function App() {
+  const [theme, setTheme] = useState("light");
 
-  const[theme,setTheme]=useState("light");
-
-   useEffect(() => {
+  useEffect(() => {
     const savedTheme = localStorage.getItem("theme") || "light";
     setTheme(savedTheme);
     document.documentElement.setAttribute("data-theme", savedTheme);
   }, []);
 
-   const toggleTheme = () => {
+  const toggleTheme = () => {
     const newTheme = theme === "light" ? "dark" : "light";
     setTheme(newTheme);
     document.documentElement.setAttribute("data-theme", newTheme);
     localStorage.setItem("theme", newTheme);
   };
 
-
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-// Move recipes state up here
+  // Move recipes state up here
   const [recipes, setRecipes] = useState([
     { id: 1, title: "Delicious Pasta" },
     { id: 2, title: "Spicy Tacos" },
@@ -77,66 +81,79 @@ function App() {
     { id: 15, title: "Loco Moco" },
     { id: 16, title: "Cinnamon Roll Casserole" },
     { id: 17, title: "Frikadellen" },
-    { id: 18, title: "Coffee Jelly" }
+    { id: 18, title: "Coffee Jelly" },
   ]);
-useEffect(() => {
-  const checkLogin = () => {
-    const user = localStorage.getItem("loggedIn");
-    setIsLoggedIn(user === "true");
-  };
+  useEffect(() => {
+    const checkLogin = () => {
+      const user = localStorage.getItem("loggedIn");
+      setIsLoggedIn(user === "true");
+    };
 
-  checkLogin();
+    checkLogin();
 
-  // Optional: listen to localStorage changes (e.g., in multi-tab)
-  window.addEventListener("storage", checkLogin);
+    // Optional: listen to localStorage changes (e.g., in multi-tab)
+    window.addEventListener("storage", checkLogin);
 
-  return () => {
-    window.removeEventListener("storage", checkLogin);
-  };
-}, []);
-  
+    return () => {
+      window.removeEventListener("storage", checkLogin);
+    };
+  }, []);
+
   return (
     <Router>
-
-      
       <FluidCursor />
-       <CustomCursor />
+      <CustomCursor />
       <ScrollToTop />
 
-      
-    {/* Dark Mode Toggle Button */}
-    <button
-      onClick={toggleTheme}
-      style={{
-        position: "fixed",
-        top: "10px",
-        right: "10px",
-        padding: "8px 12px",
-        borderRadius: "5px",
-        border: "none",
-        cursor: "pointer",
-        background: "var(--primary-color)",
-        color: "white",
-        zIndex: 1000
-      }}
-    >
-      {theme === "light" ?  <FaMoon color="black" /> : <FaSun color="#FFD700"/>}
-    </button>
+      {/* Dark Mode Toggle Button */}
+      <button
+        onClick={toggleTheme}
+        style={{
+          position: "fixed",
+          top: "10px",
+          right: "10px",
+          padding: "8px 12px",
+          borderRadius: "5px",
+          border: "none",
+          cursor: "pointer",
+          background: "var(--primary-color)",
+          color: "white",
+          zIndex: 1000,
+        }}
+      >
+        {theme === "light" ? (
+          <FaMoon color="black" />
+        ) : (
+          <FaSun color="#FFD700" />
+        )}
+      </button>
 
-
-      <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} recipes={recipes}/>
+      <Navbar
+        isLoggedIn={isLoggedIn}
+        setIsLoggedIn={setIsLoggedIn}
+        recipes={recipes}
+      />
 
       {/* <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} /> */}
 
       <Routes>
-        <Route path="/" element={<Home /> } />
-        <Route path="/" element={!isLoggedIn ? <Navigate to="/login" /> : <Home />} />
-        <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
-        <Route path="/register" element={<Register setIsLoggedIn={setIsLoggedIn} />} />
-        <Route path="/home" element={ <Home /> } />
-        <Route path="/AddRecipe" element={ <AddRecipe /> } />
-        <Route path="/About" element={ <About /> } />
-        <Route path="/ViewRecipe" element={<ViewRecipe />}/>
+        <Route path="/" element={<Home />} />
+        <Route
+          path="/"
+          element={!isLoggedIn ? <Navigate to="/login" /> : <Home />}
+        />
+        <Route
+          path="/login"
+          element={<Login setIsLoggedIn={setIsLoggedIn} />}
+        />
+        <Route
+          path="/register"
+          element={<Register setIsLoggedIn={setIsLoggedIn} />}
+        />
+        <Route path="/home" element={<Home />} />
+        <Route path="/AddRecipe" element={<AddRecipe />} />
+        <Route path="/About" element={<About />} />
+        <Route path="/ViewRecipe" element={<ViewRecipe />} />
         <Route path="/recipe/:id" element={<ViewRecipe />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/Categories" element={<Categories />} />
@@ -150,15 +167,15 @@ useEffect(() => {
         <Route path="/recipes/drinks" element={<Drinks />} />
         <Route path="/recipes/lowcarb" element={<LowCarb />} />
         <Route path="/recipes/keto" element={<Keto />} />
-        <Route path="/recipes/Vegetarian" element={<Vegetarian />} />
+        <Route path="/recipes/vegetarian" element={<Veg />} />
         <Route path="/recipes/whole30" element={<Whole30 />} />
         <Route path="/recipes/paleo" element={<Paleo />} />
         <Route path="/recipes/indian" element={<Indian />} />
         <Route path="/recipes/italian" element={<Italian />} />
         <Route path="/recipes/japanese" element={<Japanese />} />
         <Route path="/recipes/mexican" element={<Mexican />} />
-        <Route path="/pages/savedRecipes" element={<SavedRecipesProvider/>}/>
-        <Route path="/ai-chat" element={<AIChatPage/>}/>
+        <Route path="/pages/savedRecipes" element={<SavedRecipesProvider />} />
+        <Route path="/ai-chat" element={<AIChatPage />} />
         <Route path="/Blog" element={<Blog />} />
         <Route path="/Careers" element={<Careers />} />
         <Route path="/Community" element={<Community />} />

@@ -1,114 +1,10 @@
 import React, { useState } from 'react';
 import '../../styles/AllCat.css';
+import recipes from '../../data/recipes';
 
 const Lunch = () => {
     const [setSelectedRecipe] = useState(null);
 
-    const Lunch = [
-      {
-        id: 1,
-        title: "Butter Chicken",
-        image: "https://www.spiceroots.com/spiceroots/wp-content/uploads/2008/05/butterchicken-1024x682-1.jpg",
-        rating: 4.9,
-        prepTime: "40 minutes",
-        description: "Rich and creamy tomato-based chicken curry",
-        ingredients: [
-          { quantity: "500g", name: "chicken", notes: "boneless, diced" },
-          { quantity: "2 tablespoons", name: "butter" },
-          { quantity: "1 cup", name: "tomato puree" },
-          { quantity: "1/2 cup", name: "cream" },
-          { quantity: "1 teaspoon", name: "garam masala" },
-          { quantity: "1 teaspoon", name: "ginger garlic paste" },
-          { quantity: "1 teaspoon", name: "salt" }
-        ]
-      },
-      {
-        id: 2,
-        title: "Paneer Tikka Masala",
-        image: "https://www.nehascookbook.com/wp-content/uploads/2022/11/Paneer-tikka-masala-WS-500x500.jpg",
-        rating: 4.8,
-        prepTime: "35 minutes",
-        description: "Grilled paneer cubes cooked in a spiced tomato gravy",
-        ingredients: [
-          { quantity: "250g", name: "paneer", notes: "cubed" },
-          { quantity: "1 cup", name: "yogurt" },
-          { quantity: "1 teaspoon", name: "red chili powder" },
-          { quantity: "1 teaspoon", name: "turmeric powder" },
-          { quantity: "1/2 cup", name: "tomato puree" },
-          { quantity: "1 teaspoon", name: "cumin powder" },
-          { quantity: "1/2 cup", name: "cream" }
-        ]
-      },
-      {
-        id: 3,
-        title: "Vegetable Biryani",
-        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPbQMgD79WJwULTkrE5C-MsHcUMyKozMq-Kw&s",
-        rating: 4.7,
-        prepTime: "45 minutes",
-        description: "Fragrant rice cooked with mixed vegetables and spices",
-        ingredients: [
-          { quantity: "2 cups", name: "basmati rice" },
-          { quantity: "1 cup", name: "mixed vegetables", notes: "chopped" },
-          { quantity: "1", name: "onion", notes: "sliced" },
-          { quantity: "1 teaspoon", name: "garam masala" },
-          { quantity: "1 teaspoon", name: "cumin seeds" },
-          { quantity: "1/2 teaspoon", name: "turmeric powder" },
-          { quantity: "1 cup", name: "water" }
-        ]
-      },
-      {
-        id: 4,
-        title: "Dal Tadka",
-        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4kLMn_YJz4DEPNat_gUTF_QWOxqKiIRWMQw&s",
-        rating: 4.8,
-        prepTime: "30 minutes",
-        description: "Yellow lentils tempered with garlic and spices",
-        ingredients: [
-          { quantity: "1 cup", name: "toor dal (pigeon peas)" },
-          { quantity: "2 cups", name: "water" },
-          { quantity: "1 teaspoon", name: "turmeric powder" },
-          { quantity: "1 teaspoon", name: "mustard seeds" },
-          { quantity: "2 cloves", name: "garlic", notes: "minced" },
-          { quantity: "1 teaspoon", name: "ghee" },
-          { quantity: "1", name: "green chili", notes: "chopped" }
-        ]
-      },
-      {
-        id: 5,
-        title: "Chole (Chickpea Curry)",
-        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnoEyXXksyo75o7kOH6S6sz6MvKfrLzfp2BA&s",
-        rating: 4.9,
-        prepTime: "40 minutes",
-        description: "Spiced chickpea curry cooked in a tomato-based gravy",
-        ingredients: [
-          { quantity: "2 cups", name: "chickpeas", notes: "soaked overnight" },
-          { quantity: "1", name: "onion", notes: "chopped" },
-          { quantity: "2", name: "tomatoes", notes: "pureed" },
-          { quantity: "1 teaspoon", name: "garam masala" },
-          { quantity: "1 teaspoon", name: "cumin powder" },
-          { quantity: "1 teaspoon", name: "ginger garlic paste" },
-          { quantity: "1/2 teaspoon", name: "salt" }
-        ]
-      },
-      {
-        id: 6,
-        title: "Rajma (Kidney Bean Curry)",
-        image: "https://www.indianveggiedelight.com/wp-content/uploads/2022/10/instant-pot-rajma-masala.jpg",
-        rating: 4.8,
-        prepTime: "45 minutes",
-        description: "Slow-cooked kidney beans in a spiced tomato curry",
-        ingredients: [
-          { quantity: "2 cups", name: "kidney beans", notes: "soaked overnight" },
-          { quantity: "1", name: "onion", notes: "chopped" },
-          { quantity: "2", name: "tomatoes", notes: "pureed" },
-          { quantity: "1 teaspoon", name: "garam masala" },
-          { quantity: "1 teaspoon", name: "coriander powder" },
-          { quantity: "1 teaspoon", name: "ginger garlic paste" },
-          { quantity: "1/2 teaspoon", name: "salt" }
-        ]
-      }
-    ];
-    
     return (
         <div className="lunch-wrapper">
           <div className="hero-section">
@@ -147,7 +43,7 @@ const Lunch = () => {
           </div> */}
     
           <div className="recipes-showcase">
-            {Lunch.map(recipe => (
+            {recipes["lunch"].map(recipe => (
               <div key={recipe.id} className="recipe-card">
                 <div className="card-media">
                   <img src={recipe.image} alt={recipe.title} />
@@ -158,7 +54,6 @@ const Lunch = () => {
                   <div className="card-overlay">
                     <button 
                       className="view-recipe-btn"
-                      onClick={() => setSelectedRecipe(recipe)}
                     >
                       View Recipe
                     </button>

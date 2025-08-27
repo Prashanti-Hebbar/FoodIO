@@ -7,7 +7,7 @@ import { useUserContext } from '../context/userContext';
 import "../navbar.css";
 
 const Navbar = ({ isLoggedIn, setIsLoggedIn, isHomeScreen, recipes = [] }) => {
-  console.log("Recipes in Navbar:", recipes);
+  // console.log("Recipes in Navbar:", recipes);
 
   const { setUserData } = useUserContext();
   const navigate = useNavigate();
@@ -151,7 +151,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, isHomeScreen, recipes = [] }) => {
           </div>
 
           {/* Search Bar */}
-          <div className="flex-grow mx-4 max-w-md hidden md:block relative">
+          <div className="flex-grow mx-4 max-w-md md:block relative">
             <input
               type="text"
               placeholder="Search"
