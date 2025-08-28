@@ -1,101 +1,9 @@
 import React, { useState } from 'react';
 import '../../styles/AllCat.css';
+import recipes from '../../data/recipes';
 
 const Italian = () => {
     const [setSelectedRecipe] = useState(null);
-
-    const italianRecipes = [
-        {
-          id: 1,
-          title: "Margherita Pizza",
-          image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqLEoGo3bHJYJEpRIaveeChxuCkXPoLk3RNg&s",
-          rating: 4.8,
-          prepTime: "30 minutes",
-          description: "Classic Italian pizza topped with fresh tomatoes, basil, and mozzarella",
-          ingredients: [
-            { quantity: "1", name: "pizza dough" },
-            { quantity: "1/2 cup", name: "tomato sauce" },
-            { quantity: "1 cup", name: "mozzarella", notes: "sliced" },
-            { quantity: "1 teaspoon", name: "olive oil" },
-            { quantity: "5-6", name: "fresh basil leaves" }
-          ]
-        },
-        {
-          id: 2,
-          title: "Spaghetti Carbonara",
-          image: "https://www.allrecipes.com/thmb/a_0W8yk_LLCtH-VPqg2uLD9I5Pk=/0x512/filters:no_upscale():max_bytes(150000):strip_icc()/11973-spaghetti-carbonara-ii-DDMFS-4x3-6edea51e421e4457ac0c3269f3be5157.jpg",
-          rating: 4.9,
-          prepTime: "25 minutes",
-          description: "Creamy pasta with pancetta, eggs, Parmesan, and black pepper",
-          ingredients: [
-            { quantity: "200g", name: "spaghetti" },
-            { quantity: "100g", name: "pancetta", notes: "diced" },
-            { quantity: "2", name: "eggs" },
-            { quantity: "1/2 cup", name: "Parmesan cheese", notes: "grated" },
-            { quantity: "1 teaspoon", name: "black pepper" }
-          ]
-        },
-        {
-          id: 3,
-          title: "Lasagna",
-          image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUPDjxBJlk7s44DNHz2D9AJ2f1vBYwXw_Ypw&s",
-          rating: 4.7,
-          prepTime: "1 hour",
-          description: "Layers of pasta, meat sauce, ricotta, and cheese baked to perfection",
-          ingredients: [
-            { quantity: "12", name: "lasagna noodles" },
-            { quantity: "500g", name: "ground beef" },
-            { quantity: "2 cups", name: "tomato sauce" },
-            { quantity: "1 cup", name: "ricotta cheese" },
-            { quantity: "1 cup", name: "mozzarella", notes: "shredded" }
-          ]
-        },
-        {
-          id: 4,
-          title: "Minestrone Soup",
-          image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlLnTDF5PsCsyCfxn6tDxJYdDqwkYX9OMc_A&s",
-          rating: 4.6,
-          prepTime: "40 minutes",
-          description: "Hearty vegetable soup with beans, pasta, and Italian herbs",
-          ingredients: [
-            { quantity: "1", name: "onion", notes: "chopped" },
-            { quantity: "2", name: "carrots", notes: "diced" },
-            { quantity: "1 cup", name: "kidney beans" },
-            { quantity: "1/2 cup", name: "small pasta" },
-            { quantity: "1 teaspoon", name: "Italian seasoning" }
-          ]
-        },
-        {
-          id: 5,
-          title: "Risotto alla Milanese",
-          image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQ8HC6HMLhBnUUcBbE1smE5tKpo0BMtUdz4w&s",
-          rating: 4.8,
-          prepTime: "35 minutes",
-          description: "Creamy saffron-infused risotto with Parmesan and butter",
-          ingredients: [
-            { quantity: "1 cup", name: "Arborio rice" },
-            { quantity: "4 cups", name: "chicken broth" },
-            { quantity: "1/2 teaspoon", name: "saffron" },
-            { quantity: "1/2 cup", name: "Parmesan cheese", notes: "grated" },
-            { quantity: "2 tablespoons", name: "butter" }
-          ]
-        },
-        {
-          id: 6,
-          title: "Tiramisu",
-          image: "https://i0.wp.com/mediterraneantaste.com/wp-content/uploads/2023/11/tiramisu-4583.jpg?fit=1024%2C683&ssl=1",
-          rating: 5.0,
-          prepTime: "20 minutes + chilling time",
-          description: "Classic Italian dessert made with layers of coffee-soaked ladyfingers and mascarpone cream",
-          ingredients: [
-            { quantity: "200g", name: "ladyfingers" },
-            { quantity: "1 cup", name: "espresso" },
-            { quantity: "250g", name: "mascarpone cheese" },
-            { quantity: "2", name: "eggs" },
-            { quantity: "2 tablespoons", name: "cocoa powder" }
-          ]
-        }
-      ];
     
       return (
         <div className="desserts-wrapper">
@@ -121,7 +29,7 @@ const Italian = () => {
           </div>
     
           <div className="recipes-showcase">
-            {italianRecipes.map(recipe => (
+            {recipes["italian"].map(recipe => (
               <div key={recipe.id} className="recipe-card">
                 <div className="card-media">
                   <img src={recipe.image} alt={recipe.title} />

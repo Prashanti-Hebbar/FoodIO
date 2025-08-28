@@ -1,113 +1,9 @@
 import React, { useState } from 'react';
 import '../../styles/AllCat.css';
+import recipes from '../../data/recipes';
 
 const Drinks = () => {
     const [setSelectedRecipe] = useState(null);
-
-    const drinkRecipes = [
-        {
-          id: 1,
-          title: "Mango Lassi",
-          image: "https://www.whiskaffair.com/wp-content/uploads/2020/05/Mango-Lassi-2-3.jpg",
-          rating: 4.9,
-          prepTime: "10 minutes",
-          description: "Refreshing Indian mango yogurt smoothie",
-          ingredients: [
-            { quantity: "1 cup", name: "mango pulp" },
-            { quantity: "1 cup", name: "yogurt" },
-            { quantity: "1/2 cup", name: "milk" },
-            { quantity: "2 tablespoons", name: "sugar" },
-            { quantity: "1/4 teaspoon", name: "cardamom powder" },
-            { quantity: "4-5", name: "ice cubes" }
-          ]
-        },
-        {
-          id: 2,
-          title: "Masala Chai",
-          image: "https://budleaf.com/wp-content/uploads/2023/04/How-to-make-masala-chai-1568x1039.jpeg",
-          rating: 4.8,
-          prepTime: "15 minutes",
-          description: "Spiced Indian tea made with milk and aromatic spices",
-          ingredients: [
-            { quantity: "2 cups", name: "water" },
-            { quantity: "1 cup", name: "milk" },
-            { quantity: "2 teaspoons", name: "black tea leaves" },
-            { quantity: "1", name: "cinnamon stick" },
-            { quantity: "2", name: "cardamom pods", notes: "crushed" },
-            { quantity: "1", name: "clove" },
-            { quantity: "1/2 inch", name: "ginger", notes: "grated" },
-            { quantity: "2 teaspoons", name: "sugar" }
-          ]
-        },
-        {
-          id: 3,
-          title: "Jaljeera",
-          image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_8mmIhhP7ihBxDM7nUZqOePdvfITQd0YQ1g&s",
-          rating: 4.7,
-          prepTime: "10 minutes",
-          description: "Tangy and spicy Indian cumin-flavored drink",
-          ingredients: [
-            { quantity: "2 cups", name: "water" },
-            { quantity: "1/2 cup", name: "mint leaves" },
-            { quantity: "1/2 teaspoon", name: "cumin powder" },
-            { quantity: "1/2 teaspoon", name: "black salt" },
-            { quantity: "1/4 teaspoon", name: "chili powder" },
-            { quantity: "2 tablespoons", name: "lemon juice" },
-            { quantity: "4-5", name: "ice cubes" }
-          ]
-        },
-        {
-          id: 4,
-          title: "Cold Coffee",
-          image: "https://www.milkmaid.in/sites/default/files/2024-05/Cold-Coffee-335x300.jpg",
-          rating: 4.8,
-          prepTime: "5 minutes",
-          description: "Chilled coffee blended with milk and sugar",
-          ingredients: [
-            { quantity: "1 cup", name: "milk" },
-            { quantity: "1 tablespoon", name: "instant coffee" },
-            { quantity: "2 tablespoons", name: "sugar" },
-            { quantity: "4-5", name: "ice cubes" },
-            { quantity: "as needed", name: "whipped cream", notes: "optional" },
-            { quantity: "1 teaspoon", name: "chocolate syrup", notes: "optional" }
-          ]
-        },
-        {
-          id: 5,
-          title: "Aam Panna",
-          image: "https://i0.wp.com/binjalsvegkitchen.com/wp-content/uploads/2016/05/Pudina-Aam-Panna-H1-1.jpg?resize=600%2C900&ssl=1",
-          rating: 4.7,
-          prepTime: "20 minutes",
-          description: "Refreshing summer drink made with raw mango and spices",
-          ingredients: [
-            { quantity: "2", name: "raw mangoes" },
-            { quantity: "2 tablespoons", name: "sugar" },
-            { quantity: "1 teaspoon", name: "black salt" },
-            { quantity: "1 teaspoon", name: "cumin powder" },
-            { quantity: "2 tablespoons", name: "mint leaves", notes: "chopped" },
-            { quantity: "2 cups", name: "water" },
-            { quantity: "4-5", name: "ice cubes" }
-          ]
-        },
-        {
-          id: 6,
-          title: "Thandai",
-          image: "https://palatesdesire.com/wp-content/uploads/2022/03/Thandai-recipe@palates-desire-2.jpg",
-          rating: 4.9,
-          prepTime: "30 minutes",
-          description: "Traditional Indian spiced milk drink",
-          ingredients: [
-            { quantity: "2 cups", name: "milk" },
-            { quantity: "10", name: "almonds", notes: "soaked" },
-            { quantity: "5", name: "cashews", notes: "soaked" },
-            { quantity: "1 teaspoon", name: "poppy seeds" },
-            { quantity: "1 teaspoon", name: "fennel seeds" },
-            { quantity: "1/4 teaspoon", name: "cardamom powder" },
-            { quantity: "2 tablespoons", name: "sugar" },
-            { quantity: "4-5", name: "ice cubes" }
-          ]
-        }
-      ];
     
       return (
         <div className="desserts-wrapper">
@@ -133,7 +29,7 @@ const Drinks = () => {
           </div>
     
           <div className="recipes-showcase">
-            {drinkRecipes.map(recipe => (
+            {recipes["drinks"].map(recipe => (
               <div key={recipe.id} className="recipe-card">
                 <div className="card-media">
                   <img src={recipe.image} alt={recipe.title} />

@@ -1,113 +1,9 @@
 import React, { useState } from 'react';
 import '../../styles/AllCat.css';
+import recipes from '../../data/recipes';
 
 const Veg = () => {
     const [setSelectedRecipe] = useState(null);
-
-    const vegetarianRecipes = [
-        {
-          id: 1,
-          title: "Vegetable Stir-Fry",
-          image: "https://natashaskitchen.com/wp-content/uploads/2020/08/Vegetable-Stir-Fry-SQ.jpg",
-          rating: 4.8,
-          prepTime: "20 minutes",
-          description: "Colorful stir-fried vegetables in a savory garlic sauce",
-          ingredients: [
-            { quantity: "1 cup", name: "broccoli", notes: "chopped" },
-            { quantity: "1 cup", name: "carrots", notes: "sliced" },
-            { quantity: "1 cup", name: "bell peppers", notes: "sliced" },
-            { quantity: "2 tablespoons", name: "soy sauce" },
-            { quantity: "1 tablespoon", name: "olive oil" },
-            { quantity: "2 cloves", name: "garlic", notes: "minced" },
-            { quantity: "1/2 teaspoon", name: "black pepper" }
-          ]
-        },
-        {
-          id: 2,
-          title: "Chickpea Salad",
-          image: "https://www.themediterraneandish.com/wp-content/uploads/2023/12/TMD-Chickpea-Salad-Leads-01-Angle-Horizontal.jpg",
-          rating: 4.9,
-          prepTime: "10 minutes",
-          description: "Refreshing and protein-packed chickpea salad",
-          ingredients: [
-            { quantity: "1 can", name: "chickpeas", notes: "drained and rinsed" },
-            { quantity: "1/2 cup", name: "cucumber", notes: "diced" },
-            { quantity: "1/2 cup", name: "tomatoes", notes: "diced" },
-            { quantity: "1/4 cup", name: "red onion", notes: "chopped" },
-            { quantity: "1 tablespoon", name: "olive oil" },
-            { quantity: "1 tablespoon", name: "lemon juice" },
-            { quantity: "1/2 teaspoon", name: "salt" }
-          ]
-        },
-        {
-          id: 3,
-          title: "Spinach and Paneer Curry",
-          image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdNAM6-f8JSRB4M45Vy0pe7QsRcbTTf1Vln4CsFPn0NQ3vPId0oYV3HXntkfVpRw9hNrI&usqp=CAU",
-          rating: 4.9,
-          prepTime: "30 minutes",
-          description: "Creamy spinach curry with soft paneer cubes",
-          ingredients: [
-            { quantity: "2 cups", name: "spinach", notes: "chopped" },
-            { quantity: "1 cup", name: "paneer", notes: "cubed" },
-            { quantity: "1/2 cup", name: "tomatoes", notes: "pureed" },
-            { quantity: "1/2 teaspoon", name: "turmeric" },
-            { quantity: "1 teaspoon", name: "garam masala" },
-            { quantity: "1 tablespoon", name: "butter" },
-            { quantity: "1/2 teaspoon", name: "salt" }
-          ]
-        },
-        {
-          id: 4,
-          title: "Lentil Soup",
-          image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTwiwE3eGMsi3i-KSa2hzdolSWCEmSWGAg6w&s",
-          rating: 5.0,
-          prepTime: "35 minutes",
-          description: "Hearty and nutritious lentil soup with aromatic spices",
-          ingredients: [
-            { quantity: "1 cup", name: "red lentils", notes: "rinsed" },
-            { quantity: "1/2 cup", name: "carrots", notes: "diced" },
-            { quantity: "1/2 cup", name: "onion", notes: "chopped" },
-            { quantity: "2 cloves", name: "garlic", notes: "minced" },
-            { quantity: "1 teaspoon", name: "cumin powder" },
-            { quantity: "1/2 teaspoon", name: "turmeric" },
-            { quantity: "4 cups", name: "vegetable broth" }
-          ]
-        },
-        {
-          id: 5,
-          title: "Stuffed Bell Peppers",
-          image: "https://embed.widencdn.net/img/beef/t9bwp7fitq/exact/Stuffed%20Peppers%20-%20NCBA%20Beef%20Aug%20202431717.jpg?keep=c&u=7fueml",
-          rating: 4.7,
-          prepTime: "40 minutes",
-          description: "Bell peppers filled with a savory rice and veggie mixture",
-          ingredients: [
-            { quantity: "3", name: "bell peppers", notes: "halved and deseeded" },
-            { quantity: "1 cup", name: "cooked rice" },
-            { quantity: "1/2 cup", name: "black beans" },
-            { quantity: "1/2 cup", name: "corn kernels" },
-            { quantity: "1/2 teaspoon", name: "cumin" },
-            { quantity: "1/2 teaspoon", name: "paprika" },
-            { quantity: "1/4 cup", name: "cheese", notes: "shredded" }
-          ]
-        },
-        {
-          id: 6,
-          title: "Vegetable Pasta",
-          image: "https://buildyourbite.com/wp-content/uploads/2022/08/Roasted-vegetable-pasta-recipe-3.jpg",
-          rating: 4.9,
-          prepTime: "25 minutes",
-          description: "Delicious pasta tossed with fresh vegetables and herbs",
-          ingredients: [
-            { quantity: "2 cups", name: "pasta", notes: "cooked" },
-            { quantity: "1/2 cup", name: "zucchini", notes: "sliced" },
-            { quantity: "1/2 cup", name: "mushrooms", notes: "sliced" },
-            { quantity: "1/2 cup", name: "tomatoes", notes: "diced" },
-            { quantity: "2 tablespoons", name: "olive oil" },
-            { quantity: "1/2 teaspoon", name: "basil" },
-            { quantity: "1/2 teaspoon", name: "salt" }
-          ]
-        }
-      ];
     
       return (
         <div className="desserts-wrapper">
@@ -133,7 +29,7 @@ const Veg = () => {
           </div>
     
           <div className="recipes-showcase">
-            {vegetarianRecipes.map(recipe => (
+            {recipes["vegetarian"].map(recipe => (
               <div key={recipe.id} className="recipe-card">
                 <div className="card-media">
                   <img src={recipe.image} alt={recipe.title} />

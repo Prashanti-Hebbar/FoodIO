@@ -1,113 +1,9 @@
 import React, { useState } from 'react';
 import '../../styles/AllCat.css';
+import recipes from '../../data/recipes';
 
 const Paleo = () => {
     const [setSelectedRecipe] = useState(null);
-
-    const paleoRecipes = [
-        {
-          id: 1,
-          title: "Grilled Chicken with Roasted Vegetables",
-          image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6OQCqpilQ0KIOxPclC6Z75ANJhNk0FGXvpQ&s",
-          rating: 4.9,
-          prepTime: "30 minutes",
-          description: "Juicy grilled chicken with a side of roasted veggies",
-          ingredients: [
-            { quantity: "2", name: "chicken breasts", notes: "boneless, skinless" },
-            { quantity: "2 tablespoons", name: "olive oil" },
-            { quantity: "1 teaspoon", name: "garlic powder" },
-            { quantity: "1 teaspoon", name: "paprika" },
-            { quantity: "1/2 teaspoon", name: "salt" },
-            { quantity: "1/2 teaspoon", name: "black pepper" },
-            { quantity: "1 cup", name: "mixed vegetables", notes: "zucchini, bell peppers, carrots" }
-          ]
-        },
-        {
-          id: 2,
-          title: "Cauliflower Fried Rice",
-          image: "https://www.kitchensanctuary.com/wp-content/uploads/2020/09/Cauliflower-Egg-Fried-Rice-square-FS-14.jpg",
-          rating: 4.8,
-          prepTime: "20 minutes",
-          description: "A delicious paleo-friendly alternative to classic fried rice",
-          ingredients: [
-            { quantity: "2 cups", name: "cauliflower rice" },
-            { quantity: "1/2 cup", name: "carrots", notes: "diced" },
-            { quantity: "1/2 cup", name: "green onions", notes: "chopped" },
-            { quantity: "2", name: "eggs", notes: "beaten" },
-            { quantity: "1 tablespoon", name: "coconut aminos" },
-            { quantity: "1 tablespoon", name: "olive oil" },
-            { quantity: "1 teaspoon", name: "ginger", notes: "grated" }
-          ]
-        },
-        {
-          id: 3,
-          title: "Zucchini Noodles with Meatballs",
-          image: "https://lifemadesweeter.com/wp-content/uploads/Zucchini-Noodles-with-Meatballs-recipe-photo-picture-1-10-500x375.jpg",
-          rating: 4.9,
-          prepTime: "35 minutes",
-          description: "Savory meatballs served with zucchini noodles and marinara sauce",
-          ingredients: [
-            { quantity: "2", name: "zucchinis", notes: "spiralized" },
-            { quantity: "1/2 pound", name: "ground beef" },
-            { quantity: "1", name: "egg" },
-            { quantity: "1/4 cup", name: "almond flour" },
-            { quantity: "1 teaspoon", name: "garlic powder" },
-            { quantity: "1 teaspoon", name: "oregano" },
-            { quantity: "1 cup", name: "marinara sauce", notes: "sugar-free" }
-          ]
-        },
-        {
-          id: 4,
-          title: "Baked Salmon with Lemon and Dill",
-          image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGAbEDRmsrtFw3dfuEynddW2OVsb2WjbOkeg&s",
-          rating: 5.0,
-          prepTime: "25 minutes",
-          description: "Oven-baked salmon fillets with fresh lemon and dill",
-          ingredients: [
-            { quantity: "2", name: "salmon fillets" },
-            { quantity: "1 tablespoon", name: "olive oil" },
-            { quantity: "1 teaspoon", name: "lemon juice" },
-            { quantity: "1 teaspoon", name: "dill", notes: "fresh, chopped" },
-            { quantity: "1/2 teaspoon", name: "salt" },
-            { quantity: "1/2 teaspoon", name: "black pepper" },
-            { quantity: "1", name: "lemon", notes: "sliced for garnish" }
-          ]
-        },
-        {
-          id: 5,
-          title: "Sweet Potato and Avocado Breakfast Hash",
-          image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5b8E6eZfwLLJSOqkbwm6O4N0YozMgDlEofQ&s",
-          rating: 4.8,
-          prepTime: "30 minutes",
-          description: "A hearty sweet potato hash with avocado and eggs",
-          ingredients: [
-            { quantity: "1", name: "sweet potato", notes: "diced" },
-            { quantity: "1/2 cup", name: "onion", notes: "chopped" },
-            { quantity: "1/2 cup", name: "bell peppers", notes: "chopped" },
-            { quantity: "1 tablespoon", name: "olive oil" },
-            { quantity: "2", name: "eggs" },
-            { quantity: "1", name: "avocado", notes: "sliced" },
-            { quantity: "1/2 teaspoon", name: "salt" }
-          ]
-        },
-        {
-          id: 6,
-          title: "Coconut Chicken Curry",
-          image: "https://hips.hearstapps.com/hmg-prod/images/190509-coconut-chicken-curry-157-1558039780.jpg?crop=0.8891228070175439xw:1xh;center,top&resize=1200:*",
-          rating: 4.9,
-          prepTime: "35 minutes",
-          description: "A rich and creamy coconut curry with chicken and spices",
-          ingredients: [
-            { quantity: "2", name: "chicken breasts", notes: "cubed" },
-            { quantity: "1 cup", name: "coconut milk" },
-            { quantity: "1/2 cup", name: "tomato puree" },
-            { quantity: "1 tablespoon", name: "curry powder" },
-            { quantity: "1/2 teaspoon", name: "turmeric" },
-            { quantity: "1/2 teaspoon", name: "salt" },
-            { quantity: "1 tablespoon", name: "olive oil" }
-          ]
-        }
-      ];
     
       return (
         <div className="desserts-wrapper">
@@ -133,7 +29,7 @@ const Paleo = () => {
           </div>
     
           <div className="recipes-showcase">
-            {paleoRecipes.map(recipe => (
+            {recipes["paleo"].map(recipe => (
               <div key={recipe.id} className="recipe-card">
                 <div className="card-media">
                   <img src={recipe.image} alt={recipe.title} />

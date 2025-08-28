@@ -1,4 +1,4 @@
-import recipes from "../../pages/recipes";
+import recipes from "../../data/recipes";
 import RecipeCard from "./RecipeCard";
 
 //Maps over the list of recipeType like trending, newest, top-rated and calls RecipeCard

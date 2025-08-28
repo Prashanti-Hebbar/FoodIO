@@ -1,115 +1,10 @@
 import React, { useState } from 'react';
 import '../../styles/AllCat.css';
+import recipes from '../../data/recipes';
 
 const Snacks = () => {
     const [setSelectedRecipe] = useState(null);
 
-    const snackRecipes = [
-        {
-          id: 1,
-          title: "Samosa",
-          image: "https://static.toiimg.com/thumb/61050397.cms?imgsize=246859&width=800&height=800",
-          rating: 4.9,
-          prepTime: "40 minutes",
-          description: "Crispy, deep-fried pastry filled with spiced potatoes and peas",
-          ingredients: [
-            { quantity: "2 cups", name: "all-purpose flour" },
-            { quantity: "2", name: "potatoes", notes: "boiled and mashed" },
-            { quantity: "1/2 cup", name: "green peas", notes: "boiled" },
-            { quantity: "1 teaspoon", name: "cumin seeds" },
-            { quantity: "1 teaspoon", name: "garam masala" },
-            { quantity: "1/2 teaspoon", name: "red chili powder" },
-            { quantity: "1/4 cup", name: "oil", notes: "for kneading" },
-            { quantity: "as needed", name: "oil", notes: "for deep frying" }
-          ]
-        },
-        {
-          id: 2,
-          title: "Pakora",
-          image: "https://i0.wp.com/www.happyandharried.com/wp-content/uploads/2017/10/ONION-PAKORA-ONION-FRITTERS-IN-CHICKPEA-FLOUR-BATTER-HAPPYHARRIED.jpg",
-          rating: 4.8,
-          prepTime: "25 minutes",
-          description: "Crunchy fritters made with chickpea flour and vegetables",
-          ingredients: [
-            { quantity: "1 cup", name: "chickpea flour (besan)" },
-            { quantity: "1", name: "onion", notes: "sliced" },
-            { quantity: "1", name: "potato", notes: "sliced" },
-            { quantity: "1 teaspoon", name: "cumin seeds" },
-            { quantity: "1/2 teaspoon", name: "turmeric powder" },
-            { quantity: "1/2 teaspoon", name: "red chili powder" },
-            { quantity: "as needed", name: "water" },
-            { quantity: "as needed", name: "oil", notes: "for deep frying" }
-          ]
-        },
-        {
-          id: 3,
-          title: "Aloo Tikki",
-          image: "https://www.indianveggiedelight.com/wp-content/uploads/2023/07/aloo-tikki.jpg",
-          rating: 4.7,
-          prepTime: "30 minutes",
-          description: "Crispy potato patties with Indian spices",
-          ingredients: [
-            { quantity: "3", name: "potatoes", notes: "boiled and mashed" },
-            { quantity: "1/2 teaspoon", name: "red chili powder" },
-            { quantity: "1 teaspoon", name: "garam masala" },
-            { quantity: "1/2 teaspoon", name: "chaat masala" },
-            { quantity: "1/4 cup", name: "bread crumbs" },
-            { quantity: "2 tablespoons", name: "corn flour" },
-            { quantity: "as needed", name: "oil", notes: "for shallow frying" }
-          ]
-        },
-        {
-          id: 4,
-          title: "Dahi Puri",
-          image: "https://indiasweethouse.in/cdn/shop/files/DahiPuri_cc4c6b71-0316-4c3c-918f-675362b26ec1.png?v=1719576457",
-          rating: 4.9,
-          prepTime: "20 minutes",
-          description: "Mini puris stuffed with potatoes, chutneys, and yogurt",
-          ingredients: [
-            { quantity: "10", name: "mini puris" },
-            { quantity: "1", name: "potato", notes: "boiled and mashed" },
-            { quantity: "1/2 cup", name: "yogurt", notes: "whisked" },
-            { quantity: "2 tablespoons", name: "tamarind chutney" },
-            { quantity: "2 tablespoons", name: "green chutney" },
-            { quantity: "1/2 teaspoon", name: "chaat masala" },
-            { quantity: "1/4 cup", name: "sev" }
-          ]
-        },
-        {
-          id: 5,
-          title: "Masala Corn",
-          image: "https://i0.wp.com/eatsbyramya.com/wp-content/uploads/2022/04/IMG_7128_jpg.jpg?resize=1024%2C1020&ssl=1",
-          rating: 4.7,
-          prepTime: "10 minutes",
-          description: "Spicy and buttery sweet corn with lemon and chaat masala",
-          ingredients: [
-            { quantity: "1 cup", name: "sweet corn", notes: "boiled" },
-            { quantity: "1 teaspoon", name: "butter" },
-            { quantity: "1/2 teaspoon", name: "chaat masala" },
-            { quantity: "1/4 teaspoon", name: "red chili powder" },
-            { quantity: "1 teaspoon", name: "lemon juice" },
-            { quantity: "to taste", name: "salt" }
-          ]
-        },
-        {
-          id: 6,
-          title: "Bread Pizza",
-          image: "https://www.awesomecuisine.com/wp-content/uploads/2009/05/bread-pizza.jpg",
-          rating: 4.8,
-          prepTime: "15 minutes",
-          description: "Quick and easy pizza made on bread slices with veggies and cheese",
-          ingredients: [
-            { quantity: "4", name: "bread slices" },
-            { quantity: "1/2 cup", name: "pizza sauce" },
-            { quantity: "1/2 cup", name: "mozzarella cheese", notes: "grated" },
-            { quantity: "1/2", name: "capsicum", notes: "chopped" },
-            { quantity: "1/2", name: "tomato", notes: "chopped" },
-            { quantity: "1/2 teaspoon", name: "oregano" },
-            { quantity: "1/4 teaspoon", name: "chili flakes" }
-          ]
-        }
-      ];
-    
       return (
         <div className="desserts-wrapper">
           <div className="hero-section">
@@ -134,7 +29,7 @@ const Snacks = () => {
           </div>
     
           <div className="recipes-showcase">
-            {snackRecipes.map(recipe => (
+            {recipes["snacks"].map(recipe => (
               <div key={recipe.id} className="recipe-card">
                 <div className="card-media">
                   <img src={recipe.image} alt={recipe.title} />

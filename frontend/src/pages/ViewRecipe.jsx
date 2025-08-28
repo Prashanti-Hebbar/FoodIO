@@ -4,7 +4,7 @@ import { jsPDF } from 'jspdf';
 import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
 import "../ViewRecipe.css";
-import recipes from './recipes';
+import recipes from "../data/recipes"
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
