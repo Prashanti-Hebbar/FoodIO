@@ -5,7 +5,6 @@ import 'aos/dist/aos.css';
 import '../Categories.css';
 
 const Categories = () => {
-  const [isLoading, setIsLoading] = useState(null);
 
   useEffect(() => {
     AOS.init({
@@ -31,7 +30,7 @@ const Categories = () => {
     },
     {
       title: 'Cuisine',
-      items: ['Indian', 'Italian', 'Mexican', 'Japanese'],
+      items: ['Italian', 'Mexican', 'Japanese'],
       icon: '🌎',
       color: '#45B7D1'
     },
@@ -62,8 +61,6 @@ const Categories = () => {
       className="absolute inset-0 bg-cover bg-center  blur-sm bg-white/20 z-0"
       style={{ backgroundImage: "url('/bg.jpg')" }}
     />
-
-
 
 
     {/* Your original content */}

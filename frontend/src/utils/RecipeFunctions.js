@@ -57,15 +57,15 @@ export const handleShare = (recipe) => {
 
 //If recipe exists in saveList, then call Reducer dispatch func to remove it
 //If recipe does not exist in saveList, then call Reducer dispatch func to add it
-export const handleSave = (r, favList, saveDispatch) => {
+export const handleFav = (r, favList, favDispatch) => {
   const recipe = check(r, favList);
-  if (recipe) saveDispatch({ type: "REMOVE", payload: recipe });
-  else saveDispatch({ type: "ADD", payload: r });
+  if (recipe) favDispatch({ type: "REMOVE", payload: recipe });
+  else favDispatch({ type: "ADD", payload: r });
 };
 
 //If recipe exists in favList, then call Reducer dispatch func to remove it
 //If recipe does not exist in favList, then call Reducer dispatch func to add it
-export const handleFav = (r, saveList, saveDispatch) => {
+export const handleSave = (r, saveList, saveDispatch) => {
   const recipe = check(r, saveList);
   if (recipe) saveDispatch({ type: "REMOVE", payload: recipe });
   else saveDispatch({ type: "ADD", payload: r });

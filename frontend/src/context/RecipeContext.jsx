@@ -13,10 +13,12 @@ export const RecipeContext = createContext(globalContext);
 //Add Recipe to Reducer State
 const addRecipe = (state, recipe, caller) => {
   const newState = [...state, recipe];
-  localStorage.setItem("favList", JSON.stringify(newState));
 
-  const list=(caller == "fav") ? "Favourites" : "Saved List"
-  alert(`${recipe.title} was added to ${list}`);
+  //Add to favList or saveList in local storage based on caller
+  localStorage.setItem(caller, JSON.stringify(newState));
+
+  //Show alert message based on caller
+  alert(`${recipe.title} was added to ${caller}`);
 
   return newState;
 };
@@ -26,10 +28,11 @@ const removeRecipe = (state, recipe, caller) => {
   const newState = state.filter((r) => {
     return recipe.id != r.id;
   });
-  localStorage.setItem("favList", JSON.stringify(newState));
+  
+  // //Remove from favList or saveList in local storage based on caller
+  localStorage.setItem(caller, JSON.stringify(newState));
 
-  const list=(caller == "fav") ? "Favourites" : "Saved List"
-  alert(`${recipe.title} was removed from ${list}`);
+  alert(`${recipe.title} was removed from ${caller}`);
   return newState;
 };
 
@@ -37,10 +40,10 @@ const removeRecipe = (state, recipe, caller) => {
 const favReducer = (state, action) => {
   switch (action.type) {
     case "ADD": {
-      return addRecipe(state, action.payload, "fav");
+      return addRecipe(state, action.payload, "favList");
     }
     case "REMOVE": {
-      return removeRecipe(state, action.payload, "fav");
+      return removeRecipe(state, action.payload, "favList");
     }
   }
 };
@@ -49,10 +52,10 @@ const favReducer = (state, action) => {
 const saveReducer = (state, action) => {
   switch (action.type) {
     case "ADD": {
-      return addRecipe(state, action.payload, "save");
+      return addRecipe(state, action.payload, "saveList");
     }
     case "REMOVE": {
-      return removeRecipe(state, action.payload, "save");
+      return removeRecipe(state, action.payload, "saveList");
     }
     default:
       return state;
@@ -60,6 +63,8 @@ const saveReducer = (state, action) => {
 };
 
 const RecipeContextProvider = ({ children }) => {
+
+  //Reducers
   const [favList, favDispatch] = useReducer(
     favReducer,
     JSON.parse(localStorage.getItem("favList")) || []
