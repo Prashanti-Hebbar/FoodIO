@@ -29,6 +29,7 @@ const removeRecipe = (state, recipe, caller) => {
     return recipe.id != r.id;
   });
   
+
   //Remove from favList or saveList in local storage based on caller
   localStorage.setItem(caller, JSON.stringify(newState));
 

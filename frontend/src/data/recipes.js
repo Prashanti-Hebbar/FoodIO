@@ -945,7 +945,7 @@ const recipes = {
       },
       dietaryInfo: ["Vegetarian", "Gluten-Free"],
       mealType: ["Breakfast"],
-      mainIngredient: "Rice",
+      mainIngredient: "Poha",
       cookingMethod: "Stovetop",
     },
     {
@@ -2669,7 +2669,7 @@ const recipes = {
       cookingMethod: "Blending",
     },
   ],
-  lowCarb: [
+  lowcarb: [
     {
       id: 63,
       title: "Grilled Chicken Salad",

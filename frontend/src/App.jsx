@@ -15,23 +15,6 @@ import AddRecipe from "./pages/AddRecipe";
 import About from "./pages/About";
 import ViewRecipe from "./pages/ViewRecipe";
 import Profile from "./pages/profile";
-import Breakfast from "./pages/categories/Breakfast";
-import Lunch from "./pages/categories/Lunch";
-import Desserts from "./pages/categories/Desserts";
-import Dinner from "./pages/categories/Dinner";
-import Appetizer from "./pages/categories/Appetizer";
-import Sides from "./pages/categories/Sides";
-import Snacks from "./pages/categories/Snacks";
-import Drinks from "./pages/categories/Drinks";
-import LowCarb from "./pages/categories/LowCarb";
-import Keto from "./pages/categories/Keto";
-import Veg from "./pages/categories/Vegetarian";
-import Whole30 from "./pages/categories/Whole30";
-import Paleo from "./pages/categories/Paleo";
-import Indian from "./pages/categories/Indian";
-import Italian from "./pages/categories/Itallian";
-import Japanese from "./pages/categories/Japanese";
-import Mexican from "./pages/categories/Mexican";
 import { SavedRecipesProvider } from "./pages/savedRecipes";
 import AIChatPage from "./pages/AIChatPage";
 import ScrollToTop from "./components/ScrollToTop";
@@ -45,6 +28,7 @@ import Careers from "./pages/Careers";
 import { FaMoon, FaSun } from "react-icons/fa";
 import CustomCursor from "./components/CustomCursor";
 import FluidCursor from "./components/FluidCursor";
+import CategoryRenderer from "./pages/CategoryRenderer";
 function App() {
   const [theme, setTheme] = useState("light");
 
@@ -155,25 +139,10 @@ function App() {
         <Route path="/About" element={<About />} />
         <Route path="/ViewRecipe" element={<ViewRecipe />} />
         <Route path="/recipe/:id" element={<ViewRecipe />} />
-        <Route path="/profile" element={<Profile />} />
         <Route path="/Categories" element={<Categories />} />
-        <Route path="/recipes/breakfast" element={<Breakfast />} />
-        <Route path="/recipes/Lunch" element={<Lunch />} />
-        <Route path="/recipes/dessert" element={<Desserts />} />
-        <Route path="/recipes/dinner" element={<Dinner />} />
-        <Route path="/recipes/appetizers" element={<Appetizer />} />
-        <Route path="/recipes/sides" element={<Sides />} />
-        <Route path="/recipes/snacks" element={<Snacks />} />
-        <Route path="/recipes/drinks" element={<Drinks />} />
-        <Route path="/recipes/lowcarb" element={<LowCarb />} />
-        <Route path="/recipes/keto" element={<Keto />} />
-        <Route path="/recipes/vegetarian" element={<Veg />} />
-        <Route path="/recipes/whole30" element={<Whole30 />} />
-        <Route path="/recipes/paleo" element={<Paleo />} />
-        <Route path="/recipes/indian" element={<Indian />} />
-        <Route path="/recipes/italian" element={<Italian />} />
-        <Route path="/recipes/japanese" element={<Japanese />} />
-        <Route path="/recipes/mexican" element={<Mexican />} />
+        {/* Following route is used to render all categories of recipes shown on Categories page */}
+        <Route path="/recipes/:category" element={<CategoryRenderer></CategoryRenderer>} /> 
+        <Route path="/profile" element={<Profile />} />
         <Route path="/pages/savedRecipes" element={<SavedRecipesProvider />} />
         <Route path="/ai-chat" element={<AIChatPage />} />
         <Route path="/Blog" element={<Blog />} />
