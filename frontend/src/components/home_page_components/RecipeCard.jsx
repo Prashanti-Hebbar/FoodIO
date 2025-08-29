@@ -1,51 +1,30 @@
-import { useContext } from 'react';
-import {Link} from 'react-router-dom';
-import { RecipeContext } from '../../context/RecipeContext';
-import { handleFav, handleSave, handleShare } from '../../utils/RecipeFunctions';
+import { Link, useNavigate } from "react-router-dom";
+import FavouriteButton from "../recipe-card-buttons/FavouriteButton";
+import SaveButton from "../recipe-card-buttons/SaveButton";
+import ShareButton from "../recipe-card-buttons/ShareButton";
+import ViewRecipeButton from "../recipe-card-buttons/ViewRecipeButton";
 
 //Reusable card that can be rendered in multiple places.
-const RecipeCard = ({recipe}) => {
-  const {favList, saveList, favDispatch, saveDispatch}=useContext(RecipeContext);
+const RecipeCard = ({ recipe }) => {
 
   return (
     <div key={recipe.id} className="flex-shrink-0 mb-4 me-3 custom-recipe-card">
       <div className="card">
         <div className="card-actions position-absolute end-0 m-2">
           {/* Favourite Button calls handleFav */}
-          <button
-            className={`btn btn-link ${
-              recipe.isFavorite ? "text-warning" : "text-white"
-            }`}
-            onClick={() => handleFav(recipe, favList, favDispatch)}
-          >
-            <i className="fas fa-star"></i>
-          </button>
+          <FavouriteButton recipe={recipe}></FavouriteButton>
 
           {/* Save Button calls handleSave */}
-          <button
-            className={`btn btn-link ${
-              recipe.isSaved ? "text-primary" : "text-white"
-            }`}
-            onClick={() => handleSave(recipe, saveList, saveDispatch)}
-          >
-            <i className="fas fa-bookmark"></i>
-          </button>
+          <SaveButton recipe={recipe}></SaveButton>
 
           {/* Share Button calls handleShare */}
-          <button
-            className="btn btn-link text-white"
-            onClick={() => handleShare(recipe)}
-          >
-            <i className="fas fa-share-alt"></i>
-          </button>
+          <ShareButton recipe={recipe}></ShareButton>
         </div>
         <img src={recipe.image} className="card-img-top" alt={recipe.title} />
         <div className="card-body">
           <h5 className="card-title">{recipe.title}</h5>
           <p className="card-text">Rating: {recipe.rating}</p>
-          <Link to={`/ViewRecipe?id=${recipe.id}`} className="btn btn-primary">
-            View Recipe
-          </Link>
+          <ViewRecipeButton recipe_id={recipe.id}></ViewRecipeButton>
         </div>
       </div>
     </div>
@@ -53,4 +32,3 @@ const RecipeCard = ({recipe}) => {
 };
 
 export default RecipeCard;
-

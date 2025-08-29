@@ -71,7 +71,7 @@ const Profile = () => {
       } else if (section === "Favorite Recipes") {
         const updated = favoriteRecipes.filter((r) => r.id !== recipeId);
         setFavoriteRecipes(updated);
-        localStorage.setItem("favlist", JSON.stringify(updated));
+        localStorage.setItem("favList", JSON.stringify(updated));
       } else if (section === "Saved Recipes") {
         const updated = savedRecipes.filter((r) => r.id !== recipeId);
         setSavedRecipes(updated);
