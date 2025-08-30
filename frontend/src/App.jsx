@@ -26,8 +26,6 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
 import Careers from "./pages/Careers";
 import { FaMoon, FaSun } from "react-icons/fa";
-import CustomCursor from "./components/CustomCursor";
-import FluidCursor from "./components/FluidCursor";
 import CategoryRenderer from "./pages/CategoryRenderer";
 function App() {
   const [theme, setTheme] = useState("light");
@@ -85,8 +83,6 @@ function App() {
 
   return (
     <Router>
-      <FluidCursor />
-      <CustomCursor />
       <ScrollToTop />
 
       {/* Dark Mode Toggle Button */}
