@@ -3,6 +3,7 @@ import {
   Route,
   Routes,
   Navigate,
+  useLocation,
 } from "react-router-dom";
 
 import { useState, useEffect } from "react";
@@ -27,6 +28,18 @@ import TermsOfService from "./pages/TermsOfService";
 import Careers from "./pages/Careers";
 import { FaMoon, FaSun } from "react-icons/fa";
 import CategoryRenderer from "./pages/CategoryRenderer";
+
+// Custom component to handle scroll to top on route changes
+function ScrollToTopOnRouteChange() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+}
+
 function App() {
   const [theme, setTheme] = useState("light");
 
@@ -44,7 +57,6 @@ function App() {
   };
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  // Move recipes state up here
   const [recipes, setRecipes] = useState([
     { id: 1, title: "Delicious Pasta" },
     { id: 2, title: "Spicy Tacos" },
@@ -65,6 +77,7 @@ function App() {
     { id: 17, title: "Frikadellen" },
     { id: 18, title: "Coffee Jelly" },
   ]);
+  
   useEffect(() => {
     const checkLogin = () => {
       const user = localStorage.getItem("loggedIn");
@@ -73,7 +86,6 @@ function App() {
 
     checkLogin();
 
-    // Optional: listen to localStorage changes (e.g., in multi-tab)
     window.addEventListener("storage", checkLogin);
 
     return () => {
@@ -84,6 +96,8 @@ function App() {
   return (
     <Router>
       <ScrollToTop />
+      {/* Scroll to top on route change */}
+      <ScrollToTopOnRouteChange />
 
       {/* Dark Mode Toggle Button */}
       <button
@@ -114,8 +128,6 @@ function App() {
         recipes={recipes}
       />
 
-      {/* <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} /> */}
-
       <Routes>
         <Route path="/" element={<Home />} />
         <Route
@@ -136,8 +148,7 @@ function App() {
         <Route path="/ViewRecipe" element={<ViewRecipe />} />
         <Route path="/recipe/:id" element={<ViewRecipe />} />
         <Route path="/Categories" element={<Categories />} />
-        {/* Following route is used to render all categories of recipes shown on Categories page */}
-        <Route path="/recipes/:category" element={<CategoryRenderer></CategoryRenderer>} /> 
+        <Route path="/recipes/:category" element={<CategoryRenderer />} /> 
         <Route path="/profile" element={<Profile />} />
         <Route path="/pages/savedRecipes" element={<SavedRecipesProvider />} />
         <Route path="/ai-chat" element={<AIChatPage />} />
@@ -152,4 +163,5 @@ function App() {
     </Router>
   );
 }
+
 export default App;
