@@ -1207,3 +1207,573 @@ button:hover {
   }
 }
 
+/* Futuristic Login Styles */
+.login-futuristic-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.particles-background {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.particle {
+  position: absolute;
+  background: rgba(218, 143, 72, 0.6);
+  border-radius: 50%;
+  animation: float 20s infinite ease-in-out;
+  box-shadow: 0 0 10px rgba(218, 143, 72, 0.8);
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) translateX(0);
+  }
+  25% {
+    transform: translateY(-20px) translateX(10px);
+  }
+  50% {
+    transform: translateY(-35px) translateX(-10px);
+  }
+  75% {
+    transform: translateY(-15px) translateX(15px);
+  }
+}
+
+.holographic-line {
+  position: absolute;
+  height: 2px;
+  width: 100%;
+  top: 50%;
+  
+  animation: scanline 4s linear infinite;
+  z-index: 2;
+}
+
+@keyframes scanline {
+  0% {
+    top: 0%;
+  }
+  100% {
+    top: 100%;
+  }
+}
+
+.login-futuristic-card {
+  background: rgba(13, 18, 26, 0.8);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 40px;
+  width: 100%;
+  max-width: 480px;
+  z-index: 10;
+  position: relative;
+  border: 1px solid rgba(218, 143, 72, 0.3);
+  box-shadow: 
+    0 0 25px rgba(218, 143, 72, 0.2),
+    inset 0 0 20px rgba(255, 255, 255, 0.05);
+}
+
+.login-futuristic-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.logo-hologram {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.hologram-effect {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  background: radial-gradient(circle, rgba(218, 143, 72, 0.4) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: pulse 3s infinite alternate;
+  z-index: -1;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.4;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 0.7;
+    transform: scale(1.1);
+  }
+}
+
+#chef-holographic {
+  width: 80px;
+  height: 80px;
+  filter: drop-shadow(0 0 5px rgba(218, 143, 72, 0.8));
+  margin-bottom: 15px;
+}
+
+#futuristic-heading {
+  color: #fff;
+  font-size: 2.8rem;
+  font-weight: 800;
+  margin-bottom: 10px;
+  text-shadow: 0 0 10px rgba(218, 143, 72, 0.7);
+}
+
+.flicker {
+  animation: flicker 3s infinite alternate;
+}
+
+@keyframes flicker {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+    text-shadow: 0 0 5px #DA8F48, 0 0 10px #DA8F48;
+    opacity: 1;
+  }
+  20%, 24%, 55% {
+    text-shadow: none;
+    opacity: 0.7;
+  }
+}
+
+.futuristic-tagline {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 1.1rem;
+  margin: 5px 0 0;
+}
+
+.typewriter {
+  overflow: hidden;
+  border-right: 2px solid #DA8F48;
+  white-space: nowrap;
+  animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: #DA8F48 }
+}
+
+.futuristic-form {
+  margin-bottom: 20px;
+}
+
+.error-hologram {
+  background: rgba(231, 76, 60, 0.2);
+  color: #e74c3c;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  border-left: 3px solid #e74c3c;
+  display: flex;
+  align-items: center;
+  backdrop-filter: blur(5px);
+}
+
+.hologram-alert {
+  width: 16px;
+  height: 16px;
+  background: #e74c3c;
+  border-radius: 50%;
+  margin-right: 10px;
+  box-shadow: 0 0 10px #e74c3c;
+  animation: pulse-alert 2s infinite;
+}
+
+@keyframes pulse-alert {
+  0%, 100% {
+    box-shadow: 0 0 5px #e74c3c;
+  }
+  50% {
+    box-shadow: 0 0 15px #e74c3c;
+  }
+}
+
+.input-holographic {
+  margin-bottom: 25px;
+  position: relative;
+}
+
+.futuristic-label {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.hologram-icon {
+  margin-right: 10px;
+  font-style: normal;
+}
+
+.input-with-hologram {
+  position: relative;
+}
+
+.input-with-hologram input {
+  width: 100%;
+  padding: 15px 15px 15px 45px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(218, 143, 72, 0.3);
+  border-radius: 10px;
+  font-size: 1rem;
+  color: white;
+  transition: all 0.3s;
+  backdrop-filter: blur(5px);
+}
+
+.input-with-hologram input:focus {
+  outline: none;
+  border-color: #DA8F48;
+  box-shadow: 0 0 15px rgba(218, 143, 72, 0.3);
+}
+
+.input-with-hologram input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.hologram-input-effect {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  width: 0;
+  background: linear-gradient(90deg, #DA8F48, #f48922);
+  transition: width 0.3s ease;
+  border-radius: 2px;
+}
+
+.input-holographic.focused .hologram-input-effect {
+  width: 100%;
+}
+
+.hologram-toggle-password {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  font-size: 1.1rem;
+}
+
+.hologram-toggle-password:hover {
+  color: #DA8F48;
+}
+
+.futuristic-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.hologram-checkbox {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+}
+
+.hologram-checkbox input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.check-hologram {
+  height: 20px;
+  width: 20px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(218, 143, 72, 0.3);
+  border-radius: 5px;
+  margin-right: 10px;
+  position: relative;
+  transition: all 0.3s;
+}
+
+.hologram-checkbox input:checked ~ .check-hologram {
+  background-color: #DA8F48;
+  border-color: #DA8F48;
+}
+
+.check-hologram:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.hologram-checkbox input:checked ~ .check-hologram:after {
+  display: block;
+  left: 6px;
+  top: 2px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.hologram-link {
+  color: #DA8F48;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: all 0.3s;
+}
+
+.hologram-link:hover {
+  color: #f48922;
+  text-shadow: 0 0 5px rgba(218, 143, 72, 0.5);
+}
+
+.futuristic-login-btn {
+  width: 100%;
+  padding: 15px;
+  background: linear-gradient(45deg, #DA8F48, #f48922);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.futuristic-login-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(218, 143, 72, 0.4);
+}
+
+.futuristic-login-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.btn-hologram-effect {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    to bottom right,
+    rgba(255,255,255,0.2),
+    rgba(255,255,255,0.1),
+    transparent
+  );
+  transform: rotate(30deg);
+  animation: hologram-shine 3s infinite linear;
+}
+
+@keyframes hologram-shine {
+  from {
+    transform: translateX(-100%) rotate(30deg);
+  }
+  to {
+    transform: translateX(100%) rotate(30deg);
+  }
+}
+
+.hologram-spinner {
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.futuristic-footer {
+  text-align: center;
+}
+
+.futuristic-footer p {
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 20px;
+}
+
+.hologram-register-link {
+  color: #DA8F48;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.hologram-register-link:hover {
+  color: #f48922;
+  text-shadow: 0 0 5px rgba(218, 143, 72, 0.5);
+}
+
+.hologram-social-login {
+  margin-top: 25px;
+}
+
+.divider-hologram {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.divider-hologram::before,
+.divider-hologram::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(218, 143, 72, 0.3), transparent);
+}
+
+.divider-hologram span {
+  padding: 0 15px;
+  font-size: 0.9rem;
+}
+
+.social-hologram-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.social-hologram-btn {
+  padding: 12px 20px;
+  border: 1px solid rgba(218, 143, 72, 0.3);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.8);
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  backdrop-filter: blur(5px);
+}
+
+.social-hologram-btn:hover:not(:disabled) {
+  background: rgba(218, 143, 72, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(218, 143, 72, 0.2);
+}
+
+.social-hologram-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.hologram-social-icon {
+  font-style: normal;
+  font-weight: bold;
+}
+
+.futuristic-food-background {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.hologram-food-item {
+  position: absolute;
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0.1;
+  filter: hue-rotate(45deg) brightness(150%);
+}
+
+.pasta-hologram {
+  width: 150px;
+  height: 150px;
+  top: 10%;
+  left: 10%;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M10,50 Q30,30 50,50 T90,50 M10,60 Q30,40 50,60 T90,60 M10,70 Q30,50 50,70 T90,70" stroke="%23da8f48" fill="none" stroke-width="2"/></svg>');
+  animation: float-hologram 15s infinite ease-in-out;
+}
+
+.pizza-hologram {
+  width: 120px;
+  height: 120px;
+  bottom: 15%;
+  right: 15%;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="%23F8EFBA" stroke="%23da8f48" stroke-width="2"/><circle cx="35" cy="35" r="5" fill="%23da8f48"/><circle cx="65" cy="40" r="5" fill="%23da8f48"/><circle cx="45" cy="65" r="5" fill="%23da8f48"/><path d="M50,50 L10,10" stroke="%23da8f48" stroke-width="2"/></svg>');
+  animation: float-hologram 18s infinite ease-in-out reverse;
+}
+
+.burger-hologram {
+  width: 100px;
+  height: 100px;
+  top: 15%;
+  right: 20%;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect x="10" y="20" width="80" height="10" fill="%23F8EFBA" stroke="%23da8f48" stroke-width="2"/><rect x="10" y="30" width="80" height="15" fill="%23da8f48"/><rect x="10" y="45" width="80" height="10" fill="%23F8EFBA" stroke="%23da8f48" stroke-width="2"/><rect x="10" y="55" width="80" height="15" fill="%23da8f48"/><rect x="10" y="70" width="80" height="10" fill="%23F8EFBA" stroke="%23da8f48" stroke-width="2"/></svg>');
+  animation: float-hologram 12s infinite ease-in-out;
+}
+
+@keyframes float-hologram {
+  0%, 100% {
+    transform: translateY(0) translateX(0) rotate(0deg);
+  }
+  33% {
+    transform: translateY(-20px) translateX(15px) rotate(5deg);
+  }
+  66% {
+    transform: translateY(10px) translateX(-15px) rotate(-5deg);
+  }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .login-futuristic-card {
+    padding: 30px 20px;
+    margin: 0 15px;
+  }
+  
+  #futuristic-heading {
+    font-size: 2.2rem;
+  }
+  
+  .social-hologram-buttons {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 480px) {
+  .futuristic-options {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  
+  .hologram-food-item {
+    display: none;
+  }
+}
