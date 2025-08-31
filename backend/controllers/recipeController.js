@@ -190,3 +190,42 @@ export const deleteRecipe = async (req, res) => {
     res.status(500).json({ error: "Failed to delete recipe" });
   }
 };
+
+export const getRecipeById = async (req, res) => {
+  try {
+    const { recipeId } = req.params;
+
+    const recipe = await RecipesModel.findById(recipeId);
+    if (!recipe) {
+      return res.status(404).json({ message: "Recipe not found" });
+    }
+
+    res.status(200).json(recipe);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+export const updateRecipe = async (req, res) => {
+  try {
+    const { recipeId } = req.params;
+    const updatedData = req.body;
+
+    const updatedRecipe = await RecipesModel.findByIdAndUpdate(
+      recipeId,
+      updatedData,
+      { new: true, runValidators: true } // new:true => updated doc return karega
+    );
+
+    if (!updatedRecipe) {
+      return res.status(404).json({ message: "Recipe not found" });
+    }
+
+    res.status(200).json({
+      message: "Recipe updated successfully",
+      recipe: updatedRecipe,
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
