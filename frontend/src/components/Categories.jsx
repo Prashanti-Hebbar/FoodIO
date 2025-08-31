@@ -24,7 +24,7 @@ const Categories = () => {
     },
     {
       title: 'Diet',
-      items: ['LowCarb', 'Keto', 'Vegetarian', 'Whole30', 'Paleo'],
+      items: ['LowCarb', 'Keto', 'Vegetarian', 'Whole30', 'Paleo', 'GlutenFree', 'Vegan'],
       icon: '🥗',
       color: '#4ECDC4'
     },
