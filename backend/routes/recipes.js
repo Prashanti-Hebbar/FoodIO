@@ -7,7 +7,9 @@ import {
   removeSavedRecipe,
   generateRecipe,
   deleteRecipe,
-  verifyToken
+  verifyToken,
+  getRecipeById,
+  updateRecipe
 } from "../controllers/recipeController.js";
 
 const router = express.Router();
@@ -19,5 +21,7 @@ router.get("/savedRecipes", verifyToken, getSavedRecipes);
 router.delete("/savedRecipes/:recipeId", verifyToken, removeSavedRecipe);
 router.post("/api/get-recipe", generateRecipe);
 router.delete("/:recipeId", deleteRecipe);
+router.get("/:recipeId", verifyToken, getRecipeById);
+router.put("/:recipeId", verifyToken, updateRecipe);
 
 export { router as recipeRouter };
