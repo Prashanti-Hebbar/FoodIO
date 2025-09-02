@@ -2,8 +2,12 @@ import express from "express";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { UserModel } from "../models/Users.js";
 import { googleLogin} from "../controllers/authController.js";
+=======
+import User from "../models/Users.js";
+>>>>>>> d6ebae959b2794d8ac6e70405a027f554626a54f
 =======
 import User from "../models/Users.js";
 >>>>>>> d6ebae959b2794d8ac6e70405a027f554626a54f

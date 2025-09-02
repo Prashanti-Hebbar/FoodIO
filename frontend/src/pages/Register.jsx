@@ -81,6 +81,7 @@ const Register = ({ setIsLoggedIn }) => {
     </div>
     </div>
     </div>
+   
   );
 };
 
