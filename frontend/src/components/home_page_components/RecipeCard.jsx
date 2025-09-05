@@ -5,7 +5,7 @@ import ViewRecipeButton from "../recipe-card-buttons/ViewRecipeButton";
 const RecipeCard = ({ recipe }) => {
 
   return (
-    <div key={recipe.id} className="flex-shrink-0 mb-4 me-3 custom-recipe-card">
+    <div key={recipe.id} className="flex-shrink-0 mb-4 me-3 custom-recipe-card ">
       <div className="card">
         <ButtonList recipe={recipe}></ButtonList>
         <img src={recipe.image} className="card-img-top" alt={recipe.title} />
