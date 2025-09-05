@@ -11,9 +11,13 @@ const userSchema = new mongoose.Schema({
     required: true,
     unique: true
   },
-  password: {
+ 
+    password: {
     type: String,
-    required: true
+    required: function() {
+      // Agar provider google hai to password required nahi hoga
+      return this.provider !== "google";
+    }
   },
   avatar: {
     type :String,
