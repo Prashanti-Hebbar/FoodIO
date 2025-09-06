@@ -99,28 +99,7 @@ function App() {
       {/* Scroll to top on route change */}
       <ScrollToTopOnRouteChange />
 
-      {/* Dark Mode Toggle Button */}
-      <button
-        onClick={toggleTheme}
-        style={{
-          position: "fixed",
-          top: "10px",
-          right: "10px",
-          padding: "8px 12px",
-          borderRadius: "5px",
-          border: "none",
-          cursor: "pointer",
-          background: "var(--primary-color)",
-          color: "white",
-          zIndex: 1000,
-        }}
-      >
-        {theme === "light" ? (
-          <FaMoon color="black" />
-        ) : (
-          <FaSun color="#FFD700" />
-        )}
-      </button>
+      
 
       <Navbar
         isLoggedIn={isLoggedIn}

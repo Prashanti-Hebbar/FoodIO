@@ -1,25 +1,22 @@
-
 import { useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { UserIcon } from "lucide-react";
-import axios from 'axios';
-import { useUserContext } from '../context/userContext';
+import { UserIcon, Menu, X } from "lucide-react"; 
+import axios from "axios";
+import { useUserContext } from "../context/userContext";
 import "../navbar.css";
 
 const Navbar = ({ isLoggedIn, setIsLoggedIn, isHomeScreen, recipes = [] }) => {
-  // console.log("Recipes in Navbar:", recipes);
-
   const { setUserData } = useUserContext();
   const navigate = useNavigate();
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const dropdownTimeout = useRef(null);
 
-  // Dashboard dropdown handlers
   const handleDashboardEnter = () => {
     clearTimeout(dropdownTimeout.current);
     setIsDropdownOpen(true);
@@ -31,7 +28,6 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, isHomeScreen, recipes = [] }) => {
     }, 200);
   };
 
-  // User dropdown handlers
   const handleUserEnter = () => {
     clearTimeout(dropdownTimeout.current);
     setUserMenuOpen(true);
@@ -47,16 +43,17 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, isHomeScreen, recipes = [] }) => {
     const confirmed = window.confirm("Are you sure you want to logout?");
     if (confirmed) {
       try {
-
-        await axios.post("https://foodio-backend-cgsj.onrender.com/auth/logout", {}, {
-          withCredentials: true
-        });
+        await axios.post(
+          "https://foodio-backend-cgsj.onrender.com/auth/logout",
+          {},
+          { withCredentials: true }
+        );
         localStorage.clear();
         setIsLoggedIn(false);
         setUserData(null);
         navigate("/home");
       } catch (err) {
-        console.log('Error during logout:', err);
+        console.log("Error during logout:", err);
       }
     }
   };
@@ -67,22 +64,20 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, isHomeScreen, recipes = [] }) => {
 
     if (term.trim()) {
       const results = recipes
-        .filter(recipe =>
+        .filter((recipe) =>
           recipe.title.toLowerCase().includes(term.toLowerCase())
-        ) .sort((a, b) => {
-        const aTitle = a.title.toLowerCase();
-        const bTitle = b.title.toLowerCase();
+        )
+        .sort((a, b) => {
+          const aTitle = a.title.toLowerCase();
+          const bTitle = b.title.toLowerCase();
 
-        const aStarts = aTitle.startsWith(term);
-        const bStarts = bTitle.startsWith(term);
+          const aStarts = aTitle.startsWith(term);
+          const bStarts = bTitle.startsWith(term);
 
-        // Prioritize ones that start with the search term
-        if (aStarts && !bStarts) return -1;
-        if (!aStarts && bStarts) return 1;
-
-        // Otherwise, fallback to alphabetical order
-        return aTitle.localeCompare(bTitle);
-      });
+          if (aStarts && !bStarts) return -1;
+          if (!aStarts && bStarts) return 1;
+          return aTitle.localeCompare(bTitle);
+        });
       setSearchResults(results);
     } else {
       setSearchResults([]);
@@ -90,17 +85,14 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, isHomeScreen, recipes = [] }) => {
   };
 
   const handleRecipeClick = (id) => {
-     console.log("Navigating to recipe with id:", id);
     navigate(`/viewRecipe?id=${id}`);
-    setSearchTerm('');
+    setSearchTerm("");
     setSearchResults([]);
+    setIsMobileMenuOpen(false);
   };
 
   return (
-   <nav
-  className="sticky top-0 w-full z-50 text-white backdrop-blur-md shadow-[rgba(0,0,0,0.2)_0px_4px_20px,rgba(255,204,0,0.05)_0px_0px_30px_inset] bg-black/60"
->
-
+    <nav className="sticky top-0 w-full z-50 text-white backdrop-blur-md shadow-[rgba(0,0,0,0.2)_0px_4px_20px,rgba(255,204,0,0.05)_0px_0px_30px_inset] bg-black/60">
       <div className="max-w-7xl lg:mx-16 mx-auto px-2 sm:px-4 lg:px-8">
         <div className="py-4 flex justify-between items-center h-16">
           {/* Logo */}
@@ -108,10 +100,9 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, isHomeScreen, recipes = [] }) => {
             FOODIO
           </Link>
 
-          {/* Nav Links */}
-          <div className=" md:flex space-x-6 items-center">
+          {/* Desktop Nav Links (hidden on mobile) */}
+          <div className="hidden md:flex space-x-6 items-center">
             <Link to="/" className="hover:text-yellow-400">Home</Link>
-
             <div
               className="relative"
               onMouseEnter={handleDashboardEnter}
@@ -130,28 +121,17 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, isHomeScreen, recipes = [] }) => {
                   id="dashboard-menu"
                   className="absolute bg-black/90 text-white mt-2 rounded shadow-lg p-2 w-44"
                 >
-                  <Link
-                    to="/Categories"
-                    className="block px-4 py-2 hover:bg-white/10 focus:bg-white/10 focus:outline-none"
-                  >
-                    Categories
-                  </Link>
-                  <Link
-                    to="/AddRecipe"
-                    className="block px-4 py-2 hover:bg-white/10 focus:bg-white/10 focus:outline-none"
-                  >
-                    Add New Recipe
-                  </Link>
+                  <Link to="/Categories" className="block px-4 py-2 hover:bg-white/10">Categories</Link>
+                  <Link to="/AddRecipe" className="block px-4 py-2 hover:bg-white/10">Add New Recipe</Link>
                 </div>
               )}
             </div>
-
             <Link to="/About" className="hover:text-yellow-400">About</Link>
             <Link to="/ai-chat" className="hover:text-yellow-400">Chat with AI</Link>
           </div>
 
           {/* Search Bar */}
-          <div className="flex-grow mx-4 max-w-md md:block relative">
+          <div className="flex-grow mx-4 max-w-md relative">
             <input
               type="text"
               placeholder="Search"
@@ -161,54 +141,88 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, isHomeScreen, recipes = [] }) => {
             />
             {searchResults.length > 0 && (
               <div className="absolute bg-white text-black mt-1 w-full max-w-md rounded shadow-lg z-50 max-h-60 overflow-auto">
-                {searchResults.map(recipe => {
-      console.log('Search result:', recipe.title, recipe.id);
-      return (
-                  <div  key={recipe.id}
+                {searchResults.map((recipe) => (
+                  <div
+                    key={recipe.id}
                     onClick={() => handleRecipeClick(recipe.id)}
                     className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
                   >
                     {recipe.title}
                   </div>
-                )})}
+                ))}
               </div>
             )}
           </div>
 
-          {/* Auth Buttons or Profile */}
-          
+          {/* Desktop Auth/Profile (hidden on mobile) */}
+          <div className="hidden md:flex items-center space-x-2 relative">
+            <Link
+              to="/register"
+              className="px-4 py-1 bg-yellow-400 text-black rounded hover:bg-yellow-300 font-semibold "
+            >
+              REGISTER
+            </Link>
+            <div
+              className="relative"
+              onMouseEnter={handleUserEnter}
+              onMouseLeave={handleUserLeave}
+            >
+              <Link to="/profile">
+                <div className="bg-black/20 rounded p-1 cursor-pointer">
+                  <UserIcon className="h-6 w-6" />
+                </div>
+              </Link>
+              {userMenuOpen && (
+                <div className="absolute right-0 mt-2 bg-black/90 text-white rounded shadow-lg w-32">
+                  <button
+                    onClick={handleLogout}
+                    className="w-full text-left px-4 py-2 hover:bg-white/10"
+                  >
+                    Logout
+                  </button>
+                </div>
+              )}
+            </div>
+          </div>
 
-<div className="flex items-center space-x-2 relative">
-  <Link
-    to="/register"
-    className="px-4 py-1 bg-yellow-400 text-black rounded hover:bg-yellow-300 font-semibold"
-  >
-    REGISTER
-  </Link>
-  <div
-    className="relative"
-    onMouseEnter={handleUserEnter}
-    onMouseLeave={handleUserLeave}
-  >
-    <Link to="/profile">
-      <div className="bg-black/20 rounded p-1 cursor-pointer">
-        <UserIcon className="h-6 w-6" />
+          {/* Hamburger Button (only visible on mobile) */}
+          <div className="flex items-center md:hidden">
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="p-2 text-yellow-400 focus:outline-none"
+            >
+              {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+            </button>
+          </div>
+        </div>
       </div>
-    </Link>
-    {userMenuOpen && (
-      <div className="absolute right-0 mt-2 bg-black/90 text-white rounded shadow-lg w-32">
-        <button
-          onClick={handleLogout}
-          className="w-full text-left px-4 py-2 hover:bg-white/10"
-        >
-          Logout
-        </button>
-      </div>
-    )}
-  </div>
-</div>
-</div>
-      </div>
+
+      {/* Mobile Menu */}
+      {isMobileMenuOpen && (
+        <div className="md:hidden bg-white text-black px-4 py-4 space-y-4">
+          <Link to="/" onClick={() => setIsMobileMenuOpen(false)} className="block hover:text-yellow-400">Home</Link>
+          <Link to="/Categories" onClick={() => setIsMobileMenuOpen(false)} className="block hover:text-yellow-400">Categories</Link>
+          <Link to="/AddRecipe" onClick={() => setIsMobileMenuOpen(false)} className="block hover:text-yellow-400">Add New Recipe</Link>
+          <Link to="/About" onClick={() => setIsMobileMenuOpen(false)} className="block hover:text-yellow-400">About</Link>
+          <Link to="/ai-chat" onClick={() => setIsMobileMenuOpen(false)} className="block hover:text-yellow-400">Chat with AI</Link>
+          <Link
+            to="/register"
+            onClick={() => setIsMobileMenuOpen(false)}
+            className="block px-4 py-2 bg-yellow-400 text-black rounded hover:bg-yellow-300 font-semibold text-center"
+          >
+            REGISTER
+          </Link>
+          <button
+            onClick={() => {
+              handleLogout();
+              setIsMobileMenuOpen(false);
+            }}
+            className="block w-full text-left px-4 py-2 hover:bg-white/10 rounded"
+          >
+            Logout
+          </button>
+        </div>
+      )}
     </nav>
   );
 };
