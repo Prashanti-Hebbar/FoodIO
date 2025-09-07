@@ -68,7 +68,7 @@ const RecipeListRenderer = ({ recipeType }) => {
       {canScrollRight && (
         <button
           onClick={() => scroll("right")}
-          className="position-absolute top-50 end-0 translate-middle-y btn btn-light shadow rounded-circle h-14 w-14"
+          className="position-absolute top-50 end-0 translate-middle-y btn btn-light shadow rounded-circle h-14 w-14 "
           style={{ zIndex: 10 }}
         >
           ▶

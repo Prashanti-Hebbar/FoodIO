@@ -274,8 +274,8 @@ button:hover {
 
 .card {
   border: 1px solid var(--border-color);
-  background-color: var(--card-bg);
-  color: var(--text-primary);
+  /* background-color: var(--card-bg);
+  color: var(--text-primary); */
   box-shadow: 0 4px 8px var(--card-shadow);
   transition: all 0.3s ease;
   overflow: hidden;
@@ -304,17 +304,17 @@ button:hover {
 
 .card-body {
   padding: 20px;
-  background-color: var(--card-bg);
+  /* background-color: var(--card-bg); */
 }
 
 .card-title {
-  color: var(--text-primary);
+  /* color: var(--text-primary); */
   font-weight: bold;
   margin-bottom: 10px;
 }
 
 .card-text {
-  color: var(--text-secondary);
+  /* color: var(--text-secondary); */
   line-height: 1.6;
 }
 
