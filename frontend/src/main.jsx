@@ -9,9 +9,11 @@ import App from "./App.jsx";
 import { UserProvider } from "./context/userContext.jsx";
 import { ThemeProvider } from "./context/ThemeContext.jsx";
 import RecipeContextProvider from "./context/RecipeContext.jsx";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
+    <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
     <ThemeProvider>
       <UserProvider>
         <RecipeContextProvider>
@@ -19,5 +21,6 @@ createRoot(document.getElementById("root")).render(
         </RecipeContextProvider>
       </UserProvider>
     </ThemeProvider>
+    </GoogleOAuthProvider>
   </StrictMode>
 );
