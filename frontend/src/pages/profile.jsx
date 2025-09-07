@@ -92,12 +92,12 @@ const Profile = () => {
     formData.append("userId", userData._id);
 
     try {
-      const res = await axios.post("http://localhost:3001/profile", formData, {
+      const res = await axios.post("https://foodio-backend-cgsj.onrender.com/profile", formData, {
         withCredentials: true,
         headers: { "Content-Type": "multipart/form-data" },
       });
 
-      setAvatarUrl(`http://localhost:3001/uploads/${res.data.filename}`);
+      setAvatarUrl(`https://foodio-backend-cgsj.onrender.com/uploads/${res.data.filename}`);
       setUserData((prev) => ({ ...prev, avatar: res.data.filename }));
 
       alert("Profile picture uploaded successfully!");
