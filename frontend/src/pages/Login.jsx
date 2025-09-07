@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import "../App.css";
+import { GoogleLogin } from "@react-oauth/google";
 
 const Login = ({ setIsLoggedIn }) => {
   const [formData, setFormData] = useState({
@@ -95,6 +96,26 @@ const Login = ({ setIsLoggedIn }) => {
       setIsLoading(false);
     }
   };
+
+ const handleGoogleSuccess = async (credentialResponse) => {
+    try {
+      const res = await axios.post(
+        "https://foodio-backend-cgsj.onrender.com/auth/google",
+        { token: credentialResponse.credential },
+        { withCredentials: true }
+      );
+      console.log("Google login response:", res.data);
+
+      localStorage.setItem("loggedIn", "true");
+      setIsLoggedIn(true);
+      navigate("/");
+    } catch (err) {
+      console.error("Google Login Error:", err);
+      setErrorMessage("Google authentication failed");
+    }
+  };
+
+
 
   return (
     <div className="login-futuristic-container" style={{ backgroundColor: "#f5d0dc" }}>
@@ -249,7 +270,18 @@ const Login = ({ setIsLoggedIn }) => {
             <div className="divider-hologram">
               <span>Or access with</span>
             </div>
+
             <div className="social-hologram-buttons">
+
+ {/* ✅ Google Login button */}
+              <GoogleLogin
+                onSuccess={handleGoogleSuccess}
+                onError={() => {
+                  console.log("Login Failed");
+                  setErrorMessage("Google authentication failed");
+                }}
+              />
+
               <button className="social-hologram-btn google-hologram" disabled={isLoading}>
                 <i className="hologram-social-icon">G</i>
                 <span>Google</span>

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import "../App.css";
+import { GoogleLogin } from "@react-oauth/google"; 
 
 const Register = ({ setIsLoggedIn }) => {
   const [formData, setFormData] = useState({
@@ -78,6 +79,30 @@ const Register = ({ setIsLoggedIn }) => {
       setIsLoading(false);
     }
   };
+
+   const handleGoogleSuccess = async (credentialResponse) => {
+    try {
+      const response = await axios.post(
+        "https://foodio-backend-cgsj.onrender.com/auth/google",
+        { token: credentialResponse.credential },
+        { withCredentials: true }
+      );
+
+      console.log("Google login response:", response.data);
+
+      localStorage.setItem("loggedIn", "true");
+      setIsLoggedIn(true);
+      navigate("/");
+    } catch (err) {
+      console.error("Google login failed:", err);
+      setErrorMessage("Google login failed. Please try again.");
+    }
+  };
+
+  const handleGoogleError = () => {
+    setErrorMessage("Google login was cancelled or failed.");
+  };
+
 
   return (
     <div
@@ -229,6 +254,15 @@ const Register = ({ setIsLoggedIn }) => {
             )}
           </button>
         </form>
+
+        
+        {/* ⭐ Google Login Button */}
+        <div style={{ marginTop: "20px", textAlign: "center" }}>
+          <GoogleLogin
+            onSuccess={handleGoogleSuccess}
+            onError={handleGoogleError}
+          />
+        </div>
 
         <div className="futuristic-footer">
           <p>
