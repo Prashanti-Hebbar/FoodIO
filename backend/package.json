@@ -22,6 +22,7 @@
     "express": "^4.21.2",
     "google-auth-library": "^10.3.0",
     "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.19.0",
     "mongoose": "^8.18.0",
     "multer": "^2.0.2",
     "nodemon": "^3.1.10",
