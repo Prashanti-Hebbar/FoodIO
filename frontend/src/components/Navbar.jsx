@@ -1,13 +1,17 @@
 import { useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { UserIcon, Menu, X } from "lucide-react"; 
+import { UserIcon, Menu, X } from "lucide-react";
 import axios from "axios";
 import { useUserContext } from "../context/userContext";
 import "../navbar.css";
+import { Moon, Sun } from "lucide-react";
+import { useTheme } from "../context/ThemeContext";
+import { FaMoon, FaSun } from "react-icons/fa";
 
 const Navbar = ({ isLoggedIn, setIsLoggedIn, isHomeScreen, recipes = [] }) => {
   const { setUserData } = useUserContext();
   const navigate = useNavigate();
+  const { theme, toggleTheme } = useTheme();
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
@@ -137,7 +141,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, isHomeScreen, recipes = [] }) => {
               placeholder="Search"
               value={searchTerm}
               onChange={handleSearch}
-              className="w-full px-4 py-2 rounded-full text-black focus:outline-none focus:ring-2 focus:ring-yellow-300"
+              className="w-full px-4 py-2 rounded-full text-black focus:outline-none focus:ring-2 focus:ring-yellow-300 dark:placeholder:text-white"
             />
             {searchResults.length > 0 && (
               <div className="absolute bg-white text-black mt-1 w-full max-w-md rounded shadow-lg z-50 max-h-60 overflow-auto">
@@ -172,6 +176,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, isHomeScreen, recipes = [] }) => {
                   <UserIcon className="h-6 w-6" />
                 </div>
               </Link>
+
               {userMenuOpen && (
                 <div className="absolute right-0 mt-2 bg-black/90 text-white rounded shadow-lg w-32">
                   <button
@@ -180,9 +185,17 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, isHomeScreen, recipes = [] }) => {
                   >
                     Logout
                   </button>
+
                 </div>
+
               )}
             </div>
+            <button
+              onClick={toggleTheme}
+              className="p-2 rounded bg-gray-200 dark:bg-gray-900 dark:text-gray-200"
+            >
+              {theme === "light" ? <FaMoon size={20} /> : <FaSun size={20} />}
+            </button>
           </div>
 
           {/* Hamburger Button (only visible on mobile) */}
@@ -199,30 +212,43 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, isHomeScreen, recipes = [] }) => {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="md:hidden bg-white text-black px-4 py-4 space-y-4">
-          <Link to="/" onClick={() => setIsMobileMenuOpen(false)} className="block hover:text-yellow-400">Home</Link>
-          <Link to="/Categories" onClick={() => setIsMobileMenuOpen(false)} className="block hover:text-yellow-400">Categories</Link>
-          <Link to="/AddRecipe" onClick={() => setIsMobileMenuOpen(false)} className="block hover:text-yellow-400">Add New Recipe</Link>
-          <Link to="/About" onClick={() => setIsMobileMenuOpen(false)} className="block hover:text-yellow-400">About</Link>
-          <Link to="/ai-chat" onClick={() => setIsMobileMenuOpen(false)} className="block hover:text-yellow-400">Chat with AI</Link>
-          <Link
-            to="/register"
-            onClick={() => setIsMobileMenuOpen(false)}
-            className="block px-4 py-2 bg-yellow-400 text-black rounded hover:bg-yellow-300 font-semibold text-center"
-          >
-            REGISTER
-          </Link>
-          <button
-            onClick={() => {
-              handleLogout();
-              setIsMobileMenuOpen(false);
-            }}
-            className="block w-full text-left px-4 py-2 hover:bg-white/10 rounded"
-          >
-            Logout
-          </button>
-        </div>
-      )}
+  <div className="md:hidden bg-white dark:bg-gray-900 text-black dark:text-gray-200 px-4 py-4 space-y-4 transition-colors duration-300">
+    
+    <Link to="/" onClick={() => setIsMobileMenuOpen(false)} className="block hover:text-yellow-400">Home</Link>
+    <Link to="/Categories" onClick={() => setIsMobileMenuOpen(false)} className="block hover:text-yellow-400">Categories</Link>
+    <Link to="/AddRecipe" onClick={() => setIsMobileMenuOpen(false)} className="block hover:text-yellow-400">Add New Recipe</Link>
+    <Link to="/About" onClick={() => setIsMobileMenuOpen(false)} className="block hover:text-yellow-400">About</Link>
+    <Link to="/ai-chat" onClick={() => setIsMobileMenuOpen(false)} className="block hover:text-yellow-400">Chat with AI</Link>
+
+    <Link
+      to="/register"
+      onClick={() => setIsMobileMenuOpen(false)}
+      className="block px-4 py-2 bg-yellow-400 text-black rounded hover:bg-yellow-300 font-semibold text-center"
+    >
+      REGISTER
+    </Link>
+
+    <button
+      onClick={() => {
+        handleLogout();
+        setIsMobileMenuOpen(false);
+      }}
+      className="block w-full px-4 py-2 hover:bg-white/10 rounded text-center font-bold"
+    >
+      Logout
+    </button>
+
+    {/* Dark/Light Toggle Button */}
+    <button
+      onClick={toggleTheme}
+      className="flex items-center justify-center w-full px-4 py-2 mt-2 rounded bg-gray-200 dark:bg-gray-700 dark:text-white hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-300"
+    >
+      {theme === "light" ? <FaMoon size={20} /> : <FaSun size={20} />}
+    </button>
+
+</div>
+
+)}
     </nav>
   );
 };
