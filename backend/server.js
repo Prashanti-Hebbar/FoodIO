@@ -7,6 +7,7 @@ import cors from 'cors';
 import multer from 'multer';
 import dotenv from 'dotenv';
 import User from './models/Users.js';
+import chatbotRoutes from "./routes/chatbot.js";
 
 dotenv.config();
 
@@ -38,7 +39,8 @@ app.use("/uploads", express.static("uploads"));
 
 // Routes
 app.use("/auth", useRouter);
-app.use("/recipes", recipeRouter);
+app.use("/api/recipes", recipeRouter);
+app.use("/chat", chatbotRoutes);
 
 // DB connection
 mongoose.connect(process.env.MONGO_URI)
