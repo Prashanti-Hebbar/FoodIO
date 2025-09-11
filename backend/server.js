@@ -8,11 +8,25 @@ import multer from 'multer';
 import dotenv from 'dotenv';
 import User from './models/Users.js';
 import chatbotRoutes from "./routes/chatbot.js";
+import rateLimit from 'express-rate-limit';
 
 dotenv.config();
 
 const app = express(); 
 const PORT = 3001;
+
+
+
+// Rate limiting
+const limiter = rateLimit({
+  windowMs: 60 * 1000, 
+  max: 20,                
+  message: { error: "Too many requests, please try again later." },
+  standardHeaders: true,    
+  legacyHeaders: false,   
+});
+
+app.use(limiter);
 
 // Multer setup
 const storage = multer.diskStorage({
