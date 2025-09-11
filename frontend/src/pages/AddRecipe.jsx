@@ -68,15 +68,15 @@ const AddRecipe = () => {
 
       {/* Right Side Form */}
      <div className="flex-1 flex justify-center items-center p-6">
-  <div className="bg-white w-full max-w-lg h-[90%] rounded-2xl shadow-2xl border border-gray-300 p-6 overflow-y-auto">
-    <h1 className="text-2xl font-bold text-orange-600 text-center mb-4">
+  <div className="bg-white w-full max-w-lg h-[90%] rounded-2xl shadow-2xl border dark:text-black border-gray-300 p-6 overflow-y-auto">
+    <h1 className="text-2xl font-bold text-orange-600 text-center mb-4 ">
       🍲 Add a New Recipe
     </h1>
 
     <form onSubmit={handleSubmit} className="space-y-4">
       {/* Title */}
       <div>
-        <label className="block font-semibold mb-1">Recipe Title</label>
+        <label className="block font-semibold mb-1 dark:text-black">Recipe Title</label>
         <input
           type="text"
           name="title"
@@ -90,7 +90,7 @@ const AddRecipe = () => {
 
       {/* Photo */}
       <div>
-        <label className="block font-semibold mb-1">Upload Photo</label>
+        <label className="block font-semibold mb-1 dark:text-black">Upload Photo</label>
         <input
           type="text"
           name="imageUrl"
@@ -104,7 +104,7 @@ const AddRecipe = () => {
 
       {/* Description */}
       <div>
-        <label className="block font-semibold mb-1">Description</label>
+        <label className="block font-semibold mb-1 dark:text-black">Description</label>
         <textarea
           name="description"
           value={recipe.description}
@@ -117,7 +117,7 @@ const AddRecipe = () => {
 
       {/* Ingredients */}
       <div>
-        <label className="block font-semibold mb-1">Ingredients</label>
+        <label className="block font-semibold mb-1 dark:text-black">Ingredients</label>
         {recipe.ingredients.map((ingredient, index) => (
           <input
             key={index}
@@ -132,7 +132,7 @@ const AddRecipe = () => {
         <button
           type="button"
           onClick={handleAddIngredient}
-          className="text-sm bg-orange-100 px-3 py-1 rounded-lg hover:bg-orange-200"
+          className="text-sm bg-orange-100 px-3 py-1 rounded-lg hover:bg-orange-200 dark:text-black"
         >
           ➕ Add Ingredient
         </button>
@@ -140,7 +140,7 @@ const AddRecipe = () => {
 
       {/* Instructions */}
       <div>
-        <label className="block font-semibold mb-1">Instructions</label>
+        <label className="block font-semibold mb-1 dark:text-black">Instructions</label>
         <textarea
           name="instructions"
           value={recipe.instructions}
@@ -154,7 +154,7 @@ const AddRecipe = () => {
       {/* Prep + Cook Time */}
       <div className="flex gap-4">
         <div className="flex-1">
-          <label className="block font-semibold mb-1">
+          <label className="block font-semibold mb-1 dark:text-black">
             Prep Time (mins)
           </label>
           <input
@@ -167,7 +167,7 @@ const AddRecipe = () => {
           />
         </div>
         <div className="flex-1">
-          <label className="block font-semibold mb-1">
+          <label className="block font-semibold mb-1 dark:text-black">
             Cook Time (mins)
           </label>
           <input

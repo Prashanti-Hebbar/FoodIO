@@ -141,7 +141,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, isHomeScreen, recipes = [] }) => {
               placeholder="Search"
               value={searchTerm}
               onChange={handleSearch}
-              className="w-full px-4 py-2 rounded-full text-black focus:outline-none focus:ring-2 focus:ring-yellow-300 dark:placeholder:text-white"
+              className="w-full px-4 py-2 rounded-full text-black focus:outline-none focus:ring-2 focus:ring-yellow-300 dark:placeholder:text-gray-500"
             />
             {searchResults.length > 0 && (
               <div className="absolute bg-white text-black mt-1 w-full max-w-md rounded shadow-lg z-50 max-h-60 overflow-auto">
