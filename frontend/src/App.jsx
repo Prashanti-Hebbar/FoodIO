@@ -28,6 +28,7 @@ import TermsOfService from "./pages/TermsOfService";
 import Careers from "./pages/Careers";
 import { FaMoon, FaSun } from "react-icons/fa";
 import CategoryRenderer from "./pages/CategoryRenderer";
+import Chatbot from "./components/Chatbot/Chatbot";
 
 // Custom component to handle scroll to top on route changes
 function ScrollToTopOnRouteChange() {
@@ -139,6 +140,7 @@ function App() {
         <Route path="/TermsOfService" element={<TermsOfService />} />
       </Routes>
       <Footer />
+      <Chatbot />
     </Router>
   );
 }

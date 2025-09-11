@@ -1,7 +1,7 @@
-import { RecipesModel } from "../models/Recipes.js";
 import User from "../models/Users.js";
 import jwt from "jsonwebtoken";
 import axios from "axios";
+import { RecipesModel } from "../models/Recipes.js";
 
 // Middleware to verify user token
 export const verifyToken = (req, res, next) => {
@@ -229,3 +229,49 @@ export const updateRecipe = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+
+// --- Top Rated ---
+export const getTopRecipes = async (req, res) => {
+  try {
+    const limit = Math.min(parseInt(req.query.limit, 10) || 5, 20);
+    const recipes = await RecipesModel.find()
+      .sort({ rating: -1, ratingsCount: -1 })
+      .limit(limit)
+      .select("title photo description rating ratingsCount");
+    res.json(recipes);
+  } catch (err) {
+    console.error("Error fetching top recipes:", err);
+    res.status(500).json({ message: "Failed to fetch top recipes" });
+  }
+};
+
+// --- Trending ---
+export const getTrendingRecipes = async (req, res) => {
+  try {
+    const limit = Math.min(parseInt(req.query.limit, 10) || 5, 20);
+    const recipes = await RecipesModel.find()
+      .sort({ views: -1 })
+      .limit(limit)
+      .select("title photo description views");
+    res.json(recipes);
+  } catch (err) {
+    console.error("Error fetching trending recipes:", err);
+    res.status(500).json({ message: "Failed to fetch trending recipes" });
+  }
+};
+
+// --- Newest ---
+export const getNewestRecipes = async (req, res) => {
+  try {
+    const limit = Math.min(parseInt(req.query.limit, 10) || 5, 20);
+    const recipes = await RecipesModel.find()
+      .sort({ createdAt: -1 })
+      .limit(limit)
+      .select("title photo description createdAt");
+    res.json(recipes);
+  } catch (err) {
+    console.error("Error fetching newest recipes:", err);
+    res.status(500).json({ message: "Failed to fetch newest recipes" });
+  }
+};
+
