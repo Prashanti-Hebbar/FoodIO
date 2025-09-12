@@ -75,6 +75,7 @@ const ViewRecipe = () => {
                         <button className="btn btn-light me-2" onClick={() => setLikes(likes + 1)}><i className="fas fa-heart"></i></button>
                         <button className="btn btn-light me-2"><i className="fas fa-share-alt"></i></button>
                         <button className="btn btn-light"><i className="fas fa-bookmark"></i></button>
+                        <button className='btn btn-light'><i className="fas fa-bookmark"></i></button>
                     </div>
                 </div>
 
