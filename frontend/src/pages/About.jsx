@@ -41,10 +41,10 @@ const About = () => {
       <div className='row mt-5 p-5'>
         <h2 className="text-center mb-4 section-title">Why Choose FoodIO?</h2>
 
-        <div className="row justify-content-center">
-          <div className="col-md-4 col-sm-6 mb-4 feature-card">
-            <div className="card h-100">
-              <div className="card-body text-center">
+        <div className="row justify-content-center ">
+          <div className="col-md-4 col-sm-6 mb-4 feature-card   ">
+            <div className="card h-100 ">
+              <div className="card-body text-center ">
                 <h5 className="card-title">Endless Recipes</h5>
                 <p className="card-text">Discover thousands of dishes across various cuisines, from traditional to modern, catering to every taste and skill level.</p>
               </div>
