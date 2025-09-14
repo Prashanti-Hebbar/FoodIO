@@ -160,13 +160,15 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, isHomeScreen, recipes = [] }) => {
 
           {/* Desktop Auth/Profile (hidden on mobile) */}
           <div className="hidden md:flex items-center space-x-2 relative">
-            <Link
+            {!isLoggedIn ? (
+              <Link
               to="/register"
               className="px-4 py-1 bg-yellow-400 text-black rounded hover:bg-yellow-300 font-semibold "
             >
               REGISTER
             </Link>
-            <div
+            ) : (
+              <div
               className="relative"
               onMouseEnter={handleUserEnter}
               onMouseLeave={handleUserLeave}
@@ -190,6 +192,9 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, isHomeScreen, recipes = [] }) => {
 
               )}
             </div>
+            )}
+
+            {/* Dark/Light Toggle Button */} 
             <button
               onClick={toggleTheme}
               className="p-2 rounded bg-gray-200 dark:bg-gray-900 dark:text-gray-200"
@@ -220,6 +225,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, isHomeScreen, recipes = [] }) => {
     <Link to="/About" onClick={() => setIsMobileMenuOpen(false)} className="block hover:text-yellow-400">About</Link>
     <Link to="/ai-chat" onClick={() => setIsMobileMenuOpen(false)} className="block hover:text-yellow-400">Chat with AI</Link>
 
+{!isLoggedIn ? (
     <Link
       to="/register"
       onClick={() => setIsMobileMenuOpen(false)}
@@ -227,8 +233,8 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, isHomeScreen, recipes = [] }) => {
     >
       REGISTER
     </Link>
-
-    <button
+    ) : (
+         <button
       onClick={() => {
         handleLogout();
         setIsMobileMenuOpen(false);
@@ -237,6 +243,10 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, isHomeScreen, recipes = [] }) => {
     >
       Logout
     </button>
+    )}
+  
+
+ 
 
     {/* Dark/Light Toggle Button */}
     <button
