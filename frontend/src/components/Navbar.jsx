@@ -141,7 +141,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, isHomeScreen, recipes = [] }) => {
               placeholder="Search"
               value={searchTerm}
               onChange={handleSearch}
-              className="w-full px-4 py-2 rounded-full text-black focus:outline-none focus:ring-2 focus:ring-yellow-300 dark:placeholder:text-gray-500"
+              className="w-full px-4 py-2 rounded-full placeholder:text-gray-900 focus:outline-none focus:ring-2 focus:ring-yellow-300 dark:placeholder:text-gray-300"
             />
             {searchResults.length > 0 && (
               <div className="absolute bg-white text-black mt-1 w-full max-w-md rounded shadow-lg z-50 max-h-60 overflow-auto">
@@ -217,15 +217,20 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, isHomeScreen, recipes = [] }) => {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-  <div className="md:hidden bg-white dark:bg-gray-900 text-black dark:text-gray-200 px-4 py-4 space-y-4 transition-colors duration-300">
-    
-    <Link to="/" onClick={() => setIsMobileMenuOpen(false)} className="block hover:text-yellow-400">Home</Link>
-    <Link to="/Categories" onClick={() => setIsMobileMenuOpen(false)} className="block hover:text-yellow-400">Categories</Link>
-    <Link to="/AddRecipe" onClick={() => setIsMobileMenuOpen(false)} className="block hover:text-yellow-400">Add New Recipe</Link>
-    <Link to="/About" onClick={() => setIsMobileMenuOpen(false)} className="block hover:text-yellow-400">About</Link>
-    <Link to="/ai-chat" onClick={() => setIsMobileMenuOpen(false)} className="block hover:text-yellow-400">Chat with AI</Link>
+        <div
+          className={`md:hidden px-4 py-4 space-y-4 transition-all duration-300 
+      ${theme === "dark"
+              ? "bg-black text-white"
+              : "bg-white text-black"
+            }`}
+        >
+          <Link to="/" onClick={() => setIsMobileMenuOpen(false)} className="block hover:text-yellow-400">Home</Link>
+          <Link to="/Categories" onClick={() => setIsMobileMenuOpen(false)} className="block hover:text-yellow-400">Categories</Link>
+          <Link to="/AddRecipe" onClick={() => setIsMobileMenuOpen(false)} className="block hover:text-yellow-400">Add New Recipe</Link>
+          <Link to="/About" onClick={() => setIsMobileMenuOpen(false)} className="block hover:text-yellow-400">About</Link>
+          <Link to="/ai-chat" onClick={() => setIsMobileMenuOpen(false)} className="block hover:text-yellow-400">Chat with AI</Link>
 
-{!isLoggedIn ? (
+ {!isLoggedIn ? (
     <Link
       to="/register"
       onClick={() => setIsMobileMenuOpen(false)}
@@ -244,21 +249,19 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, isHomeScreen, recipes = [] }) => {
       Logout
     </button>
     )}
-  
 
- 
 
-    {/* Dark/Light Toggle Button */}
-    <button
-      onClick={toggleTheme}
-      className="flex items-center justify-center w-full px-4 py-2 mt-2 rounded bg-gray-200 dark:bg-gray-700 dark:text-white hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-300"
-    >
-      {theme === "light" ? <FaMoon size={20} /> : <FaSun size={20} />}
-    </button>
+          {/* Dark/Light Toggle Button */}
+          <button
+            onClick={toggleTheme}
+            className="flex items-center justify-center w-full px-4 py-2 mt-2 rounded bg-gray-200 dark:bg-gray-700 dark:text-white hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-300"
+          >
+            {theme === "light" ? <FaMoon size={20} /> : <FaSun size={20} />}
+          </button>
 
-</div>
+        </div>
 
-)}
+      )}
     </nav>
   );
 };
