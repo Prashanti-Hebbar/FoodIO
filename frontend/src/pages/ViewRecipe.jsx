@@ -1,28 +1,36 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { jsPDF } from 'jspdf';
 import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
 import "../ViewRecipe.css";
-import recipes from "../data/recipes"
+import recipes from "../data/recipes";
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 const ViewRecipe = () => {
     const location = useLocation();
-    const searchParams = new URLSearchParams(location.search);
-    const recipeId = parseInt(searchParams.get('id'), 10);
+    const navigate = useNavigate();
+    const { id } = useParams(); // ✅ Extract id from path params
+    const recipeId = parseInt(id, 10);
 
     const [recipe, setRecipe] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
     const [likes, setLikes] = useState(0);
     const [comments, setComments] = useState([]);
     const [newComment, setNewComment] = useState("");
     const pdfRef = useRef();
 
     useEffect(() => {
-        const selectedRecipe = Object.values(recipes).flat().find(recipe => recipe.id === recipeId);
-        if (selectedRecipe) setRecipe(selectedRecipe);
-    }, [recipeId]);
+        setIsLoading(true);
+        const selectedRecipe = Object.values(recipes).flat().find(r => r.id === recipeId);
+        if (selectedRecipe) {
+            setRecipe(selectedRecipe);
+        } else {
+            setRecipe(null);
+        }
+        setIsLoading(false);
+    }, [recipeId]); // ✅ Runs whenever recipeId changes
 
     const generatePDF = () => {
         const doc = new jsPDF('p', 'pt', 'a4');
@@ -52,7 +60,24 @@ const ViewRecipe = () => {
 
     const suggestedRecipes = Object.values(recipes).flat().filter(r => r.id !== recipeId).slice(0, 3);
 
-    if (!recipe) return <div>Loading...</div>;
+    if (isLoading) {
+        return (
+            <div style={{ textAlign: 'center', marginTop: '50px' }}>
+                <p>Loading...</p>
+            </div>
+        );
+    }
+
+    if (!recipe) {
+        return (
+            <div style={{ textAlign: 'center', marginTop: '50px' }}>
+                <p>Recipe not found. Please try again.</p>
+                <button className="btn btn-secondary" onClick={() => navigate('/home')}>
+                    Clear / Go Back
+                </button>
+            </div>
+        );
+    }
 
     const nutritionData = {
         labels: Object.keys(recipe.nutritionalInfo || {}),
@@ -89,14 +114,12 @@ const ViewRecipe = () => {
                     </div>
                     <p>{recipe.description}</p>
 
-                    {/* Info */}
                     <div className="row mb-3">
                         <div className="col-md-4"><strong>Prep Time:</strong> {recipe.prepTime}</div>
                         <div className="col-md-4"><strong>Cook Time:</strong> {recipe.cookTime}</div>
                         <div className="col-md-4"><strong>Servings:</strong> {recipe.servings}</div>
                     </div>
 
-                    {/* Ingredients */}
                     <h2 id='h2'>Ingredients</h2>
                     <ul className="ingredients-list">
                         {recipe.ingredients.map((ing, i) => (
@@ -104,7 +127,6 @@ const ViewRecipe = () => {
                         ))}
                     </ul>
 
-                    {/* Step-by-step Instructions */}
                     <h2>Instructions</h2>
                     <div className="instruction-steps">
                         {recipe.instructions.map((step, i) => (
@@ -114,7 +136,6 @@ const ViewRecipe = () => {
                         ))}
                     </div>
 
-                    {/* Nutrition Chart */}
                     {recipe.nutritionalInfo && (
                         <div className="mt-4">
                             <h2>Nutritional Info</h2>
@@ -122,12 +143,10 @@ const ViewRecipe = () => {
                         </div>
                     )}
 
-                    {/* Download PDF */}
                     <button className="btn btn-primary mt-3" onClick={generatePDF}>Download Recipe</button>
                 </div>
             </div>
 
-            {/* Real-time Comments */}
             <div className="mt-5">
                 <h3>Comments</h3>
                 <div className="d-flex mb-2">
@@ -150,13 +169,16 @@ const ViewRecipe = () => {
                 </ul>
             </div>
 
-            {/* Suggested Recipes */}
             <div className="mt-5">
                 <h3>Suggested Recipes</h3>
                 <div className="row">
                     {suggestedRecipes.map(s => (
                         <div className="col-md-4" key={s.id}>
-                            <div className="card">
+                            <div 
+                                className="card" 
+                                style={{ cursor: 'pointer' }}
+                                onClick={() => navigate(`/recipe/${s.id}`)}
+                            >
                                 <img src={s.image} className="card-img-top" alt={s.title} />
                                 <div className="card-body">
                                     <h5>{s.title}</h5>
