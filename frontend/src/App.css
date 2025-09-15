@@ -716,6 +716,7 @@ button:hover {
   padding: 24px;
   background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(248,249,250,0.6));
   position: relative;
+  min-height: 150px;
 }
 
 .card-body::before {
@@ -734,6 +735,11 @@ button:hover {
   margin-bottom: 12px;
   color: #2c3e50;
   text-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  height: 3rem;
 }
 
 .card-text {

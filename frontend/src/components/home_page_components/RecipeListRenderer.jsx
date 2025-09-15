@@ -10,7 +10,6 @@ const RecipeListRenderer = ({ recipeType }) => {
   const checkScroll = () => {
     const el = scrollRef.current;
     if (!el) return;
-
     setCanScrollLeft(el.scrollLeft > 0);
     setCanScrollRight(el.scrollLeft + el.clientWidth < el.scrollWidth);
   };
@@ -19,10 +18,8 @@ const RecipeListRenderer = ({ recipeType }) => {
     checkScroll();
     const el = scrollRef.current;
     if (!el) return;
-
     el.addEventListener("scroll", checkScroll);
     window.addEventListener("resize", checkScroll);
-
     return () => {
       el.removeEventListener("scroll", checkScroll);
       window.removeEventListener("resize", checkScroll);
@@ -32,7 +29,6 @@ const RecipeListRenderer = ({ recipeType }) => {
   const scroll = (direction) => {
     const el = scrollRef.current;
     if (!el) return;
-
     const scrollAmount = el.clientWidth * 0.8;
     el.scrollBy({
       left: direction === "left" ? -scrollAmount : scrollAmount,
@@ -42,7 +38,6 @@ const RecipeListRenderer = ({ recipeType }) => {
 
   return (
     <div className="position-relative">
-      {/* Left button */}
       {canScrollLeft && (
         <button
           onClick={() => scroll("left")}
@@ -52,19 +47,19 @@ const RecipeListRenderer = ({ recipeType }) => {
           ◀
         </button>
       )}
-
-      {/* Scrollable container with hidden scrollbar */}
       <div
         ref={scrollRef}
         className="d-flex flex-nowrap hide-scrollbar"
         style={{ overflowX: "auto", scrollBehavior: "smooth" }}
       >
-        {recipes[recipeType].map((recipe) => (
-          <RecipeCard recipe={recipe} key={recipe.id} />
-        ))}
+        {recipes[recipeType] && recipes[recipeType].length > 0 ? (
+          recipes[recipeType].map((recipe) => (
+            <RecipeCard recipe={recipe} key={recipe.id} />
+          ))
+        ) : (
+          <p className="text-gray-500">No recipes found</p>
+        )}
       </div>
-
-      {/* Right button */}
       {canScrollRight && (
         <button
           onClick={() => scroll("right")}
