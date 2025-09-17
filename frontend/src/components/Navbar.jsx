@@ -1,10 +1,10 @@
+
 import { useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { UserIcon, Menu, X } from "lucide-react";
+import { UserIcon, Menu, X, ChevronDown, Sun as SunIcon } from "lucide-react";
 import axios from "axios";
 import { useUserContext } from "../context/userContext";
 import "../navbar.css";
-import { Moon, Sun } from "lucide-react";
 import { useTheme } from "../context/ThemeContext";
 import { FaMoon, FaSun } from "react-icons/fa";
 
@@ -25,18 +25,15 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, isHomeScreen, recipes = [] }) => {
     clearTimeout(dropdownTimeout.current);
     setIsDropdownOpen(true);
   };
-
   const handleDashboardLeave = () => {
     dropdownTimeout.current = setTimeout(() => {
       setIsDropdownOpen(false);
     }, 200);
   };
-
   const handleUserEnter = () => {
     clearTimeout(dropdownTimeout.current);
     setUserMenuOpen(true);
   };
-
   const handleUserLeave = () => {
     dropdownTimeout.current = setTimeout(() => {
       setUserMenuOpen(false);
@@ -65,7 +62,6 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, isHomeScreen, recipes = [] }) => {
   const handleSearch = (e) => {
     const term = e.target.value;
     setSearchTerm(term);
-
     if (term.trim()) {
       const results = recipes
         .filter((recipe) =>
@@ -74,10 +70,8 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, isHomeScreen, recipes = [] }) => {
         .sort((a, b) => {
           const aTitle = a.title.toLowerCase();
           const bTitle = b.title.toLowerCase();
-
           const aStarts = aTitle.startsWith(term);
           const bStarts = bTitle.startsWith(term);
-
           if (aStarts && !bStarts) return -1;
           if (!aStarts && bStarts) return 1;
           return aTitle.localeCompare(bTitle);
@@ -96,60 +90,157 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, isHomeScreen, recipes = [] }) => {
   };
 
   return (
-    <nav className="sticky top-0 w-full z-50 text-white backdrop-blur-md shadow-[rgba(0,0,0,0.2)_0px_4px_20px,rgba(255,204,0,0.05)_0px_0px_30px_inset] bg-black/60">
-      <div className="max-w-7xl lg:mx-16 mx-auto px-2 sm:px-4 lg:px-8">
-        <div className="py-4 flex justify-between items-center h-16">
+    <nav
+      className={`
+        sticky top-0 w-full z-50 backdrop-blur-md
+        ${
+          theme === "dark"
+            ? "bg-black/80 text-gray-100 shadow-lg"
+            : "bg-white text-gray-800 shadow-md"
+        }
+      `}
+    >
+      <div className="lg:mx-16 mx-auto px-4 sm:px-6 lg:px-8 ">
+        <div
+          className={`py-3 flex justify-between items-center h-16 
+          after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-full after:h-1
+    after:rounded-full after:shadow-[0_0_10px_2px_rgba(255,255,255,0.7)] 
+    after:bg-white`}
+        >
           {/* Logo */}
-          <Link to="/" className="text-2xl font-bold text-yellow-400">
-            FOODIO
-          </Link>
-
-          {/* Desktop Nav Links (hidden on mobile) */}
-          <div className="hidden md:flex space-x-6 items-center">
-            <Link to="/" className="hover:text-yellow-400">Home</Link>
-            <div
-              className="relative"
-              onMouseEnter={handleDashboardEnter}
-              onMouseLeave={handleDashboardLeave}
+          <div className="flex-shrink-0">
+            <Link
+              to="/"
+              className={`font-sans font-bold tracking-wide hover:scale-105 transition-transform text-2xl sm:text-3xl md:text-4xl
+                ${theme === "dark" ? "text-orange-400" : "text-yellow-400"}`}
             >
-              <button
-                className="text-white hover:text-yellow-400 px-2 py-1 focus:outline-none"
-                aria-haspopup="true"
-                aria-expanded={isDropdownOpen}
-                aria-controls="dashboard-menu"
-              >
-                Dashboard ▾
-              </button>
-              {isDropdownOpen && (
-                <div
-                  id="dashboard-menu"
-                  className="absolute bg-black/90 text-white mt-2 rounded shadow-lg p-2 w-44"
-                >
-                  <Link to="/Categories" className="block px-4 py-2 hover:bg-white/10">Categories</Link>
-                  <Link to="/AddRecipe" className="block px-4 py-2 hover:bg-white/10">Add New Recipe</Link>
-                </div>
-              )}
-            </div>
-            <Link to="/About" className="hover:text-yellow-400">About</Link>
-            <Link to="/ai-chat" className="hover:text-yellow-400">Chat with AI</Link>
+              FOODIO
+            </Link>
           </div>
 
+          {/* Desktop Menu */}
+        {/* Desktop Menu */}
+<div className="hidden md:flex space-x-6 lg:space-x-8 items-center font-medium">
+  <Link
+    to="/"
+    className={`px-3 py-2 border rounded-md text-sm lg:text-base font-medium tracking-wide transition-all duration-200 shadow-sm
+      ${theme === "dark"
+        ? "border-gray-700 text-gray-100 hover:bg-gray-800 hover:text-orange-400"
+        : "border-gray-300 text-gray-800 hover:border-orange-400 hover:text-orange-500 hover:bg-gray-200"
+      }`}
+  >
+    Home
+  </Link>
+
+  {/* Dashboard with Dropdown */}
+  <div
+    className="relative"
+    onMouseEnter={handleDashboardEnter}
+    onMouseLeave={handleDashboardLeave}
+  >
+    <div
+    typeof="button"
+    tabIndex={0}
+      className={`flex items-center gap-1 px-3 py-2 border rounded-md text-sm lg:text-base font-medium tracking-wide transition-all duration-200 shadow-sm
+        ${theme === "dark"
+          ? "border-gray-700 text-gray-100 hover:bg-gray-800 hover:text-orange-400"
+          : "border-gray-300 text-gray-800 hover:border-orange-400 hover:text-orange-500 hover:bg-gray-200"
+        }`}
+      aria-haspopup="true"
+      aria-expanded={isDropdownOpen}
+    >
+      Dashboard <ChevronDown size={15} />
+  </div>
+
+    {isDropdownOpen && (
+      <div
+        className={`absolute mt-2 rounded-lg shadow-lg w-48 lg:w-52 py-2 z-50
+          ${theme === "dark"
+            ? "bg-black/90 border border-gray-700 text-gray-100 backdrop-blur-md"
+            : "bg-white border border-gray-200 text-gray-800"
+          }`}
+      >
+        <Link
+          to="/Categories"
+          className={`block px-4 py-2 text-sm font-medium rounded-md transition
+            ${theme === "dark"
+              ? "hover:bg-gray-800 hover:text-orange-400"
+              : "hover:bg-orange-50 hover:text-orange-600"
+            }`}
+        >
+          Categories
+        </Link>
+        <Link
+          to="/AddRecipe"
+          className={`block px-4 py-2 text-sm font-medium rounded-md transition
+            ${theme === "dark"
+              ? "hover:bg-gray-800 hover:text-orange-400"
+              : "hover:bg-orange-50 hover:text-orange-600"
+            }`}
+        >
+          Add New Recipe
+        </Link>
+      </div>
+    )}
+  </div>
+
+  <Link
+    to="/About"
+    className={`px-3 py-2 border rounded-md text-sm lg:text-base font-medium tracking-wide transition-all duration-200 shadow-sm
+      ${theme === "dark"
+        ? "border-gray-700 text-gray-100 hover:bg-gray-800 hover:text-orange-400"
+        : "border-gray-300 text-gray-800 hover:border-orange-400 hover:text-orange-500 hover:bg-gray-200"
+      }`}
+  >
+    About
+  </Link>
+
+  <Link
+    to="/ai-chat"
+    className={`px-3 py-2 border rounded-md text-sm lg:text-base font-medium tracking-wide transition-all duration-200 shadow-sm
+      ${theme === "dark"
+        ? "border-gray-700 text-gray-100 hover:bg-gray-800 hover:text-orange-400"
+        : "border-gray-300 text-gray-800 hover:border-orange-400 hover:text-orange-500 hover:bg-gray-200"
+      }`}
+  >
+    Chat with AI
+  </Link>
+</div>
+
+
           {/* Search Bar */}
-          <div className="flex-grow mx-4 max-w-md relative">
+          <div className="flex-grow mx-2 sm:mx-4 max-w-xs sm:max-w-md  md:hidden relative hidden sm:block lg:block">
             <input
               type="text"
-              placeholder="Search"
+              placeholder="Search recipes..."
               value={searchTerm}
               onChange={handleSearch}
-              className="w-full px-4 py-2 rounded-full placeholder:text-gray-900 focus:outline-none focus:ring-2 focus:ring-yellow-300 dark:placeholder:text-gray-300"
+              className={`w-full px-4 py-2 rounded-full focus:outline-none focus:ring-2 transition-all text-sm sm:text-base
+                ${
+                  theme === "dark"
+                    ? "bg-black/80 text-gray-100 placeholder-gray-400 focus:ring-orange-400"
+                    : "bg-white text-black placeholder-gray-500 focus:ring-blue-400"
+                }`}
             />
             {searchResults.length > 0 && (
-              <div className="absolute bg-white text-black mt-1 w-full max-w-md rounded shadow-lg z-50 max-h-60 overflow-auto">
+              <div
+                className={`absolute mt-1 w-full rounded-lg shadow-xl z-50 max-h-60 overflow-auto
+                  ${
+                    theme === "dark"
+                      ? "bg-black/90 text-gray-100 backdrop-blur-md"
+                      : "bg-white text-black"
+                  }`}
+              >
                 {searchResults.map((recipe) => (
                   <div
                     key={recipe.id}
                     onClick={() => handleRecipeClick(recipe.id)}
-                    className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                    className={`px-4 py-2 cursor-pointer transition-colors text-sm
+                      ${
+                        theme === "dark"
+                          ? "hover:bg-gray-800"
+                          : "hover:bg-gray-100"
+                      }`}
                   >
                     {recipe.title}
                   </div>
@@ -158,54 +249,93 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, isHomeScreen, recipes = [] }) => {
             )}
           </div>
 
-          {/* Desktop Auth/Profile (hidden on mobile) */}
-          <div className="hidden md:flex items-center space-x-2 relative">
+          {/* Desktop Profile */}
+          <div className="hidden md:flex items-center space-x-3 relative">
             <Link
               to="/register"
-              className="px-4 py-1 bg-yellow-400 text-black rounded hover:bg-yellow-300 font-semibold "
+              className={`flex items-center gap-1 px-3 py-2 border rounded-md text-sm lg:text-base font-medium tracking-wide transition-all duration-200 shadow-sm
+                ${
+                  theme === "dark"
+                    ? "border-gray-700 text-gray-100 hover:bg-gray-800 hover:text-orange-400"
+                    : "border-gray-300 text-gray-800 hover:border-orange-400 hover:bg-gray-200"
+                }`}
             >
               REGISTER
             </Link>
+
             <div
               className="relative"
               onMouseEnter={handleUserEnter}
               onMouseLeave={handleUserLeave}
             >
               <Link to="/profile">
-                <div className="bg-black/20 rounded p-1 cursor-pointer">
-                  <UserIcon className="h-6 w-6" />
+                <div
+                  className={`rounded-full p-2 cursor-pointer transition-colors
+                    ${
+                      theme === "dark"
+                        ? "hover:bg-gray-800"
+                        : "hover:bg-gray-200"
+                    }`}
+                >
+                  <UserIcon className="h-5 w-5 lg:h-6 lg:w-6" />
                 </div>
               </Link>
 
               {userMenuOpen && (
-                <div className="absolute right-0 mt-2 bg-black/90 text-white rounded shadow-lg w-32">
-                  <button
+                <div
+                  className={`absolute right-0 mt-2 rounded-md shadow-xl w-28 overflow-hidden
+                    ${
+                      theme === "dark"
+                        ? "bg-black/90 border border-gray-700 text-gray-100 backdrop-blur-md"
+                        : "bg-black/95 border border-yellow-400/20 text-white"
+                    }`}
+                >
+                  <div
                     onClick={handleLogout}
-                    className="w-full text-left px-4 py-2 hover:bg-white/10"
+                    className={`w-full text-left px-4 py-2 rounded-md cursor-pointer font-medium select-none
+                      ${
+                        theme === "dark"
+                          ? "bg-gray-800 hover:bg-gray-700 text-gray-100"
+                          : "bg-white hover:bg-gray-200 text-gray-800"
+                      }`}
                   >
                     Logout
-                  </button>
-
+                  </div>
                 </div>
-
               )}
             </div>
-            <button
+
+            <div
+              role="button"
+              tabIndex={0}
               onClick={toggleTheme}
-              className="p-2 rounded bg-gray-200 dark:bg-gray-900 dark:text-gray-200"
+              className={`flex items-center justify-center w-9 h-9 lg:w-10 lg:h-10 cursor-pointer rounded-full transition-colors shadow-sm
+                ${
+                  theme === "dark" ? "hover:bg-gray-800" : "hover:bg-gray-200"
+                }`}
             >
-              {theme === "light" ? <FaMoon size={20} /> : <FaSun size={20} />}
-            </button>
+              {theme === "light" ? (
+                <FaMoon className="text-black" size={16} />
+              ) : (
+                <FaSun className="text-orange-400" size={18} />
+              )}
+            </div>
           </div>
 
-          {/* Hamburger Button (only visible on mobile) */}
+          {/* Mobile Hamburger */}
           <div className="flex items-center md:hidden">
-            <button
+            <div
+              tabIndex={0}
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="p-2 text-yellow-400 focus:outline-none"
+              className={`p-2 focus:outline-none transition-colors
+                ${
+                  theme === "dark"
+                    ? "hover:text-orange-400"
+                    : "hover:text-black"
+                }`}
             >
-              {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
-            </button>
+              {isMobileMenuOpen ? <X size={26} /> : <Menu size={26} />}
+            </div>
           </div>
         </div>
       </div>
@@ -213,46 +343,81 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, isHomeScreen, recipes = [] }) => {
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
         <div
-          className={`md:hidden px-4 py-4 space-y-4 transition-all duration-300 
-      ${theme === "dark"
-              ? "bg-black text-white"
-              : "bg-white text-black"
+          className={`md:hidden px-6 py-5 space-y-5 flex flex-col justify-center items-center transition-all duration-300 rounded-xl shadow-xl
+            ${
+              theme === "dark"
+                ? "bg-black/90 text-gray-100 border border-gray-700 backdrop-blur-md"
+                : "bg-white text-gray-900 border border-gray-200"
             }`}
         >
-          <Link to="/" onClick={() => setIsMobileMenuOpen(false)} className="block hover:text-yellow-400">Home</Link>
-          <Link to="/Categories" onClick={() => setIsMobileMenuOpen(false)} className="block hover:text-yellow-400">Categories</Link>
-          <Link to="/AddRecipe" onClick={() => setIsMobileMenuOpen(false)} className="block hover:text-yellow-400">Add New Recipe</Link>
-          <Link to="/About" onClick={() => setIsMobileMenuOpen(false)} className="block hover:text-yellow-400">About</Link>
-          <Link to="/ai-chat" onClick={() => setIsMobileMenuOpen(false)} className="block hover:text-yellow-400">Chat with AI</Link>
-
-          <Link
-            to="/register"
-            onClick={() => setIsMobileMenuOpen(false)}
-            className="block px-4 py-2 bg-yellow-400 text-black rounded hover:bg-yellow-300 font-semibold text-center"
-          >
-            REGISTER
-          </Link>
-
-          <button
+          {[
+            "Home",
+            "Categories",
+            "Add New Recipe",
+            "About",
+            "Chat with AI",
+            "REGISTER",
+          ].map((name, i) => {
+            const path =
+              name === "Home"
+                ? "/"
+                : name === "Categories"
+                ? "/Categories"
+                : name === "Add New Recipe"
+                ? "/AddRecipe"
+                : name === "About"
+                ? "/About"
+                : name === "Chat with AI"
+                ? "/ai-chat"
+                : "/register";
+            return (
+              <Link
+                key={i}
+                to={path}
+                onClick={() => setIsMobileMenuOpen(false)}
+                className={`block w-full px-4 py-2 rounded-lg text-center font-semibold border transition-all duration-200
+                  ${
+                    theme === "dark"
+                      ? "border-gray-700 hover:bg-gray-800 hover:text-orange-400"
+                      : "border-red-400 hover:bg-gray-200"
+                  }`}
+              >
+                {name}
+              </Link>
+            );
+          })}
+          <div
             onClick={() => {
               handleLogout();
               setIsMobileMenuOpen(false);
             }}
-            className="block w-full px-4 py-2 hover:bg-white/10 rounded text-center font-bold"
+            className={`block w-full px-4 py-2 rounded-lg text-center font-semibold border transition-all duration-200 cursor-pointer
+              ${
+                theme === "dark"
+                  ? "border-gray-700 hover:bg-gray-800 hover:text-orange-400"
+                  : "border-red-400 hover:bg-gray-200"
+              }`}
           >
             Logout
-          </button>
-
-          {/* Dark/Light Toggle Button */}
-          <button
+          </div>
+          <div
+            role="button"
+            tabIndex={0}
             onClick={toggleTheme}
-            className="flex items-center justify-center w-full px-4 py-2 mt-2 rounded bg-gray-200 dark:bg-gray-700 dark:text-white hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-300"
+            className={`flex items-center justify-center w-full px-4 py-2 mt-3 rounded-lg shadow-md border transition-colors duration-200
+              ${
+                theme === "dark"
+                  ? "border-gray-700 hover:bg-gray-800"
+                  : "border-yellow-300 hover:bg-gray-200"
+              }`}
           >
-            {theme === "light" ? <FaMoon size={20} /> : <FaSun size={20} />}
-          </button>
-
+            {theme === "light" ? (
+              <FaMoon size={18} />
+            ) : (
+              <FaSun className="text-orange-400" size={18} />
+            )}
+          </div>
         </div>
-
       )}
     </nav>
   );
