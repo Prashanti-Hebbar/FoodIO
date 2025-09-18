@@ -323,7 +323,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, isHomeScreen, recipes = [] }) => {
               ) : (
                 <FaSun className="text-orange-400" size={18} />
               )}
-            </div>
+            </button>
           </div>
 
           {/* Mobile Hamburger */}
@@ -397,7 +397,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, isHomeScreen, recipes = [] }) => {
             ) : (
               <FaSun className="text-orange-400" size={18} />
             )}
-          </div>
+          </button>
         </div>
       )}
     </nav>
