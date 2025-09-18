@@ -249,9 +249,11 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, isHomeScreen, recipes = [] }) => {
             )}
           </div>
 
-          {/* Desktop Profile */}
-          <div className="hidden md:flex items-center space-x-3 relative">
-            <Link
+
+          {/* Desktop Auth/Profile (hidden on mobile) */}
+          <div className="hidden md:flex items-center space-x-2 relative">
+            {!isLoggedIn ? (
+              <Link
               to="/register"
               className={`flex items-center gap-1 px-3 py-2 border rounded-md text-sm lg:text-base font-medium tracking-wide transition-all duration-200 shadow-sm
                 ${
@@ -263,7 +265,8 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, isHomeScreen, recipes = [] }) => {
               REGISTER
             </Link>
 
-            <div
+            ) : (
+              <div
               className="relative"
               onMouseEnter={handleUserEnter}
               onMouseLeave={handleUserLeave}
@@ -305,9 +308,10 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, isHomeScreen, recipes = [] }) => {
               )}
             </div>
 
-            <div
-              role="button"
-              tabIndex={0}
+            )}
+
+            {/* Dark/Light Toggle Button */} 
+            <button
               onClick={toggleTheme}
               className={`flex items-center justify-center w-9 h-9 lg:w-10 lg:h-10 cursor-pointer rounded-full transition-colors shadow-sm
                 ${
@@ -350,59 +354,36 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, isHomeScreen, recipes = [] }) => {
                 : "bg-white text-gray-900 border border-gray-200"
             }`}
         >
-          {[
-            "Home",
-            "Categories",
-            "Add New Recipe",
-            "About",
-            "Chat with AI",
-            "REGISTER",
-          ].map((name, i) => {
-            const path =
-              name === "Home"
-                ? "/"
-                : name === "Categories"
-                ? "/Categories"
-                : name === "Add New Recipe"
-                ? "/AddRecipe"
-                : name === "About"
-                ? "/About"
-                : name === "Chat with AI"
-                ? "/ai-chat"
-                : "/register";
-            return (
-              <Link
-                key={i}
-                to={path}
-                onClick={() => setIsMobileMenuOpen(false)}
-                className={`block w-full px-4 py-2 rounded-lg text-center font-semibold border transition-all duration-200
-                  ${
-                    theme === "dark"
-                      ? "border-gray-700 hover:bg-gray-800 hover:text-orange-400"
-                      : "border-red-400 hover:bg-gray-200"
-                  }`}
-              >
-                {name}
-              </Link>
-            );
-          })}
-          <div
-            onClick={() => {
-              handleLogout();
-              setIsMobileMenuOpen(false);
-            }}
-            className={`block w-full px-4 py-2 rounded-lg text-center font-semibold border transition-all duration-200 cursor-pointer
-              ${
-                theme === "dark"
-                  ? "border-gray-700 hover:bg-gray-800 hover:text-orange-400"
-                  : "border-red-400 hover:bg-gray-200"
-              }`}
-          >
-            Logout
-          </div>
-          <div
-            role="button"
-            tabIndex={0}
+
+          <Link to="/" onClick={() => setIsMobileMenuOpen(false)} className="block hover:text-yellow-400">Home</Link>
+          <Link to="/Categories" onClick={() => setIsMobileMenuOpen(false)} className="block hover:text-yellow-400">Categories</Link>
+          <Link to="/AddRecipe" onClick={() => setIsMobileMenuOpen(false)} className="block hover:text-yellow-400">Add New Recipe</Link>
+          <Link to="/About" onClick={() => setIsMobileMenuOpen(false)} className="block hover:text-yellow-400">About</Link>
+          <Link to="/ai-chat" onClick={() => setIsMobileMenuOpen(false)} className="block hover:text-yellow-400">Chat with AI</Link>
+
+ {!isLoggedIn ? (
+    <Link
+      to="/register"
+      onClick={() => setIsMobileMenuOpen(false)}
+      className="block px-4 py-2 bg-yellow-400 text-black rounded hover:bg-yellow-300 font-semibold text-center"
+    >
+      REGISTER
+    </Link>
+    ) : (
+         <button
+      onClick={() => {
+        handleLogout();
+        setIsMobileMenuOpen(false);
+      }}
+      className="block w-full px-4 py-2 hover:bg-white/10 rounded text-center font-bold"
+    >
+      Logout
+    </button>
+    )}
+
+
+          {/* Dark/Light Toggle Button */}
+          <button
             onClick={toggleTheme}
             className={`flex items-center justify-center w-full px-4 py-2 mt-3 rounded-lg shadow-md border transition-colors duration-200
               ${
