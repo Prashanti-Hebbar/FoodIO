@@ -31,6 +31,12 @@ const register = async (req, res) => {
       password: hashedPassword,
     });
     await newUser.save();
+    const token = jwt.sign(
+      { id: newUser._id },
+      process.env.JWT_SECRET || "secret",
+      { expiresIn: "7d" }
+    );
+    setAuthCookie(res, token);
     await session.commitTransaction();
     session.endSession();
     res.status(201).json({ message: "User registered successfully. Please log in." });

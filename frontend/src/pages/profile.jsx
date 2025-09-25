@@ -41,7 +41,7 @@ const Profile = () => {
 
         if (response.data.user.avatar) {
           setAvatarUrl(
-            `http://localhost:3001/uploads/${response.data.user.avatar}`
+            `https://foodio-backend-cgsj.onrender.com/${response.data.user.avatar}`
           );
         } else {
           setAvatarUrl("ban.jpg"); // fallback avatar
