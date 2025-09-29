@@ -120,14 +120,13 @@ No complex configuration required. Just clone, install, and run.
     npm install
     
     # Frontend dependencies
-    cd frontend
+    cd ../frontend
     npm install
-    npm run dev
     ```
 
 3.  **🔑 Set Up Environment Variables:**
     
-    Create a `.env` file in the server directory:
+    Create a `.env` file in the backend directory:
     ```bash
     MONGO_URI=your_mongodb_connection_string
     JWT_SECRET=your_secret_key
@@ -145,7 +144,7 @@ No complex configuration required. Just clone, install, and run.
     npm run dev
     ```
     
-    Your app will be running on `http://localhost:3000`!
+    Your app will be running on `http://localhost:5173`!
 
 ---
 
