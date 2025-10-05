@@ -179,6 +179,74 @@ html {
   outline-offset: 2px;
 }
 
+/* --- General & Hero Section --- */
+html[data-theme="dark"] .categories-hero p {
+  color: #94a3b8; /* Using a muted light gray for less emphasis */
+}
+
+/* --- Card Styles --- */
+html[data-theme="dark"] .category-card {
+  background: #2b2b2b; /* Using --search-bg-dark for a consistent card BG */
+  border-color: rgba(255, 255, 255, 0.1); /* Subtle border */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+html[data-theme="dark"] .category-card:hover {
+  border-color: var(--primary-color); /* Use brand primary color on hover */
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
+}
+
+/* --- Card Header & Title --- */
+html[data-theme="dark"] .card-header h2 {
+  color: var(--link-color-dark); /* Using --link-color-dark for titles */
+}
+
+html[data-theme="dark"] .category-card:hover .card-header h2 {
+  color: var(--primary-color); /* Highlight with brand primary color */
+}
+
+/* --- Collapsible Accordion --- */
+html[data-theme="dark"] .collapsible label {
+  background: rgba(255, 255, 255, 0.05); /* Subtle light background */
+  color: var(--link-color-dark);
+  box-shadow: none;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+html[data-theme="dark"] .collapsible label:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--primary-color);
+}
+
+html[data-theme="dark"] .collapsible label:after {
+  filter: invert(0.8); /* Adjust arrow to be slightly less bright */
+}
+
+html[data-theme="dark"] .collapsible input:checked ~ .collapsible-text {
+  background: transparent; /* No need for a separate BG */
+}
+
+/* --- Collapsible Links --- */
+html[data-theme="dark"] .collapsible-text a {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--link-color-dark);
+  border: 1px solid transparent;
+}
+
+html[data-theme="dark"] .collapsible-text a:hover {
+  background: var(--card-color); /* Keep the dynamic category color for the link BG */
+  color: #000; /* Change text to black for better contrast on colorful BG */
+  border-color: var(--card-color);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+/* --- Focus Styles for Accessibility --- */
+html[data-theme="dark"] .collapsible label:focus-visible,
+html[data-theme="dark"] .collapsible-text a:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
 @media (max-width: 768px) {
   .categories-hero h1 {
     font-size: 2.5rem;
