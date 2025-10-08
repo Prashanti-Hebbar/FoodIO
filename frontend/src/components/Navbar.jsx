@@ -95,8 +95,8 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, isHomeScreen, recipes = [] }) => {
         sticky top-0 w-full z-50 backdrop-blur-md
         ${
           theme === "dark"
-            ? "bg-black/80 text-gray-100 shadow-lg"
-            : "bg-white text-gray-800 shadow-md"
+            ? "bg-[#8f0303] text-gray-100 shadow-lg" // new dark bg
+            : "bg-[#cbd412ed] text-gray-800 shadow-md" // new light bg
         }
       `}
     >
