@@ -3,7 +3,7 @@ import RecipeListRenderer from './RecipeListRenderer'
 //Sets the list to be rendered by RecipeListRenderer
 const RecipeSection = () => {
   return (
-    <div className="container mt-4 p-5  ">
+    <div className="container mt-4 p-5  bg-[#fc9e3aaf]">
         <h2 id="top-rated" className="mt-5"><b>Top Rated Recipes</b></h2>
         <RecipeListRenderer recipeType={"topRated"}></RecipeListRenderer>
 
