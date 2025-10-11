@@ -1,16 +1,21 @@
+
+<img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
+
 <h1 align="center">Foodio 🍽️</h1>
 
+<img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
+
+<div align="center">
+  
 ### 🌐 Live Demo
 
 👉 [Click here to view Foodio Live](https://foodio-frontend-6ps0.onrender.com/)
-
+</div>
 
 <p align="center">
   <strong>A full-stack recipe sharing platform that brings food lovers together to create, share, and discover amazing dishes.</strong>
   <br />
   <br />
-  <a href="#-getting-started-in-under-5-minutes"><strong>🚀 Get Started</strong></a>
-  ·
   <a href="https://github.com/Prashanti-Hebbar/FoodIO/issues"><strong>🐛 Report a Bug</strong></a>
   ·
   <a href="https://github.com/Prashanti-Hebbar/FoodIO/issues"><strong>✨ Request a Feature</strong></a>
@@ -22,13 +27,32 @@
   <a href="https://github.com/Prashanti-Hebbar/FoodIO/network/members"><img src="https://img.shields.io/github/forks/Prashanti-Hebbar/FoodIO?style=for-the-badge&logo=github&color=90EE90" alt="Forks"></a>
 </p>
 
----
+
+<img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
 
 ## 🌟 The Mission: Democratizing Culinary Knowledge
 
 In a world where great recipes are often locked away in family traditions or expensive cookbooks, **Foodio** breaks down barriers by creating a vibrant, open community where food enthusiasts can share, discover, and perfect their culinary creations.
 
 Whether you're a home cook looking to share your grandmother's secret recipe, a food blogger wanting to reach a wider audience, or someone searching for that perfect dish for tonight's dinner, Foodio connects you with a passionate community of food lovers.
+
+<img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
+
+## 🌟 Vision
+
+Foodio's vision is to democratize culinary knowledge — making it simple for anyone to share, discover, and improve recipes. We believe great food connects people, and that sharing recipes should be effortless and joyful.
+
+
+<img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
+
+## Why Foodio?
+
+- Community-focused: Encourages sharing of family recipes, small-batch experiments, and local cuisines.
+- Lightweight & fast: Built with a modern MERN stack for fast iteration and responsiveness.
+- Privacy-minded: JWT-based auth and sensible defaults, with room to add granular privacy controls.
+- Extensible: Designed so features like comments, ratings, or multi-step cooking timers can be added later.
+
+<img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
 
 ### 🔥 Core Features
 
@@ -41,10 +65,17 @@ Whether you're a home cook looking to share your grandmother's secret recipe, a 
 - **🔗 Share Recipes**: Share recipes via social media or direct links with friends and family.
 - **🔍 Search Recipes**: Find recipes quickly using keywords, ingredients, or cuisine types.
 
----
+<img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
+
+## 🏗️ Architecture Overview
+Foodio uses a standard MERN architecture (React frontend, Express/Node backend, MongoDB database).
+
+### Flowchart 
+<img width="781" height="713" alt="Untitled diagram-2025-10-11-054057" src="https://github.com/user-attachments/assets/87c3fc24-5eac-4f2a-85c0-a67a0ddaf063" />
+
+<img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
 
 ## 🏗️ System Architecture: Built for Scale and Performance
-
 Foodio leverages the powerful MERN stack to deliver a seamless, responsive user experience with robust backend functionality.
 
 <details>
@@ -78,10 +109,9 @@ Foodio leverages the powerful MERN stack to deliver a seamless, responsive user 
 
 </details>
 
----
+<img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
 
 ## 🚀 The Tech Stack: Built for Modern Web Development
-
 Every technology was chosen for its scalability, developer experience, and proven effectiveness in building modern web applications.
 
 | Component           | Technology                | Rationale & Key Benefits                                                                                |
@@ -94,16 +124,19 @@ Every technology was chosen for its scalability, developer experience, and prove
 | **Authentication** | **JWT & bcrypt.js**      | **Secure & Stateless.** Token-based authentication with industry-standard password hashing.         |
 | **HTTP Client**    | **Axios**                | **Promise-Based.** Reliable API communication with request/response interceptors.                    |
 
----
+
+<img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
 
 ## 🛠️ Getting Started in Under 5 Minutes
 
 No complex configuration required. Just clone, install, and run.
 
 ### Prerequisites
-
 1.  **Node.js & npm:** Make sure you have Node.js installed. [Get it here](https://nodejs.org/).
 2.  **MongoDB:** Local MongoDB installation or MongoDB Atlas account. [Get it here](https://www.mongodb.com/).
+
+
+<img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
 
 ### Installation & Launch
 
@@ -146,8 +179,7 @@ No complex configuration required. Just clone, install, and run.
     
     Your app will be running on `http://localhost:5173`!
 
----
-
+<img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
 
 ## 📂 Project Structure
 
@@ -172,6 +204,7 @@ FoodIO/
 └── README.md        # Project documentation
 ```
 
+<img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
 
 ## 🤝 Contributing
 
@@ -191,17 +224,19 @@ We welcome contributions from the community! Here's how you can help make Foodio
 - Test your changes thoroughly before submitting
 - Ensure responsive design for all UI components
 
----
+<img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
 
-## 🌟 Contributors
+### 📡 API Reference
 
-Thanks to these wonderful people who have contributed to Foodio:
+GET /api/recipes
+- Query params: ?q=search&page=1
+- Response: list of recipes
 
-<a href="https://github.com/Prashanti-Hebbar/FoodIO/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=Prashanti-Hebbar/FoodIO" />
-</a>
+POST /api/recipes
+- Body: { title, ingredients, steps, imageUrl }
+- Auth: Bearer token
 
----
+<img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
 
 ## 🐛 Troubleshooting
 
@@ -219,15 +254,14 @@ Thanks to these wonderful people who have contributed to Foodio:
 - Double-check your `.env` file is in the server directory
 - Ensure all required environment variables are set
 
----
+<img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
 
 ## 📱 Screenshots & Demo
 
 ![Screenshot 1](frontend/public/website_screenshot_1.png)
 ![Screenshot 2](frontend/public/website_screenshot_2.png)
 
-
----
+<img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
 
 ## 🧪 Testing
 
@@ -242,16 +276,25 @@ npm test
 cd ../client
 npm test
 ```
-
+<img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
 
 ## 🪪 License 
 
 This project is licensed under the **MIT License**. See the `LICENSE` file for more information.
 
----
+<img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
+
+## 🌟 Contributors
+
+Thanks to these wonderful people who have contributed to Foodio:
+
+<a href="https://github.com/Prashanti-Hebbar/FoodIO/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=Prashanti-Hebbar/FoodIO" />
+</a>
 
 <div align="center">
   <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
   <p>Built with ❤️ and a passion for bringing food lovers together.</p>
   <img src="https://komarev.com/ghpvc/?username=Prashanti-Hebbar-FoodIO&label=Project%20Views&color=00BFFF&style=flat" alt="Project views" />
 </div>
+
