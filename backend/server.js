@@ -2,6 +2,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import { useRouter } from './routes/users.js';
 import { recipeRouter } from './routes/recipes.js';
+import {NewsRouter} from './routes/NewsRoutes.js'
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import multer from 'multer';
@@ -13,7 +14,7 @@ import rateLimit from 'express-rate-limit';
 dotenv.config();
 
 const app = express(); 
-const PORT = 3001;
+const PORT = process.env.PORT;
 
 
 
@@ -55,7 +56,7 @@ app.use("/uploads", express.static("uploads"));
 app.use("/auth", useRouter);
 app.use("/api/recipes", recipeRouter);
 app.use("/chat", chatbotRoutes);
-
+app.use("/api/newsletter",NewsRouter);
 // DB connection
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log("MongoDB connected"))

@@ -3,7 +3,7 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import "../App.css";
 import { GoogleLogin } from "@react-oauth/google";
-
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "https://foodio-backend-cgsj.onrender.com";
 const Login = ({ setIsLoggedIn }) => {
   const [formData, setFormData] = useState({
     username: "",
@@ -65,7 +65,7 @@ const Login = ({ setIsLoggedIn }) => {
 
     try {
       const response = await axios.post(
-        "https://foodio-backend-cgsj.onrender.com/auth/login",
+        `${BACKEND_URL}/auth/login`,
         {
           username: formData.username,
           password: formData.password
@@ -76,6 +76,10 @@ const Login = ({ setIsLoggedIn }) => {
       );
 
       console.log("Login response:", response.data);
+      // After login success
+localStorage.setItem("user", JSON.stringify(response.data.user)); // user object with _id, username, email
+localStorage.setItem("loggedIn", "true");
+
 
       if (rememberMe) {
         localStorage.setItem("rememberedUser", formData.username);
@@ -100,7 +104,7 @@ const Login = ({ setIsLoggedIn }) => {
  const handleGoogleSuccess = async (credentialResponse) => {
     try {
       const res = await axios.post(
-        "https://foodio-backend-cgsj.onrender.com/auth/google",
+       `${BACKEND_URL}/auth/google`,
         { token: credentialResponse.credential },
         { withCredentials: true }
       );
