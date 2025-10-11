@@ -1,7 +1,7 @@
 
 <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
 
-<h1 align="center">Foodio 🍽️</h1>
+<h1 align="center">FoodIO 🍽️</h1>
 
 <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
 
@@ -45,7 +45,7 @@ Foodio's vision is to democratize culinary knowledge — making it simple for an
 
 <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
 
-## Why Foodio?
+## Why FoodIO?
 
 - Community-focused: Encourages sharing of family recipes, small-batch experiments, and local cuisines.
 - Lightweight & fast: Built with a modern MERN stack for fast iteration and responsiveness.
