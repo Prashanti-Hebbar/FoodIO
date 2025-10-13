@@ -231,7 +231,7 @@ const submitNewsletter = async (e) => {
                 <FaInstagram aria-hidden="true" />
               </a>
               <a href="#" className="social-icon social-twitter" aria-label="Visit our Twitter profile" role="listitem">
-                <FaTwitter aria-hidden="true" />
+                <FaXTwitter aria-hidden="true" />
               </a>
               <a href="#" className="social-icon social-pinterest" aria-label="Visit our Pinterest profile" role="listitem">
                 <FaPinterestP aria-hidden="true" />

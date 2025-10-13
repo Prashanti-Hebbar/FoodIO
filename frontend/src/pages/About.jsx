@@ -12,14 +12,24 @@ const About = () => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           entry.target.classList.add('animate');
+          // Once animated, we don't need to observe anymore to prevent conflicts
+          observer.unobserve(entry.target);
         }
       });
     }, observerOptions);
 
-    const animateElements = document.querySelectorAll('.animate-on-scroll, .feature-card, .faq-section, .faq-item, .section-title');
+    const animateElements = document.querySelectorAll('.animate-on-scroll, .feature-card, .faq-section, .section-title');
     
     animateElements.forEach((el) => {
       observer.observe(el);
+    });
+
+    // Handle FAQ items separately to avoid conflicts with Bootstrap collapse
+    const faqItems = document.querySelectorAll('.faq-item');
+    faqItems.forEach((item, index) => {
+      setTimeout(() => {
+        item.classList.add('animate');
+      }, index * 100);
     });
 
     return () => {
@@ -102,6 +112,7 @@ const About = () => {
       <div className="row mt-5 p-5 text-center faq-section">
         <h2 className="section-title">Frequently Asked Questions (FAQs)</h2>
 
+        <div className="accordion" id="faqAccordion">
         {/* Question 1 */}
         <div className="mb-3 faq-item">
           <button
@@ -240,6 +251,7 @@ const About = () => {
               We are currently working on mobile apps for iOS and Android! Meanwhile, you can use Foodio through any mobile browser with our fully responsive design.
             </div>
           </div>
+        </div>
         </div>
       </div>
     </div>
