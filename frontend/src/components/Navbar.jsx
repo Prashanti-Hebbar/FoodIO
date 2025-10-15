@@ -7,6 +7,7 @@ import { useUserContext } from "../context/userContext";
 import "../navbar.css";
 import { useTheme } from "../context/ThemeContext";
 import { FaMoon, FaSun } from "react-icons/fa";
+import toast from "react-hot-toast";
 
 const Navbar = ({ isLoggedIn, setIsLoggedIn, isHomeScreen, recipes = [] }) => {
   const { setUserData } = useUserContext();
@@ -41,22 +42,62 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, isHomeScreen, recipes = [] }) => {
   };
 
   const handleLogout = async () => {
-    const confirmed = window.confirm("Are you sure you want to logout?");
-    if (confirmed) {
-      try {
-        await axios.post(
-          "https://foodio-backend-cgsj.onrender.com/auth/logout",
-          {},
-          { withCredentials: true }
-        );
-        localStorage.clear();
-        setIsLoggedIn(false);
-        setUserData(null);
-        navigate("/home");
-      } catch (err) {
-        console.log("Error during logout:", err);
-      }
-    }
+    toast((t) => (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+        <span style={{ fontWeight: '600' }}>Are you sure you want to logout?</span>
+        <div style={{ display: 'flex', gap: '10px', justifyContent: 'flex-end' }}>
+          <button
+            onClick={() => toast.dismiss(t.id)}
+            style={{
+              padding: '6px 16px',
+              border: '1px solid #e5e7eb',
+              borderRadius: '15px',
+              background: 'white',
+              color: 'black',
+              cursor: 'pointer',
+              fontSize: '14px'
+            }}
+          >
+            Cancel
+          </button>
+          <button
+            onClick={async () => {
+              toast.dismiss(t.id);
+              try {
+                await axios.post(
+                  "https://foodio-backend-cgsj.onrender.com/auth/logout",
+                  {},
+                  { withCredentials: true }
+                );
+                localStorage.clear();
+                toast.success("Logged out successfully!");
+                setIsLoggedIn(false);
+                setUserData(null);
+                navigate("/home");
+              } catch (err) {
+                console.log("Error during logout:", err);
+                toast.error("Logout failed. Please try again.");
+              }
+            }}
+            style={{
+              padding: '6px 16px',
+              border: 'none',
+              borderRadius: '6px',
+              background: '#ef4444',
+              color: 'white',
+              cursor: 'pointer',
+              fontSize: '14px',
+              fontWeight: '500'
+            }}
+          >
+            Logout
+          </button>
+        </div>
+      </div>
+    ), {
+      duration: 5000,
+      position: 'top-center',
+    });
   };
 
   const handleSearch = (e) => {

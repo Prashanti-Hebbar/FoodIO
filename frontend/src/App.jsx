@@ -96,7 +96,7 @@ function App() {
 
   return (
     <Router>
-      <Toaster position="top-right" reverseOrder={false} />
+      <Toaster/>
       <ScrollToTop />
       {/* Scroll to top on route change */}
       <ScrollToTopOnRouteChange />

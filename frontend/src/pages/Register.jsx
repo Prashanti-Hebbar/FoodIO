@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import "../App.css";
 import { GoogleLogin } from "@react-oauth/google"; 
@@ -67,7 +68,7 @@ const Register = ({ setIsLoggedIn }) => {
 
       localStorage.setItem("loggedIn", "true");
       setIsLoggedIn(true);
-      alert("Registration successful!");
+      toast.success("Registration successful!");
       navigate("/");
     } catch (error) {
       console.log("Register error:", error);
