@@ -1,11 +1,13 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import { FaApple, FaFacebookF, FaInstagram, FaPinterestP, FaTwitter, FaGlobeAmericas, FaGooglePlay } from "react-icons/fa";
+import { FaApple, FaFacebookF, FaInstagram, FaPinterestP, FaGlobeAmericas, FaGooglePlay } from "react-icons/fa";
 import { IoMoon, IoSunny } from "react-icons/io5";
 import { RiArrowRightSLine } from "react-icons/ri";
 import { useTheme } from "../context/ThemeContext";
 import { toast } from "react-hot-toast";
+import { FaXTwitter } from "react-icons/fa6";
 import "../styles/Footer.css";
+
 const currentUser = (() => {
   const userStr = localStorage.getItem("user");
   try {
