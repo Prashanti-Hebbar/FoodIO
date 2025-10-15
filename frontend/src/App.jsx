@@ -3,9 +3,9 @@ import {
   Route,
   Routes,
   Navigate,
-  useLocation,
+  useLocation
 } from "react-router-dom";
-
+import { Toaster } from "react-hot-toast";
 import { useState, useEffect } from "react";
 import Navbar from "./components/Navbar";
 import Categories from "./components/Categories";
@@ -96,6 +96,7 @@ function App() {
 
   return (
     <Router>
+      <Toaster position="top-right" reverseOrder={false} />
       <ScrollToTop />
       {/* Scroll to top on route change */}
       <ScrollToTopOnRouteChange />

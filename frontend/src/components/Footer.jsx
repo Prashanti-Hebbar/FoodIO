@@ -4,24 +4,69 @@ import { FaApple, FaFacebookF, FaInstagram, FaPinterestP, FaTwitter, FaGlobeAmer
 import { IoMoon, IoSunny } from "react-icons/io5";
 import { RiArrowRightSLine } from "react-icons/ri";
 import { useTheme } from "../context/ThemeContext";
+import { toast } from "react-hot-toast";
 import "../styles/Footer.css";
-import { FaXTwitter } from "react-icons/fa6";
-
-
+const currentUser = (() => {
+  const userStr = localStorage.getItem("user");
+  try {
+    return userStr ? JSON.parse(userStr) : null;
+  } catch (err) {
+    console.error("Failed to parse user from localStorage:", err);
+    return null;
+  }
+})();
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 function Footer() {
   const { theme, toggleTheme } = useTheme();
   const [email, setEmail] = useState("");
   const [langOpen, setLangOpen] = useState(false);
   const [languageCode, setLanguageCode] = useState("en");
   const [modalItem, setModalItem] = useState(null);
+  const [loading, setLoading] = useState(false);
 
-  const submitNewsletter = (e) => {
-    e.preventDefault();
-    if (!email) return;
-    // Replace with real API later
-    alert("Subscribed successfully! ✅");
-    setEmail("");
-  };
+
+const submitNewsletter = async (e) => {
+  e.preventDefault();
+
+  if (!email) {
+    toast.error("Please enter your email.");
+    return;
+  }
+
+  setLoading(true);
+
+  try {
+    const response = await fetch(`${BACKEND_URL}/api/newsletter/subscribe`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email }), // no userId
+    });
+
+    let data;
+    const contentType = response.headers.get("content-type");
+    if (contentType && contentType.includes("application/json")) {
+      data = await response.json();
+    } else {
+      data = { message: "Unexpected server response" };
+    }
+
+    if (response.ok) {
+      const successMessage = data.message || "Subscribed successfully!";
+      toast.success(successMessage);
+      alert(successMessage); // ✅ show success alert
+      setEmail(""); // clear input
+    } else {
+      toast.error(data.message || "Subscription failed.");
+    }
+  } catch (error) {
+    console.error("Subscription error:", error);
+    toast.error("Network error. Please try again.");
+  } finally {
+    setLoading(false);
+  }
+};
+
+
 
   const languages = [
     { code: "en", label: "English" },

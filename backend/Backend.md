@@ -15,6 +15,9 @@ This is a Node.js/Express backend for a recipe management application that allow
 MONGO_URI=<your_mongodb_connection_string>
 JWT_SECRET=<your_jwt_secret_key>
 OPENROUTER_API_KEY=<your_openrouter_api_key>
+EMAIL_USER=<your_gmail_address>
+EMAIL_PASS=<your_gmail_app_password>
+ZEROBOUNCE_API_KEY=<your_zerobounce_api_key>
 ```
 
 ## Database Models
@@ -39,6 +42,13 @@ Defines the structure for user documents with authentication and saved recipes.
 - `email` (String, required, unique): User's email address
 - `password` (String, required): Hashed password
 - `savedRecipes` (Array of ObjectIds): References to saved recipe documents
+
+### **Subscriber Model (`models/Subscriber.js`)**
+Defines the structure for newsletter subscriber documents in MongoDB.
+
+**Schema Fields:**
+- `email` (String, required, unique): Subscriber’s email address (must be valid)
+- `createdAt` (Date, default: current date): Timestamp of when the user subscribed
 
 ---
 
@@ -327,7 +337,49 @@ Defines the structure for user documents with authentication and saved recipes.
 **How it helps**: Provides personalized recipe suggestions based on available ingredients and dietary preferences.
 
 ---
+### 7. Subscribe to Newsletter
+**Endpoint**: `POST /api/newsletter/subscribe`
 
+**Purpose**: Subscribes a user to the newsletter by validating and saving their email address and sending the subscription mail.
+
+**Expected Input:**
+```json
+{
+  "email": "user@example.com"
+}
+```
+**process**
+1.Validates the email format using a regular expression.
+2.Checks if the email already exists in the newsletter database.
+3.Verifies the email's validity using the ZeroBounce API.
+4.Saves the new subscriber to MongoDB.
+5.Sends a confirmation email to the user via Nodemailer.
+
+**Expected Output**
+```json
+// Success
+{
+  "message": "Subscription successful!"
+}
+
+// Invalid email format
+{
+  "message": "Invalid email format"
+}
+
+// Email already subscribed
+{
+  "message": "Email already subscribed"
+}
+
+// Email verification failed
+{
+  "message": "Email verification failed"
+}
+```
+
+**How it helps**: Allows the platform to send updates, announcements, and other communications to an engaged user base.
+---
 ## Server Configuration (`server.js`)
 
 **Port**: 3001
