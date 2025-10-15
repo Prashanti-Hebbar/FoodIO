@@ -11,8 +11,8 @@ ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 const ViewRecipe = () => {
     const location = useLocation();
     const navigate = useNavigate();
-    const { id } = useParams(); // ✅ Extract id from path params
-    const recipeId = parseInt(id, 10);
+    const params = new URLSearchParams(window.location.search);
+    const recipeId = parseInt(params.get("id"), 10);
 
     const [recipe, setRecipe] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
