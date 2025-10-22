@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import toast from "react-hot-toast";
 import { useUserContext } from "../context/userContext";
 import "../styles/EditProfile.css";
 
@@ -52,10 +53,10 @@ const EditProfile = ({ onClose }) => {
 
       setAvatarUrl(`https://foodio-backend-cgsj.onrender.com/uploads/${res.data.filename}`);
       setUserData(prev => ({ ...prev, avatar: res.data.filename }));
-      alert("Profile picture updated!");
+      toast.success("Profile picture updated!");
     } catch (err) {
       console.error("Avatar upload error:", err);
-      alert("Failed to upload profile picture.");
+      toast.error("Failed to upload profile picture.");
     }
   };
 
@@ -72,11 +73,11 @@ const EditProfile = ({ onClose }) => {
         { withCredentials: true }
       );
       setUserData(prev => ({ ...prev, ...formData }));
-      alert("Profile updated!");
+      toast.success("Profile updated!");
       onClose();
     } catch (error) {
       console.error("Profile update error:", error);
-      alert("Failed to update profile.");
+      toast.error("Failed to update profile.");
     } finally {
       setIsLoading(false);
 

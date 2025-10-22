@@ -1,4 +1,5 @@
 import { createContext, useReducer, useState } from "react";
+import toast from "react-hot-toast";
 
 const globalContext = {
   favList: [],
@@ -17,8 +18,8 @@ const addRecipe = (state, recipe, caller) => {
   //Add to favList or saveList in local storage based on caller
   localStorage.setItem(caller, JSON.stringify(newState));
 
-  //Show alert message based on caller
-  alert(`${recipe.title} was added to ${caller}`);
+  //Show toast message based on caller
+  toast.success(`${recipe.title} was added to ${caller === 'favList' ? 'favorites' : 'saved recipes'}`);
 
   return newState;
 };
@@ -33,7 +34,7 @@ const removeRecipe = (state, recipe, caller) => {
   //Remove from favList or saveList in local storage based on caller
   localStorage.setItem(caller, JSON.stringify(newState));
 
-  alert(`${recipe.title} was removed from ${caller}`);
+  toast.success(`${recipe.title} was removed from ${caller === 'favList' ? 'favorites' : 'saved recipes'}`);
   return newState;
 };
 

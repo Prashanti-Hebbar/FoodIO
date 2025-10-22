@@ -3,6 +3,7 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import "../App.css";
 import { GoogleLogin } from "@react-oauth/google";
+import toast from "react-hot-toast";
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "https://foodio-backend-cgsj.onrender.com";
 const Login = ({ setIsLoggedIn }) => {
   const [formData, setFormData] = useState({
@@ -88,6 +89,7 @@ localStorage.setItem("loggedIn", "true");
       }
 
       localStorage.setItem("loggedIn", "true");
+      toast.success("Login successful!");
       setIsLoggedIn(true);
       navigate("/");
     } catch (error) {
@@ -111,6 +113,7 @@ localStorage.setItem("loggedIn", "true");
       console.log("Google login response:", res.data);
 
       localStorage.setItem("loggedIn", "true");
+      toast.success("Google login successful");
       setIsLoggedIn(true);
       navigate("/");
     } catch (err) {

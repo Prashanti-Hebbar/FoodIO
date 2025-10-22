@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import EditProfile from "../components/EditProfile";
 import axios from "axios";
+import toast from "react-hot-toast";
 import "../profile.css";
 import { useUserContext } from "../context/userContext";
 
@@ -48,7 +49,7 @@ const Profile = () => {
         }
       } catch (error) {
         console.error("Error fetching user data:", error);
-        alert("Failed to load user data. Please try again.");
+        toast.error("Failed to load user data. Please try again.");
       }
     };
 
@@ -59,27 +60,75 @@ const Profile = () => {
 
   // 🔹 Delete/Remove Recipe
   const handleDelete = async (recipeId, section) => {
-    try {
-      if (section === "My Recipes") {
-        await fetch(
-          `https://foodio-backend-cgsj.onrender.com/recipes/${recipeId}`,
-          {
-            method: "DELETE",
-          }
-        );
-        setUserRecipes(userRecipes.filter((recipe) => recipe.id !== recipeId));
-      } else if (section === "Favorite Recipes") {
-        const updated = favoriteRecipes.filter((r) => r.id !== recipeId);
-        setFavoriteRecipes(updated);
-        localStorage.setItem("favList", JSON.stringify(updated));
-      } else if (section === "Saved Recipes") {
-        const updated = savedRecipes.filter((r) => r.id !== recipeId);
-        setSavedRecipes(updated);
-        localStorage.setItem("saveList", JSON.stringify(updated));
-      }
-    } catch (error) {
-      console.error("Error deleting recipe:", error);
-    }
+    toast((t) => (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+        <span style={{ fontWeight: '600' }}>
+          {section === "My Recipes" 
+            ? "Delete this recipe permanently?" 
+            : `Remove from ${section.toLowerCase()}?`}
+        </span>
+        <div style={{ display: 'flex', gap: '10px', justifyContent: 'flex-end' }}>
+          <button
+            onClick={() => toast.dismiss(t.id)}
+            style={{
+              padding: '6px 16px',
+              border: '1px solid #e5e7eb',
+              borderRadius: '6px',
+              background: 'white',
+              cursor: 'pointer',
+              fontSize: '14px'
+            }}
+          >
+            Cancel
+          </button>
+          <button
+            onClick={async () => {
+              toast.dismiss(t.id);
+              try {
+                if (section === "My Recipes") {
+                  await fetch(
+                    `https://foodio-backend-cgsj.onrender.com/recipes/${recipeId}`,
+                    {
+                      method: "DELETE",
+                    }
+                  );
+                  setUserRecipes(userRecipes.filter((recipe) => recipe.id !== recipeId));
+                  toast.success("Recipe deleted successfully!");
+                } else if (section === "Favorite Recipes") {
+                  const updated = favoriteRecipes.filter((r) => r.id !== recipeId);
+                  setFavoriteRecipes(updated);
+                  localStorage.setItem("favList", JSON.stringify(updated));
+                  toast.success("Removed from favorites!");
+                } else if (section === "Saved Recipes") {
+                  const updated = savedRecipes.filter((r) => r.id !== recipeId);
+                  setSavedRecipes(updated);
+                  localStorage.setItem("saveList", JSON.stringify(updated));
+                  toast.success("Removed from saved recipes!");
+                }
+              } catch (error) {
+                console.error("Error deleting recipe:", error);
+                toast.error("Failed to delete recipe. Please try again.");
+              }
+            }}
+            style={{
+              padding: '6px 16px',
+              border: 'none',
+              borderRadius: '6px',
+              background: '#ef4444',
+              color: 'white',
+              cursor: 'pointer',
+              fontSize: '14px',
+              fontWeight: '500'
+            }}
+          >
+            {section === "My Recipes" ? "Delete" : "Remove"}
+          </button>
+        </div>
+      </div>
+    ), {
+      duration: 5000,
+      position: 'top-center',
+    });
   };
 
   // 🔹 Avatar Upload
@@ -100,10 +149,10 @@ const Profile = () => {
       setAvatarUrl(`https://foodio-backend-cgsj.onrender.com/uploads/${res.data.filename}`);
       setUserData((prev) => ({ ...prev, avatar: res.data.filename }));
 
-      alert("Profile picture uploaded successfully!");
+      toast.success("Profile picture uploaded successfully!");
     } catch (err) {
       console.error("Upload failed", err);
-      alert("Upload failed.");
+      toast.error("Upload failed.");
     }
   };
 

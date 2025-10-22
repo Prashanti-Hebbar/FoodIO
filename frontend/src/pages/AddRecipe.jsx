@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import toast from "react-hot-toast";
 import { useCookies } from "react-cookie";
 import { useGetUserID } from "../hooks/useGetUserID";
 
@@ -46,10 +47,11 @@ const AddRecipe = () => {
         recipe,
         { headers: { authorization: cookies.access_token } }
       );
-      alert("Recipe saved successfully! 🎉");
+      toast.success("Recipe saved successfully! 🎉");
       navigate("/");
     } catch (error) {
       console.log(error);
+      toast.error("Failed to save recipe. Please try again.");
     }
   };
 

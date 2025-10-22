@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import toast from 'react-hot-toast';
 import ReactMarkdown from 'react-markdown';
 import '../styles/aichat.css';
 
@@ -31,7 +32,7 @@ function AIChat() {
 
         } catch (error) {
             console.error(error);
-            alert('Failed to get recipe. Please try again.');
+            toast.error('Failed to get recipe. Please try again.');
         }
 
         setLoading(false);

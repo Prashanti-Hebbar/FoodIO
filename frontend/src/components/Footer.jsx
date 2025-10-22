@@ -55,7 +55,6 @@ const submitNewsletter = async (e) => {
     if (response.ok) {
       const successMessage = data.message || "Subscribed successfully!";
       toast.success(successMessage);
-      alert(successMessage); // ✅ show success alert
       setEmail(""); // clear input
     } else {
       toast.error(data.message || "Subscription failed.");
