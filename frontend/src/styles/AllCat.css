@@ -1,7 +1,7 @@
 /* Root variables for light and dark themes */
 :root {
   /* Light Mode Colors */
-  --bg-light: #f8f9fa;
+  --bg-light: linear-gradient(135deg, #ccd438ed 0%, #eaea5c 50%, #dfc543 100%);
   --text-light: #222;
   --text-muted-light: #6c757d;
   --card-bg-light: #ffffff;
@@ -16,7 +16,7 @@
   --btn-primary-hover-light: rgb(182,96,22);
 
   /* Dark Mode Colors */
-  --bg-dark: #121212;
+  --bg-dark:  linear-gradient(135deg, #8f0303 0%, #654321 50%, #2f2523 100%);
   --text-dark: #e0e0e0;
   --text-muted-dark: #a0a0a0;
   --card-bg-dark: #1e1e1e;
@@ -64,15 +64,32 @@
   --btn-primary-hover: var(--btn-primary-hover-dark);
 }
 
-/* Base styles */
+html {
+  min-height: 100%;
+}
+
 body, .lunch-wrapper {
-  min-height: 100vh;
-  background: var(--bg);
+  position: relative;          /* needed for pseudo-element */
+  min-height: 100%;
+  margin: 0;
   color: var(--text);
   overflow-x: hidden;
   max-width: 100vw;
 }
-
+/* Full-page gradient background that stretches with scroll */
+body::before {
+  content: '';
+  position: fixed;             /* stays behind content */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;                 /* behind everything */
+  background: var(--bg);
+  background-repeat: no-repeat;
+  background-size: cover;       /* fills full vertical height */
+  background-attachment: fixed; /* stays smooth while scrolling */
+}
 /* Hero Section */
 .hero-section {
   height: 60vh;

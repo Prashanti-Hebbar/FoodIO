@@ -4,6 +4,7 @@ import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import "../App.css";
 import { GoogleLogin } from "@react-oauth/google"; 
+import { useTheme } from "../context/ThemeContext";
 
 const Register = ({ setIsLoggedIn }) => {
   const [formData, setFormData] = useState({
@@ -16,6 +17,7 @@ const Register = ({ setIsLoggedIn }) => {
   const [focusedField, setFocusedField] = useState(null);
   const [particles, setParticles] = useState([]);
   const navigate = useNavigate();
+  const { theme, toggleTheme } = useTheme();
 
   // Create animated particles for background (same as login)
   useEffect(() => {
@@ -107,8 +109,13 @@ const Register = ({ setIsLoggedIn }) => {
 
   return (
     <div
-      className="login-futuristic-container"
-      style={{ backgroundColor: "#f5d0dc" }}// baby pink
+      className={`login-futuristic-container
+      ${
+      theme === "dark"
+        ? "bg-[#8f03039b]" // new dark bg
+        : "bg-[#e6e6486e]" // new light bg
+    }`}
+      // style={{ backgroundColor: "#f5d0dc" }}// baby pink
     >
       {/* Animated background particles */}
       <div className="particles-background">
